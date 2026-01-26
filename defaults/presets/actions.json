@@ -5,7 +5,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-desktop-display.png"
+        "value": "RD-preferences-desktop-display"
       },
       "action": {
         "type": "builtin",
@@ -20,7 +20,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-system-windows-actions.png"
+        "value": "RD-preferences-system-windows-actions"
       },
       "action": {
         "type": "hotkey",
@@ -41,7 +41,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-desktop-display.png"
+        "value": "RD-preferences-desktop-display"
       },
       "action": {
         "type": "hotkey",
@@ -65,7 +65,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-list-remove.png"
+        "value": "RD-list-remove"
       },
       "action": {
         "type": "hotkey",
@@ -89,7 +89,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-zoom-fit-best.png"
+        "value": "RD-zoom-fit-best"
       },
       "action": {
         "type": "hotkey",
@@ -115,7 +115,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-list-add.png"
+        "value": "RD-list-add"
       },
       "action": {
         "type": "hotkey",
@@ -139,7 +139,7 @@
       "category": "Display / Graphics",
       "icon": {
         "type": "path",
-        "value": "RD-system-switch-user.png"
+        "value": "RD-system-switch-user"
       },
       "action": {
         "type": "hotkey",
@@ -162,7 +162,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-application-x-iso.png"
+        "value": "RD-application-x-iso"
       },
       "action": {
         "type": "hotkey",
@@ -186,7 +186,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-utilities-terminal.png"
+        "value": "RD-utilities-terminal"
       },
       "action": {
         "type": "hotkey",
@@ -208,7 +208,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-tweaks-shadows.png"
+        "value": "RD-preferences-tweaks-shadows"
       },
       "action": {
         "type": "hotkey",
@@ -233,7 +233,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-media-playback-pause.png"
+        "value": "RD-media-playback-pause"
       },
       "action": {
         "type": "hotkey",
@@ -260,7 +260,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-process-stop.png"
+        "value": "RD-process-stop"
       },
       "action": {
         "type": "hotkey",
@@ -287,7 +287,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-folder-blue-backup.png"
+        "value": "RD-folder-blue-backup"
       },
       "action": {
         "type": "hotkey",
@@ -314,7 +314,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-camera-photo.png"
+        "value": "RD-camera-photo"
       },
       "action": {
         "type": "hotkey",
@@ -342,7 +342,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-pcsxr-icon.png"
+        "value": "RD-pcsxr-icon"
       },
       "action": {
         "type": "hotkey",
@@ -363,7 +363,7 @@
       "category": "General",
       "icon": {
         "type": "path",
-        "value": "RD-video-x-generic.png"
+        "value": "RD-video-x-generic"
       },
       "action": {
         "type": "hotkey",
@@ -388,7 +388,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-folder-blue-backup.png"
+        "value": "RD-folder-blue-backup"
       },
       "action": {
         "type": "hotkey",
@@ -414,7 +414,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-document-save.png"
+        "value": "RD-document-save"
       },
       "action": {
         "type": "hotkey",
@@ -441,7 +441,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-ESC.png"
+        "value": "RD-ESC"
       },
       "action": {
         "type": "hotkey",
@@ -467,7 +467,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-zoom-fit-best.png"
+        "value": "RD-zoom-fit-best"
       },
       "action": {
         "type": "hotkey",
@@ -494,7 +494,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-tweaks-shadows.png"
+        "value": "RD-preferences-tweaks-shadows"
       },
       "action": {
         "type": "hotkey",
@@ -520,7 +520,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-media-playback-pause.png"
+        "value": "RD-media-playback-pause"
       },
       "action": {
         "type": "hotkey",
@@ -547,7 +547,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-folder-blue-backup.png"
+        "value": "RD-folder-blue-backup"
       },
       "action": {
         "type": "hotkey",
@@ -574,7 +574,7 @@
       "category": "Quick Menu",
       "icon": {
         "type": "path",
-        "value": "RD-process-stop.png"
+        "value": "RD-process-stop"
       },
       "action": {
         "type": "builtin",
@@ -589,7 +589,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-folder-blue-backup.png"
+        "value": "RD-folder-blue-backup"
       },
       "action": {
         "type": "hotkey",
@@ -615,7 +615,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-go-next.png"
+        "value": "RD-go-next"
       },
       "action": {
         "type": "hotkey",
@@ -641,7 +641,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-go-previous.png"
+        "value": "RD-go-previous"
       },
       "action": {
         "type": "hotkey",
@@ -667,7 +667,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-document-save.png"
+        "value": "RD-document-save"
       },
       "action": {
         "type": "hotkey",
@@ -693,7 +693,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-Arrow-33.png"
+        "value": "RD-Arrow-33"
       },
       "action": {
         "type": "hotkey",
@@ -715,7 +715,7 @@
       "category": "State Menu",
       "icon": {
         "type": "path",
-        "value": "RD-Arrow-34.png"
+        "value": "RD-Arrow-34"
       },
       "action": {
         "type": "hotkey",
@@ -738,7 +738,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-zoom-out.png"
+        "value": "RD-zoom-out"
       },
       "action": {
         "type": "hotkey",
@@ -763,7 +763,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-battery-missing.png"
+        "value": "RD-battery-missing"
       },
       "action": {
         "type": "hotkey",
@@ -785,7 +785,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-org.xfce.session.png"
+        "value": "RD-org.xfce.session"
       },
       "action": {
         "type": "hotkey",
@@ -809,7 +809,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-battery-full-charging.png"
+        "value": "RD-battery-full-charging"
       },
       "action": {
         "type": "hotkey",
@@ -830,7 +830,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-zoom-in.png"
+        "value": "RD-zoom-in"
       },
       "action": {
         "type": "hotkey",
@@ -855,7 +855,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-view-refresh.png"
+        "value": "RD-view-refresh"
       },
       "action": {
         "type": "hotkey",
@@ -877,7 +877,7 @@
       "category": "Speed / Frames",
       "icon": {
         "type": "path",
-        "value": "RD-zoom-original.png"
+        "value": "RD-zoom-original"
       },
       "action": {
         "type": "hotkey",
@@ -898,7 +898,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-alt.png"
+        "value": "RD-alt"
       },
       "action": {
         "type": "hotkey",
@@ -918,7 +918,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-alt-f4.png"
+        "value": "RD-alt-f4"
       },
       "action": {
         "type": "hotkey",
@@ -939,7 +939,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-ctrl.png"
+        "value": "RD-ctrl"
       },
       "action": {
         "type": "hotkey",
@@ -959,7 +959,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-Enter.png"
+        "value": "RD-Enter"
       },
       "action": {
         "type": "hotkey",
@@ -984,7 +984,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-ESC.png"
+        "value": "RD-ESC"
       },
       "action": {
         "type": "hotkey",
@@ -1010,7 +1010,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-F1.png"
+        "value": "RD-F1"
       },
       "action": {
         "type": "hotkey",
@@ -1030,7 +1030,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-F4.png"
+        "value": "RD-F4"
       },
       "action": {
         "type": "hotkey",
@@ -1050,7 +1050,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-F5.png"
+        "value": "RD-F5"
       },
       "action": {
         "type": "hotkey",
@@ -1070,7 +1070,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-F8.png"
+        "value": "RD-F8"
       },
       "action": {
         "type": "hotkey",
@@ -1090,7 +1090,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "rd-pc-call.png"
+        "value": "rd-pc-call"
       },
       "action": {
         "type": "hotkey",
@@ -1110,7 +1110,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-shift.png"
+        "value": "RD-shift"
       },
       "action": {
         "type": "hotkey",
@@ -1130,7 +1130,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-frontslash.png"
+        "value": "RD-frontslash"
       },
       "action": {
         "type": "hotkey",
@@ -1150,7 +1150,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-space.png"
+        "value": "RD-space"
       },
       "action": {
         "type": "hotkey",
@@ -1170,7 +1170,7 @@
       "category": "Steam Deck / PC",
       "icon": {
         "type": "path",
-        "value": "RD-Tab.png"
+        "value": "RD-Tab"
       },
       "action": {
         "type": "hotkey",
@@ -1190,7 +1190,7 @@
       "category": "Azahar",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-desktop-accessibility.png"
+        "value": "RD-preferences-desktop-accessibility"
       },
       "action": {
         "type": "hotkey",
@@ -1211,7 +1211,7 @@
       "category": "Azahar",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-desktop-accessibility.png"
+        "value": "RD-preferences-desktop-accessibility"
       },
       "action": {
         "type": "hotkey",
@@ -1232,7 +1232,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-edit-find.png"
+        "value": "RD-edit-find"
       },
       "action": {
         "type": "hotkey",
@@ -1254,7 +1254,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-view-refresh.png"
+        "value": "RD-view-refresh"
       },
       "action": {
         "type": "hotkey",
@@ -1276,7 +1276,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-distributor-logo-netbsd.png"
+        "value": "RD-distributor-logo-netbsd"
       },
       "action": {
         "type": "hotkey",
@@ -1298,7 +1298,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-notification-network-wireless.png"
+        "value": "RD-notification-network-wireless"
       },
       "action": {
         "type": "hotkey",
@@ -1320,7 +1320,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wiimote-side.png"
+        "value": "RD-wiimote-side"
       },
       "action": {
         "type": "hotkey",
@@ -1342,7 +1342,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wii-1.png"
+        "value": "RD-wii-1"
       },
       "action": {
         "type": "hotkey",
@@ -1365,7 +1365,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wii-2.png"
+        "value": "RD-wii-2"
       },
       "action": {
         "type": "hotkey",
@@ -1388,7 +1388,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wii-3.png"
+        "value": "RD-wii-3"
       },
       "action": {
         "type": "hotkey",
@@ -1411,7 +1411,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wii-4.png"
+        "value": "RD-wii-4"
       },
       "action": {
         "type": "hotkey",
@@ -1434,7 +1434,7 @@
       "category": "Dolphin / PrimeHack",
       "icon": {
         "type": "path",
-        "value": "RD-wiimote-up.png"
+        "value": "RD-wiimote-up"
       },
       "action": {
         "type": "hotkey",
@@ -1456,7 +1456,7 @@
       "category": "GZDoom",
       "icon": {
         "type": "path",
-        "value": "RD-freedoom-pack.png"
+        "value": "RD-freedoom-pack"
       },
       "action": {
         "type": "hotkey",
@@ -1476,7 +1476,7 @@
       "category": "GZDoom",
       "icon": {
         "type": "path",
-        "value": "RD-freedoom-pack2.png"
+        "value": "RD-freedoom-pack2"
       },
       "action": {
         "type": "hotkey",
@@ -1496,7 +1496,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-emblem-generic.png"
+        "value": "RD-emblem-generic"
       },
       "action": {
         "type": "hotkey",
@@ -1518,7 +1518,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-Arcade-BLUE.png"
+        "value": "RD-Arcade-BLUE"
       },
       "action": {
         "type": "hotkey",
@@ -1540,7 +1540,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-Arcade-GREEN.png"
+        "value": "RD-Arcade-GREEN"
       },
       "action": {
         "type": "hotkey",
@@ -1562,7 +1562,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-Arcade-RED.png"
+        "value": "RD-Arcade-RED"
       },
       "action": {
         "type": "hotkey",
@@ -1584,7 +1584,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-Arcade-YELLOW.png"
+        "value": "RD-Arcade-YELLOW"
       },
       "action": {
         "type": "hotkey",
@@ -1606,7 +1606,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-emblem-documents.png"
+        "value": "RD-emblem-documents"
       },
       "action": {
         "type": "hotkey",
@@ -1628,7 +1628,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "rd-tilt.png"
+        "value": "rd-tilt"
       },
       "action": {
         "type": "hotkey",
@@ -1650,7 +1650,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-tilt-1.png"
+        "value": "RD-tilt-1"
       },
       "action": {
         "type": "hotkey",
@@ -1672,7 +1672,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-tilt-2.png"
+        "value": "RD-tilt-2"
       },
       "action": {
         "type": "hotkey",
@@ -1694,7 +1694,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-tilt-3.png"
+        "value": "RD-tilt-3"
       },
       "action": {
         "type": "hotkey",
@@ -1716,7 +1716,7 @@
       "category": "MAME",
       "icon": {
         "type": "path",
-        "value": "RD-tilt-4.png"
+        "value": "RD-tilt-4"
       },
       "action": {
         "type": "hotkey",
@@ -1738,7 +1738,7 @@
       "category": "MelonDS",
       "icon": {
         "type": "path",
-        "value": "RD-emblem-downloads.png"
+        "value": "RD-emblem-downloads"
       },
       "action": {
         "type": "hotkey",
@@ -1759,7 +1759,7 @@
       "category": "MelonDS",
       "icon": {
         "type": "path",
-        "value": "RD-media-playback-start.png"
+        "value": "RD-media-playback-start"
       },
       "action": {
         "type": "hotkey",
@@ -1780,7 +1780,7 @@
       "category": "MelonDS",
       "icon": {
         "type": "path",
-        "value": "RD-list-add.png"
+        "value": "RD-list-add"
       },
       "action": {
         "type": "hotkey",
@@ -1801,7 +1801,7 @@
       "category": "MelonDS",
       "icon": {
         "type": "path",
-        "value": "RD-list-remove.png"
+        "value": "RD-list-remove"
       },
       "action": {
         "type": "hotkey",
@@ -1822,7 +1822,7 @@
       "category": "RetroArch",
       "icon": {
         "type": "path",
-        "value": "RD-godot.png"
+        "value": "RD-godot"
       },
       "action": {
         "type": "hotkey",
@@ -1843,7 +1843,7 @@
       "category": "RetroArch",
       "icon": {
         "type": "path",
-        "value": "RD-utilities-terminal.png"
+        "value": "RD-utilities-terminal"
       },
       "action": {
         "type": "hotkey",
@@ -1864,7 +1864,7 @@
       "category": "RetroArch",
       "icon": {
         "type": "path",
-        "value": "RD-notification-network-ethernet-connected.png"
+        "value": "RD-notification-network-ethernet-connected"
       },
       "action": {
         "type": "hotkey",
@@ -1885,7 +1885,7 @@
       "category": "RetroArch",
       "icon": {
         "type": "path",
-        "value": "RD-go-next.png"
+        "value": "RD-go-next"
       },
       "action": {
         "type": "hotkey",
@@ -1906,7 +1906,7 @@
       "category": "RetroArch",
       "icon": {
         "type": "path",
-        "value": "RD-go-previous.png"
+        "value": "RD-go-previous"
       },
       "action": {
         "type": "hotkey",
@@ -1927,7 +1927,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-close.png"
+        "value": "rd-pc-close"
       },
       "action": {
         "type": "hotkey",
@@ -1947,7 +1947,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-fight.png"
+        "value": "rd-pc-fight"
       },
       "action": {
         "type": "hotkey",
@@ -1967,7 +1967,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-give.png"
+        "value": "rd-pc-give"
       },
       "action": {
         "type": "hotkey",
@@ -1987,7 +1987,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-look.png"
+        "value": "rd-pc-look"
       },
       "action": {
         "type": "hotkey",
@@ -2007,7 +2007,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-move.png"
+        "value": "rd-pc-move"
       },
       "action": {
         "type": "hotkey",
@@ -2027,7 +2027,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-open.png"
+        "value": "rd-pc-open"
       },
       "action": {
         "type": "hotkey",
@@ -2047,7 +2047,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-pickup.png"
+        "value": "rd-pc-pickup"
       },
       "action": {
         "type": "hotkey",
@@ -2067,7 +2067,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-push.png"
+        "value": "rd-pc-push"
       },
       "action": {
         "type": "hotkey",
@@ -2087,7 +2087,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-pull.png"
+        "value": "rd-pc-pull"
       },
       "action": {
         "type": "hotkey",
@@ -2107,7 +2107,7 @@
       "category": "ScummVM",
       "icon": {
         "type": "path",
-        "value": "rd-pc-use.png"
+        "value": "rd-pc-use"
       },
       "action": {
         "type": "hotkey",
@@ -2127,7 +2127,7 @@
       "category": "Switch",
       "icon": {
         "type": "path",
-        "value": "RD-emblem-new.png"
+        "value": "RD-emblem-new"
       },
       "action": {
         "type": "hotkey",
@@ -2148,7 +2148,7 @@
       "category": "Switch",
       "icon": {
         "type": "path",
-        "value": "RD-emblem-unlocked.png"
+        "value": "RD-emblem-unlocked"
       },
       "action": {
         "type": "hotkey",
@@ -2169,7 +2169,7 @@
       "category": "Switch",
       "icon": {
         "type": "path",
-        "value": "RD-preferences-desktop-accessibility.png"
+        "value": "RD-preferences-desktop-accessibility"
       },
       "action": {
         "type": "hotkey",
@@ -2190,7 +2190,7 @@
       "category": "Switch",
       "icon": {
         "type": "path",
-        "value": "RD-F4.png"
+        "value": "RD-F4"
       },
       "action": {
         "type": "hotkey",

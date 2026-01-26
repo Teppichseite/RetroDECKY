@@ -13,8 +13,9 @@ export interface Action {
     id: string;
     name: string;
     category?: string;
+    disabled?: boolean;
     icon: {
-        type: "path" | "fa";
+        type: "path";
         value: string;
     };
     action: {
@@ -24,9 +25,6 @@ export interface Action {
     } | {
         type: "builtin";
         operation: "view_manual" | "exit";
-    } | {
-        type: "script";
-        path: string;
     };
     systems: "*" | string[];
     emulators: "*" | (string | string[])[] ;

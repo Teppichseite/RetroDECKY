@@ -5,7 +5,7 @@ import {
     removeEventListener,
 } from "@decky/api"
 import { adjustCategories, filterActions } from "./utils";
-import { useBackendState } from "./hooks";
+import { useJsContextState } from "./hooks";
 import { checkSetupStateBe, getActionsBe, getGameEventBe, mapBeSetupStateToSetupState } from "./backend";
 import { Router } from "@decky/ui";
 import { SteamClient } from "@decky/ui/dist/globals/steam-client";
@@ -23,9 +23,13 @@ export interface MenuContextValue {
     heldActions: string[];
     pdfViewState: PdfViewState;
     setupState: SetupState | null;
+    focusedElement: string | null;
+    openedCategory: string | null;
     setPdfViewState: (pdfViewState: PdfViewState) => void;
     setGameEvent: (gameEvent: GameEvent | null) => void,
     handleAction: (action: Action) => void,
+    setFocusedElement: (element: string | null) => void,
+    setOpenedCategory: (category: string | null) => void,
 }
 
 const defaultPdfViewState: PdfViewState = {
@@ -42,9 +46,13 @@ export const MenuContext = createContext<MenuContextValue>({
     heldActions: [],
     pdfViewState: defaultPdfViewState,
     setupState: null,
+    focusedElement: null,
+    openedCategory: null,
     setPdfViewState: () => { },
     setGameEvent: () => { },
     handleAction: () => { },
+    setFocusedElement: () => { },
+    setOpenedCategory: () => { },
 });
 
 export interface MenuContextProviderProps {
@@ -57,10 +65,13 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
     const [displayedActions, setDisplayedActions] = useState<Action[]>([]);
     const [gameEvent, setGameEvent] = useState<GameEvent | null>(null);
     
-    const [heldActions, setHeldActions] = useBackendState<string[]>("held_actions", []);
-    const [pdfViewState, setPdfViewState] = useBackendState<PdfViewState>("pdf_view_state", defaultPdfViewState);
+    const [heldActions, setHeldActions] = useJsContextState<string[]>("held_actions", []);
+    const [pdfViewState, setPdfViewState] = useJsContextState<PdfViewState>("pdf_view_state", defaultPdfViewState);
 
     const [setupState, setSetupState] = useState<SetupState | null>(null);
+
+    const [focusedElement, setFocusedElement] = useJsContextState<string | null>("focused_action", null);
+    const [openedCategory, setOpenedCategory] = useJsContextState<string | null>("focused_category", null);
 
     const handleGameEvent = (incomingEvent: GameEvent | null) => {
         if (!incomingEvent) {
@@ -213,9 +224,13 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         heldActions,
         pdfViewState,
         setupState,
+        focusedElement,
+        openedCategory,
         setPdfViewState,
         handleAction,
         setGameEvent,
+        setFocusedElement,
+        setOpenedCategory,
     };
 
     return <MenuContext.Provider value={menuContextValue}>

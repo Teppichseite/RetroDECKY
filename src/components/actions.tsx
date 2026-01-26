@@ -38,34 +38,40 @@ export const ActionsComponent = () => {
             <ActionComponent action={action} key={action.id} />
         ))}
         {Object.entries(categorizedActions).map(([category, actionsForCategory]) => (
-            <div key={category}>
-                <ActionButton
-                    onClick={() => {
-                        if (category === openedCategory) {
-                            setOpenedCategory(null);
-                        } else {
-                            setOpenedCategory(category);
-                        }
-                    }}
-                    icon={<img src={getIconPath(`RD-zoom-${openedCategory === category ? 'out' : 'in'}.png`)} width={24} height={24} />}
-                >
-                    {category}
-                </ActionButton>
-                {openedCategory === category && <div style={{ marginLeft: '15px' }}>
-                    {actionsForCategory.map((action) => (
-                        <ActionComponent action={action} key={action.id} />
-                    ))}
-                </div>}
-            </div>
+            <CategoryComponent category={category} actionsForCategory={actionsForCategory} key={category} />
         ))}
+    </div>;
+}
+
+export const CategoryComponent = ({ category, actionsForCategory }: { category: string, actionsForCategory: Action[] }) => {
+    const { openedCategory, setOpenedCategory } = useMenuContext();
+    
+    return <div key={category}>
+        <ActionButton
+            onClick={() => {
+                if (category === openedCategory) {
+                    setOpenedCategory(null);
+                } else {
+                    setOpenedCategory(category);
+                }
+            }}
+            icon={<img src={getIconPath(`RD-zoom-${openedCategory === category ? 'out' : 'in'}`)} width={24} height={24} />}
+        >
+            {category}
+        </ActionButton>
+        {openedCategory === category && <div style={{ marginLeft: '15px' }}>
+            {actionsForCategory.map((action) => (
+                <ActionComponent action={action} key={action.id} />
+            ))}
+        </div>}
     </div>;
 }
 
 export const ActionComponent = ({ action }: { action: Action }) => {
     const { handleAction, heldActions, gameEvent } = useMenuContext();
 
-    if(!gameEvent) {
-        return <div/>;
+    if (!gameEvent) {
+        return <div />;
     }
 
     const icon = action.icon.type === 'path'

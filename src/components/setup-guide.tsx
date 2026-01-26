@@ -22,7 +22,7 @@ export const SetupGuide = () => {
                 setShowGuide(!showGuide)
             }}
         >
-            <ButtonItemIconContent icon={<img src={getIconPath(`RD-zoom-${showGuide ? 'out' : 'in'}.png`)} width={24} height={24} />}>Setup Guide</ButtonItemIconContent>
+            <ButtonItemIconContent icon={<img src={getIconPath(`RD-zoom-${showGuide ? 'out' : 'in'}`)} width={24} height={24} />}>Setup Guide</ButtonItemIconContent>
         </ButtonItem>
         {
             showGuide && <div style={{ marginTop: '20px' }}>
