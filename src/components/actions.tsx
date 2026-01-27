@@ -1,5 +1,5 @@
 import { ButtonItem, PanelSectionRow } from "@decky/ui";
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
 import { Action } from "../interfaces";
@@ -11,8 +11,6 @@ export const ActionsComponent = () => {
     if (actions.length === 0) {
         return <div style={{ textAlign: 'center' }}>There are no actions available.</div>;
     }
-
-    const [openedCategory, setOpenedCategory] = useState<string | null>(null);
 
     const uncategorizedActions = actions.filter(action => !action.category);
 
@@ -44,9 +42,20 @@ export const ActionsComponent = () => {
 }
 
 export const CategoryComponent = ({ category, actionsForCategory }: { category: string, actionsForCategory: Action[] }) => {
-    const { openedCategory, setOpenedCategory } = useMenuContext();
+    const { openedCategory, setOpenedCategory, focusedElement, setFocusedElement } = useMenuContext();
+    const buttonRef = useRef<HTMLDivElement>(null);
     
-    return <div key={category}>
+    const isFocused = focusedElement === `category:${category}`;
+    
+    useEffect(() => {
+        if (isFocused && buttonRef.current) {
+            buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            const buttonItem = buttonRef.current.querySelector("button");
+            buttonItem?.focus();
+        }
+    }, [isFocused]);
+    
+    return <div key={category} ref={buttonRef}>
         <ActionButton
             onClick={() => {
                 if (category === openedCategory) {
@@ -55,6 +64,7 @@ export const CategoryComponent = ({ category, actionsForCategory }: { category: 
                     setOpenedCategory(category);
                 }
             }}
+            onFocus={() => setFocusedElement(`category:${category}`)}
             icon={<img src={getIconPath(`RD-zoom-${openedCategory === category ? 'out' : 'in'}`)} width={24} height={24} />}
         >
             {category}
@@ -68,7 +78,18 @@ export const CategoryComponent = ({ category, actionsForCategory }: { category: 
 }
 
 export const ActionComponent = ({ action }: { action: Action }) => {
-    const { handleAction, heldActions, gameEvent } = useMenuContext();
+    const { handleAction, heldActions, gameEvent, focusedElement, setFocusedElement } = useMenuContext();
+    const buttonRef = useRef<HTMLDivElement>(null);
+    
+    const isFocused = focusedElement === `action:${action.id}`;
+    
+    useEffect(() => {
+        if (isFocused && buttonRef.current) {
+            buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            const buttonItem = buttonRef.current.querySelector("button");
+            buttonItem?.focus();
+        }
+    }, [isFocused]);
 
     if (!gameEvent) {
         return <div />;
@@ -86,13 +107,16 @@ export const ActionComponent = ({ action }: { action: Action }) => {
 
     const isManualViewAction = action.action.type === 'builtin' && action.action.operation === 'view_manual';
 
-    return <ActionButton
-        onClick={() => handleAction(action)}
-        icon={icon}
-        disabled={isManualViewAction && !gameEvent.manual_path}
-    >
-        {action.name}{textAddition}
-    </ActionButton>;
+    return <div ref={buttonRef}>
+        <ActionButton
+            onClick={() => handleAction(action)}
+            onFocus={() => setFocusedElement(`action:${action.id}`)}
+            icon={icon}
+            disabled={isManualViewAction && !gameEvent.manual_path}
+        >
+            {action.name}{textAddition}
+        </ActionButton>
+    </div>;
 }
 
 interface ActionButtonProps {
@@ -100,18 +124,45 @@ interface ActionButtonProps {
     icon: React.ReactNode;
     children: React.ReactNode;
     disabled?: boolean;
+    onFocus?: () => void;
 }
 
 const ActionButton = (props: ActionButtonProps) => {
-    return <PanelSectionRow>
-        <ButtonItem
-            layout="below"
-            onClick={props.onClick}
-            disabled={props.disabled}
-        >
-            <ButtonItemIconContent icon={props.icon} >
-                {props.children}
-            </ButtonItemIconContent>
-        </ButtonItem>
-    </PanelSectionRow>;
+    const containerRef = useRef<HTMLDivElement>(null);
+    
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container || !props.onFocus) {
+            return;
+        }
+        
+        const button = container.querySelector("button");
+        if (!button) {
+            return;
+        }
+        
+        const handleFocus = () => {
+            props.onFocus?.();
+        };
+        
+        button.addEventListener('focus', handleFocus);
+        
+        return () => {
+            button.removeEventListener('focus', handleFocus);
+        };
+    }, [props.onFocus]);
+    
+    return <div ref={containerRef}>
+        <PanelSectionRow>
+            <ButtonItem
+                layout="below"
+                onClick={props.onClick}
+                disabled={props.disabled}
+            >
+                <ButtonItemIconContent icon={props.icon} >
+                    {props.children}
+                </ButtonItemIconContent>
+            </ButtonItem>
+        </PanelSectionRow>
+    </div>;
 }
