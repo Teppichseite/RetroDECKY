@@ -1,2207 +1,2190 @@
 [
-    {
-      "id": "display-view-pdf",
-      "name": "View Manual",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-desktop-display"
-      },
-      "action": {
-        "type": "builtin",
-        "operation": "view_manual"
-      },
-      "systems": "*",
-      "emulators": "*"
-    },
-    {
-      "id": "display-change-dual-screens-layout",
-      "name": "Change Dual Screens Layout",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-system-windows-actions"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_L"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar"
-      ]
-    },
-    {
-      "id": "display-change-widescreen-aspect",
-      "name": "Change Widescreen / Aspect Ratio",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-desktop-display"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_W"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "display-decrease-resolution-upscale",
-      "name": "Decrease Resolution / Upscale",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-list-remove"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_Y"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "display-fullscreen-toggle",
-      "name": "Fullscreen Toggle",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-zoom-fit-best"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_ENTER"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "display-increase-resolution-upscale",
-      "name": "Increase Resolution / Upscale",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-list-add"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_U"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "display-swap-screens",
-      "name": "Swap Screens",
-      "category": "Display / Graphics",
-      "icon": {
-        "type": "path",
-        "value": "RD-system-switch-user"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_TAB"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Cemu (Standalone)",
-        "MelonDS (Standalone)"
-      ]
-    },
-    {
-      "id": "general-change-disc-next-disc",
-      "name": "Change Disc / Next Disc",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-application-x-iso"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_D"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-cheats-toggle",
-      "name": "Cheats On/Off",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-utilities-terminal"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_C"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-open-menu",
-      "name": "Open Menu",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-tweaks-shadows"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_M"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "RPCS3",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-pause-resume",
-      "name": "Pause / Resume",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-media-playback-pause"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_P"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-quit-component",
-      "name": "Quit",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-process-stop"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_Q"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "RetroArch",
-        "Ruffle"
-      ]
-    },
-    {
-      "id": "general-restart-reset",
-      "name": "Restart / Reset",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-folder-blue-backup"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_R"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-screenshot",
-      "name": "Take Screenshot",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-camera-photo"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_X"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "general-turbo-toggle",
-      "name": "Turbo On/Off",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-pcsxr-icon"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_T"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)"
-      ]
-    },
-    {
-      "id": "general-video-recording",
-      "name": "Video Recording On/Off",
-      "category": "General",
-      "icon": {
-        "type": "path",
-        "value": "RD-video-x-generic"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_V"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-load-state",
-      "name": "Load State",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-folder-blue-backup"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_A"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-save-state",
-      "name": "Save State",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-document-save"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_S"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-escape",
-      "name": "Escape",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-ESC"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_ESC"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "GZDoom",
-        "IkemanGO",
-        "OpenBOR",
-        "PC-Systems",
-        "Ryubing (Standalone)",
-        "Ruffle",
-        "Solarus"
-      ]
-    },
-    {
-      "id": "quick-fullscreen-toggle",
-      "name": "Fullscreen Toggle",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-zoom-fit-best"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_ENTER"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RPCS3"
-      ]
-    },
-    {
-      "id": "quick-open-menu",
-      "name": "Open Menu",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-tweaks-shadows"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_M"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RPCS3",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-pause-resume",
-      "name": "Pause / Resume",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-media-playback-pause"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_P"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-restart-reset",
-      "name": "Restart / Reset",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-folder-blue-backup"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_R"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "quick-quit-component",
-      "name": "Quit",
-      "category": "Quick Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-process-stop"
-      },
-      "action": {
-        "type": "builtin",
-        "operation": "exit"
-      },
-      "systems": "*",
-      "emulators": "*"
-    },
-    {
-      "id": "state-load-state",
-      "name": "Load State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-folder-blue-backup"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_A"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "state-next-state",
-      "name": "Next State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-go-next"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_K"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "state-previous-state",
-      "name": "Previous State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-go-previous"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_J"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "state-save-state",
-      "name": "Save State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-document-save"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_S"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "PCSX2 (Standalone)",
-        "PPSSPP (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "state-undo-load",
-      "name": "Undo Load State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arrow-33"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_8"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "state-undo-save",
-      "name": "Undo Save State",
-      "category": "State Menu",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arrow-34"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_9"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "speed-decrease-emulation-speed",
-      "name": "Decrease Emulation Speed",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-zoom-out"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_2"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)"
-      ]
-    },
-    {
-      "id": "speed-disable-speed-limit",
-      "name": "Disable Emulation Speed Limit",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-battery-missing"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_0"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "speed-fast-forward",
-      "name": "Fast Forward",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-org.xfce.session"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "hold",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_KPPLUS"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "MelonDS (Standalone)",
-        "PCSX2 (Standalone)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "speed-frame-limit-toggle",
-      "name": "Frame Limit On/Off",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-battery-full-charging"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_Z"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PCSX2 (Standalone)"
-      ]
-    },
-    {
-      "id": "speed-increase-emulation-speed",
-      "name": "Increase Emulation Speed",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-zoom-in"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar",
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)",
-        "Duckstation (Legacy)",
-        "PCSX2 (Standalone)"
-      ]
-    },
-    {
-      "id": "speed-rewind",
-      "name": "Rewind",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-view-refresh"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "hold",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_KPMINUS"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)",
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "speed-reset-emulation-speed",
-      "name": "Reset Emulation Speed",
-      "category": "Speed / Frames",
-      "icon": {
-        "type": "path",
-        "value": "RD-zoom-original"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_3"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Duckstation (Legacy)"
-      ]
-    },
-    {
-      "id": "steam-alt",
-      "name": "Alt",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-alt"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-alt-f4",
-      "name": "Alt + F4",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-alt-f4"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_F4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-ctrl",
-      "name": "Control",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-ctrl"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-enter",
-      "name": "Enter",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-Enter"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_ENTER"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "GZDoom",
-        "IkemanGO",
-        "OpenBOR",
-        "PC-Systems",
-        "Ryubing (Standalone)",
-        "Solarus"
-      ]
-    },
-    {
-      "id": "steam-escape",
-      "name": "Escape",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-ESC"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_ESC"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "GZDoom",
-        "IkemanGO",
-        "OpenBOR",
-        "PC-Systems",
-        "Ruffle",
-        "Ryubing (Standalone)",
-        "Solarus"
-      ]
-    },
-    {
-      "id": "steam-f1",
-      "name": "F1",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-F1"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-f4",
-      "name": "F4",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-F4"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-f5",
-      "name": "F5",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-F5"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F5"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-f8",
-      "name": "F8",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-F8"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F8"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-f10",
-      "name": "F10",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-call"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F10"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-shift",
-      "name": "Shift",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-shift"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTSHIFT"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-slash",
-      "name": "Slash (/)",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-frontslash"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_KPSLASH"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-space",
-      "name": "Space",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-space"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_SPACE"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "steam-tab",
-      "name": "Tab",
-      "category": "Steam Deck / PC",
-      "icon": {
-        "type": "path",
-        "value": "RD-Tab"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_TAB"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "PC-Systems"
-      ]
-    },
-    {
-      "id": "azahar-load-amiibo",
-      "name": "Load Amiibo",
-      "category": "Azahar",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-desktop-accessibility"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_M"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar"
-      ]
-    },
-    {
-      "id": "azahar-remove-amiibo",
-      "name": "Remove Amiibo",
-      "category": "Azahar",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-desktop-accessibility"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_N"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Azahar"
-      ]
-    },
-    {
-      "id": "dolphin-freelook-toggle",
-      "name": "Freelook Mode On/Off",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-edit-find"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_F"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-freelook-reset",
-      "name": "Freelook Mode Reset",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-view-refresh"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_R"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-golf-toggle",
-      "name": "Golf Mode On/Off",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-distributor-logo-netbsd"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_H"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wii-sync",
-      "name": "Wii Sync Button",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-notification-network-wireless"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_W"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-sideways",
-      "name": "Wiimote Sideways",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wiimote-side"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_X"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-sync-p1",
-      "name": "Wiimote Sync - Player 1",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wii-1"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_W",
-          "KEY_1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-sync-p2",
-      "name": "Wiimote Sync - Player 2",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wii-2"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_W",
-          "KEY_2"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-sync-p3",
-      "name": "Wiimote Sync - Player 3",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wii-3"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_W",
-          "KEY_3"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-sync-p4",
-      "name": "Wiimote Sync - Player 4",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wii-4"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_W",
-          "KEY_4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "dolphin-wiimote-upright",
-      "name": "Wiimote Upright",
-      "category": "Dolphin / PrimeHack",
-      "icon": {
-        "type": "path",
-        "value": "RD-wiimote-up"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_Z"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Dolphin (Standalone)",
-        "PrimeHack (Standalone)"
-      ]
-    },
-    {
-      "id": "gzdoom-give-all-items",
-      "name": "Give all Items",
-      "category": "GZDoom",
-      "icon": {
-        "type": "path",
-        "value": "RD-freedoom-pack"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "IDFA"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "GZDoom"
-      ]
-    },
-    {
-      "id": "gzdoom-give-all-items-keys",
-      "name": "Give all Items + Keys",
-      "category": "GZDoom",
-      "icon": {
-        "type": "path",
-        "value": "RD-freedoom-pack2"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "IDKFA"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "GZDoom"
-      ]
-    },
-    {
-      "id": "mame-insert-bill-note",
-      "name": "Insert Bill / Note",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-emblem-generic"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_B",
-          "KEY_1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-service-button-1",
-      "name": "Service Button 1",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arcade-BLUE"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_S",
-          "KEY_1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-service-button-2",
-      "name": "Service Button 2",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arcade-GREEN"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_S",
-          "KEY_2"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-service-button-3",
-      "name": "Service Button 3",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arcade-RED"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_S",
-          "KEY_3"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-service-button-4",
-      "name": "Service Button 4",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-Arcade-YELLOW"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_S",
-          "KEY_4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-service-mode",
-      "name": "Service Mode",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-emblem-documents"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_S",
-          "KEY_0"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-tilt",
-      "name": "Tilt",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "rd-tilt"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_T",
-          "KEY_0"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-tilt-p1",
-      "name": "Tilt - Player 1",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-tilt-1"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_T",
-          "KEY_1"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-tilt-p2",
-      "name": "Tilt - Player 2",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-tilt-2"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_T",
-          "KEY_2"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-tilt-p3",
-      "name": "Tilt - Player 3",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-tilt-3"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_T",
-          "KEY_3"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "mame-tilt-p4",
-      "name": "Tilt - Player 4",
-      "category": "MAME",
-      "icon": {
-        "type": "path",
-        "value": "RD-tilt-4"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_T",
-          "KEY_4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MAME (Standalone)"
-      ]
-    },
-    {
-      "id": "melonds-close-open-lid",
-      "name": "Close/Open Lid",
-      "category": "MelonDS",
-      "icon": {
-        "type": "path",
-        "value": "RD-emblem-downloads"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_L"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MelonDS (Standalone)"
-      ]
-    },
-    {
-      "id": "melonds-play-microphone",
-      "name": "Play Microphone",
-      "category": "MelonDS",
-      "icon": {
-        "type": "path",
-        "value": "RD-media-playback-start"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_P"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MelonDS (Standalone)"
-      ]
-    },
-    {
-      "id": "melonds-sunlight-plus",
-      "name": "Sunlight +",
-      "category": "MelonDS",
-      "icon": {
-        "type": "path",
-        "value": "RD-list-add"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_KPPLUS"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MelonDS (Standalone)"
-      ]
-    },
-    {
-      "id": "melonds-sunlight-minus",
-      "name": "Sunlight -",
-      "category": "MelonDS",
-      "icon": {
-        "type": "path",
-        "value": "RD-list-remove"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_KPMINUS"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "MelonDS (Standalone)"
-      ]
-    },
-    {
-      "id": "retroarch-ai-service",
-      "name": "AI Service On/Off",
-      "category": "RetroArch",
-      "icon": {
-        "type": "path",
-        "value": "RD-godot"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_I"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "retroarch-cheats-toggle",
-      "name": "Cheats On/Off",
-      "category": "RetroArch",
-      "icon": {
-        "type": "path",
-        "value": "RD-utilities-terminal"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_C"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "retroarch-netplay-host",
-      "name": "Netplay Host On/Off",
-      "category": "RetroArch",
-      "icon": {
-        "type": "path",
-        "value": "RD-notification-network-ethernet-connected"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_H"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "retroarch-next-cheat",
-      "name": "Next Cheat",
-      "category": "RetroArch",
-      "icon": {
-        "type": "path",
-        "value": "RD-go-next"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_G"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "retroarch-previous-cheat",
-      "name": "Previous Cheat",
-      "category": "RetroArch",
-      "icon": {
-        "type": "path",
-        "value": "RD-go-previous"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTCTRL",
-          "KEY_F"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "RetroArch"
-      ]
-    },
-    {
-      "id": "scummvm-close",
-      "name": "Close",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-close"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_C"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-fight",
-      "name": "Fight",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-fight"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-give",
-      "name": "Give",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-give"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_G"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-look-at",
-      "name": "Look-At",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-look"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_L"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-move",
-      "name": "Move",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-move"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_M"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-open",
-      "name": "Open",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-open"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_O"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-pick-up",
-      "name": "Pick-Up",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-pickup"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_P"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-push-shove",
-      "name": "Push / Shove",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-push"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_S"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-pull-yank",
-      "name": "Pull / Yank",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-pull"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_Y"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "scummvm-use",
-      "name": "Use",
-      "category": "ScummVM",
-      "icon": {
-        "type": "path",
-        "value": "rd-pc-use"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_U"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "ScummVM"
-      ]
-    },
-    {
-      "id": "switch-gpu-accuracy",
-      "name": "Change GPU Accuracy",
-      "category": "Switch",
-      "icon": {
-        "type": "path",
-        "value": "RD-emblem-new"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_G"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Ryubing (Standalone)"
-      ]
-    },
-    {
-      "id": "switch-docked-undocked",
-      "name": "Docked / Undocked Mode",
-      "category": "Switch",
-      "icon": {
-        "type": "path",
-        "value": "RD-emblem-unlocked"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_D"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Ryubing (Standalone)"
-      ]
-    },
-    {
-      "id": "switch-load-remove-amiibo",
-      "name": "Load / Remove Amiibo",
-      "category": "Switch",
-      "icon": {
-        "type": "path",
-        "value": "RD-preferences-desktop-accessibility"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_LEFTALT",
-          "KEY_M"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Ryubing (Standalone)"
-      ]
-    },
-    {
-      "id": "switch-open-menu-f4",
-      "name": "Open Menu Ryubing",
-      "category": "Switch",
-      "icon": {
-        "type": "path",
-        "value": "RD-F4"
-      },
-      "action": {
-        "type": "hotkey",
-        "operation": "press",
-        "keys": [
-          "KEY_F4"
-        ]
-      },
-      "systems": "*",
-      "emulators": [
-        "Ryubing (Standalone)"
-      ]
-    }
-  ]
+  {
+    "id": "display-view-pdf",
+    "name": "View Manual",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-desktop-display"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "view_manual"
+    },
+    "systems": "*",
+    "emulators": "*"
+  },
+  {
+    "id": "display-change-dual-screens-layout",
+    "name": "Change Dual Screens Layout",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-system-windows-actions"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_L"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar"
+    ]
+  },
+  {
+    "id": "display-change-widescreen-aspect-ratio",
+    "name": "Change Widescreen / Aspect Ratio",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-desktop-display"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_W"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)",
+      "PrimeHack (Standalone)"
+    ]
+  },
+  {
+    "id": "display-decrease-resolution-upscale",
+    "name": "Decrease Resolution / Upscale",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-list-remove"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_Y"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)",
+      "PrimeHack (Standalone)"
+    ]
+  },
+  {
+    "id": "display-fullscreen-toggle",
+    "name": "Fullscreen Toggle",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-zoom-fit-best"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_ENTER"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "PrimeHack (Standalone)"
+    ]
+  },
+  {
+    "id": "display-increase-resolution-upscale",
+    "name": "Increase Resolution / Upscale",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-list-add"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_U"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)",
+      "PrimeHack (Standalone)"
+    ]
+  },
+  {
+    "id": "display-swap-screens",
+    "name": "Swap Screens",
+    "category": "Display / Graphics",
+    "icon": {
+      "type": "path",
+      "value": "RD-system-switch-user"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_TAB"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Cemu (Standalone)",
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "general-change-disc-next-disc",
+    "name": "Change Disc / Next Disc",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-application-x-iso"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_D"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-cheats-onoff",
+    "name": "Cheats On/Off",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-utilities-terminal"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_C"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-open-menu",
+    "name": "Open Menu",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-tweaks-shadows"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_M"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)",
+      "RPCS3",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-pause-resume",
+    "name": "Pause / Resume",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-media-playback-pause"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_P"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-restart-reset",
+    "name": "Restart / Reset",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-folder-blue-backup"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_R"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-take-screenshot",
+    "name": "Take Screenshot",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-camera-photo"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_X"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "general-turbo-onoff",
+    "name": "Turbo On/Off",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-pcsxr-icon"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_T"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)"
+    ]
+  },
+  {
+    "id": "general-video-recording-onoff",
+    "name": "Video Recording On/Off",
+    "category": "General",
+    "icon": {
+      "type": "path",
+      "value": "RD-video-x-generic"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_V"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-escape",
+    "name": "Escape",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-ESC"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_ESC"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "GZDoom",
+      "IkemanGO",
+      "OpenBOR",
+      "PC-Systems",
+      "Ryubing (Standalone)",
+      "Ruffle",
+      "Solarus"
+    ]
+  },
+  {
+    "id": "quick-fullscreen-toggle",
+    "name": "Fullscreen Toggle",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-zoom-fit-best"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_ENTER"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RPCS3"
+    ]
+  },
+  {
+    "id": "quick-load-state",
+    "name": "Load State",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-folder-blue-backup"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_A"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-open-menu",
+    "name": "Open Menu",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-tweaks-shadows"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_M"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RPCS3",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-pause-resume",
+    "name": "Pause / Resume",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-media-playback-pause"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_P"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-restart-reset",
+    "name": "Restart / Reset",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-folder-blue-backup"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_R"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-save-state",
+    "name": "Save State",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-document-save"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_S"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "quick-swap-screens",
+    "name": "Swap Screens",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-system-switch-user"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_TAB"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Cemu (Standalone)",
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "quick-take-screenshot",
+    "name": "Take Screenshot",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-camera-photo"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_X"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "state-load-state",
+    "name": "Load State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-folder-blue-backup"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_A"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "state-next-state",
+    "name": "Next State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-go-next"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_K"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "state-previous-state",
+    "name": "Previous State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-go-previous"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_J"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "state-save-state",
+    "name": "Save State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-document-save"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_S"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "PCSX2 (Standalone)",
+      "PPSSPP (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "state-undo-load-state",
+    "name": "Undo Load State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arrow-33"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_8"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "state-undo-save-state",
+    "name": "Undo Save State",
+    "category": "State",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arrow-34"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_9"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "speed-decrease-emulation-speed",
+    "name": "Decrease Emulation Speed",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-zoom-out"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_2"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)"
+    ]
+  },
+  {
+    "id": "speed-disable-emulation-speed-limit",
+    "name": "Disable Emulation Speed Limit",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-battery-missing"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_0"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "speed-fast-forward",
+    "name": "Fast Forward",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-org.xfce.session"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_KPPLUS"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "MelonDS (Standalone)",
+      "PCSX2 (Standalone)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "speed-frame-limit-onoff",
+    "name": "Frame Limit On/Off",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-battery-full-charging"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_Z"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PCSX2 (Standalone)"
+    ]
+  },
+  {
+    "id": "speed-increase-emulation-speed",
+    "name": "Increase Emulation Speed",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-zoom-in"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar",
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)",
+      "Duckstation (Legacy)",
+      "PCSX2 (Standalone)"
+    ]
+  },
+  {
+    "id": "speed-rewind",
+    "name": "Rewind",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-view-refresh"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_KPMINUS"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)",
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "speed-reset-emulation-speed",
+    "name": "Reset Emulation Speed",
+    "category": "Speed / Frames",
+    "icon": {
+      "type": "path",
+      "value": "RD-zoom-original"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_3"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Duckstation (Legacy)"
+    ]
+  },
+  {
+    "id": "steam-alt",
+    "name": "Alt",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-alt"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-alt-f4",
+    "name": "Alt + F4",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-alt-f4"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_F4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-control",
+    "name": "Control",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-ctrl"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-enter",
+    "name": "Enter",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-Enter"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_ENTER"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "GZDoom",
+      "IkemanGO",
+      "OpenBOR",
+      "PC-Systems",
+      "Ryubing (Standalone)",
+      "Solarus"
+    ]
+  },
+  {
+    "id": "steam-escape",
+    "name": "Escape",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-ESC"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_ESC"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "GZDoom",
+      "IkemanGO",
+      "OpenBOR",
+      "PC-Systems",
+      "Ruffle",
+      "Ryubing (Standalone)",
+      "Solarus"
+    ]
+  },
+  {
+    "id": "steam-f1",
+    "name": "F1",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-F1"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-f4",
+    "name": "F4",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-F4"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-f5",
+    "name": "F5",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-F5"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F5"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-f8",
+    "name": "F8",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-F8"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F8"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-f10",
+    "name": "F10",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-call"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F10"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-shift",
+    "name": "Shift",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-shift"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTSHIFT"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-slash",
+    "name": "Slash (/)",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-frontslash"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_SLASH"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-space",
+    "name": "Space",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-space"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_SPACE"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "steam-tab",
+    "name": "Tab",
+    "category": "Steam Deck / PC",
+    "icon": {
+      "type": "path",
+      "value": "RD-Tab"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_TAB"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "PC-Systems"
+    ]
+  },
+  {
+    "id": "azahar-load-amiibo",
+    "name": "Load Amiibo",
+    "category": "Azahar",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-desktop-accessibility"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_M"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar"
+    ]
+  },
+  {
+    "id": "azahar-remove-amiibo",
+    "name": "Remove Amiibo",
+    "category": "Azahar",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-desktop-accessibility"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_N"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Azahar"
+    ]
+  },
+  {
+    "id": "dolphin-freelook-mode-onoff",
+    "name": "Freelook Mode On/Off",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-edit-find"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_F"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-freelook-mode-reset",
+    "name": "Freelook Mode Reset",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-view-refresh"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_R"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-golf-mode-onoff",
+    "name": "Golf Mode On/Off",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-distributor-logo-netbsd"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_H"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wii-sync-button",
+    "name": "Wii Sync Button",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-notification-network-wireless"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_W"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-sideways",
+    "name": "Wiimote Sideways",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wiimote-side"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_X"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-sync-player-1",
+    "name": "Wiimote Sync - Player 1",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wii-1"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_W",
+        "KEY_1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-sync-player-2",
+    "name": "Wiimote Sync - Player 2",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wii-2"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_W",
+        "KEY_2"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-sync-player-3",
+    "name": "Wiimote Sync - Player 3",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wii-3"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_W",
+        "KEY_3"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-sync-player-4",
+    "name": "Wiimote Sync - Player 4",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wii-4"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_W",
+        "KEY_4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "dolphin-wiimote-upright",
+    "name": "Wiimote Upright",
+    "category": "Dolphin / Primehack",
+    "icon": {
+      "type": "path",
+      "value": "RD-wiimote-up"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_Z"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Dolphin (Standalone)",
+      "Primehack (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-insert-bill-note",
+    "name": "Insert Bill / Note",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-generic"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_B",
+        "KEY_1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-service-button-1",
+    "name": "Service Button 1",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arcade-BLUE"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_S",
+        "KEY_1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-service-button-2",
+    "name": "Service Button 2",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arcade-GREEN"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_S",
+        "KEY_2"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-service-button-3",
+    "name": "Service Button 3",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arcade-RED"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_S",
+        "KEY_3"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-service-button-4",
+    "name": "Service Button 4",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-Arcade-YELLOW"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_S",
+        "KEY_4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-service-mode",
+    "name": "Service Mode",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-documents"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_S",
+        "KEY_0"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-tilt",
+    "name": "Tilt",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "rd-tilt"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_T",
+        "KEY_0"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-tilt-player-1",
+    "name": "Tilt - Player 1",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-tilt-1"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_T",
+        "KEY_1"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-tilt-player-2",
+    "name": "Tilt - Player 2",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-tilt-2"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_T",
+        "KEY_2"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-tilt-player-3",
+    "name": "Tilt - Player 3",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-tilt-3"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_T",
+        "KEY_3"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "mame-tilt-player-4",
+    "name": "Tilt - Player 4",
+    "category": "MAME",
+    "icon": {
+      "type": "path",
+      "value": "RD-tilt-4"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_T",
+        "KEY_4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MAME (Standalone)"
+    ]
+  },
+  {
+    "id": "melonds-closeopen-lid",
+    "name": "Close/Open Lid",
+    "category": "MelonDS",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-downloads"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_L"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "melonds-play-microphone",
+    "name": "Play Microphone",
+    "category": "MelonDS",
+    "icon": {
+      "type": "path",
+      "value": "RD-media-playback-start"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_P"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "melonds-sunlight",
+    "name": "Sunlight +",
+    "category": "MelonDS",
+    "icon": {
+      "type": "path",
+      "value": "RD-list-add"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_KPPLUS"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "melonds-sunlight",
+    "name": "Sunlight -",
+    "category": "MelonDS",
+    "icon": {
+      "type": "path",
+      "value": "RD-list-remove"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_KPMINUS"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "MelonDS (Standalone)"
+    ]
+  },
+  {
+    "id": "retroarch-ai-service-onoff",
+    "name": "AI Service On/Off",
+    "category": "RetroArch",
+    "icon": {
+      "type": "path",
+      "value": "RD-godot"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_I"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "retroarch-cheats-onoff",
+    "name": "Cheats On/Off",
+    "category": "RetroArch",
+    "icon": {
+      "type": "path",
+      "value": "RD-utilities-terminal"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_C"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "retroarch-netplay-host-onoff",
+    "name": "Netplay Host On/Off",
+    "category": "RetroArch",
+    "icon": {
+      "type": "path",
+      "value": "RD-notification-network-ethernet-connected"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_H"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "retroarch-next-cheat",
+    "name": "Next Cheat",
+    "category": "RetroArch",
+    "icon": {
+      "type": "path",
+      "value": "RD-go-next"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_G"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "retroarch-previous-cheat",
+    "name": "Previous Cheat",
+    "category": "RetroArch",
+    "icon": {
+      "type": "path",
+      "value": "RD-go-previous"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTCTRL",
+        "KEY_F"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "RetroArch"
+    ]
+  },
+  {
+    "id": "scummvm-close",
+    "name": "Close",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-close"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_C"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-fight",
+    "name": "Fight",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-fight"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-give",
+    "name": "Give",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-give"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_G"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-look-at",
+    "name": "Look-At",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-look"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_L"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-move",
+    "name": "Move",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-move"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_M"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-open",
+    "name": "Open",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-open"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_O"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-pick-up",
+    "name": "Pick-Up",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-pickup"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_P"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-push-shove",
+    "name": "Push / Shove",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-push"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_S"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-pull-yank",
+    "name": "Pull / Yank",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-pull"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_Y"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "scummvm-use",
+    "name": "Use",
+    "category": "ScummVM",
+    "icon": {
+      "type": "path",
+      "value": "rd-pc-use"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_U"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "ScummVM"
+    ]
+  },
+  {
+    "id": "switch-change-gpu-accuracy",
+    "name": "Change GPU Accuracy",
+    "category": "Switch",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-new"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_G"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Ryubing (Standalone)"
+    ]
+  },
+  {
+    "id": "switch-docked-undocked-mode",
+    "name": "Docked / Undocked Mode",
+    "category": "Switch",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-unlocked"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_D"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Ryubing (Standalone)"
+    ]
+  },
+  {
+    "id": "switch-load-remove-amiibo",
+    "name": "Load / Remove Amiibo",
+    "category": "Switch",
+    "icon": {
+      "type": "path",
+      "value": "RD-preferences-desktop-accessibility"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_LEFTALT",
+        "KEY_M"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Ryubing (Standalone)"
+    ]
+  },
+  {
+    "id": "switch-open-menu-ryubing-f4",
+    "name": "Open Menu Ryubing - F4",
+    "category": "Switch",
+    "icon": {
+      "type": "path",
+      "value": "RD-F4"
+    },
+    "action": {
+      "type": "hotkey",
+      "operation": "press",
+      "keys": [
+        "KEY_F4"
+      ]
+    },
+    "systems": "*",
+    "emulators": [
+      "Ryubing (Standalone)"
+    ]
+  },
+  {
+    "id": "quick-quit-component",
+    "name": "Quit",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-process-stop"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "exit"
+    },
+    "systems": "*",
+    "emulators": "*"
+  }
+]

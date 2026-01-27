@@ -190,8 +190,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
 
             if (action.action.operation === 'exit') {
 
-                console.log(lastFocusedChangedEvent);
-
                 if (!lastFocusedChangedEvent) {
                     return;
                 }

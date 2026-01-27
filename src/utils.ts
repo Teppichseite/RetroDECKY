@@ -26,7 +26,7 @@ export const filterActions = (actions: Action[], gameEvent: GameEvent): Action[]
 export const adjustCategories = (actions: Action[]): Action[] => {
     return actions
         .map<Action>(({ category, ...action }) => {
-            if (category === 'Quick Menu') {
+            if (['Quick Menu', 'Quick'].includes(category ?? '')) {
                 return action;
             }
             return {
