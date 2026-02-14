@@ -3,7 +3,7 @@ export interface GameEvent {
     path: string;
     name: string;
     system_name: string;
-    full_system_name: string;
+    system_full_name: string;
     image_path: string | null;
     manual_path: string | null;
     emulator_name: string[];

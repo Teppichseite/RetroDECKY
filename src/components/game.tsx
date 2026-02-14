@@ -23,11 +23,11 @@ export function Game() {
                     alt={gameEvent.name}
                     style={{ width: "60%", marginTop: '10px' }}
                 />}
-                <div className={staticClasses.PanelSectionTitle} style={{ marginTop: '20px' }}>
+                <div className={staticClasses.PanelSectionTitle} style={{ marginTop: '20px', textAlign: 'center' }}>
                     {gameEvent.name}
                 </div>
-                <div style={{ marginBottom: '20px', fontSize: '14px' }}>
-                    {gameEvent.system_name.toUpperCase()}
+                <div style={{ marginBottom: '20px', fontSize: '14px', textAlign: 'center' }}>
+                    {gameEvent.system_full_name}
                 </div>
             </div>
             <ActionsComponent />

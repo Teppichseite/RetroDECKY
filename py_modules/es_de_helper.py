@@ -103,7 +103,7 @@ class EsDeHelper:
             api_url = os.path.join(apiBaseUrl, "game-event")
 
             script_content = f"""
-            curl -X POST -d "{event_type};$1;$2;$3;$4 &" {api_url}
+            curl -X POST -d "{event_type};$1;$2;$3;$4" {api_url} &
             """.strip()
             
             target_folder = os.path.join(self.paths.esDeConfigFolder, "scripts", script_name)
