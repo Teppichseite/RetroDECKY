@@ -3,6 +3,7 @@ import subprocess
 
 from es_de_helper import EsDeHelper
 from models import GameEvent, Paths
+from paths_resolver import PathsResolver
 from server import Server
 
 import asyncio
@@ -128,21 +129,17 @@ class Plugin:
     async def _main(self):
         self.loop = asyncio.get_event_loop()
 
-        self.paths = Paths(
-            esDeUserFolder=os.path.join(decky.DECKY_USER_HOME, "retrodeck", "ES-DE"),
-            esDeConfigFolder=os.path.join(decky.DECKY_USER_HOME, ".var", "app", "net.retrodeck.retrodeck", "config", "ES-DE"),
-            esDeDownloadedMediaFolder=os.path.join(decky.DECKY_USER_HOME, "retrodeck", "ES-DE", "downloaded_media"),
-            esDeDefaultEsSystemsFile=os.path.join(decky.DECKY_PLUGIN_DIR, "presets", "es_systems.xml"),
-            actionsFile=os.path.join(decky.DECKY_PLUGIN_DIR, "presets", "actions.json"),
-            romsFolder=os.path.join(decky.DECKY_USER_HOME, "retrodeck", "roms")
-        )
-
-        decky.logger.info(f"Initialized plugin with paths: {self.paths}")
-
         self._check_retrodeck_flatpak()
         if not self.is_retrodeck_flatpak_installed:
             decky.logger.error("RetroDeck flatpak is not installed")
             return
+
+        self.paths = PathsResolver(decky.DECKY_USER_HOME, decky.DECKY_PLUGIN_DIR, decky.logger).resolve()
+        if self.paths is None:
+            decky.logger.error("Failed to resolve paths")
+            return
+
+        decky.logger.info(f"Initialized plugin with paths: {self.paths}")
 
         self.server = Server(decky.logger, self.paths, self._on_game_event)
         self.server.start_server()

@@ -61,5 +61,6 @@ py_modules/*
 !py_modules/models.py
 !py_modules/key_emitter.py
 !py_modules/es_de_helper.py
+!py_modules/paths_resolver.py
 
 test_script.py

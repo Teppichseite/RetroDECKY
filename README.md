@@ -33,12 +33,8 @@ The goal of this plugin is to provide a menu which displays only the actions rel
 5. To reload the setup status, go to **Decky Settings > Plugins > RetroDecky > Reload**
 
 ## Known Issues
-1. Currently the setup works only for the RetroDeck default installation. This means:
-    1. RetroDeck user folder is stored under `~/retrodeck/`
-    2. Roms are stored under `~/retrodeck/roms`
-    3. Downloaded media is stored under `~/retrodeck/ES-DE/downloaded_media`
-2. Hotkeys which require holding keys like Fast Forward are not correctly working yet
-3. PDF Manual is currently more a proof of concept the aspect ratios and performance is not optimal
+1. Hotkeys which require holding keys like Fast Forward are not correctly working yet
+2. PDF Manual is currently more a proof of concept the aspect ratios and performance is not optimal
 
 ## How It Works
 The plugin integrates with RetroDeck through ES-DE event scripts:
