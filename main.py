@@ -11,6 +11,7 @@ from dataclasses import asdict
 import json
 
 import decky
+from settings import SettingsManager
 
 class Plugin:
     actions: list[dict] = None
@@ -22,6 +23,8 @@ class Plugin:
     es_de_helper: EsDeHelper = None
 
     game_event: GameEvent = None
+
+    settings: SettingsManager = None
 
     states: dict[str, str] = dict()
 
@@ -124,10 +127,19 @@ class Plugin:
 
     async def check_setup_state(self) -> [bool, bool]:
         return self.is_retrodeck_flatpak_installed, self.are_es_de_event_scripts_created
-        
+
+    async def get_setting(self, key: str):
+        return self.settings.getSetting(key)
+
+    async def set_setting(self, key: str, value):
+        self.settings.setSetting(key, value)
+        self.settings.commit()
 
     async def _main(self):
         self.loop = asyncio.get_event_loop()
+
+        self.settings = SettingsManager(name="settings", settings_directory=decky.DECKY_PLUGIN_SETTINGS_DIR)
+        self.settings.read()
 
         self._check_retrodeck_flatpak()
         if not self.is_retrodeck_flatpak_installed:

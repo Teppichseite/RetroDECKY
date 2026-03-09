@@ -1,12 +1,26 @@
 import { ButtonItem, PanelSectionRow } from "@decky/ui";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
 import { Action } from "../interfaces";
 import { getIconPath } from "../utils";
+import { getSettingBe } from "../backend";
 
 export const ActionsComponent = () => {
-    const { displayedActions: actions } = useMenuContext();
+    const { displayedActions } = useMenuContext();
+    const [showManualButton, setShowManualButton] = useState(false);
+
+    useEffect(() => {
+        getSettingBe("showManualButton").then((value) => {
+            setShowManualButton(!!value);
+        });
+    }, []);
+
+    const actions = showManualButton
+        ? displayedActions
+        : displayedActions.filter(
+            (action) => !(action.action.type === 'builtin' && action.action.operation === 'view_manual')
+        );
 
     if (actions.length === 0) {
         return <div style={{ textAlign: 'center' }}>There are no actions available.</div>;

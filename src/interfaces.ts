@@ -44,3 +44,5 @@ export interface SetupState {
     isRetrodeckFlatpakInstalled: boolean;
     areEsDeEventScriptsCreated: boolean;
 }
+
+export type SettingsKey = string;

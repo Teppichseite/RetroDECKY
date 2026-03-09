@@ -1,6 +1,7 @@
 import { PanelSection } from "@decky/ui";
 import retrodeckLogo from "../../assets/retrodeck-logo.png";
 import { SetupGuide } from "./setup-guide";
+import { Settings } from "./settings";
 
 export const NoGame = () => {
     return <div>
@@ -17,6 +18,7 @@ export const NoGame = () => {
                 <strong>No game is currently running.</strong>
             </div>
             <SetupGuide />
+            <Settings />
         </PanelSection>
     </div>;
 };
