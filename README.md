@@ -27,7 +27,7 @@ The goal of this plugin is to provide a menu which displays only the actions rel
     2. Install the plugin from the **releases page**
     3. **Build the plugin yourself**
 2. Ensure **RetroDeck Flatpak** is installed on your system
-    1. If not installed, you can install it via the **Discover Store** or run: `flatpak install --user flathub net.retrodeck.retrodeck`
+    1. Follow [this guide](https://retrodeck.readthedocs.io/en/latest/wiki_devices/steamdeck/steamdeck-start/) on how to install the RetroDECK Flatpak on your system
 3. Open RetroDecky in the **Steam Quick Access Menu**
 4. Follow the **Setup Guide** displayed in the plugin menu:
 5. To reload the setup status, go to **Decky Settings > Plugins > RetroDecky > Reload**
@@ -63,3 +63,4 @@ The plugin integrates with RetroDeck through ES-DE event scripts:
 
 ## Acknowledgements
 1. RetroDeck Logo, Icons and certain config files are taken from the RetroDeck project: https://github.com/RetroDECK/RetroDECK
+2. Release workflow taken from https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.yml
