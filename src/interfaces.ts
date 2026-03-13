@@ -9,6 +9,11 @@ export interface GameEvent {
     emulator_name: string[];
 }
 
+export interface HotkeyLabel {
+    name: 'string';
+    keys: string[];
+}
+
 export interface Action {
     id: string;
     name: string;
@@ -27,7 +32,8 @@ export interface Action {
         operation: "view_manual" | "exit";
     };
     systems: "*" | string[];
-    emulators: "*" | (string | string[])[] ;
+    emulators: "*" | (string | string[])[];
+    hotkeyLabels: HotkeyLabel[]
 }
 
 export interface PdfViewState {
@@ -44,3 +50,5 @@ export interface SetupState {
     isRetrodeckFlatpakInstalled: boolean;
     areEsDeEventScriptsCreated: boolean;
 }
+
+export type SettingsKey = string;

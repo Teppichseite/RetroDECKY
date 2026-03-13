@@ -10,7 +10,7 @@ import { checkSetupStateBe, getActionsBe, getGameEventBe, mapBeSetupStateToSetup
 import { Router } from "@decky/ui";
 import { SteamClient } from "@decky/ui/dist/globals/steam-client";
 import { FocusChangeEvent } from "@decky/ui/dist/globals/steam-client/system/UI";
-import { holdHotkeys, pressHotkeys, releaseHotkeys } from "./hotkey";
+import { pressHotkeys } from "./hotkey";
 
 declare var SteamClient: SteamClient;
 
@@ -20,7 +20,6 @@ export interface MenuContextValue {
     actions: Action[];
     gameEvent: GameEvent | null;
     displayedActions: Action[];
-    heldActions: string[];
     pdfViewState: PdfViewState;
     setupState: SetupState | null;
     focusedElement: string | null;
@@ -43,7 +42,6 @@ export const MenuContext = createContext<MenuContextValue>({
     actions: [],
     gameEvent: null,
     displayedActions: [],
-    heldActions: [],
     pdfViewState: defaultPdfViewState,
     setupState: null,
     focusedElement: null,
@@ -65,7 +63,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
     const [displayedActions, setDisplayedActions] = useState<Action[]>([]);
     const [gameEvent, setGameEvent] = useState<GameEvent | null>(null);
     
-    const [heldActions, setHeldActions] = useJsContextState<string[]>("held_actions", []);
     const [pdfViewState, setPdfViewState] = useJsContextState<PdfViewState>("pdf_view_state", defaultPdfViewState);
 
     const [setupState, setSetupState] = useState<SetupState | null>(null);
@@ -147,30 +144,15 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         }
 
         const keys = action.action.keys;
+        const type = action.action.operation;
 
-        let type: 'hold' | 'press' | 'release' = action.action.operation;
-
-        if (type === 'hold') {
-            const isHeld = heldActions.includes(action.id);
-            if (isHeld) {
-                type = 'release';
-                setHeldActions(heldActions.filter((a) => a != action.id));
-            } else {
-                type = 'hold';
-                setHeldActions([...heldActions, action.id]);
-            }
+        if(type !== 'press') {
+            return;
         }
 
         Router.CloseSideMenus();
         setTimeout(() => {
-            //runHotkeyActionBe(type, keys);
-            if(type === 'hold') {
-                holdHotkeys(keys);
-            } else if(type === 'press') {
-                pressHotkeys(keys);
-            } else if(type === 'release') {
-                releaseHotkeys(keys);
-            }
+            pressHotkeys(keys);
         }, 200);
     }
 
@@ -219,7 +201,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         actions,
         gameEvent,
         displayedActions,
-        heldActions,
         pdfViewState,
         setupState,
         focusedElement,

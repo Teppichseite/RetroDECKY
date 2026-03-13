@@ -42,7 +42,7 @@ This file provides an overview of all actions defined in actions.json.
 
 - **Load State** (`quick-load-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_A (press)`
-  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch
+  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch, Azahar (Standalone)
 
 - **Save State** (`quick-save-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_S (press)`
@@ -120,7 +120,7 @@ This file provides an overview of all actions defined in actions.json.
 
 - **Load State** (`state-load-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_A (press)`
-  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch
+  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch, Azahar (Standalone)
 
 - **Previous State** (`state-previous-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_J (press)`
@@ -132,7 +132,7 @@ This file provides an overview of all actions defined in actions.json.
 
 - **Save State** (`state-save-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_S (press)`
-  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch
+  - Emulators: Duckstation (Legacy) (Standalone), Dolphin (Standalone), Primehack (Standalone), PCSX2 (Standalone), PPSSPP (Standalone), RetroArch, Azahar (Standalone)
 
 - **Undo Load State** (`state-undo-load-state`)
   - Hotkey: `KEY_LEFTCTRL + KEY_8 (press)`
@@ -193,11 +193,11 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: Dolphin (Standalone), Primehack (Standalone)
 
 - **Fast Forward** (`speed-fast-forward`)
-  - Hotkey: `KEY_LEFTCTRL + KEY_KPPLUS (press)`
+  - Hotkey: `KEY_LEFTCTRL + KEY_KPPLUS (hold)`
   - Emulators: Duckstation (Legacy) (Standalone), MelonDS (Standalone), PCSX2 (Standalone), RetroArch
 
 - **Rewind** (`speed-rewind`)
-  - Hotkey: `KEY_LEFTCTRL + KEY_KPMINUS (press)`
+  - Hotkey: `KEY_LEFTCTRL + KEY_KPMINUS (hold)`
   - Emulators: Duckstation (Legacy) (Standalone), RetroArch
 
 

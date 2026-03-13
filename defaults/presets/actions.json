@@ -12,7 +12,8 @@
       "operation": "view_manual"
     },
     "systems": "*",
-    "emulators": "*"
+    "emulators": "*",
+    "hotkeyLabels": []
   },
   {
     "id": "quick-load-state",
@@ -37,7 +38,45 @@
       "Primehack (Standalone)",
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
-      "RetroArch"
+      "RetroArch",
+      "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "A"
+        ]
+      }
     ]
   },
   {
@@ -65,6 +104,43 @@
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "S"
+        ]
+      }
     ]
   },
   {
@@ -92,6 +168,43 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "A"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "A"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Cross"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "B"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "P"
+        ]
+      }
     ]
   },
   {
@@ -119,6 +232,15 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "R"
+        ]
+      }
     ]
   },
   {
@@ -142,6 +264,15 @@
       "Azahar (Standalone)",
       "Cemu (Standalone)",
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "TAB"
+        ]
+      }
     ]
   },
   {
@@ -163,6 +294,15 @@
     "systems": "*",
     "emulators": [
       "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "L"
+        ]
+      }
     ]
   },
   {
@@ -190,6 +330,14 @@
       "PC-Systems",
       "Ruffle (Standalone)",
       "Solarus (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ESC"
+        ]
+      }
     ]
   },
   {
@@ -219,6 +367,43 @@
       "RPCS3 Game Serial (Standalone)",
       "RPCS3 Directory (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "Y"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "Y"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Triangle"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "X"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "M"
+        ]
+      }
     ]
   },
   {
@@ -234,7 +419,37 @@
       "operation": "exit"
     },
     "systems": "*",
-    "emulators": "*"
+    "emulators": "*",
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "Start"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "Start"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Start"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "Start"
+        ]
+      }
+    ]
   },
   {
     "id": "general-pause-resume",
@@ -261,6 +476,43 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "A"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "A"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Cross"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "B"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "P"
+        ]
+      }
     ]
   },
   {
@@ -288,6 +540,15 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "R"
+        ]
+      }
     ]
   },
   {
@@ -312,6 +573,15 @@
       "Primehack (Standalone)",
       "Duckstation (Legacy) (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "D"
+        ]
+      }
     ]
   },
   {
@@ -340,6 +610,43 @@
       "RPCS3 Game Serial (Standalone)",
       "RPCS3 Directory (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "Y"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "Y"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Triangle"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "X"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "M"
+        ]
+      }
     ]
   },
   {
@@ -362,6 +669,15 @@
     "emulators": [
       "Duckstation (Legacy) (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "C"
+        ]
+      }
     ]
   },
   {
@@ -383,6 +699,15 @@
     "systems": "*",
     "emulators": [
       "Duckstation (Legacy) (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "T"
+        ]
+      }
     ]
   },
   {
@@ -411,6 +736,43 @@
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "B"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "B"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Circle"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "A"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "X"
+        ]
+      }
     ]
   },
   {
@@ -436,6 +798,15 @@
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "V"
+        ]
+      }
     ]
   },
   {
@@ -461,7 +832,45 @@
       "Primehack (Standalone)",
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
-      "RetroArch"
+      "RetroArch",
+      "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "L1"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "A"
+        ]
+      }
     ]
   },
   {
@@ -488,6 +897,43 @@
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "D-Pad Left"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "D-Pad Left"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "D-Pad Left"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "D-Pad Left"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "J"
+        ]
+      }
     ]
   },
   {
@@ -514,6 +960,43 @@
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "D-Pad Right"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "D-Pad Right"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "D-Pad Right"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "D-Pad Right"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "K"
+        ]
+      }
     ]
   },
   {
@@ -539,7 +1022,45 @@
       "Primehack (Standalone)",
       "PCSX2 (Standalone)",
       "PPSSPP (Standalone)",
-      "RetroArch"
+      "RetroArch",
+      "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "R1"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "S"
+        ]
+      }
     ]
   },
   {
@@ -562,6 +1083,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "8"
+        ]
+      }
     ]
   },
   {
@@ -585,6 +1115,15 @@
       "Duckstation (Legacy) (Standalone)",
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "9"
+        ]
+      }
     ]
   },
   {
@@ -609,6 +1148,15 @@
       "Duckstation (Legacy) (Standalone)",
       "PCSX2 (Standalone)",
       "PrimeHack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "W"
+        ]
+      }
     ]
   },
   {
@@ -632,6 +1180,15 @@
       "Azahar (Standalone)",
       "Cemu (Standalone)",
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "TAB"
+        ]
+      }
     ]
   },
   {
@@ -656,6 +1213,15 @@
       "Duckstation (Legacy) (Standalone)",
       "PCSX2 (Standalone)",
       "PrimeHack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "Y"
+        ]
+      }
     ]
   },
   {
@@ -680,6 +1246,15 @@
       "Duckstation (Legacy) (Standalone)",
       "PCSX2 (Standalone)",
       "PrimeHack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "U"
+        ]
+      }
     ]
   },
   {
@@ -706,6 +1281,43 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "PrimeHack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "X"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "X"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "Square"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "Y"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "ENTER"
+        ]
+      }
     ]
   },
   {
@@ -731,6 +1343,43 @@
       "Primehack (Standalone)",
       "Duckstation (Legacy) (Standalone)",
       "PCSX2 (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "D-Pad Down"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "D-Pad Down"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "D-Pad Down"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "D-Pad Down"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -756,6 +1405,43 @@
       "Primehack (Standalone)",
       "Duckstation (Legacy) (Standalone)",
       "PCSX2 (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "D-Pad Up"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "D-Pad Up"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "D-Pad Up"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "D-Pad Up"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -777,6 +1463,15 @@
     "systems": "*",
     "emulators": [
       "Duckstation (Legacy) (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "3"
+        ]
+      }
     ]
   },
   {
@@ -798,6 +1493,15 @@
     "systems": "*",
     "emulators": [
       "PCSX2 (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "Z"
+        ]
+      }
     ]
   },
   {
@@ -820,6 +1524,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "0"
+        ]
+      }
     ]
   },
   {
@@ -832,7 +1545,7 @@
     },
     "action": {
       "type": "hotkey",
-      "operation": "press",
+      "operation": "hold",
       "keys": [
         "KEY_LEFTCTRL",
         "KEY_KPPLUS"
@@ -844,6 +1557,43 @@
       "MelonDS (Standalone)",
       "PCSX2 (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "R2"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "R2"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "R2"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "R2"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "+"
+        ]
+      }
     ]
   },
   {
@@ -856,7 +1606,7 @@
     },
     "action": {
       "type": "hotkey",
-      "operation": "press",
+      "operation": "hold",
       "keys": [
         "KEY_LEFTCTRL",
         "KEY_KPMINUS"
@@ -866,6 +1616,43 @@
     "emulators": [
       "Duckstation (Legacy) (Standalone)",
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Steam Deck",
+        "keys": [
+          "HKB",
+          "L2"
+        ]
+      },
+      {
+        "name": "Xbox",
+        "keys": [
+          "HKB",
+          "L2"
+        ]
+      },
+      {
+        "name": "PlayStation",
+        "keys": [
+          "HKB",
+          "L2"
+        ]
+      },
+      {
+        "name": "Nintendo",
+        "keys": [
+          "HKB",
+          "L2"
+        ]
+      },
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "-"
+        ]
+      }
     ]
   },
   {
@@ -887,6 +1674,15 @@
     "systems": "*",
     "emulators": [
       "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "M"
+        ]
+      }
     ]
   },
   {
@@ -908,6 +1704,15 @@
     "systems": "*",
     "emulators": [
       "Azahar (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "N"
+        ]
+      }
     ]
   },
   {
@@ -930,6 +1735,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "F"
+        ]
+      }
     ]
   },
   {
@@ -952,6 +1766,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "R"
+        ]
+      }
     ]
   },
   {
@@ -974,6 +1797,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "H"
+        ]
+      }
     ]
   },
   {
@@ -996,6 +1828,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "W"
+        ]
+      }
     ]
   },
   {
@@ -1018,6 +1859,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "X"
+        ]
+      }
     ]
   },
   {
@@ -1040,6 +1890,15 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "Z"
+        ]
+      }
     ]
   },
   {
@@ -1063,6 +1922,16 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "W",
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -1086,6 +1955,16 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "W",
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -1109,6 +1988,16 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "W",
+          "3"
+        ]
+      }
     ]
   },
   {
@@ -1132,6 +2021,16 @@
     "emulators": [
       "Dolphin (Standalone)",
       "Primehack (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "W",
+          "4"
+        ]
+      }
     ]
   },
   {
@@ -1153,6 +2052,15 @@
     "systems": "*",
     "emulators": [
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "L"
+        ]
+      }
     ]
   },
   {
@@ -1174,6 +2082,15 @@
     "systems": "*",
     "emulators": [
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "+"
+        ]
+      }
     ]
   },
   {
@@ -1195,6 +2112,15 @@
     "systems": "*",
     "emulators": [
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "-"
+        ]
+      }
     ]
   },
   {
@@ -1216,6 +2142,15 @@
     "systems": "*",
     "emulators": [
       "MelonDS (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "P"
+        ]
+      }
     ]
   },
   {
@@ -1238,6 +2173,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "S",
+          "0"
+        ]
+      }
     ]
   },
   {
@@ -1260,6 +2205,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "S",
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -1282,6 +2237,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "S",
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -1304,6 +2269,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "S",
+          "3"
+        ]
+      }
     ]
   },
   {
@@ -1326,6 +2301,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "S",
+          "4"
+        ]
+      }
     ]
   },
   {
@@ -1348,6 +2333,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "B",
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -1370,6 +2365,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "T",
+          "0"
+        ]
+      }
     ]
   },
   {
@@ -1392,6 +2397,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "T",
+          "1"
+        ]
+      }
     ]
   },
   {
@@ -1414,6 +2429,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "T",
+          "2"
+        ]
+      }
     ]
   },
   {
@@ -1436,6 +2461,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "T",
+          "3"
+        ]
+      }
     ]
   },
   {
@@ -1458,6 +2493,16 @@
     "systems": "*",
     "emulators": [
       "MAME (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "T",
+          "4"
+        ]
+      }
     ]
   },
   {
@@ -1479,6 +2524,15 @@
     "systems": "*",
     "emulators": [
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "C"
+        ]
+      }
     ]
   },
   {
@@ -1500,6 +2554,15 @@
     "systems": "*",
     "emulators": [
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "F"
+        ]
+      }
     ]
   },
   {
@@ -1521,6 +2584,15 @@
     "systems": "*",
     "emulators": [
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "G"
+        ]
+      }
     ]
   },
   {
@@ -1542,6 +2614,15 @@
     "systems": "*",
     "emulators": [
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "I"
+        ]
+      }
     ]
   },
   {
@@ -1563,6 +2644,15 @@
     "systems": "*",
     "emulators": [
       "RetroArch"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL",
+          "H"
+        ]
+      }
     ]
   },
   {
@@ -1590,6 +2680,14 @@
       "PC-Systems",
       "Ruffle (Standalone)",
       "Solarus (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ESC"
+        ]
+      }
     ]
   },
   {
@@ -1616,6 +2714,14 @@
       "OpenBOR (Standalone)",
       "PC-Systems",
       "Solarus (Standalone)"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ENTER"
+        ]
+      }
     ]
   },
   {
@@ -1638,6 +2744,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "SPACE"
+        ]
+      }
     ]
   },
   {
@@ -1660,6 +2774,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "TAB"
+        ]
+      }
     ]
   },
   {
@@ -1682,6 +2804,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "CTRL"
+        ]
+      }
     ]
   },
   {
@@ -1704,6 +2834,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT"
+        ]
+      }
     ]
   },
   {
@@ -1726,6 +2864,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "SHIFT"
+        ]
+      }
     ]
   },
   {
@@ -1749,6 +2895,15 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "ALT",
+          "F4"
+        ]
+      }
     ]
   },
   {
@@ -1771,6 +2926,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F1"
+        ]
+      }
     ]
   },
   {
@@ -1793,6 +2956,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F4"
+        ]
+      }
     ]
   },
   {
@@ -1815,6 +2986,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F5"
+        ]
+      }
     ]
   },
   {
@@ -1837,6 +3016,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F8"
+        ]
+      }
     ]
   },
   {
@@ -1859,6 +3046,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F10"
+        ]
+      }
     ]
   },
   {
@@ -1881,6 +3076,14 @@
     ],
     "emulators": [
       "PC-Systems"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "/"
+        ]
+      }
     ]
   },
   {
@@ -1903,6 +3106,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "C"
+        ]
+      }
     ]
   },
   {
@@ -1925,6 +3136,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "O"
+        ]
+      }
     ]
   },
   {
@@ -1947,6 +3166,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "G"
+        ]
+      }
     ]
   },
   {
@@ -1969,6 +3196,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "P"
+        ]
+      }
     ]
   },
   {
@@ -1991,6 +3226,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "U"
+        ]
+      }
     ]
   },
   {
@@ -2013,6 +3256,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "L"
+        ]
+      }
     ]
   },
   {
@@ -2035,6 +3286,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "M"
+        ]
+      }
     ]
   },
   {
@@ -2057,6 +3316,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "S"
+        ]
+      }
     ]
   },
   {
@@ -2079,6 +3346,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "Y"
+        ]
+      }
     ]
   },
   {
@@ -2101,6 +3376,14 @@
     ],
     "emulators": [
       "ScummVM"
+    ],
+    "hotkeyLabels": [
+      {
+        "name": "Keyboard",
+        "keys": [
+          "F"
+        ]
+      }
     ]
   }
 ]

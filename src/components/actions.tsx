@@ -1,12 +1,43 @@
-import { ButtonItem, PanelSectionRow } from "@decky/ui";
-import { useRef, useEffect } from "react";
+import { DialogButton, Field, Focusable, PanelSectionRow, findSP, showModal } from "@decky/ui";
+import { useRef, useEffect, useState, RefObject } from "react";
+import { FaInfoCircle } from "react-icons/fa";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
 import { Action } from "../interfaces";
 import { getIconPath } from "../utils";
+import { getSettingBe } from "../backend";
+import { ActionModal } from "./action-modal";
+
+const useFocusElement = (focusedElement: string | null, elementId: string): { ref: RefObject<HTMLDivElement | null>, isFocused: boolean } => {
+    const ref = useRef<HTMLDivElement>(null);
+    const isFocused = focusedElement === elementId;
+
+    useEffect(() => {
+        if (isFocused && ref.current) {
+            ref.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            const button = ref.current.querySelector("button");
+            button?.focus();
+        }
+    }, [isFocused]);
+
+    return { ref, isFocused };
+};
 
 export const ActionsComponent = () => {
-    const { displayedActions: actions } = useMenuContext();
+    const { displayedActions } = useMenuContext();
+    const [showManualButton, setShowManualButton] = useState(false);
+
+    useEffect(() => {
+        getSettingBe("showManualButton").then((value) => {
+            setShowManualButton(!!value);
+        });
+    }, []);
+
+    const actions = showManualButton
+        ? displayedActions
+        : displayedActions.filter(
+            (action) => !(action.action.type === 'builtin' && action.action.operation === 'view_manual')
+        );
 
     if (actions.length === 0) {
         return <div style={{ textAlign: 'center' }}>There are no actions available.</div>;
@@ -43,19 +74,9 @@ export const ActionsComponent = () => {
 
 export const CategoryComponent = ({ category, actionsForCategory }: { category: string, actionsForCategory: Action[] }) => {
     const { openedCategory, setOpenedCategory, focusedElement, setFocusedElement } = useMenuContext();
-    const buttonRef = useRef<HTMLDivElement>(null);
-    
-    const isFocused = focusedElement === `category:${category}`;
-    
-    useEffect(() => {
-        if (isFocused && buttonRef.current) {
-            buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            const buttonItem = buttonRef.current.querySelector("button");
-            buttonItem?.focus();
-        }
-    }, [isFocused]);
-    
-    return <div key={category} ref={buttonRef}>
+    const { ref } = useFocusElement(focusedElement, `category:${category}`);
+
+    return <div key={category} ref={ref}>
         <ActionButton
             onClick={() => {
                 if (category === openedCategory) {
@@ -78,18 +99,8 @@ export const CategoryComponent = ({ category, actionsForCategory }: { category: 
 }
 
 export const ActionComponent = ({ action }: { action: Action }) => {
-    const { handleAction, heldActions, gameEvent, focusedElement, setFocusedElement } = useMenuContext();
-    const buttonRef = useRef<HTMLDivElement>(null);
-    
-    const isFocused = focusedElement === `action:${action.id}`;
-    
-    useEffect(() => {
-        if (isFocused && buttonRef.current) {
-            buttonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            const buttonItem = buttonRef.current.querySelector("button");
-            buttonItem?.focus();
-        }
-    }, [isFocused]);
+    const { handleAction, gameEvent, focusedElement, setFocusedElement } = useMenuContext();
+    const { ref, isFocused } = useFocusElement(focusedElement, `action:${action.id}`);
 
     if (!gameEvent) {
         return <div />;
@@ -99,22 +110,29 @@ export const ActionComponent = ({ action }: { action: Action }) => {
         ? <img alt={action.name} src={getIconPath(action.icon.value)} width={24} height={24} />
         : 'v';
 
-    const isHoldAction = action.action.type === 'hotkey' && action.action.operation === 'hold';
 
-    const isHeld = heldActions.includes(action.id);
+    const onOpenModal = () => {
+        setFocusedElement(null);
+        showModal(<ActionModal action={action} onClose={() => setFocusedElement(`action:${action.id}`)} />, findSP());
+    };
 
-    const textAddition = `${isHoldAction ? isHeld ? ' - Release' : ' - Hold' : ''}`;
+    const showInfoButton = isFocused && action.action.type !== 'builtin';
 
     const isManualViewAction = action.action.type === 'builtin' && action.action.operation === 'view_manual';
+    const isDisabled = (isManualViewAction && !gameEvent.manual_path) 
+        || (action.action.type === 'hotkey' && action.action.operation === 'hold')
+        || action.disabled;
 
-    return <div ref={buttonRef}>
+    return <div ref={ref}>
         <ActionButton
             onClick={() => handleAction(action)}
             onFocus={() => setFocusedElement(`action:${action.id}`)}
             icon={icon}
-            disabled={isManualViewAction && !gameEvent.manual_path}
+            disabled={isDisabled}
+            showInfoButton={showInfoButton}
+            onInfoClick={onOpenModal}
         >
-            {action.name}{textAddition}
+            {action.name}
         </ActionButton>
     </div>;
 }
@@ -125,44 +143,62 @@ interface ActionButtonProps {
     children: React.ReactNode;
     disabled?: boolean;
     onFocus?: () => void;
+    showInfoButton?: boolean;
+    onInfoClick?: () => void;
 }
 
 const ActionButton = (props: ActionButtonProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    
+
     useEffect(() => {
         const container = containerRef.current;
         if (!container || !props.onFocus) {
             return;
         }
-        
+
         const button = container.querySelector("button");
         if (!button) {
             return;
         }
-        
-        const handleFocus = () => {
-            props.onFocus?.();
-        };
-        
-        button.addEventListener('focus', handleFocus);
-        
+
+        const observer = new MutationObserver(() => {
+            if (button.classList.contains("gpfocus")) {
+                props.onFocus?.();
+            }
+        });
+
+        observer.observe(button, { attributes: true, attributeFilter: ["class"] });
+
         return () => {
-            button.removeEventListener('focus', handleFocus);
+            observer.disconnect();
         };
     }, [props.onFocus]);
-    
+
     return <div ref={containerRef}>
         <PanelSectionRow>
-            <ButtonItem
-                layout="below"
-                onClick={props.onClick}
-                disabled={props.disabled}
-            >
-                <ButtonItemIconContent icon={props.icon} >
-                    {props.children}
-                </ButtonItemIconContent>
-            </ButtonItem>
+            <Field childrenLayout="below" childrenContainerWidth="max">
+                <Focusable className="FocusRegion" style={{ display: "flex", gap: "10px" }}>
+                    <DialogButton
+                        style={{ flex: 1, minWidth: "0" }}
+                        onClick={props.onClick}
+                        disabled={props.disabled}
+                    >
+                        <ButtonItemIconContent icon={props.icon}>
+                            {props.children}
+                        </ButtonItemIconContent>
+                    </DialogButton>
+                    {props.showInfoButton && (
+                        <DialogButton
+                            style={{ minWidth: "0", width: "auto", paddingLeft: "12px", paddingRight: "12px" }}
+                            onClick={props.onInfoClick}
+                        >
+                            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <FaInfoCircle />
+                            </div>
+                        </DialogButton>
+                    )}
+                </Focusable>
+            </Field>
         </PanelSectionRow>
     </div>;
 }

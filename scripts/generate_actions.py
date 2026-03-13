@@ -196,6 +196,39 @@ EMULATOR_SYSTEM_EXPANDS: Dict[str, List[str]] = {
     "ScummVM": ["scummvm"]
 }
 
+# Actions whose hotkey operation should be "hold" instead of the default "press".
+HOTKEY_HOLD_ACTIONS = [
+    "speed-rewind",
+    "speed-fast-forward",
+]
+
+# Controller-specific hotkey labels for actions.
+# Format: action_id -> (steam_deck/xbox, nintendo, sony)
+# Steam Deck and Xbox share the same button layout, so both use the first value.
+# The Keyboard label is added automatically from the scraped keyboard shortcut.
+# Keys are split by " + " to produce a list (e.g. "HKB + L1" -> ["HKB", "L1"]).
+HOTKEY_LABELS: Dict[str, tuple] = {
+    "quick-pause-resume": ("HKB + A", "HKB + B", "HKB + Cross"),
+    "general-pause-resume": ("HKB + A", "HKB + B", "HKB + Cross"),
+    "quick-load-state": ("HKB + L1", "HKB + L1", "HKB + L1"),
+    "state-load-state": ("HKB + L1", "HKB + L1", "HKB + L1"),
+    "quick-save-state": ("HKB + R1", "HKB + R1", "HKB + R1"),
+    "state-save-state": ("HKB + R1", "HKB + R1", "HKB + R1"),
+    "quick-open-menu": ("HKB + Y", "HKB + X", "HKB + Triangle"),
+    "general-open-menu": ("HKB + Y", "HKB + X", "HKB + Triangle"),
+    "quick-take-screenshot": ("HKB + B", "HKB + A", "HKB + Circle"),
+    "general-take-screenshot": ("HKB + B", "HKB + A", "HKB + Circle"),
+    "quick-fullscreen-toggle": ("HKB + X", "HKB + Y", "HKB + Square"),
+    "display-fullscreen-toggle": ("HKB + X", "HKB + Y", "HKB + Square"),
+    "quick-quit-component": ("HKB + Start", "HKB + Start", "HKB + Start"),
+    "state-previous-state": ("HKB + D-Pad Left", "HKB + D-Pad Left", "HKB + D-Pad Left"),
+    "state-next-state": ("HKB + D-Pad Right", "HKB + D-Pad Right", "HKB + D-Pad Right"),
+    "speed-decrease-emulation-speed": ("HKB + D-Pad Down", "HKB + D-Pad Down", "HKB + D-Pad Down"),
+    "speed-increase-emulation-speed": ("HKB + D-Pad Up", "HKB + D-Pad Up", "HKB + D-Pad Up"),
+    "speed-fast-forward": ("HKB + R2", "HKB + R2", "HKB + R2"),
+    "speed-rewind": ("HKB + L2", "HKB + L2", "HKB + L2")
+}
+
 # Mapping from human-readable keyboard shortcuts to uinput KEY_* format
 # Only includes keys that exist in hotkey.ts, using lowercase keys
 KEY_MAPPING = {
@@ -490,14 +523,16 @@ def parse_html(html: str) -> List[Dict]:
             action_id = f"{category_prefix}-{name_slug}"
 
             # Create action object
+            operation = "hold" if action_id in HOTKEY_HOLD_ACTIONS else "press"
             action = {
                 "id": action_id,
                 "name": name,
                 "category": category or "Uncategorized",
                 "icon": {"type": "path", "value": icon_filename or "RD-emblem-generic"},
-                "action": {"type": "hotkey", "operation": "press", "keys": keys},
+                "action": {"type": "hotkey", "operation": operation, "keys": keys},
                 "systems": "*",
                 "emulators": emulators if emulators else "*",
+                "_keyboard_text": keyboard_text,
             }
 
             actions.append(action)
@@ -545,6 +580,13 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
 
     actions.insert(0, view_manual_action)
     actions.append(quit_action)
+
+    # Add Azahar to load and save state actions
+    for action in actions:
+        if action.get("id", "") in ("quick-load-state", "state-load-state", "quick-save-state", "state-save-state"):
+            emus = action.get("emulators", [])
+            if isinstance(emus, list) and "Azahar" not in emus:
+                emus.append("Azahar")
 
     return actions
 
@@ -640,6 +682,40 @@ def apply_system_expands_from_emulators(actions: List[Dict]) -> List[Dict]:
     return actions
 
 
+def apply_hotkey_labels(actions: List[Dict]) -> List[Dict]:
+    """Apply hotkeyLabels to actions.
+
+    - Controller labels (Steam Deck, Xbox, Sony, Nintendo) are added from
+      HOTKEY_LABELS for actions that have an entry.
+    - The Keyboard label is added automatically for every action that has a
+      scraped keyboard shortcut (stored in ``_keyboard_text`` during parsing).
+    - The temporary ``_keyboard_text`` field is removed after processing.
+    """
+    for action in actions:
+        action_id = action.get("id", "")
+        labels: List[Dict] = []
+
+        # Add controller labels if specified
+        if action_id in HOTKEY_LABELS:
+            steam_deck_xbox, nintendo, sony = HOTKEY_LABELS[action_id]
+            labels.extend([
+                {"name": "Steam Deck", "keys": steam_deck_xbox.split(" + ")},
+                {"name": "Xbox", "keys": steam_deck_xbox.split(" + ")},
+                {"name": "PlayStation", "keys": sony.split(" + ")},
+                {"name": "Nintendo", "keys": nintendo.split(" + ")},
+            ])
+
+        # Auto-add Keyboard label from the scraped keyboard shortcut
+        keyboard_text = action.pop("_keyboard_text", None)
+        if keyboard_text:
+            labels.append(
+                {"name": "Keyboard", "keys": [k.upper() for k in keyboard_text.split(" + ")]}
+            )
+
+        action["hotkeyLabels"] = labels
+    return actions
+
+
 def sort_actions(actions: List[Dict]) -> List[Dict]:
     """Sort actions according to ACTION_GROUPS ordering and CATEGORY_ORDER."""
     # Build a priority map from ACTION_GROUPS, handling ! prefix
@@ -726,6 +802,9 @@ def main():
 
     # Expand emulators using EMULATOR_EXPANDS mapping
     actions = expand_emulators(actions)
+
+    # Apply hotkey labels for controller-specific bindings
+    actions = apply_hotkey_labels(actions)
 
     # Sort actions by defined ordering
     actions = sort_actions(actions)

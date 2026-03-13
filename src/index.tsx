@@ -9,6 +9,12 @@ import { FaGamepad } from "react-icons/fa";
 import { MenuContextProvider } from "./context";
 import { PdfViewer } from "./components/pdf-viewer";
 import { Menu } from "./components/menu";
+import { getSettingBe } from "./backend";
+import { SteamClient } from "@decky/ui/dist/globals/steam-client";
+import { EUIMode } from "@decky/ui/dist/globals/steam-client/shared";
+import { startRetroDeckOnStartup } from "./app-utils";
+
+declare var SteamClient: SteamClient;
 
 function Content() {
   return <MenuContextProvider>
@@ -17,7 +23,16 @@ function Content() {
 }
 
 export default definePlugin(() => {
-  console.log("Template plugin initializing, this is called once on frontend startup1");
+  console.log("RetroDecky plugin initializing");
+
+  const uiModeSubscription = SteamClient.UI.RegisterForUIModeChanged((mode) => {
+    if (mode !== EUIMode.GamePad) return;
+
+    getSettingBe("autoStartEnabled").then((enabled) => {
+      if (!enabled) return;
+      startRetroDeckOnStartup();
+    });
+  });
 
   routerHook.addRoute("/retrodeck-menu/pdf-viewer", () => {
     return <MenuContextProvider>
@@ -32,6 +47,7 @@ export default definePlugin(() => {
     icon: <FaGamepad />,
     onDismount() {
       console.log("Unloading");
+      uiModeSubscription?.unregister();
       routerHook.removeRoute("/retrodeck-menu/pdf-viewer")
     }
   };
