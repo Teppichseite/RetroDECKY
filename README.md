@@ -19,7 +19,7 @@ The goal of this plugin is to provide a menu which displays only the actions rel
 ## Features
 - **Emulator Actions** - Displays actions specifically for the emulator
 - **Action Triggering** - Triggering emulator actions via buttons instead of hotkeys
-- **View Controller Hotkeys** - Show controller hotkeys for actions which controller hotkeys are mapped to them
+- **View Controller Hotkeys** - Show controller hotkeys mappings for actions
 - **Auto Start RetroDECK** - Automatically start RetroDECK when Steam starts in Game Mode
 - **PDF Manual Viewer** - View game manuals while staying in game
 - **Game info** - View basic game info such as title, system and and an image
