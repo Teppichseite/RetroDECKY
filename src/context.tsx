@@ -117,8 +117,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         if (!gameEvent) {
             //setPdfViewState(defaultPdfViewState);
             setDisplayedActions([]);
-            setFocusedElement(null);
-            setOpenedCategory(null);
             return;
         }
         const filteredActions = filterActions(actions, gameEvent);
