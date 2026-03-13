@@ -63,3 +63,4 @@ The plugin integrates with RetroDeck through ES-DE event scripts:
 
 ## Acknowledgements
 1. RetroDeck Logo, Icons and certain config files are taken from the RetroDeck project: https://github.com/RetroDECK/RetroDECK
+2. Release workflow taken from https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.yml
