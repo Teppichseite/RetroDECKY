@@ -1,69 +1,166 @@
 # RetroDECKY
-An Ingame Menu for RetroDECK as Decky Plugin. Allows to use emulator actions without using hotkeys.
 
-<p float="left">
-<img src="./assets/screenshot1.png" alt="RetroDECKY Screenshot" width="200"/>
-<img src="./assets/screenshot2.png" alt="RetroDECKY Screenshot" width="200"/>
-<img src="./assets/screenshot3.png" alt="RetroDECKY Screenshot" width="200"/>
-<img src="./assets/screenshot4.png" alt="RetroDECKY Screenshot" width="600"/>
+<p>
+  <img src="./assets/logo/icon-RetroDECKY.svg" alt="RetroDECKY logo" width="100">
 </p>
 
-## Goal of the plugin
-RetroDECK supports multiple hotkeys to perform certain actions on the currently running emulator. Additionally RetroDECK supports standard Steam Input Menus. 
-But there are certain problems with these approaches:
-1. One has to remember multiple types of hotkeys across multiple emulators
-2. Steam Input Menus do not provide a best user experience, especially when a lot of items have to be displayed
 
-The goal of this plugin is to provide a menu which displays only the actions relevant for the currently opened game and provide an overall better menu user experience. Additionally the plugin supports certain actions which do no exist in RetroDECK right now, such as in game manual viewing.
+**RetroDECKY** is a Decky Plugin for the all-in-on Retro Gaming Platform [RetroDECK](https://retrodeck.readthedocs.io/en/latest/). 
+
+## Screenshots
+
+<p>
+  <img src="./assets/screenshots/screenshot1.png" alt="RetroDECKY in-game menu" width="200">
+  <img src="./assets/screenshots/screenshot2.png" alt="RetroDECKY Adventure Art" width="200">
+  <img src="./assets/screenshots/screenshot3.png" alt="RetroDECKY Hotkey overview" width="200">
+</p>
+
+<p>
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explination" width="600">
+</p>
+
+---
+
+## Purpose and Goal of RetroDECKY
+
+RetroDECK provides multiple built-in **hotkey combinations** for interacting with the currently running component. It also supports **Steam Deck system hotkeys** and **Steam Input templates** that feature multitude of radial button submenus.
+
+That approach present usability challenges:
+
+- Users must remember multiple hotkey schemes across different components.
+- Steam Input menus provide limited usability when displaying many actions.
+
+RetroDECKY addresses these issues by providing a **content-aware** in-game menu that:
+
+- Displays only actions relevant to the currently running component.
+- Improves usability compared to large radial or input menus.
+- Expands features not currently available or possible in RetroDECK (but might be in the future) like an in game manual viewer.
+
+---
 
 ## Features
-- **Emulator Actions** - Displays actions specifically for the emulator
-- **Action Triggering** - Triggering emulator actions via buttons instead of hotkeys
-- **View Controller Hotkeys** - Show controller hotkeys for actions which controller hotkeys are mapped to them
-- **Auto Start RetroDECK** - Automatically start RetroDECK when Steam starts in Game Mode
-- **PDF Manual Viewer** - View game manuals while staying in game
-- **Game info** - View basic game info such as title, system and and an image
 
-## Plugin Setup
-1. You can install the Plugin in the following ways:
-    1. Download the plugin from the **Decky Plugin Store** (Not available yet)
-    2. Install the plugin from the **releases page**
-    3. **Build the plugin yourself**
-2. Ensure **RetroDECK Flatpak** is installed on your system
-    1. Follow [this guide](https://retrodeck.readthedocs.io/en/latest/wiki_devices/steamdeck/steamdeck-start/) on how to install the RetroDECK Flatpak on your system
-3. Open RetroDECKY in the **Steam Quick Access Menu**
-4. Follow the **Setup Guide** displayed in the plugin menu:
-5. To reload the setup status, go to **Decky Settings > Plugins > RetroDECKY > Reload**
+- **Running Game Actions** - Displays hotkey actions specific to the currently running game.
+
+- **Running Game Information** - Displays data from ES-DE such as artwork, covers and metadata.
+
+- **Hotkey Triggering** - Execute hotkey functions through Decky menu buttons instead of keyboard hotkeys, button combos or radial menus.
+
+- **Boot into RetroDECK** - A function to automatically start RetroDECK when Steam launches in Game Mode.
+
+- **PDF Manual Viewer** - Read game manuals without leaving the game session.
+
+---
 
 ## Known Issues
-1. Hotkeys which require holding keys like Fast Forward are not correctly working yet
-2. PDF Manual is currently more a proof of concept the aspect ratios and performance is not optimal
 
-## How It Works
-The plugin integrates with RetroDECK through ES-DE event scripts:
+- Hotkey actions requiring **held inputs** like fast-forward are not fully supported.
+- The **PDF manual viewer** is currently experimental.
+
+---
+
+## Requirements for RetroDECKY: Decky Loader & RetroDECK
+
+Before you can install **RetroDECKY** ensure the following are installed:
+
+### Install RetroDECK
+
+<img src="./assets/logo/icon-RetroDECK.svg" alt="RetroDECK logo" width="45">
+
+RetroDECK must be installed before using the plugin.
+
+- [RetroDECK Installation Guide](https://retrodeck.readthedocs.io/en/latest/wiki_general/retrodeck-start/)
+
+Read the **Steam Deck** installation section.
+
+### Install Decky Loader
+
+<img src="./assets/logo/icon-decky-loader.png" alt="Decky Loader logo" width="45">
+
+Decky Loader is required to run the RetroDECKY plugin.
+
+- [Decky Loader Website](https://decky.xyz/)
+- [Decky Loader GitHub](https://github.com/SteamDeckHomebrew/decky-loader/)
+
+---
+
+## How-to Install RetroDECKY
+
+### Step 1: Install the Plugin
+
+Choose one of the following methods:
+
+- Install from the **Decky Plugin Store** *(not available yet, but will be the recommended path)* 
+- Download and install from the **GitHub Releases page**.
+
+---
+
+### Step 2: Launch the Plugin
+
+1. Open the **Steam Quick Access Menu**.
+2. Launch **RetroDECKY**.
+3. Follow the **Setup Guide** shown in the plugin interface.
+4. Reload Setup Status (if needed): Decky Settings → Plugins → RetroDECKY → Reload
+
+---
+
+## Architecture: How does it work?
+
+**RetroDECKY** integrates with RetroDECK using through ES-DE event scripts.
 
 ### Game Event Detection
-1. When a game starts in RetroDECK, ES-DE executes a custom event script
-    1. This script is injected into the ES-DE scirpts folder of RetroDECK when the plugin starts
-2. The script sends game information to the plugin's backend server
-3. The plugin receives the game event and displays it in the menu
-4. Actions are filtered based on the current game's system and emulator
 
-### Media Resolution
-1. The plugin automatically resolves game cover art and manual paths from ES-DE's media directories
-2. It checks for miximages, covers, and manuals in the appropriate system folders
-3. Media is served through a local HTTP server for display in the plugin
+1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `~/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts` directory during initialization.
+2. The script sends the games metadata and assets to the plugin backend.
+3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
 
-### Action triggering
-1. This plugins supports most hotkeys which are listed here as actions: https://retrodeck.readthedocs.io/en/latest/wiki_rd_controls/radial-steamdeck-full/
-2. A script converts those hotkey mappings into an action json file which contains all mappings for each emulator
-3. The full mappings can be seen in [this autogenerated filed](./defaults/presets/actions_summary.md)
-4. When triggering an action via the menu, the plugin than presses the keyboard combination of the action on the currently running emulator
+#### Detected ES-DE Metadata
 
-### Game manual displaying
-1. The game manuals are just PDFs which are rendered via PDF.js
-2. This approach acts currently more as a proof of concept
+The plugin automatically resolves assets using **ES-DE** metadata directories under `retrodeck/ES-DE/`.
+
+Supported media types include:
+
+- **Cover artwork**
+- **Gamelists**
+- **Game manuals**
+- **Miximages**
+
+Metadata and assets served through a **local HTTP server** and displayed within the plugin interface.
+
+---
+
+### Hotkey Triggering
+
+RetroDECKY supports most component hotkeys documented here: 
+
+[RetroDECK Hotkeys](https://retrodeck.readthedocs.io/en/latest/wiki_rd_controls/radial-steamdeck-full/)  
+
+- A script converts hotkey definitions into an **action mapping JSON file** per component.
+
+- Full mappings are documented in the autogenerated file: [actions_summary.md](./defaults/presets/actions_summary.md)
+
+- When a user selects an action from the menu, the plugin simulates the corresponding **keyboard input combination** for the active component.
+
+---
+
+### Game Manual Viewer
+
+Current implementation is a **proof of concept**.
+
+- Game manuals are stored as **PDF files**.
+- Rendering is handled using **PDF.js**.
+
+---
 
 ## Acknowledgements
-1. RetroDECK Logo, Icons and certain config files are taken from the RetroDECK project: https://github.com/RetroDECK/RetroDECK
-2. Release workflow taken from https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.yml
+
+- RetroDECK assets, art and configuration files originate from the RetroDECK project.
+  - [GitHub: RetroDECK](https://github.com/RetroDECK/RetroDECK)
+  - Corresponding licenses check `other_licenses.txt`.
+
+<br>
+
+- The release workflow is based on SimpleDeckyTDP's workflow.
+  - [GitHub: SimpleDeckyTDP - Workflow ](https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.y)
+
+---
