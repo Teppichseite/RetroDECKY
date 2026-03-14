@@ -135,6 +135,15 @@ Media files are served through a **local HTTP server** and displayed within the 
 
 ---
 
+## Known Issues
+
+- Hotkey actions requiring **held inputs** like fast-forward are not fully supported.
+- The **PDF manual viewer** is currently experimental.
+
+
+---
+
+
 ## Acknowledgements
 
 - RetroDECK logo, icons, and configuration files originate from the RetroDECK project: https://github.com/RetroDECK/RetroDECK and corresponding licenses check other_licenses.txt
