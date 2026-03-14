@@ -110,7 +110,7 @@ Choose one of the following methods:
 
 ### Game Event Detection
 
-1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `retrodeck/ES-DE/custom_systems/` directory during initialization.
+1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `~/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts` directory during initialization.
 2. The script sends the games metadata and assets to the plugin backend.
 3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
 
