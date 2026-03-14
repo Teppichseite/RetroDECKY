@@ -43,13 +43,13 @@ export const Settings = () => {
             showSettings && <div style={{ marginTop: '10px' }}>
                 <ToggleField
                     label="Auto Start RetroDECK"
-                    description={`Automatically launch RetroDECK when Steam starts in Game Mode. This launches any steam game which is called "RetroDECK" in your library.`}
+                    description={`Automatically launch RetroDECK when Steam starts in Gaming Mode. This launches any steam game which is called "RetroDECK" in your library. (experimental)`}
                     checked={autoStartEnabled}
                     onChange={setAutoStartEnabled}
                 />
                 <ToggleField
                     label={`"View Manual" Button`}
-                    description={`Show the "View Manual" button in the actions menu (experimental)`}
+                    description={`Show the "View Manual" button in the actions menu. (experimental)`}
                     checked={showManualButton}
                     onChange={setShowManualButton}
                 />
