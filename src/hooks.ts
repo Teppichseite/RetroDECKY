@@ -1,6 +1,6 @@
 // Taken from https://github.com/Teppichseite/DeckPass/blob/main/src/hooks.ts
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const jsContextState: Record<string, any> = {};
 
@@ -9,12 +9,12 @@ export const useJsContextState = <T>(key: string, initialValue: T): [T, (value: 
 
   useEffect(() => {
     _setState(jsContextState[key] ?? initialValue);
-  }, []);
+  }, [key, initialValue]);
 
-  const setState = async (value: T) => {
+  const setState = useCallback(async (value: T) => {
     jsContextState[key] = value;
     _setState(value);
-  };
+  }, [key]);
 
   return [state ?? initialValue, setState];
 }

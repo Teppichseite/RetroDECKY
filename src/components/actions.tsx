@@ -1,5 +1,5 @@
 import { DialogButton, Field, Focusable, PanelSectionRow, findSP, showModal } from "@decky/ui";
-import { useRef, useEffect, useState, RefObject } from "react";
+import { useRef, useEffect, useState, useCallback, RefObject } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
@@ -64,6 +64,8 @@ export const CategoryComponent = ({ category, actionsForCategory, isFirst }: { c
     const { openedCategory, setOpenedCategory, focusedElement, setFocusedElement } = useMenuContext();
     const { ref } = useFocusElement(focusedElement, `category:${category}`, isFirst);
 
+    const onFocus = useCallback(() => setFocusedElement(`category:${category}`), [setFocusedElement, category]);
+
     return <div key={category} ref={ref}>
         <ActionButton
             onClick={() => {
@@ -73,7 +75,7 @@ export const CategoryComponent = ({ category, actionsForCategory, isFirst }: { c
                     setOpenedCategory(category);
                 }
             }}
-            onFocus={() => setFocusedElement(`category:${category}`)}
+            onFocus={onFocus}
             icon={<img src={getIconPath(`RD-zoom-${openedCategory === category ? 'out' : 'in'}`)} width={24} height={24} />}
         >
             {category}
@@ -89,6 +91,8 @@ export const CategoryComponent = ({ category, actionsForCategory, isFirst }: { c
 export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?: boolean }) => {
     const { handleAction, gameEvent, focusedElement, setFocusedElement } = useMenuContext();
     const { ref, isFocused } = useFocusElement(focusedElement, `action:${action.id}`, isFirst);
+
+    const onFocus = useCallback(() => setFocusedElement(`action:${action.id}`), [setFocusedElement, action.id]);
 
     if (!gameEvent) {
         return <div />;
@@ -114,7 +118,7 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
     return <div ref={ref}>
         <ActionButton
             onClick={() => handleAction(action)}
-            onFocus={() => setFocusedElement(`action:${action.id}`)}
+            onFocus={onFocus}
             icon={icon}
             disabled={isDisabled}
             showInfoButton={showInfoButton}
