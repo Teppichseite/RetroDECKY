@@ -170,6 +170,6 @@ Current implementation is a **proof of concept**.
 <br>
 
 - The release workflow is based on SimpleDeckyTDP's workflow.
-  - [GitHub: SimpleDeckyTDP - Workflow ](https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.y)
+  - [GitHub: SimpleDeckyTDP - Workflow ](https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.yml)
 
 ---
