@@ -91,8 +91,17 @@ Decky Loader is required to run the RetroDECKY plugin.
 Choose one of the following methods:
 
 - Install from the **Decky Plugin Store** *(not available yet, but will be the recommended path)* 
-- Download and install from the **GitHub Releases page**.
-
+- Download and install from the **GitHub Releases page**
+  1. Switch to desktop mode and open your browser
+  2. Go to the [GitHub Releases page](https://github.com/RetroDECK/RetroDECKY/releases)
+  3. For the latest release download `RetroDECKY.zip` under assets
+  4. Switch back to Gaming mode
+  5. Open the Quick Access Menu > Decky Tab > Click on the settings icon on the top right
+  6. Under "General" enable "Developer mode"
+  7. Go to the "Developer" section on the left side
+  8. Click on "Browse" next to "Install Plugin from ZIP file"
+  9. Select the `RetroDECKY.zip` file you downloaded in step 3 (usually stored under `~/Downloads`)
+  10. Click on "Install"
 ---
 
 ### Step 2: Launch the Plugin
