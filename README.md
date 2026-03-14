@@ -112,22 +112,22 @@ Choose one of the following methods:
 
 ### Game Event Detection
 
-1. When a game launches in RetroDECK **ES-DE** executes a custom event script.
-2. The plugin injects this script into the **ES-DE** `retrodeck/ES-DE/custom_systems/` directory during initialization.
-3. The script sends the games metadata to the plugin backend.
-4. The plugin updates the menu with metadata and images based on the detected game and component.
+1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `retrodeck/ES-DE/custom_systems/` directory during initialization.
+2. The script sends the games metadata and assets to the plugin backend.
+3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
 
-**Detected ES-DE Metadata**
+### Detected ES-DE Metadata
 
-The plugin automatically resolves media assets using **ES-DE** metadata directories under `retrodeck/ES-DE/`.
+The plugin automatically resolves assets using **ES-DE** metadata directories under `retrodeck/ES-DE/`.
 
 Supported media types include:
 
-- **Miximages**
 - **Cover artwork**
+- **Gamelists**
 - **Game manuals**
+- **Miximages**
 
-Media files are served through a **local HTTP server** and displayed within the plugin interface.
+Metadata and assets served through a **local HTTP server** and displayed within the plugin interface.
 
 ---
 
