@@ -1,7 +1,7 @@
 {
   "name": "RetroDECKY",
-  "version": "0.0.1",
-  "description": "A template to quickly create decky plugins from scratch, based on TypeScript and webpack",
+  "version": "0.0.2",
+  "description": "An Ingame Menu for RetroDECK as Decky Plugin. Allows to use emulator actions without using hotkeys.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
@@ -17,16 +17,17 @@
   "keywords": [
     "decky",
     "plugin",
-    "plugin-template",
     "steam-deck",
-    "deck"
+    "deck",
+    "RetroDECK", 
+    "emulation"
   ],
   "author": "You <you@you.tld>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/issues"
+    "url": "https://github.com/Teppichseite/RetroDECKY/issues"
   },
-  "homepage": "https://github.com/SteamDeckHomebrew/decky-plugin-template#readme",
+  "homepage": "https://github.com/Teppichseite/RetroDECKY",
   "devDependencies": {
     "@decky/rollup": "^1.0.2",
     "@decky/ui": "^4.11.1",
