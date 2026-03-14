@@ -25,7 +25,7 @@ export const SetupGuide = () => {
             <ButtonItemIconContent icon={<img src={getIconPath(`RD-zoom-${showGuide ? 'out' : 'in'}`)} width={24} height={24} />}>Setup Guide</ButtonItemIconContent>
         </ButtonItem>
         {
-            showGuide && <div style={{ marginTop: '20px' }}>
+            showGuide && <div style={{ marginTop: '20px', marginBottom: '20px' }}>
                 {!isSetup ? <RetroDECKNotInstalled /> : <RetroDECKEventScriptsEnableGuide />}
                 <div
                     style={{ overflowWrap: 'break-word', marginTop: '30px' }}
