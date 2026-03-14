@@ -10,13 +10,13 @@
 ## Screenshots
 
 <p>
-  <img src="./assets/screenshot1.png" alt="RetroDECKY in-game menu" width="200">
-  <img src="./assets/screenshot2.png" alt="RetroDECKY Adventure Art" width="200">
-  <img src="./assets/screenshot3.png" alt="RetroDECKY Hotkey overview" width="200">
+  <img src="./assets/screenshots/screenshot1.png" alt="RetroDECKY in-game menu" width="200">
+  <img src="./assets/screenshots/screenshot2.png" alt="RetroDECKY Adventure Art" width="200">
+  <img src="./assets/screenshots/screenshot3.png" alt="RetroDECKY Hotkey overview" width="200">
 </p>
 
 <p>
-  <img src="./assets/screenshot4.png" alt="RetroDECKY Hotkey Explination" width="600">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explination" width="600">
 </p>
 
 ---
