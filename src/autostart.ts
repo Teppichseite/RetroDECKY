@@ -1,7 +1,6 @@
 import { SteamClient } from "@decky/ui/dist/globals/steam-client";
-import { debounce } from "lodash";
 import { getSettingBe } from "./backend";
-import { EUIMode, sleep } from "@decky/ui";
+import { EUIMode, findModuleChild, findSP, sleep } from "@decky/ui";
 
 declare var SteamClient: SteamClient;
 
@@ -16,7 +15,7 @@ declare var appStore: {
 
 const RETRODECK_APP_NAME = 'RetroDECK';
 
-async function waitForAppStore(timeoutMs = 10000, intervalMs = 500): Promise<boolean> {
+async function waitForAppStore(timeoutMs = 10000, intervalMs = 250): Promise<boolean> {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     if (appStore?.allApps?.length > 0) {
@@ -27,12 +26,29 @@ async function waitForAppStore(timeoutMs = 10000, intervalMs = 500): Promise<boo
   return false;
 }
 
+async function waitForSP(timeoutMs = 10000, intervalMs = 250): Promise<boolean> {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    const sp = findSP();
+    if (sp?.document?.getElementById("GamepadUI_Full_Root")) {
+      return true;
+    }
+    await sleep(intervalMs);
+  }
+  return false;
+}
+
 export async function findRetroDECKApp(): Promise<AppOverview | undefined> {
-  const ready = await waitForAppStore();
-  if (!ready) {
-    console.warn("RetroDECKY: appStore not ready after timeout");
+  const [appStoreReady, spReady] = await Promise.all([
+    waitForAppStore(),
+    waitForSP()
+  ]);
+
+  if (!appStoreReady || !spReady) {
+    console.warn("RetroDECKY: Could not find RetroDECK app in Steam library");
     return undefined;
   }
+
   return appStore.allApps.find(
     (app) => app.display_name.trim() === RETRODECK_APP_NAME.trim()
   );
@@ -40,33 +56,70 @@ export async function findRetroDECKApp(): Promise<AppOverview | undefined> {
 
 export async function startRetroDECK() {
   const app = await findRetroDECKApp();
+
   if (!app) {
     console.warn("RetroDECKY: Could not find RetroDECK app in Steam library");
     return;
   }
+
+  await sleep(1000);
   SteamClient.Apps.RunGame(app.m_gameid, "", -1, 100);
 }
 
-const startRetroDECKDebounced = debounce(startRetroDECK, 1500);
+let wasStarted = false;
+
+const wasRetroDECKStarted = () => {
+  return sessionStorage.getItem("RetroDECKY_startup_finished") === "true" || wasStarted;
+}
+
+const setRetroDECKStarted = () => {
+  wasStarted = true;
+  sessionStorage.setItem("RetroDECKY_startup_finished", "true");
+}
 
 export function startRetroDECKOnStartup() {
-  const uiModeSubscription = SteamClient.UI.RegisterForUIModeChanged((mode) => {
-    if (mode !== EUIMode.GamePad) return;
+  try {
+    const historyExport = findModuleChild((m) => {
+      if (typeof m !== "object") return undefined;
+      for (let prop in m) {
+        if (m[prop]?.m_history) return m[prop].m_history
+      }
+    })
 
-    if(sessionStorage.getItem("RetroDECKY_startup_finished")) {
-      return;
+    if (!historyExport) {
+      console.warn("RetroDECKY: Could not find history module");
+      return () => { };
     }
 
-    sessionStorage.setItem("RetroDECKY_startup_finished", "true");
+    const unlisten = historyExport.listen(async (info: any) => {
 
-    getSettingBe("autoStartEnabled").then((enabled) => {
-      if (!enabled){
+      if (info.pathname !== "/library/home") {
         return;
-      };
-      
-      startRetroDECKDebounced();
-    });
-  });
+      }
 
-  return uiModeSubscription;
+      if (wasRetroDECKStarted()) {
+        return;
+      }
+
+      setRetroDECKStarted();
+
+      getSettingBe("autoStartEnabled").then(async (enabled) => {
+        if (!enabled) {
+          return;
+        }
+
+        if ((await SteamClient.UI.GetUIMode()) !== EUIMode.GamePad) {
+          return;
+        }
+
+        await startRetroDECK();
+      });
+
+    });
+
+    return unlisten;
+  } catch (error) {
+    console.error("RetroDECKY: Error starting RetroDECK on startup", error);
+    return () => { };
+  }
 }

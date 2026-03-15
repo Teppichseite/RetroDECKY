@@ -20,7 +20,7 @@ function Content() {
 export default definePlugin(() => {
   console.log("RetroDECKY plugin initializing");
 
-  const startupSubscription = startRetroDECKOnStartup();
+  const unregisterStartupSubscription = startRetroDECKOnStartup();
 
   routerHook.addRoute("/retrodeck-menu/pdf-viewer", () => {
     return <MenuContextProvider>
@@ -34,7 +34,7 @@ export default definePlugin(() => {
     content: <Content />,
     icon: <FaGamepad />,
     onDismount() {
-      startupSubscription.unregister();
+      unregisterStartupSubscription();
       routerHook.removeRoute("/retrodeck-menu/pdf-viewer");
       console.log("RetroDECKY plugin unloaded");
     }
