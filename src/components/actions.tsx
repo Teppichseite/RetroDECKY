@@ -7,6 +7,7 @@ import { Action } from "../interfaces";
 import { getIconPath } from "../utils";
 import { getSettingBe } from "../backend";
 import { ActionModal } from "./action-modal";
+import { PdfViewerModal } from "./pdf-viewer";
 
 export const ActionsComponent = () => {
     const { displayedActions } = useMenuContext();
@@ -115,9 +116,24 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
         || (action.action.type === 'hotkey' && action.action.operation === 'hold')
         || action.disabled;
 
+    const onHandleAction = () => {
+        if (isManualViewAction) {
+
+            if (!gameEvent.manual_path) {  
+                return;
+            }
+
+
+            showModal(<PdfViewerModal pdfPath={gameEvent.manual_path} onClose={() => setFocusedElement(`action:${action.id}`)} />);
+            return;
+        }
+
+        handleAction(action);
+    };
+
     return <div ref={ref}>
         <ActionButton
-            onClick={() => handleAction(action)}
+            onClick={onHandleAction}
             onFocus={onFocus}
             icon={icon}
             disabled={isDisabled}

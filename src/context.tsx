@@ -33,7 +33,7 @@ export interface MenuContextValue {
 
 const defaultPdfViewState: PdfViewState = {
     pageNumber: 1,
-    zoom: 1.5,
+    zoom: 1,
     totalPages: 1,
     position: { x: 0, y: 0 }
 }

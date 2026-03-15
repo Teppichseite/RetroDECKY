@@ -22,11 +22,11 @@ export default definePlugin(() => {
 
   const unregisterStartupSubscription = startRetroDECKOnStartup();
 
-  routerHook.addRoute("/retrodeck-menu/pdf-viewer", () => {
+  /*routerHook.addRoute("/retrodeck-menu/pdf-viewer", () => {
     return <MenuContextProvider>
       <PdfViewer />
     </MenuContextProvider>;
-  });
+  });*/
 
   return {
     name: "RetroDECKY",
@@ -35,7 +35,7 @@ export default definePlugin(() => {
     icon: <FaGamepad />,
     onDismount() {
       unregisterStartupSubscription();
-      routerHook.removeRoute("/retrodeck-menu/pdf-viewer");
+      //routerHook.removeRoute("/retrodeck-menu/pdf-viewer");
       console.log("RetroDECKY plugin unloaded");
     }
   };
