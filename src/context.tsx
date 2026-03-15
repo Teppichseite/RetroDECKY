@@ -169,8 +169,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         if (action.action.type === 'builtin') {
 
             if (action.action.operation === 'view_manual') {
-                Router.CloseSideMenus();
-                Router.Navigate("/retrodeck-menu/pdf-viewer");
                 return;
             }
 

@@ -8,20 +8,14 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react';
 
-import { SteamClient } from "@decky/ui/dist/globals/steam-client";
-import { ControllerInputGamepadButton } from '@decky/ui/dist/globals/steam-client/Input';
 import { PdfViewState } from '../interfaces';
 import { getIconPath } from '../utils';
-import { Field, Focusable, ModalRoot, ModalRootProps, Spinner, findSP, gamepadDialogClasses } from '@decky/ui';
+import { Field, Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from '@decky/ui';
+import retrodeckLogo from "../../assets/logo/icon-RetroDECKY.svg";
 
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc as string;
-
-const BUTTON_LEFT = [ControllerInputGamepadButton.GAMEPAD_BUTTON_DPAD_LEFT, ControllerInputGamepadButton.GAMEPAD_LEFTSTICK_LEFT];
-const BUTTON_RIGHT = [ControllerInputGamepadButton.GAMEPAD_BUTTON_DPAD_RIGHT, ControllerInputGamepadButton.GAMEPAD_LEFTSTICK_RIGHT];
-const BUTTON_UP = [ControllerInputGamepadButton.GAMEPAD_BUTTON_DPAD_UP, ControllerInputGamepadButton.GAMEPAD_LEFTSTICK_UP];
-const BUTTON_DOWN = [ControllerInputGamepadButton.GAMEPAD_BUTTON_DPAD_DOWN, ControllerInputGamepadButton.GAMEPAD_LEFTSTICK_DOWN];
 
 const DEFAULT_ZOOM = 1;
 const MAX_ZOOM = 3;
@@ -29,8 +23,6 @@ const MIN_ZOOM = 1;
 const ZOOM_STEP = 0.3;
 
 const OFFSET_STEP = 20;
-
-declare var SteamClient: SteamClient;
 
 const ControlGuideKey = ({ button }: { button: string }) => (
     <span style={{
@@ -45,20 +37,19 @@ const ControlGuideKey = ({ button }: { button: string }) => (
     </span>
 );
 
-interface ControlsGuideProps {
-    isZoomed: boolean;
+interface PdfInfoProps {
     pageNumber: number;
     totalPages: number;
+    title: string;
+    zoom: number;
 }
 
-const ControlsGuide = ({ isZoomed, pageNumber, totalPages }: ControlsGuideProps) => (
+const PdfInfo = ({ pageNumber, totalPages, title, zoom }: PdfInfoProps) => (
     <div
-        className={gamepadDialogClasses.GamepadDialogContent}
         style={{
             position: "absolute",
-            left: 12,
-            top: "50%",
-            transform: "translateY(-50%)",
+            left: 0,
+            top: 0,
             zIndex: 10,
             pointerEvents: "none",
             width: "auto",
@@ -71,37 +62,32 @@ const ControlsGuide = ({ isZoomed, pageNumber, totalPages }: ControlsGuideProps)
     >
         <div style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            columnGap: "12px",
             marginBottom: "12px",
         }}>
-            <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
-                <img alt="RetroDECK" src={getIconPath("RD-retrodeck-compact")} width={32} height={32} />
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px", marginTop: "8px" }}>
+                <img alt="RetroDECK" src={getIconPath("RD-preferences-desktop-display")} width={32} height={32} />
             </div>
             <div style={{
                 fontWeight: "bold",
                 fontSize: "16px",
+                textAlign: "center",
+                marginBottom: "8px",
             }}>
-                Controls
+                Manual Viewer
+            </div>
+            <div style={{
+                fontSize: "14px",
+                textAlign: "center",
+                whiteSpace: "normal",
+                wordBreak: "break-word",
+            }}>
+                {title}
             </div>
         </div>
-        <Field label="Zoom In" bottomSeparator="standard">
-            <ControlGuideKey button="R1" />
-        </Field>
-        <Field label="Zoom Out" bottomSeparator="standard">
-            <ControlGuideKey button="L1" />
-        </Field>
-        <Field label={isZoomed ? "Pan Left" : "Prev Page"} bottomSeparator="standard">
-            <ControlGuideKey button="◀" />
-        </Field>
-        <Field label={isZoomed ? "Pan Right" : "Next Page"} bottomSeparator="standard">
-            <ControlGuideKey button="▶" />
-        </Field>
-        <Field label="Pan Up" bottomSeparator="standard">
-            <ControlGuideKey button="▲" />
-        </Field>
-        <Field label="Pan Down" bottomSeparator="standard">
-            <ControlGuideKey button="▼" />
+        <Field label="Zoom" bottomSeparator="standard">
+            <ControlGuideKey button={`${Math.round(zoom * 100)}%`} />
         </Field>
         <Field label="Page" bottomSeparator="none">
             <ControlGuideKey button={`${pageNumber} / ${totalPages}`} />
@@ -111,9 +97,10 @@ const ControlsGuide = ({ isZoomed, pageNumber, totalPages }: ControlsGuideProps)
 
 export interface PdfViewerProps {
     pdfPath: string;
+    title: string;
 }
 
-export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
+export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
     const [viewState, setViewState] = useState<PdfViewState>({
         pageNumber: 1,
@@ -122,16 +109,71 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
         position: { x: 0, y: 0 }
     });
 
-    const focusableRef = useRef<HTMLDivElement>(null);
 
-    const pageHeight = useMemo(() => Math.floor(findSP().innerHeight * 0.85), []);
+    const pageHeight = useMemo(() => Math.floor(findSP().innerHeight * 0.80), []);
+    const pageWidth = useMemo(() => Math.floor(findSP().innerWidth * 0.80), []);
 
     const [documentLoaded, setDocumentLoaded] = useState(false);
     const [pageRendered, setPageRendered] = useState(false);
 
+    // Reset state when PDF path changes
+    useEffect(() => {
+        setDocumentLoaded(false);
+        setPageRendered(false);
+        setViewState({
+            pageNumber: 1,
+            zoom: 1,
+            totalPages: 1,
+            position: { x: 0, y: 0 }
+        });
+    }, [pdfPath]);
+
     useEffect(() => {
         setPageRendered(false);
     }, [viewState.pageNumber]);
+
+    const handleButtonDown = (evt: { detail: { button: number } }) => {
+        const button = evt.detail.button;
+        const moveOffset = viewState.zoom * OFFSET_STEP;
+
+        if (button === GamepadButton.BUMPER_LEFT) {
+            zoomOut();
+            return;
+        }
+
+        if (button === GamepadButton.BUMPER_RIGHT) {
+            zoomIn();
+            return;
+        }
+
+        if (button === GamepadButton.DIR_LEFT) {
+            if (viewState.zoom <= DEFAULT_ZOOM) {
+                goToPreviousPage();
+            } else {
+                moveX(moveOffset);
+            }
+            return;
+        }
+
+        if (button === GamepadButton.DIR_RIGHT) {
+            if (viewState.zoom <= DEFAULT_ZOOM) {
+                goToNextPage();
+            } else {
+                moveX(-moveOffset);
+            }
+            return;
+        }
+
+        if (button === GamepadButton.DIR_UP) {
+            moveY(moveOffset);
+            return;
+        }
+
+        if (button === GamepadButton.DIR_DOWN) {
+            moveY(-moveOffset);
+            return;
+        }
+    };
 
     const fileSource = useMemo(() => {
         const cleaned = pdfPath.replace(/\\/g, "");
@@ -154,28 +196,54 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
     };
 
     const goToNextPage = () => {
-        if (viewState.pageNumber >= viewState.totalPages) return;
-        setViewState((prev) => ({
-            ...prev,
-            pageNumber: prev.pageNumber + 1
-        }));
+        setViewState((prev) => {
+            if (prev.pageNumber >= prev.totalPages) {
+                // If on last page, go to first page
+                return {
+                    ...prev,
+                    pageNumber: 1
+                };
+            }
+            return {
+                ...prev,
+                pageNumber: prev.pageNumber + 1
+            };
+        });
     }
 
     const goToPreviousPage = () => {
-        if (viewState.pageNumber <= 1) return;
-        setViewState((prev) => ({
-            ...prev,
-            pageNumber: prev.pageNumber - 1
-        }));
+        setViewState((prev) => {
+            if (prev.pageNumber <= 1) {
+                // If on first page, go to last page
+                return {
+                    ...prev,
+                    pageNumber: prev.totalPages
+                };
+            }
+            return {
+                ...prev,
+                pageNumber: prev.pageNumber - 1
+            };
+        });
+    }
+
+    const clampPosition = (position: { x: number; y: number }) => {
+        const maxPanX = pageWidth / 2;
+        const maxPanY = pageHeight / 2;
+        return {
+            x: Math.max(-maxPanX, Math.min(maxPanX, position.x)),
+            y: Math.max(-maxPanY, Math.min(maxPanY, position.y))
+        };
     }
 
     const zoomIn = () => {
         if (viewState.zoom >= MAX_ZOOM) return;
         setViewState((prev) => {
             const newZoom = prev.zoom + ZOOM_STEP;
+            const newPosition = newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position;
             return {
                 ...prev,
-                position: newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position,
+                position: clampPosition(newPosition),
                 zoom: newZoom
             }
         });
@@ -185,101 +253,54 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
         if (viewState.zoom <= MIN_ZOOM) return;
         setViewState((prev) => {
             const newZoom = prev.zoom - ZOOM_STEP;
+            const newPosition = newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position;
             return {
                 ...prev,
-                position: newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position,
+                position: clampPosition(newPosition),
                 zoom: newZoom
             }
         });
     }
 
     const moveX = (x: number) => {
-        setViewState((prev) => ({
-            ...prev,
-            position: { x: prev.position.x + x, y: prev.position.y }
-        }));
+        setViewState((prev) => {
+            const newPosition = { x: prev.position.x + x, y: prev.position.y };
+            return {
+                ...prev,
+                position: clampPosition(newPosition)
+            };
+        });
     }
 
     const moveY = (y: number) => {
-        setViewState((prev) => ({
-            ...prev,
-            position: { x: prev.position.x, y: prev.position.y + y }
-        }));
+        if (viewState.zoom <= MIN_ZOOM) return;
+        setViewState((prev) => {
+            const newPosition = { x: prev.position.x, y: prev.position.y + y };
+            return {
+                ...prev,
+                position: clampPosition(newPosition)
+            };
+        });
     }
 
-    useEffect(() => {
-
-        focusableRef.current?.focus();
-
-        const unregisterable = SteamClient.Input.RegisterForControllerInputMessages((_, button, isPressed) => {
-
-            console.log(button, isPressed);
-
-            const takeFocus = () => {
-                focusableRef.current?.focus();
-            }
-
-            if (!isPressed) {
-                return;
-            }
-
-            if (button === ControllerInputGamepadButton.GAMEPAD_BUTTON_LSHOULDER) {
-                zoomOut();
-                takeFocus();
-                return;
-            }
-
-            if (button === ControllerInputGamepadButton.GAMEPAD_BUTTON_RSHOULDER) {
-                zoomIn();
-                takeFocus();
-                return;
-            }
-
-            const isDirectionPressed = (buttons: ControllerInputGamepadButton[]) => {
-                return buttons.includes(button);
-            };
-
-            const moveOffset = viewState.zoom * OFFSET_STEP;
-
-            if (isDirectionPressed(BUTTON_LEFT)) {
-                if (viewState.zoom <= DEFAULT_ZOOM) {
-                    goToPreviousPage();
-                } else {
-                    moveX(moveOffset);
-                }
-                takeFocus();
-                return;
-            }
-
-            if (isDirectionPressed(BUTTON_RIGHT)) {
-                if (viewState.zoom <= DEFAULT_ZOOM) {
-                    goToNextPage();
-                } else {
-                    moveX(-moveOffset);
-                }
-                takeFocus();
-                return;
-            }
-
-            if (isDirectionPressed(BUTTON_UP)) {
-                moveY(moveOffset);
-                takeFocus();
-                return;
-            }
-
-            if (isDirectionPressed(BUTTON_DOWN)) {
-                moveY(-moveOffset);
-                takeFocus();
-                return;
-            }
-        });
-
-        return () => {
-            unregisterable.unregister();
-        };
-    }, [viewState, setViewState, pdfPath]);
 
     const isZoomed = viewState.zoom > DEFAULT_ZOOM;
+
+    const actionDescriptionMap = isZoomed
+        ? {
+            [GamepadButton.BUMPER_LEFT]: "Zoom Out",
+            [GamepadButton.BUMPER_RIGHT]: "Zoom In",
+            [GamepadButton.DIR_LEFT]: "Pan Left",
+            [GamepadButton.DIR_RIGHT]: "Pan Right",
+            [GamepadButton.DIR_UP]: "Pan Up",
+            [GamepadButton.DIR_DOWN]: "Pan Down",
+        }
+        : {
+            [GamepadButton.BUMPER_LEFT]: "Zoom Out",
+            [GamepadButton.BUMPER_RIGHT]: "Zoom In",
+            [GamepadButton.DIR_LEFT]: "Previous Page",
+            [GamepadButton.DIR_RIGHT]: "Next Page",
+        };
 
     return (
         <div style={{
@@ -292,28 +313,53 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
             overflow: "hidden",
             position: "relative",
         }}>
-            <ControlsGuide
-                isZoomed={isZoomed}
+            <style>{`
+                .react-pdf__Page {
+                    background: transparent !important;
+                    background-color: transparent !important;
+                }
+            `}</style>
+            <PdfInfo
                 pageNumber={viewState.pageNumber}
                 totalPages={viewState.totalPages}
+                title={title}
+                zoom={viewState.zoom}
             />
+
+            {
+                !(documentLoaded && pageRendered) &&
+                <div style={{
+                    position: "absolute", 
+                    top: 0, 
+                    left: 0, 
+                    width: "100%", 
+                    height: "100%", 
+                    display: "flex", 
+                    justifyContent: "center", 
+                    alignItems: "center"
+                }}
+                ><RetrodeckSpinner /></div>
+            }
+
 
             <Focusable
                 noFocusRing
-                ref={focusableRef}
                 onActivate={() => { }}
+                actionDescriptionMap={actionDescriptionMap}
+                onButtonDown={handleButtonDown}
             >
-                {!(documentLoaded && pageRendered) && <div>Loading...</div>}
                 <div style={{
                     transform: `translate(${viewState.position.x}px, ${viewState.position.y}px) scale(${viewState.zoom})`,
                     transformOrigin: "center center",
-                    visibility: documentLoaded && pageRendered ? "visible" : "hidden",
+                    height: pageHeight,
                 }}>
                     <Document
+                        key={`document-${pdfPath}`}
                         file={fileSource}
                         onLoadSuccess={onDocumentLoadSuccess}
                         onLoadError={(error) => console.error("PDF load error:", error)}
                         error={<div>Failed to load PDF. Check console for details.</div>}
+                        loading={<></>}
                     >
                         <Page
                             pageNumber={viewState.pageNumber}
@@ -321,6 +367,8 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
                             renderTextLayer={false}
                             renderAnnotationLayer={false}
                             onRenderSuccess={() => setPageRendered(true)}
+                            canvasBackground="transparent"
+                            loading={<></>}
                         />
                     </Document>
                 </div>
@@ -331,6 +379,7 @@ export const PdfViewer = ({ pdfPath }: PdfViewerProps) => {
 
 export interface PdfViewerModalProps extends ModalRootProps {
     pdfPath: string;
+    title: string;
     onClose?: () => void;
 }
 
@@ -344,13 +393,15 @@ export const PdfViewerModal = (props: PdfViewerModalProps) => {
         let parent: HTMLElement | null = el.parentElement;
         while (parent) {
             if (parent.classList.contains("DialogContent")) {
-                parent.style.width = "90vw";
-                parent.style.maxWidth = "90vw";
+                parent.style.width = "95vw";
+                parent.style.maxWidth = "95vw";
+                parent.style.padding = "12px";
                 break;
             }
             parent = parent.parentElement;
         }
     }, []);
+
 
     return (
         <ModalRoot
@@ -363,11 +414,30 @@ export const PdfViewerModal = (props: PdfViewerModalProps) => {
                 ref={contentRef}
                 style={{
                     width: "100%",
-                    height: "80vh",
+                    height: "100%",
                 }}
             >
-                <PdfViewer pdfPath={props.pdfPath} />
+                <PdfViewer pdfPath={props.pdfPath} title={props.title} />
             </div>
+            
         </ModalRoot>
     );
 };
+
+const RetrodeckSpinner = ({ size = 64 }: { size?: number }) => (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+        <style>{`
+            @keyframes retrodeck-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `}</style>
+        <img
+            alt="Loading"
+            src={retrodeckLogo}
+            width={size}
+            height={size}
+            style={{ animation: "retrodeck-spin 1.2s linear infinite" }}
+        />
+    </div>
+);
