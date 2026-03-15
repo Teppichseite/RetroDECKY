@@ -33,7 +33,7 @@ export interface MenuContextValue {
 
 const defaultPdfViewState: PdfViewState = {
     pageNumber: 1,
-    zoom: 1.5,
+    zoom: 1,
     totalPages: 1,
     position: { x: 0, y: 0 }
 }
@@ -169,8 +169,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         if (action.action.type === 'builtin') {
 
             if (action.action.operation === 'view_manual') {
-                Router.CloseSideMenus();
-                Router.Navigate("/retrodeck-menu/pdf-viewer");
                 return;
             }
 

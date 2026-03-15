@@ -3,11 +3,9 @@ import {
 } from "@decky/ui";
 import {
   definePlugin,
-  routerHook,
 } from "@decky/api"
 import { FaGamepad } from "react-icons/fa";
 import { MenuContextProvider } from "./context";
-import { PdfViewer } from "./components/pdf-viewer";
 import { Menu } from "./components/menu";
 import { startRetroDECKOnStartup } from "./autostart";
 
@@ -22,12 +20,6 @@ export default definePlugin(() => {
 
   const unregisterStartupSubscription = startRetroDECKOnStartup();
 
-  routerHook.addRoute("/retrodeck-menu/pdf-viewer", () => {
-    return <MenuContextProvider>
-      <PdfViewer />
-    </MenuContextProvider>;
-  });
-
   return {
     name: "RetroDECKY",
     titleView: <div className={staticClasses.Title}>RetroDECKY</div>,
@@ -35,7 +27,6 @@ export default definePlugin(() => {
     icon: <FaGamepad />,
     onDismount() {
       unregisterStartupSubscription();
-      routerHook.removeRoute("/retrodeck-menu/pdf-viewer");
       console.log("RetroDECKY plugin unloaded");
     }
   };
