@@ -1,6 +1,6 @@
 {
   "name": "RetroDECKY",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An Ingame Menu for RetroDECK as Decky Plugin. Allows to use emulator actions without using hotkeys.",
   "type": "module",
   "scripts": {

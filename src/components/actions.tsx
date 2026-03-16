@@ -257,7 +257,11 @@ const useFocusElement = (focusedElement: string | null, elementId: string, scrol
                 ref.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
             const button = ref.current.querySelector("button");
-            button?.focus();
+            
+            const sp = findSP();
+            if (button && sp?.document.activeElement !== button) {
+                button.focus();
+            }
         }
     }, [isFocused]);
 
