@@ -1,5 +1,4 @@
 
-
 /*
  NOTE: This component is still quite messy and serves
  as a proof of concept for PDF viewing and controller
@@ -8,10 +7,9 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react';
 
-import { PdfViewState } from '../interfaces';
-import { getIconPath } from '../utils';
-import { Field, Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from '@decky/ui';
-import retrodeckLogo from "../../assets/logo/icon-RetroDECKY.svg";
+import { PdfViewState } from '../../interfaces';
+import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from '@decky/ui';
+import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from './viewers-shared';
 
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -23,77 +21,6 @@ const MIN_ZOOM = 1;
 const ZOOM_STEP = 0.3;
 
 const OFFSET_STEP = 20;
-
-const ControlGuideKey = ({ button }: { button: string }) => (
-    <span style={{
-        background: "rgba(255, 255, 255, 0.1)",
-        padding: "8px 12px",
-        borderRadius: "4px",
-        color: "#dcdedf",
-        fontFamily: "monospace",
-        fontSize: "14px",
-    }}>
-        {button}
-    </span>
-);
-
-interface PdfInfoProps {
-    pageNumber: number;
-    totalPages: number;
-    title: string;
-    zoom: number;
-}
-
-const PdfInfo = ({ pageNumber, totalPages, title, zoom }: PdfInfoProps) => (
-    <div
-        style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            zIndex: 10,
-            pointerEvents: "none",
-            width: "auto",
-            minWidth: 150,
-            padding: "16px 20px",
-            background: "#0e141b",
-            color: "#dcdedf",
-            border: "2px solid #23262e"
-        }}
-    >
-        <div style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginBottom: "12px",
-        }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px", marginTop: "8px" }}>
-                <img alt="RetroDECK" src={getIconPath("RD-preferences-desktop-display")} width={32} height={32} />
-            </div>
-            <div style={{
-                fontWeight: "bold",
-                fontSize: "16px",
-                textAlign: "center",
-                marginBottom: "8px",
-            }}>
-                Manual Viewer
-            </div>
-            <div style={{
-                fontSize: "14px",
-                textAlign: "center",
-                whiteSpace: "normal",
-                wordBreak: "break-word",
-            }}>
-                {title}
-            </div>
-        </div>
-        <Field label="Zoom" bottomSeparator="standard">
-            <ControlGuideKey button={`${Math.round(zoom * 100)}%`} />
-        </Field>
-        <Field label="Page" bottomSeparator="none">
-            <ControlGuideKey button={`${pageNumber} / ${totalPages}`} />
-        </Field>
-    </div>
-);
 
 export interface PdfViewerProps {
     pdfPath: string;
@@ -182,21 +109,21 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
             useSystemFonts: true,
             disableFontFace: true,
             verbosity: pdfjs.VerbosityLevel.INFOS,
-            wasmUrl: "/plugins/RetroDECKY/dist/pdfjs-dist/wasm/",
+            wasmUrl: "http://127.0.0.1:1337/plugins/RetroDECKY/dist/pdfjs-dist/wasm/",
             enableHWA: true,
         };
     }, [pdfPath]);
 
     const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
         setDocumentLoaded(true);
-        setViewState((prev) => ({
+        setViewState((prev: PdfViewState) => ({
             ...prev,
             totalPages: numPages
         }));
     };
 
     const goToNextPage = () => {
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             if (prev.pageNumber >= prev.totalPages) {
                 // If on last page, go to first page
                 return {
@@ -212,7 +139,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
     }
 
     const goToPreviousPage = () => {
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             if (prev.pageNumber <= 1) {
                 // If on first page, go to last page
                 return {
@@ -238,7 +165,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
     const zoomIn = () => {
         if (viewState.zoom >= MAX_ZOOM) return;
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             const newZoom = prev.zoom + ZOOM_STEP;
             const newPosition = newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position;
             return {
@@ -251,7 +178,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
     const zoomOut = () => {
         if (viewState.zoom <= MIN_ZOOM) return;
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             const newZoom = prev.zoom - ZOOM_STEP;
             const newPosition = newZoom <= DEFAULT_ZOOM ? { x: 0, y: 0 } : prev.position;
             return {
@@ -263,7 +190,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
     }
 
     const moveX = (x: number) => {
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             const newPosition = { x: prev.position.x + x, y: prev.position.y };
             return {
                 ...prev,
@@ -274,7 +201,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
     const moveY = (y: number) => {
         if (viewState.zoom <= MIN_ZOOM) return;
-        setViewState((prev) => {
+        setViewState((prev: PdfViewState) => {
             const newPosition = { x: prev.position.x, y: prev.position.y + y };
             return {
                 ...prev,
@@ -307,9 +234,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
             width: "100%",
             height: "100%",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            flexDirection: "row",
             overflow: "hidden",
             position: "relative",
         }}>
@@ -319,60 +244,75 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
                     background-color: transparent !important;
                 }
             `}</style>
-            <PdfInfo
-                pageNumber={viewState.pageNumber}
-                totalPages={viewState.totalPages}
+            <ViewerInfo
                 title={title}
-                zoom={viewState.zoom}
+                viewerTitle="Manual Viewer"
+                fields={[
+                    {
+                        label: "Zoom",
+                        value: `${Math.round(viewState.zoom * 100)}%`
+                    },
+                    {
+                        label: "Page",
+                        value: `${viewState.pageNumber} / ${viewState.totalPages}`
+                    }
+                ]}
             />
 
-            {
-                !(documentLoaded && pageRendered) &&
-                <div style={{
-                    position: "absolute", 
-                    top: 0, 
-                    left: 0, 
-                    width: "100%", 
-                    height: "100%", 
-                    display: "flex", 
-                    justifyContent: "center", 
-                    alignItems: "center"
-                }}
-                ><RetrodeckSpinner /></div>
-            }
+            <div style={{
+                flex: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+            }}>
+                {
+                    !(documentLoaded && pageRendered) &&
+                    <div style={{
+                        position: "absolute", 
+                        top: 0, 
+                        left: 0, 
+                        width: "100%", 
+                        height: "100%", 
+                        display: "flex", 
+                        justifyContent: "center", 
+                        alignItems: "center"
+                    }}
+                    ><RetrodeckSpinner /></div>
+                }
 
-
-            <Focusable
-                noFocusRing
-                onActivate={() => { }}
-                actionDescriptionMap={actionDescriptionMap}
-                onButtonDown={handleButtonDown}
-            >
-                <div style={{
-                    transform: `translate(${viewState.position.x}px, ${viewState.position.y}px) scale(${viewState.zoom})`,
-                    transformOrigin: "center center",
-                    height: pageHeight,
-                }}>
-                    <Document
-                        key={`document-${pdfPath}`}
-                        file={fileSource}
-                        onLoadSuccess={onDocumentLoadSuccess}
-                        onLoadError={(error) => console.error("PDF load error:", error)}
-                        error={<div>Failed to load PDF. Check console for details.</div>}
-                        loading={<></>}
-                    >
-                        <Page
-                            pageNumber={viewState.pageNumber}
-                            height={pageHeight}
-                            renderTextLayer={false}
-                            renderAnnotationLayer={false}
-                            onRenderSuccess={() => setPageRendered(true)}
-                            canvasBackground="transparent"
+                <Focusable
+                    noFocusRing
+                    onActivate={() => { }}
+                    actionDescriptionMap={actionDescriptionMap}
+                    onButtonDown={handleButtonDown}
+                >
+                    <div style={{
+                        transform: `translate(${viewState.position.x}px, ${viewState.position.y}px) scale(${viewState.zoom})`,
+                        transformOrigin: "center center",
+                        height: pageHeight,
+                    }}>
+                        <Document
+                            key={`document-${pdfPath}`}
+                            file={fileSource}
+                            onLoadSuccess={onDocumentLoadSuccess}
+                            onLoadError={(error) => console.error("PDF load error:", error)}
+                            error={<div>Failed to load PDF. Check console for details.</div>}
                             loading={<></>}
-                        />
-                    </Document>
-                </div>
-            </Focusable>
+                        >
+                            <Page
+                                pageNumber={viewState.pageNumber}
+                                height={pageHeight}
+                                renderTextLayer={false}
+                                renderAnnotationLayer={false}
+                                onRenderSuccess={() => setPageRendered(true)}
+                                canvasBackground="transparent"
+                                loading={<></>}
+                            />
+                        </Document>
+                    </div>
+                </Focusable>
+            </div>
         </div>
     );
 };
@@ -385,22 +325,7 @@ export interface PdfViewerModalProps extends ModalRootProps {
 
 export const PdfViewerModal = (props: PdfViewerModalProps) => {
     const contentRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const el = contentRef.current;
-        if (!el) return;
-
-        let parent: HTMLElement | null = el.parentElement;
-        while (parent) {
-            if (parent.classList.contains("DialogContent")) {
-                parent.style.width = "95vw";
-                parent.style.maxWidth = "95vw";
-                parent.style.padding = "12px";
-                break;
-            }
-            parent = parent.parentElement;
-        }
-    }, []);
+    useDialogContentStyling(contentRef);
 
 
     return (
@@ -424,20 +349,3 @@ export const PdfViewerModal = (props: PdfViewerModalProps) => {
     );
 };
 
-const RetrodeckSpinner = ({ size = 64 }: { size?: number }) => (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-        <style>{`
-            @keyframes retrodeck-spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-        `}</style>
-        <img
-            alt="Loading"
-            src={retrodeckLogo}
-            width={size}
-            height={size}
-            style={{ animation: "retrodeck-spin 1.2s linear infinite" }}
-        />
-    </div>
-);

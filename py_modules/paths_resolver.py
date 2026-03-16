@@ -51,6 +51,8 @@ class PathsResolver:
             )
             return None
 
+        custom_documents_folder = os.path.join(rd_home_path, "retrodecky", "custom_documents")
+
         return Paths(
             esDeUserFolder=os.path.join(rd_home_path, "ES-DE"),
             esDeConfigFolder=os.path.join(
@@ -60,4 +62,6 @@ class PathsResolver:
             esDeDefaultEsSystemsFile=os.path.join(self.plugin_dir, "presets", "es_systems.xml"),
             actionsFile=os.path.join(self.plugin_dir, "presets", "actions.json"),
             romsFolder=roms_path,
+            customDocumentsFolder=custom_documents_folder,
+            retrodeckHomePath=rd_home_path,
         )
