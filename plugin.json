@@ -5,7 +5,7 @@
   "api_version": 1,
   "publish": {
     "tags": ["RetroDECK", "emulation"],
-    "description": "An Ingame Menu for RetroDECK as Decky Plugin. Allows to use emulator actions without using hotkeys.",
+    "description": "A Decky plugin for RetroDECK. Allows to use emulator actions without using hotkeys.",
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }

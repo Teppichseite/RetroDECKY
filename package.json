@@ -1,7 +1,7 @@
 {
   "name": "RetroDECKY",
   "version": "0.0.3",
-  "description": "An Ingame Menu for RetroDECK as Decky Plugin. Allows to use emulator actions without using hotkeys.",
+  "description": "A Decky plugin for RetroDECK. Allows to use emulator actions without using hotkeys.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SteamDeckHomebrew/decky-plugin-template.git"
+    "url": "git+https://github.com/Teppichseite/RetroDECKY.git"
   },
   "keywords": [
     "decky",
@@ -22,8 +22,8 @@
     "RetroDECK",
     "emulation"
   ],
-  "author": "You <you@you.tld>",
-  "license": "BSD-3-Clause",
+  "author": "Teppichseite",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/Teppichseite/RetroDECKY/issues"
   },
