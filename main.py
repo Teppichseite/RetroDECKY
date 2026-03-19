@@ -5,6 +5,7 @@ from es_de_helper import EsDeHelper
 from models import GameEvent, Paths
 from paths_resolver import PathsResolver
 from server import Server
+from custom_documents import CustomDocuments
 
 import asyncio
 from dataclasses import asdict
@@ -22,6 +23,8 @@ class Plugin:
 
     es_de_helper: EsDeHelper = None
 
+    custom_documents: CustomDocuments = None
+
     game_event: GameEvent = None
 
     settings: SettingsManager = None
@@ -36,6 +39,7 @@ class Plugin:
             return None
 
         return os.path.join(self.server.get_es_de_media_url(), relative_media_path)
+
 
     def _build_game_event(self, raw_data: str) -> GameEvent:
         parts = raw_data.strip().split(";")
@@ -135,6 +139,16 @@ class Plugin:
         self.settings.setSetting(key, value)
         self.settings.commit()
 
+    async def list_custom_documents(self, system_name: str, game_path: str) -> list[str]:
+        """List all PDF and TXT files in the custom_documents directory for a given game, returns server URLs"""
+        return await self.custom_documents.list_custom_documents(system_name, game_path)
+
+    async def copy_file_to_custom_documents(
+        self, source_path: str, system_name: str, game_path: str, document_name: str
+    ) -> str:
+        """Copy a file to the custom_documents directory for a given game"""
+        return await self.custom_documents.copy_file_to_custom_documents(source_path, system_name, game_path, document_name)
+
     async def _main(self):
         self.loop = asyncio.get_event_loop()
 
@@ -158,6 +172,12 @@ class Plugin:
 
         self.es_de_helper = EsDeHelper(decky.logger, self.paths)
         self.es_de_helper.load_es_systems()
+
+        self.custom_documents = CustomDocuments(
+            decky.logger,
+            self.paths,
+            self.server.get_custom_documents_url
+        )
 
         self._check_es_de_event_scripts()
 
