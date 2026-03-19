@@ -16,8 +16,13 @@
 </p>
 
 <p>
-  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explination" width="300">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explanation" width="300">
+  <img src="./assets/screenshots/screenshot7.png" alt="RetroDECKY Documents" width="300">
+</p>
+
+<p>
   <img src="./assets/screenshots/screenshot5.png" alt="RetroDECKY PDF Viewer" width="300">
+  <img src="./assets/screenshots/screenshot6.png" alt="RetroDECKY Text Viewer" width="300">
 </p>
 
 ---
