@@ -166,7 +166,7 @@ Current implementation is a **proof of concept**.
 
 - RetroDECK assets, art and configuration files originate from the RetroDECK project.
   - [GitHub: RetroDECK](https://github.com/RetroDECK/RetroDECK)
-  - Corresponding licenses check `other_licenses.txt`.
+  - Corresponding licenses check `LICENSE`.
 
 <br>
 
