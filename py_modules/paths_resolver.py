@@ -42,16 +42,20 @@ class PathsResolver:
         rd_home_path = rd_paths.get("rd_home_path")
         roms_path = rd_paths.get("roms_path")
         downloaded_media_path = rd_paths.get("downloaded_media_path")
+        retrodeck_storage_path = rd_paths.get("storage_path")
 
-        if not all([rd_home_path, roms_path, downloaded_media_path]):
+        if not all([rd_home_path, roms_path, downloaded_media_path, retrodeck_storage_path]):
             self.logger.error(
                 f"retrodeck.json is missing required path(s): "
                 f"rd_home_path={rd_home_path}, roms_path={roms_path}, "
-                f"downloaded_media_path={downloaded_media_path}"
+                f"downloaded_media_path={downloaded_media_path}, "
+                f"storage_path={retrodeck_storage_path}"
             )
             return None
 
-        custom_documents_folder = os.path.join(rd_home_path, "retrodecky", "custom_documents")
+        custom_documents_folder = os.path.join(
+            retrodeck_storage_path, "retrodecky", "documents"
+        )
 
         return Paths(
             esDeUserFolder=os.path.join(rd_home_path, "ES-DE"),
