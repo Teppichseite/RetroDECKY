@@ -135,7 +135,7 @@ flowchart TB
     end
 
     subgraph plugin["RetroDECKY"]
-        UI["Decky UI — React"]
+        UI["SteamOS/Decky UI — React"]
         Py["Python local HTTP server"]
     end
 
