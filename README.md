@@ -126,11 +126,11 @@ Choose one of the following methods:
 
 RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI.
 
-- **Local HTTP service** — Receives game lifecycle **POSTs** from ES-DE scripts and **serves** ES-DE media and custom documents so the **React** menu can load covers and manuals in the browser.
+- **Local HTTP service** — Receives game lifecycle **POSTs** from ES-DE scripts and **serves** ES-DE media and custom documents so the **Frontend** can load covers and manuals.
 
 - **Decky backend** — The plugin’s Python side that **Decky Loader** talks to: the UI **calls into** it for actions, settings, setup checks, and document lists (the usual Decky plugin channel, separate from the localhost HTTP service above).
 
-- **Event emission** — When a game event POST is handled, the backend **emits** an update through Decky so the menu **refreshes immediately** instead of polling for the active game.
+- **Event emission** — When a game event POST is handled, the backend **emits** an update through Decky event emitter so the menu **refreshes immediately** instead of polling for the active game.
 
 The **React** frontend loads media data from the local service, uses the **Decky backend** for structured data, and can send **simulated keyboard shortcuts** to the active emulator or component.
 
