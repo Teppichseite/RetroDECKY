@@ -56,12 +56,15 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - **PDF Manual Viewer** - Read game manuals without leaving the game session.
 
+- **Additional Documents** - Add PDF, TXT, or Markdown documents per game and view them during the game session
+
 ---
 
 ## Known Issues
 
 - Hotkey actions requiring **held inputs** like fast-forward are not fully supported.
 - The **PDF manual viewer** is currently experimental.
+- Launching games directly via the Steam library is currently not supported.
 
 ---
 
@@ -121,24 +124,58 @@ Choose one of the following methods:
 
 ## Architecture: How does it work?
 
-**RetroDECKY** integrates with RetroDECK using through ES-DE event scripts.
+RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI. A small **Python HTTP server** (port chosen at plugin start) receives game lifecycle events, exposes ES-DE media and custom documents over HTTP, and the **React** frontend loads artwork and manuals while sending simulated keyboard shortcuts to the active emulator or component.
+
+```mermaid
+flowchart TB
+    subgraph retrodeck["RetroDECK"]
+        ES["ES-DE"]
+        Game["Running game / emulator"]
+        Scripts["game-start / game-end scripts"]
+    end
+
+    subgraph plugin["RetroDECKY"]
+        UI["Decky UI — React"]
+        Py["Python local HTTP server"]
+    end
+
+    ES -->|"launches"| Game
+    ES -->|"invokes"| Scripts
+    Scripts -->|"POST /api/game-event"| Py
+    Py -->|"game context & paths"| UI
+    UI -->|"GET /es-de-media/, /custom-documents/"| Py
+    Py -->|"serves files from disk"| ES
+    UI -->|"keyboard hotkey simulation"| Game
+```
 
 ### Game Event Detection
 
-1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `~/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts` directory during initialization.
-2. The script sends the games metadata and assets to the plugin backend.
-3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
+RetroDECKY uses [ES-DE custom event scripts](https://github.com/RetroDECK/ES-DE/blob/retrodeck-main/INSTALL.md#custom-event-scripts). The **game-start** and **game-end** events notify the plugin when a session begins and ends so the menu can show the right game context and metadata.
+
+Scripts live under:
+
+```
+/home/deck/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts
+├── game-end
+│   └── game_end_RetroDECKY_v1.sh
+└── game-start
+    └── game_start_RetroDECKY_v1.sh
+```
+
+Each script sends a small background HTTP **POST** request to RetroDECKY’s local **`/api/game-event`** endpoint: one payload marks a **game start**, the other a **game end**, and both include the same four pieces of information ES-DE passes in: **ROM path**, **game name**, **system name**, and **system full name**. That lets the plugin know which game is currently running.
+
+The endpoint is exposed as a local HTTP server on `localhost`.
 
 #### Detected ES-DE Metadata
 
-The plugin automatically resolves assets using **ES-DE** metadata directories under `retrodeck/ES-DE/`.
+The plugin automatically resolves assets using **ES-DE** metadata directories under `${retrodeck_home_path}$/ES-DE/` and under `${retrodeck_downloaded_media_path}$`.
 
 Supported media types include:
 
-- **Cover artwork**
 - **Gamelists**
-- **Game manuals**
+- **Cover artwork**
 - **Miximages**
+- **Game manuals**
 
 Metadata and assets served through a **local HTTP server** and displayed within the plugin interface.
 
@@ -158,12 +195,9 @@ RetroDECKY supports most component hotkeys documented here:
 
 ---
 
-### Game Manual Viewer
+### Game PDF Viewer
 
-Current implementation is a **proof of concept**.
-
-- Game manuals are stored as **PDF files**.
-- Rendering is handled using **PDF.js**.
+The plugin uses PDF.js and react-pdf to render PDF files. Internally it uses WASM to improve rendering performance.
 
 ---
 
