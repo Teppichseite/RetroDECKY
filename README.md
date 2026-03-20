@@ -124,7 +124,15 @@ Choose one of the following methods:
 
 ## Architecture: How does it work?
 
-RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI. A small **Python HTTP server** receives game lifecycle events and exposes ES-DE media and custom documents over HTTP. The **React** frontend loads artwork and manuals from that server and sends simulated keyboard shortcuts to the active emulator or component.
+RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI.
+
+- **Local HTTP service** — Receives game lifecycle **POSTs** from ES-DE scripts and **serves** ES-DE media and custom documents so the **React** menu can load covers and manuals in the browser.
+
+- **Decky backend** — The plugin’s Python side that **Decky Loader** talks to: the UI **calls into** it for actions, settings, setup checks, and document lists (the usual Decky plugin channel, separate from the localhost HTTP service above).
+
+- **Event emission** — When a game event POST is handled, the backend **emits** an update through Decky so the menu **refreshes immediately** instead of polling for the active game.
+
+The **React** frontend loads media data from the local service, uses the **Decky backend** for structured data, and can send **simulated keyboard shortcuts** to the active emulator or component.
 
 ```mermaid
 flowchart TB
@@ -136,15 +144,18 @@ flowchart TB
 
     subgraph plugin["RetroDECKY"]
         UI["SteamOS/Decky UI — React"]
-        Py["Python local HTTP server"]
+        HTTP["Local HTTP — POST events + file serving"]
+        BE["Decky backend — Python plugin"]
     end
 
     ES -->|"launches"| Game
     ES -->|"invokes"| Scripts
-    Scripts -->|"POST /api/game-event"| Py
-    Py -->|"game context & paths"| UI
-    UI -->|"GET /es-de-media/, /custom-documents/"| Py
-    Py -->|"serves files from disk"| ES
+    Scripts -->|"POST game event"| HTTP
+    HTTP -->|"handoff"| BE
+    BE -->|"emit game update"| UI
+    UI -->|"call actions, settings, …"| BE
+    UI -->|"fetch media"| HTTP
+    HTTP -->|"files on disk"| ES
     UI -->|"keyboard hotkey simulation"| Game
 ```
 
@@ -175,7 +186,7 @@ Supported media types include:
 - **Miximages**
 - **Game manuals**
 
-Metadata and assets served through a **local HTTP server** and displayed within the plugin interface.
+Metadata and assets are served through the **local HTTP** layer above and shown in the **Decky** UI.
 
 ---
 
