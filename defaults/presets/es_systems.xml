@@ -2091,17 +2091,6 @@
         <platform>supracan</platform>
         <theme>supracan</theme>
     </system>
-    <system>
-        <name>switch</name>
-        <fullname>Nintendo Switch</fullname>
-        <path>%ROMPATH%/switch</path>
-        <extension>.nca .NCA .nro .NRO .nso .NSO .nsp .NSP .xci .XCI</extension>
-        <command label="Ryubing (Standalone)">%EMULATOR_RYUBING% %ROM%</command>
-        <!-- <command label="Eden (Standalone)">%EMULATOR_EDEN% %ROM%</command> -->
-        <!-- <command label="Yuzu (via Ponzu)">%INJECT%=%BASENAME%.esprefix %EMULATOR_YUZU% -f -g %ROM%</command> -->
-        <platform>switch</platform>
-        <theme>switch</theme>
-    </system>
     <!--
     <system>
         <name>symbian</name>

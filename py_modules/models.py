@@ -19,3 +19,5 @@ class Paths:
     esDeDefaultEsSystemsFile: str
     romsFolder: str
     actionsFile: str
+    customDocumentsFolder: str
+    retrodeckHomePath: str

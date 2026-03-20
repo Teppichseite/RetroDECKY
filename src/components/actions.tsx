@@ -1,5 +1,5 @@
 import { DialogButton, Field, Focusable, PanelSectionRow, findSP, showModal } from "@decky/ui";
-import { useRef, useEffect, useState, RefObject } from "react";
+import { useRef, useEffect, useState, useCallback, RefObject } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
@@ -7,6 +7,8 @@ import { Action } from "../interfaces";
 import { getIconPath } from "../utils";
 import { getSettingBe } from "../backend";
 import { ActionModal } from "./action-modal";
+import { PdfViewerModal } from "./viewers/pdf-viewer";
+import { DocumentListModal } from "./document-list-modal";
 
 export const ActionsComponent = () => {
     const { displayedActions } = useMenuContext();
@@ -64,6 +66,8 @@ export const CategoryComponent = ({ category, actionsForCategory, isFirst }: { c
     const { openedCategory, setOpenedCategory, focusedElement, setFocusedElement } = useMenuContext();
     const { ref } = useFocusElement(focusedElement, `category:${category}`, isFirst);
 
+    const onFocus = useCallback(() => setFocusedElement(`category:${category}`), [setFocusedElement, category]);
+
     return <div key={category} ref={ref}>
         <ActionButton
             onClick={() => {
@@ -73,7 +77,7 @@ export const CategoryComponent = ({ category, actionsForCategory, isFirst }: { c
                     setOpenedCategory(category);
                 }
             }}
-            onFocus={() => setFocusedElement(`category:${category}`)}
+            onFocus={onFocus}
             icon={<img src={getIconPath(`RD-zoom-${openedCategory === category ? 'out' : 'in'}`)} width={24} height={24} />}
         >
             {category}
@@ -90,6 +94,8 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
     const { handleAction, gameEvent, focusedElement, setFocusedElement } = useMenuContext();
     const { ref, isFocused } = useFocusElement(focusedElement, `action:${action.id}`, isFirst);
 
+    const onFocus = useCallback(() => setFocusedElement(`action:${action.id}`), [setFocusedElement, action.id]);
+
     if (!gameEvent) {
         return <div />;
     }
@@ -99,22 +105,57 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
         : 'v';
 
 
-    const onOpenModal = () => {
+    const openManualListModal = () => {
         setFocusedElement(null);
-        showModal(<ActionModal action={action} onClose={() => setFocusedElement(`action:${action.id}`)} />, findSP());
+        showModal(
+            <DocumentListModal 
+                gameEvent={gameEvent} 
+                onClose={() => setFocusedElement(`action:${action.id}`)} 
+            />,
+            findSP()
+        );
     };
 
-    const showInfoButton = isFocused && action.action.type !== 'builtin';
+    const onOpenModal = () => {
+        if (isManualViewAction) {
+            openManualListModal();
+        } else {
+            setFocusedElement(null);
+            showModal(<ActionModal action={action} onClose={() => setFocusedElement(`action:${action.id}`)} />, findSP());
+        }
+    };
 
     const isManualViewAction = action.action.type === 'builtin' && action.action.operation === 'view_manual';
-    const isDisabled = (isManualViewAction && !gameEvent.manual_path) 
-        || (action.action.type === 'hotkey' && action.action.operation === 'hold')
+    const showInfoButton = isFocused && (action.action.type !== 'builtin' || isManualViewAction);
+    const isDisabled = (action.action.type === 'hotkey' && action.action.operation === 'hold')
         || action.disabled;
+
+    const onHandleAction = () => {
+        if (isManualViewAction) {
+            // If manual is available, open it directly as PDF; otherwise open the manual list modal
+            if (gameEvent.manual_path) {
+                setFocusedElement(null);
+                showModal(
+                    <PdfViewerModal
+                        pdfPath={gameEvent.manual_path}
+                        title="Official Game Manual"
+                        onClose={() => setFocusedElement(`action:${action.id}`)}
+                    />,
+                    findSP()
+                );
+            } else {
+                openManualListModal();
+            }
+            return;
+        }
+
+        handleAction(action);
+    };
 
     return <div ref={ref}>
         <ActionButton
-            onClick={() => handleAction(action)}
-            onFocus={() => setFocusedElement(`action:${action.id}`)}
+            onClick={onHandleAction}
+            onFocus={onFocus}
             icon={icon}
             disabled={isDisabled}
             showInfoButton={showInfoButton}
@@ -216,7 +257,11 @@ const useFocusElement = (focusedElement: string | null, elementId: string, scrol
                 ref.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
             const button = ref.current.querySelector("button");
-            button?.focus();
+            
+            const sp = findSP();
+            if (button && sp?.document.activeElement !== button) {
+                button.focus();
+            }
         }
     }, [isFocused]);
 

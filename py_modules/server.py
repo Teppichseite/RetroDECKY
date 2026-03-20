@@ -11,6 +11,7 @@ class ServerHandler(SimpleHTTPRequestHandler):
         paths = self.server.config["paths"]
         return {
             "/es-de-media/": paths.esDeDownloadedMediaFolder,
+            "/custom-documents/": paths.customDocumentsFolder,
         }
 
     def _set_cors_headers(self):
@@ -84,6 +85,9 @@ class Server:
     def get_es_de_media_url(self):
         return f"http://localhost:{self.port}/es-de-media/"
 
+    def get_custom_documents_url(self):
+        return f"http://localhost:{self.port}/custom-documents/"
+
     def get_api_url(self):
         return f"http://localhost:{self.port}/api/"
         
@@ -102,6 +106,7 @@ class Server:
         self.logger.info(f"Server started on port {self.port}")
 
         self.logger.info(f"ES-DE media URL: {self.get_es_de_media_url()}")
+        self.logger.info(f"Custom documents URL: {self.get_custom_documents_url()}")
         self.logger.info(f"API URL: {self.get_api_url()}")
 
     def __init__(self, logger: Logger, paths: Paths, on_game_event_callback: callable):

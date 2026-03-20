@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, ReactNode, useEffect, useState } from "react";
 import { Action, GameEvent, PdfViewState, SetupState } from "./interfaces";
 import {
     addEventListener,
@@ -33,7 +33,7 @@ export interface MenuContextValue {
 
 const defaultPdfViewState: PdfViewState = {
     pageNumber: 1,
-    zoom: 1.5,
+    zoom: 1,
     totalPages: 1,
     position: { x: 0, y: 0 }
 }
@@ -70,8 +70,10 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
     const [focusedElement, setFocusedElement] = useJsContextState<string | null>("focused_action", null);
     const [openedCategory, setOpenedCategory] = useJsContextState<string | null>("focused_category", null);
 
-    const handleGameEvent = (incomingEvent: GameEvent | null) => {
+    const handleGameEvent = useCallback((incomingEvent: GameEvent | null) => {
         if (!incomingEvent) {
+            setFocusedElement(null);
+            setOpenedCategory(null);
             setGameEvent(null);
             return;
         }
@@ -82,10 +84,12 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         }
 
         if (incomingEvent.type === 'game_end') {
+            setFocusedElement(null);
+            setOpenedCategory(null);
             setGameEvent(null);
             return;
         }
-    }
+    }, [setGameEvent, setFocusedElement, setOpenedCategory]);
 
     useEffect(() => {
         getActionsBe().then((actions) => { 
@@ -95,7 +99,7 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         getGameEventBe().then((gameEvent) => {
             handleGameEvent(gameEvent);
         });
-    }, [setActions, setGameEvent]);
+    }, [setActions, handleGameEvent]);
 
     useEffect(() => {
 
@@ -111,7 +115,7 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         return () => {
             removeEventListener("game_event", listener);
         };
-    }, []);
+    }, [handleGameEvent]);
 
     useEffect(() => {
         if (!gameEvent) {
@@ -122,7 +126,7 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         const filteredActions = filterActions(actions, gameEvent);
         const adjustedActions = adjustCategories(filteredActions);
         setDisplayedActions(adjustedActions);
-    }, [gameEvent]);
+    }, [gameEvent, actions]);
 
     useEffect(() => {
         if(gameEvent) {
@@ -165,8 +169,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         if (action.action.type === 'builtin') {
 
             if (action.action.operation === 'view_manual') {
-                Router.CloseSideMenus();
-                Router.Navigate("/retrodeck-menu/pdf-viewer");
                 return;
             }
 

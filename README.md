@@ -16,7 +16,13 @@
 </p>
 
 <p>
-  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explination" width="600">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explanation" width="300">
+  <img src="./assets/screenshots/screenshot7.png" alt="RetroDECKY Documents" width="300">
+</p>
+
+<p>
+  <img src="./assets/screenshots/screenshot5.png" alt="RetroDECKY PDF Viewer" width="300">
+  <img src="./assets/screenshots/screenshot6.png" alt="RetroDECKY Text Viewer" width="300">
 </p>
 
 ---
@@ -91,8 +97,17 @@ Decky Loader is required to run the RetroDECKY plugin.
 Choose one of the following methods:
 
 - Install from the **Decky Plugin Store** *(not available yet, but will be the recommended path)* 
-- Download and install from the **GitHub Releases page**.
-
+- Download and install from the **GitHub Releases page**
+  1. Switch to desktop mode and open your browser
+  2. Go to the [GitHub Releases page](https://github.com/Teppichseite/RetroDECKY/releases)
+  3. For the latest release download `RetroDECKY.zip` under assets
+  4. Switch back to Gaming mode
+  5. Open the Quick Access Menu > Decky Tab > Click on the settings icon on the top right
+  6. Under "General" enable "Developer mode"
+  7. Go to the "Developer" section on the left side
+  8. Click on "Browse" next to "Install Plugin from ZIP file"
+  9. Select the `RetroDECKY.zip` file you downloaded in step 3 (usually stored under `~/Downloads`)
+  10. Click on "Install"
 ---
 
 ### Step 2: Launch the Plugin
@@ -110,7 +125,7 @@ Choose one of the following methods:
 
 ### Game Event Detection
 
-1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `retrodeck/ES-DE/custom_systems/` directory during initialization.
+1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `~/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts` directory during initialization.
 2. The script sends the games metadata and assets to the plugin backend.
 3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
 
@@ -156,11 +171,11 @@ Current implementation is a **proof of concept**.
 
 - RetroDECK assets, art and configuration files originate from the RetroDECK project.
   - [GitHub: RetroDECK](https://github.com/RetroDECK/RetroDECK)
-  - Corresponding licenses check `other_licenses.txt`.
+  - Corresponding licenses check `LICENSE`.
 
 <br>
 
 - The release workflow is based on SimpleDeckyTDP's workflow.
-  - [GitHub: SimpleDeckyTDP - Workflow ](https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.y)
+  - [GitHub: SimpleDeckyTDP - Workflow ](https://github.com/aarron-lee/SimpleDeckyTDP/blob/main/.github/workflows/release.yml)
 
 ---
