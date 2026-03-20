@@ -155,7 +155,7 @@ flowchart TB
     BE -->|"emit game update"| UI
     UI -->|"call actions, settings, …"| BE
     UI -->|"fetch media"| HTTP
-    HTTP -->|"files on disk"| ES
+    HTTP -->|"media files on disk"| ES
     UI -->|"keyboard hotkey simulation"| Game
 ```
 
