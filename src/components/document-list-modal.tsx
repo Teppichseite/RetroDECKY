@@ -61,7 +61,7 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
     };
 
     const documents: DocumentItem[] = [];
-    
+
     customDocuments.forEach((docPath) => {
         documents.push({
             path: docPath,
@@ -73,7 +73,7 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
 
     const handleDocumentClick = (documentPath: string, documentName: string, fileType: FileType) => {
         props.closeModal?.();
-        
+
         if (fileType === 'txt') {
             showModal(
                 <TextViewerModal
@@ -109,14 +109,14 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
 
             if (result && result.path) {
                 const documentName = getDocumentName(result.path);
-                
+
                 await copyFileToCustomDocumentsBe(
                     result.path,
                     props.gameEvent.system_name,
                     props.gameEvent.path,
                     documentName
                 );
-                
+
                 // Refresh the document list
                 await loadDocuments();
             }
@@ -165,12 +165,12 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
 
                 <div>
                     {isLoading ? (
-                        <div style={{ textAlign: "center" }}>
-                            Loading documents...
+                        <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+                            <strong>Loading documents...</strong>
                         </div>
                     ) : documents.length === 0 ? (
-                        <div style={{ textAlign: "center" }}>
-                            No documents available. Click "Add Document" to add a PDF, TXT, or Markdown manual.
+                        <div style={{ marginBottom: "20px", marginTop: "20px" }}>
+                            <strong>No documents available.</strong> Click <strong>Add Document</strong> to add a PDF, TXT, or Markdown document.
                         </div>
                     ) : (
                         documents.map((doc, index) => (

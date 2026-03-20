@@ -1,6 +1,6 @@
 import { DialogButton, Field, Focusable, PanelSectionRow, findSP, showModal } from "@decky/ui";
 import { useRef, useEffect, useState, useCallback, RefObject } from "react";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaFileAlt, FaInfoCircle } from "react-icons/fa";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
 import { Action } from "../interfaces";
@@ -128,11 +128,11 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
     const isManualViewAction = action.action.type === 'builtin' && action.action.operation === 'view_manual';
     const showInfoButton = isFocused && (action.action.type !== 'builtin' || isManualViewAction);
     const isDisabled = (action.action.type === 'hotkey' && action.action.operation === 'hold')
-        || action.disabled;
+        || action.disabled
+        || (isManualViewAction && !gameEvent.manual_path);
 
     const onHandleAction = () => {
         if (isManualViewAction) {
-            // If manual is available, open it directly as PDF; otherwise open the manual list modal
             if (gameEvent.manual_path) {
                 setFocusedElement(null);
                 showModal(
@@ -143,8 +143,6 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
                     />,
                     findSP()
                 );
-            } else {
-                openManualListModal();
             }
             return;
         }
@@ -160,6 +158,7 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
             disabled={isDisabled}
             showInfoButton={showInfoButton}
             onInfoClick={onOpenModal}
+            infoIcon={isManualViewAction ? <FaFileAlt /> : <FaInfoCircle />}
         >
             {action.name}
         </ActionButton>
@@ -174,6 +173,7 @@ interface ActionButtonProps {
     onFocus?: () => void;
     showInfoButton?: boolean;
     onInfoClick?: () => void;
+    infoIcon?: React.ReactNode;
 }
 
 const ActionButton = (props: ActionButtonProps) => {
@@ -222,7 +222,7 @@ const ActionButton = (props: ActionButtonProps) => {
                             onClick={props.onInfoClick}
                         >
                             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <FaInfoCircle />
+                                {props.infoIcon ?? <FaInfoCircle />}
                             </div>
                         </DialogButton>
                     )}
