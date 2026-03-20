@@ -124,7 +124,7 @@ Choose one of the following methods:
 
 ## Architecture: How does it work?
 
-RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI. A small **Python HTTP server** (port chosen at plugin start) receives game lifecycle events, exposes ES-DE media and custom documents over HTTP, and the **React** frontend loads artwork and manuals while sending simulated keyboard shortcuts to the active emulator or component.
+RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI. A small **Python HTTP server** receives game lifecycle events and exposes ES-DE media and custom documents over HTTP. The **React** frontend loads artwork and manuals from that server and sends simulated keyboard shortcuts to the active emulator or component.
 
 ```mermaid
 flowchart TB
@@ -163,8 +163,6 @@ Scripts live under:
 ```
 
 Each script sends a small background HTTP **POST** request to RetroDECKY’s local **`/api/game-event`** endpoint: one payload marks a **game start**, the other a **game end**, and both include the same four pieces of information ES-DE passes in: **ROM path**, **game name**, **system name**, and **system full name**. That lets the plugin know which game is currently running.
-
-The endpoint is exposed as a local HTTP server on `localhost`.
 
 #### Detected ES-DE Metadata
 
