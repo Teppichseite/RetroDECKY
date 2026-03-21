@@ -50,6 +50,10 @@ export const adjustCategories = (actions: Action[]): Action[] => {
         });
 }
 
+export const getDistPath = () => {
+    return `http://127.0.0.1:1337/plugins/RetroDECKY/dist/`;
+}
+
 export const getIconPath = (iconName: string) => {
-    return `http://127.0.0.1:1337/plugins/RetroDECKY/dist/retrodeck-icons/${iconName}.png`;
+    return `${getDistPath()}retrodeck-icons/${iconName}.png`;
 }

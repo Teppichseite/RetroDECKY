@@ -1,10 +1,3 @@
-
-/*
- NOTE: This component is still quite messy and serves
- as a proof of concept for PDF viewing and controller
- navigation. It will be refined and cleaned up later.
-*/
-
 import { useEffect, useRef, useState, useMemo } from 'react';
 
 import { PdfViewState } from '../../interfaces';
@@ -13,6 +6,7 @@ import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from './viewers
 
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";
 import { Document, Page, pdfjs } from 'react-pdf';
+import { getDistPath } from '../../utils';
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc as string;
 
 const DEFAULT_ZOOM = 1;
@@ -109,7 +103,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
             useSystemFonts: true,
             disableFontFace: true,
             verbosity: pdfjs.VerbosityLevel.INFOS,
-            wasmUrl: "http://127.0.0.1:1337/plugins/RetroDECKY/dist/pdfjs-dist/wasm/",
+            wasmUrl: `${getDistPath()}pdfjs-dist/wasm/`,
             enableHWA: true,
         };
     }, [pdfPath]);

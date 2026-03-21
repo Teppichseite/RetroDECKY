@@ -124,7 +124,7 @@ export const ActionComponent = ({ action, isFirst }: { action: Action, isFirst?:
                 showModal(
                     <PdfViewerModal
                         pdfPath={gameEvent.manual_path}
-                        title="Official Game Manual"
+                        title={gameEvent.name}
                         onClose={() => setFocusedElement(`action:${action.id}`)}
                     />,
                     findSP()
