@@ -62,9 +62,9 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 ## Known Issues
 
-- Hotkey actions requiring **held inputs** like fast-forward are not fully supported.
-- The **PDF manual viewer** is currently experimental.
+- Hotkey actions requiring **held inputs** like fast-forward are currently not fully supported.
 - Launching games directly via the Steam library is currently not supported.
+- Alternative emulators for individual games are currently not supported.
 
 ---
 
@@ -119,6 +119,23 @@ Choose one of the following methods:
 2. Launch **RetroDECKY**.
 3. Follow the **Setup Guide** shown in the plugin interface.
 4. Reload Setup Status (if needed): Decky Settings → Plugins → RetroDECKY → Reload
+
+---
+
+## Guides
+
+### Custom Documents
+
+You can add custom documents which you can view during a game session. Supported file types are **PDF**, **TXT**, and **Markdown** (`.md` / `.markdown`). There are two ways to add documents:
+
+1. **In the plugin UI**
+    - While the game is running, open **RetroDECKY** from the Steam **Quick Access Menu**.
+    - Navigate to the button **View Manual** and and tap on the document button right next to it
+    - Tap **Add Document**, choose a file in the system picker (PDF / TXT / Markdown). The plugin copies it into that game’s documents folder and refreshes the list.
+2. **Manually**
+    - Custom documents are stored under `<storage path>/retrodecky/documents/<system>/<relative path for rom>`
+    - E.g. for the rom path `~/retrodeck/roms/snes/game A.zip` the documents would be stored under `~/retrodeck/storage/retrodecky/documents/snes/game A/`
+    - You can just add your documents to the folder and they will be **visible in the plugin UI**
 
 ---
 

@@ -1,38 +1,24 @@
 import { DialogButton, Field, Focusable, PanelSectionRow, findSP, showModal } from "@decky/ui";
-import { useRef, useEffect, useState, useCallback, RefObject } from "react";
+import { useRef, useEffect, useCallback, RefObject } from "react";
 import { FaFileAlt, FaInfoCircle } from "react-icons/fa";
 import { ButtonItemIconContent } from "./shared";
 import { useMenuContext } from "../context";
 import { Action } from "../interfaces";
 import { getIconPath } from "../utils";
-import { getSettingBe } from "../backend";
 import { ActionModal } from "./action-modal";
 import { PdfViewerModal } from "./viewers/pdf-viewer";
 import { DocumentListModal } from "./document-list-modal";
 
 export const ActionsComponent = () => {
     const { displayedActions } = useMenuContext();
-    const [showManualButton, setShowManualButton] = useState(false);
 
-    useEffect(() => {
-        getSettingBe("showManualButton").then((value) => {
-            setShowManualButton(!!value);
-        });
-    }, []);
-
-    const actions = showManualButton
-        ? displayedActions
-        : displayedActions.filter(
-            (action) => !(action.action.type === 'builtin' && action.action.operation === 'view_manual')
-        );
-
-    if (actions.length === 0) {
+    if (displayedActions.length === 0) {
         return <div style={{ textAlign: 'center' }}>There are no actions available.</div>;
     }
 
-    const uncategorizedActions = actions.filter(action => !action.category);
+    const uncategorizedActions = displayedActions.filter(action => !action.category);
 
-    const categorizedActions = actions
+    const categorizedActions = displayedActions
         .filter(action => !uncategorizedActions.some(a => a.name === action.name))
         .reduce((acc, action) => {
             const category = action.category;

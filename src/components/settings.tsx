@@ -28,7 +28,6 @@ export const Settings = () => {
     const [showSettings, setShowSettings] = useState(false);
 
     const [autoStartEnabled, setAutoStartEnabled] = useSettingToggle("autoStartEnabled", false);
-    const [showManualButton, setShowManualButton] = useSettingToggle("showManualButton", false);
 
     return <div>
         <ButtonItem
@@ -46,12 +45,6 @@ export const Settings = () => {
                     description={`Automatically launch RetroDECK when Steam starts in Gaming Mode. This launches any steam game which is called "RetroDECK" in your library. (experimental)`}
                     checked={autoStartEnabled}
                     onChange={setAutoStartEnabled}
-                />
-                <ToggleField
-                    label={`"View Manual" Button`}
-                    description={`Show the "View Manual" button in the actions menu. (experimental)`}
-                    checked={showManualButton}
-                    onChange={setShowManualButton}
                 />
             </div>
         }
