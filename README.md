@@ -64,7 +64,6 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - Hotkey actions requiring **held inputs** like fast-forward are currently not fully supported.
 - Launching games directly via the Steam library is currently not supported.
-- Alternative emulators for individual games are currently not supported.
 
 ---
 
