@@ -36,14 +36,22 @@ export interface Action {
     hotkeyLabels: HotkeyLabel[]
 }
 
-export interface PdfViewState {
+export interface PersistedPdfViewState {
     pageNumber: number;
     zoom: number;
-    totalPages: number;
     position: {
         x: number;
         y: number;
     }
+}
+
+export interface PdfViewState extends PersistedPdfViewState {
+    totalPages: number;
+}
+
+export interface TextViewState {
+    fontSize: number;
+    scrollTop: number;
 }
 
 export interface SetupState {

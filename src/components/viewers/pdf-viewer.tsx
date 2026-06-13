@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import { PdfViewState } from '../../interfaces';
 import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from '@decky/ui';
 import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from './viewers-shared';
+import { useCachedPdfViewState } from './viewer-state';
 
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -23,13 +24,7 @@ export interface PdfViewerProps {
 
 export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
-    const [viewState, setViewState] = useState<PdfViewState>({
-        pageNumber: 1,
-        zoom: 1,
-        totalPages: 1,
-        position: { x: 0, y: 0 }
-    });
-
+    const [viewState, setViewState] = useCachedPdfViewState(pdfPath);
 
     const pageHeight = useMemo(() => Math.floor(findSP().innerHeight * 0.80), []);
     const pageWidth = useMemo(() => Math.floor(findSP().innerWidth * 0.80), []);
@@ -37,16 +32,9 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
     const [documentLoaded, setDocumentLoaded] = useState(false);
     const [pageRendered, setPageRendered] = useState(false);
 
-    // Reset state when PDF path changes
     useEffect(() => {
         setDocumentLoaded(false);
         setPageRendered(false);
-        setViewState({
-            pageNumber: 1,
-            zoom: 1,
-            totalPages: 1,
-            position: { x: 0, y: 0 }
-        });
     }, [pdfPath]);
 
     useEffect(() => {
@@ -112,7 +100,8 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
         setDocumentLoaded(true);
         setViewState((prev: PdfViewState) => ({
             ...prev,
-            totalPages: numPages
+            totalPages: numPages,
+            pageNumber: Math.min(Math.max(1, prev.pageNumber), numPages),
         }));
     };
 

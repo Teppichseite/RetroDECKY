@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, ReactNode, useEffect, useState } from "react";
-import { Action, GameEvent, PdfViewState, SetupState } from "./interfaces";
+import { Action, GameEvent, SetupState } from "./interfaces";
 import {
     addEventListener,
     removeEventListener,
@@ -20,33 +20,22 @@ export interface MenuContextValue {
     actions: Action[];
     gameEvent: GameEvent | null;
     displayedActions: Action[];
-    pdfViewState: PdfViewState;
     setupState: SetupState | null;
     focusedElement: string | null;
     openedCategory: string | null;
-    setPdfViewState: (pdfViewState: PdfViewState) => void;
     setGameEvent: (gameEvent: GameEvent | null) => void,
     handleAction: (action: Action) => void,
     setFocusedElement: (element: string | null) => void,
     setOpenedCategory: (category: string | null) => void,
 }
 
-const defaultPdfViewState: PdfViewState = {
-    pageNumber: 1,
-    zoom: 1,
-    totalPages: 1,
-    position: { x: 0, y: 0 }
-}
-
 export const MenuContext = createContext<MenuContextValue>({
     actions: [],
     gameEvent: null,
     displayedActions: [],
-    pdfViewState: defaultPdfViewState,
     setupState: null,
     focusedElement: null,
     openedCategory: null,
-    setPdfViewState: () => { },
     setGameEvent: () => { },
     handleAction: () => { },
     setFocusedElement: () => { },
@@ -62,8 +51,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
     const [actions, setActions] = useState<Action[]>([]);
     const [displayedActions, setDisplayedActions] = useState<Action[]>([]);
     const [gameEvent, setGameEvent] = useState<GameEvent | null>(null);
-    
-    const [pdfViewState, setPdfViewState] = useJsContextState<PdfViewState>("pdf_view_state", defaultPdfViewState);
 
     const [setupState, setSetupState] = useState<SetupState | null>(null);
 
@@ -119,7 +106,6 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
 
     useEffect(() => {
         if (!gameEvent) {
-            //setPdfViewState(defaultPdfViewState);
             setDisplayedActions([]);
             return;
         }
@@ -203,11 +189,9 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         actions,
         gameEvent,
         displayedActions,
-        pdfViewState,
         setupState,
         focusedElement,
         openedCategory,
-        setPdfViewState,
         handleAction,
         setGameEvent,
         setFocusedElement,

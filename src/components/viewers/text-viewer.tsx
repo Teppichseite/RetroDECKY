@@ -2,12 +2,12 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 
 import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from '@decky/ui';
 import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from './viewers-shared';
+import { useCachedTextViewState } from './viewer-state';
 
 const SCROLL_STEP = 50;
 const PAGE_SCROLL_STEP = 500;
 const FONT_SIZE_MIN = 12;
 const FONT_SIZE_MAX = 24;
-const FONT_SIZE_DEFAULT = 12;
 const FONT_SIZE_STEP = 2;
 
 export interface TextViewerProps {
@@ -19,7 +19,7 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
     const [textContent, setTextContent] = useState<string>("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [fontSize, setFontSize] = useState(FONT_SIZE_DEFAULT);
+    const [fontSize, setFontSize, scrollTop, setScrollTop] = useCachedTextViewState(txtPath);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     const containerHeight = useMemo(() => Math.floor(findSP().innerHeight * 0.70), []);
@@ -55,6 +55,12 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
 
         loadText();
     }, [txtPath]);
+
+    useEffect(() => {
+        if (!isLoading && !error && textContent && scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop = scrollTop;
+        }
+    }, [isLoading, error, textContent, txtPath, fontSize]);
 
     const scrollUp = (amount: number) => {
         if (scrollContainerRef.current) {
@@ -130,6 +136,9 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
     useEffect(() => {
         const updateScrollInfo = () => {
             setScrollInfo(getScrollInfo());
+            if (scrollContainerRef.current) {
+                setScrollTop(scrollContainerRef.current.scrollTop);
+            }
         };
 
         const container = scrollContainerRef.current;
@@ -143,7 +152,7 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
                 container.removeEventListener('scroll', updateScrollInfo);
             }
         };
-    }, [textContent]);
+    }, [textContent, setScrollTop]);
 
     const actionDescriptionMap = {
         [GamepadButton.BUMPER_LEFT]: "Smaller Text",
