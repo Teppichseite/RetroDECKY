@@ -95,20 +95,55 @@ class EsDeHelper:
 
         return wrapped_xml
 
-    def _load_gamelist_alternative_emulator(self, system_name: str):
+    def _load_gamelist(self, system_name: str) -> dict | None:
         gamelist_path = os.path.join(self.paths.esDeUserFolder, "gamelists", system_name, "gamelist.xml")
         try:
             with open(gamelist_path, "r") as f: 
                 xml_content = self._preprocess_gamelist_xml(f.read())
-                gamelist = xmltodict.parse(xml_content)['wrapperRoot']
-
-                if "alternativeEmulator" in gamelist:
-                    return gamelist['alternativeEmulator']['label']
-                
-                return None
+                return xmltodict.parse(xml_content)['wrapperRoot']
         except:
             self.logger.error(f"Failed to load gamelist for system {system_name} at path {gamelist_path}")
             return None
+
+    def _normalize_rom_path_for_gamelist(self, rom_path: str, system_name: str) -> str:
+        rom_path = rom_path.replace("\\", "")
+        rom_path_normalized = os.path.normpath(rom_path)
+        rom_system_folder = os.path.normpath(os.path.join(self.paths.romsFolder, system_name))
+        return os.path.normpath(os.path.relpath(rom_path_normalized, rom_system_folder))
+
+    def _load_gamelist_alternative_emulator(self, system_name: str):
+        gamelist = self._load_gamelist(system_name)
+        if gamelist is None:
+            return None
+
+        if "alternativeEmulator" in gamelist:
+            return gamelist['alternativeEmulator']['label']
+        
+        return None
+
+    def _load_gamelist_game_alternative_emulator(self, system_name: str, rom_path: str):
+        gamelist = self._load_gamelist(system_name)
+        if gamelist is None or "gameList" not in gamelist:
+            return None
+
+        games = gamelist['gameList']['game']
+        if not isinstance(games, list):
+            games = [games]
+
+        normalized_rom_path = self._normalize_rom_path_for_gamelist(rom_path, system_name)
+
+        for game in games:
+            if game.get('path') is None:
+                continue
+
+            gamelist_path = os.path.normpath(game['path'].strip().removeprefix('./'))
+            if gamelist_path != normalized_rom_path:
+                continue
+
+            if "altemulator" in game:
+                return game['altemulator']
+
+        return None
         
     def _resolve_emulator_by_command(self, command: dict) -> bool:
         if(command['#text'].strip().startswith("%EMULATOR_RETROARCH%")):
@@ -116,7 +151,7 @@ class EsDeHelper:
 
         return [command['@label'].strip()]
 
-    def resolve_emulator_name(self, system_name: str) -> list[str]:
+    def resolve_emulator_name(self, system_name: str, rom_path: str) -> list[str]:
         if system_name not in self.es_systems:
             return []
 
@@ -124,7 +159,10 @@ class EsDeHelper:
 
         command_list = commands if isinstance(commands, list) else [commands]
 
-        alt_emulator = self._load_gamelist_alternative_emulator(system_name)
+        alt_emulator = self._load_gamelist_game_alternative_emulator(system_name, rom_path)
+        if alt_emulator is None:
+            alt_emulator = self._load_gamelist_alternative_emulator(system_name)
+
         if alt_emulator is not None:
 
             for command in command_list:

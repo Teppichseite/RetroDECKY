@@ -57,7 +57,7 @@ class Plugin:
 
         manual_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "manuals")
 
-        emulator_name = self.es_de_helper.resolve_emulator_name(system_name)
+        emulator_name = self.es_de_helper.resolve_emulator_name(system_name, rom_path)
 
         return GameEvent(
             type=parts[0],
