@@ -2656,9 +2656,9 @@
     ]
   },
   {
-    "id": "steam-escape",
+    "id": "keyboard-escape",
     "name": "Escape",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-ESC"
@@ -2670,17 +2670,8 @@
         "KEY_ESC"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "GZDoom (Standalone)",
-      "IkemanGO (Standalone)",
-      "OpenBOR (Standalone)",
-      "PC-Systems",
-      "Ruffle (Standalone)",
-      "Solarus (Standalone)"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2691,9 +2682,9 @@
     ]
   },
   {
-    "id": "steam-enter",
+    "id": "keyboard-enter",
     "name": "Enter",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-Enter"
@@ -2705,16 +2696,8 @@
         "KEY_ENTER"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "GZDoom (Standalone)",
-      "IkemanGO (Standalone)",
-      "OpenBOR (Standalone)",
-      "PC-Systems",
-      "Solarus (Standalone)"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2725,9 +2708,9 @@
     ]
   },
   {
-    "id": "steam-space",
+    "id": "keyboard-space",
     "name": "Space",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-space"
@@ -2739,12 +2722,8 @@
         "KEY_SPACE"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2755,9 +2734,9 @@
     ]
   },
   {
-    "id": "steam-tab",
+    "id": "keyboard-tab",
     "name": "Tab",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-Tab"
@@ -2769,12 +2748,8 @@
         "KEY_TAB"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2785,9 +2760,9 @@
     ]
   },
   {
-    "id": "steam-control",
+    "id": "keyboard-control",
     "name": "Control",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-ctrl"
@@ -2799,12 +2774,8 @@
         "KEY_LEFTCTRL"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2815,9 +2786,9 @@
     ]
   },
   {
-    "id": "steam-alt",
+    "id": "keyboard-alt",
     "name": "Alt",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-alt"
@@ -2829,12 +2800,8 @@
         "KEY_LEFTALT"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2845,9 +2812,9 @@
     ]
   },
   {
-    "id": "steam-shift",
+    "id": "keyboard-shift",
     "name": "Shift",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-shift"
@@ -2859,12 +2826,8 @@
         "KEY_LEFTSHIFT"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2875,9 +2838,9 @@
     ]
   },
   {
-    "id": "steam-alt-f4",
+    "id": "keyboard-alt-f4",
     "name": "Alt + F4",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-alt-f4"
@@ -2890,12 +2853,8 @@
         "KEY_F4"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2907,9 +2866,9 @@
     ]
   },
   {
-    "id": "steam-f1",
+    "id": "keyboard-f1",
     "name": "F1",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F1"
@@ -2921,12 +2880,8 @@
         "KEY_F1"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2937,9 +2892,9 @@
     ]
   },
   {
-    "id": "steam-f4",
+    "id": "keyboard-f4",
     "name": "F4",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F4"
@@ -2951,12 +2906,8 @@
         "KEY_F4"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2967,9 +2918,9 @@
     ]
   },
   {
-    "id": "steam-f5",
+    "id": "keyboard-f5",
     "name": "F5",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F5"
@@ -2981,12 +2932,8 @@
         "KEY_F5"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2997,9 +2944,9 @@
     ]
   },
   {
-    "id": "steam-f8",
+    "id": "keyboard-f8",
     "name": "F8",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F8"
@@ -3011,12 +2958,8 @@
         "KEY_F8"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -3027,9 +2970,9 @@
     ]
   },
   {
-    "id": "steam-f10",
+    "id": "keyboard-f10",
     "name": "F10",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "rd-pc-call"
@@ -3041,12 +2984,8 @@
         "KEY_F10"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -3057,9 +2996,9 @@
     ]
   },
   {
-    "id": "steam-slash",
+    "id": "keyboard-slash",
     "name": "Slash (/)",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-frontslash"
@@ -3071,12 +3010,8 @@
         "KEY_SLASH"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",

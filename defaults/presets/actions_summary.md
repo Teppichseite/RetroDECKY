@@ -354,65 +354,65 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: RetroArch
 
 
-### Steam
+### Keyboard
 
 *14 action(s)*
 
-- **Escape** (`steam-escape`)
+- **Escape** (`keyboard-escape`)
   - Hotkey: `KEY_ESC (press)`
-  - Emulators: GZDoom (Standalone), IkemanGO (Standalone), OpenBOR (Standalone), PC-Systems, Ruffle (Standalone), Solarus (Standalone)
+  - Emulators: *
 
-- **Enter** (`steam-enter`)
+- **Enter** (`keyboard-enter`)
   - Hotkey: `KEY_ENTER (press)`
-  - Emulators: GZDoom (Standalone), IkemanGO (Standalone), OpenBOR (Standalone), PC-Systems, Solarus (Standalone)
+  - Emulators: *
 
-- **Space** (`steam-space`)
+- **Space** (`keyboard-space`)
   - Hotkey: `KEY_SPACE (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Tab** (`steam-tab`)
+- **Tab** (`keyboard-tab`)
   - Hotkey: `KEY_TAB (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Control** (`steam-control`)
+- **Control** (`keyboard-control`)
   - Hotkey: `KEY_LEFTCTRL (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Alt** (`steam-alt`)
+- **Alt** (`keyboard-alt`)
   - Hotkey: `KEY_LEFTALT (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Shift** (`steam-shift`)
+- **Shift** (`keyboard-shift`)
   - Hotkey: `KEY_LEFTSHIFT (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Alt + F4** (`steam-alt-f4`)
+- **Alt + F4** (`keyboard-alt-f4`)
   - Hotkey: `KEY_LEFTALT + KEY_F4 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F1** (`steam-f1`)
+- **F1** (`keyboard-f1`)
   - Hotkey: `KEY_F1 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F4** (`steam-f4`)
+- **F4** (`keyboard-f4`)
   - Hotkey: `KEY_F4 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F5** (`steam-f5`)
+- **F5** (`keyboard-f5`)
   - Hotkey: `KEY_F5 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F8** (`steam-f8`)
+- **F8** (`keyboard-f8`)
   - Hotkey: `KEY_F8 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F10** (`steam-f10`)
+- **F10** (`keyboard-f10`)
   - Hotkey: `KEY_F10 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Slash (/)** (`steam-slash`)
+- **Slash (/)** (`keyboard-slash`)
   - Hotkey: `KEY_SLASH (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
 
 ### Scummvm

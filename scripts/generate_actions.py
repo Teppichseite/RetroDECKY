@@ -112,21 +112,21 @@ ACTION_GROUPS = {
         "retroarch-ai-service-onoff",
         "retroarch-netplay-host-onoff",
     ],
-    "steam": [
-        "steam-escape",
-        "steam-enter",
-        "steam-space",
-        "steam-tab",
-        "steam-control",
-        "steam-alt",
-        "steam-shift",
-        "steam-alt-f4",
-        "steam-f1",
-        "steam-f4",
-        "steam-f5",
-        "steam-f8",
-        "steam-f10",
-        "steam-slash",
+    "keyboard": [
+        "keyboard-escape",
+        "keyboard-enter",
+        "keyboard-space",
+        "keyboard-tab",
+        "keyboard-control",
+        "keyboard-alt",
+        "keyboard-shift",
+        "keyboard-alt-f4",
+        "keyboard-f1",
+        "keyboard-f4",
+        "keyboard-f5",
+        "keyboard-f8",
+        "keyboard-f10",
+        "keyboard-slash",
     ],
     "scummvm": [
         "scummvm-close",
@@ -156,7 +156,7 @@ CATEGORY_ORDER = [
     "Melonds",
     "Mame",
     "Retroarch",
-    "Steam",
+    "Keyboard",
     "Scummvm"
 ]
 
@@ -591,6 +591,24 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
     return actions
 
 
+def apply_keyboard_action_overrides(actions: List[Dict]) -> List[Dict]:
+    """Rename scraped Steam-category actions to Keyboard and show them for all emulators."""
+    keyboard_ids = set(ACTION_GROUPS.get("keyboard", []))
+
+    for action in actions:
+        action_id = action.get("id", "")
+        if action_id.startswith("steam-"):
+            action["id"] = "keyboard-" + action_id[len("steam-") :]
+        elif action_id not in keyboard_ids:
+            continue
+
+        if action.get("id", "") in keyboard_ids:
+            action["emulators"] = "*"
+            action["systems"] = "*"
+
+    return actions
+
+
 def apply_category_overrides(actions: List[Dict]) -> List[Dict]:
     """Apply category overrides based on ACTION_GROUPS and filter hidden actions."""
     # Build a set of hidden action IDs and a mapping for visible actions
@@ -793,6 +811,9 @@ def main():
     actions = parse_html(html)
 
     actions = modify_actions(actions)
+
+    # Rename Steam actions to Keyboard and make them available for all emulators
+    actions = apply_keyboard_action_overrides(actions)
 
     # Apply category overrides
     actions = apply_category_overrides(actions)
