@@ -6,6 +6,6 @@
   "publish": {
     "tags": ["RetroDECK", "emulation"],
     "description": "A Decky plugin for RetroDECK. Allows to use emulator actions without using hotkeys.",
-    "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
+    "image": "https://raw.githubusercontent.com/Teppichseite/RetroDECKY/refs/heads/main/assets/logo/store.png"
   }
 }
