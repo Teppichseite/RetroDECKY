@@ -8,6 +8,8 @@
     "postinstall": "pip install -r requirements.txt -t py_modules --upgrade",
     "watch": "rollup -c -w",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "generate-actions": "python scripts/generate_actions.py && python scripts/generate_summary.py"
   },
   "repository": {
@@ -36,6 +38,7 @@
     "@types/react": "19.1.1",
     "@types/react-dom": "19.1.1",
     "@types/webpack": "^5.28.5",
+    "prettier": "^3.2.5",
     "rollup": "^4.53.3",
     "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.6.2"
