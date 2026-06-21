@@ -1,4 +1,4 @@
-import { ButtonItem, ModalRoot, ModalRootProps, showModal, findSP } from "@decky/ui";
+import { Button, ModalRoot, ModalRootProps, showModal, findSP } from "@decky/ui";
 import { useEffect, useState } from "react";
 import { FileSelectionType, openFilePicker } from "@decky/api";
 import { GameEvent } from "../interfaces";
@@ -23,6 +23,8 @@ interface DocumentItem {
     fileType: FileType;
 }
 
+const dialogButtonStyle = { marginBottom: "20px" } as const;
+
 export const DocumentListModal = (props: DocumentListModalProps) => {
     const [customDocuments, setCustomDocuments] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -46,18 +48,16 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
     }, [props.gameEvent.system_name, props.gameEvent.path]);
 
     const getDocumentName = (path: string): string => {
-        // Extract filename from path (handle both Unix and Windows paths)
         const parts = path.replace(/\\/g, "/").split("/");
         return parts[parts.length - 1] || path;
     };
-
 
     const getFileType = (path: string): FileType => {
         const lowerPath = path.toLowerCase();
         if (lowerPath.endsWith('.txt') || lowerPath.endsWith('.md') || lowerPath.endsWith('.markdown')) {
             return 'txt';
         }
-        return 'pdf'; // Default to pdf
+        return 'pdf';
     };
 
     const documents: DocumentItem[] = [];
@@ -70,6 +70,11 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
             fileType: getFileType(docPath),
         });
     });
+
+    const handleClose = () => {
+        props.closeModal?.();
+        props.onClose?.();
+    };
 
     const handleDocumentClick = (documentPath: string, documentName: string, fileType: FileType) => {
         props.closeModal?.();
@@ -117,7 +122,6 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
                     documentName
                 );
 
-                // Refresh the document list
                 await loadDocuments();
             }
         } catch (error) {
@@ -128,19 +132,14 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
     };
 
     return (
-        <ModalRoot
-            onCancel={() => {
-                props.closeModal?.();
-                props.onClose?.();
-            }}
-        >
-            <div>
+        <ModalRoot onCancel={handleClose}>
+            <>
                 <div
                     style={{
                         display: "flex",
                         alignItems: "center",
-                        columnGap: "12px",
                         marginBottom: "20px",
+                        columnGap: "10px",
                     }}
                 >
                     <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
@@ -163,49 +162,52 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
                     </div>
                 </div>
 
-                <div>
-                    {isLoading ? (
-                        <div style={{ marginBottom: "20px", marginTop: "20px" }}>
-                            <strong>Loading documents...</strong>
-                        </div>
-                    ) : documents.length === 0 ? (
-                        <div style={{ marginBottom: "20px", marginTop: "20px" }}>
-                            <strong>No documents available.</strong> Click <strong>Add Document</strong> to add a PDF, TXT, or Markdown document.
-                        </div>
-                    ) : (
-                        documents.map((doc, index) => (
-                            <ButtonItem
-                                key={index}
-                                layout="below"
-                                onClick={() => handleDocumentClick(doc.path, doc.name, doc.fileType)}
+                {isLoading ? (
+                    <div style={{ marginBottom: "20px" }}>
+                        <strong>Loading documents...</strong>
+                    </div>
+                ) : documents.length === 0 ? (
+                    <div style={{ marginBottom: "20px", whiteSpace: "normal", wordBreak: "break-word" }}>
+                        <strong>No documents available.</strong> Click <strong>Add Document</strong> to add a PDF, TXT, or Markdown document.
+                    </div>
+                ) : (
+                    documents.map((doc, index) => (
+                        <Button
+                            key={doc.path}
+                            className="DialogButton Secondary"
+                            style={{
+                                ...dialogButtonStyle,
+                                marginTop: index === 0 ? "20px" : undefined,
+                            }}
+                            onClick={() => handleDocumentClick(doc.path, doc.name, doc.fileType)}
+                        >
+                            <ButtonItemIconContent
+                                icon={
+                                    <img
+                                        alt={doc.fileType === 'txt' ? "TXT" : "PDF"}
+                                        src={getIconPath("RD-text-x-generic")}
+                                        width={24}
+                                        height={24}
+                                    />
+                                }
                             >
-                                <ButtonItemIconContent
-                                    icon={
-                                        <img
-                                            alt={doc.fileType === 'txt' ? "TXT" : "PDF"}
-                                            src={getIconPath("RD-text-x-generic")}
-                                            width={24}
-                                            height={24}
-                                        />
-                                    }
-                                >
-                                    {doc.name}
-                                </ButtonItemIconContent>
-                            </ButtonItem>
-                        ))
-                    )}
-                    <ButtonItem
-                        layout="below"
-                        onClick={handleAddDocument}
-                        disabled={isAddingDocument}
-                    >
-                        <ButtonItemIconContent icon={<FaPlus />}>
-                            {isAddingDocument ? "Adding..." : "Add Document"}
-                        </ButtonItemIconContent>
-                    </ButtonItem>
-                </div>
-            </div>
+                                {doc.name}
+                            </ButtonItemIconContent>
+                        </Button>
+                    ))
+                )}
+
+                <Button
+                    className="DialogButton Secondary"
+                    style={{ marginBottom: "20px", marginTop: "20px" }}
+                    onClick={handleAddDocument}
+                    disabled={isAddingDocument}
+                >
+                    <ButtonItemIconContent icon={<FaPlus />}>
+                        {isAddingDocument ? "Adding..." : "Add Document"}
+                    </ButtonItemIconContent>
+                </Button>
+            </>
         </ModalRoot>
     );
 };
-
