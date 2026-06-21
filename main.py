@@ -186,8 +186,9 @@ class Plugin:
         decky.logger.info("Loaded RetroDECKY plugin")
 
     async def _unload(self):
+        if self.server is not None:
+            self.server.stop_server()
         decky.logger.info("Unloaded RetroDECKY plugin")
-        pass
 
     async def _uninstall(self):
         try:

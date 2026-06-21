@@ -69,15 +69,15 @@ class ServerHandler(SimpleHTTPRequestHandler):
 
 
 class Server:
-    def _server_target(self):        
-        server = HTTPServer(("localhost", self.port), ServerHandler)
+    def _server_target(self):
+        self.httpd = HTTPServer(("localhost", self.port), ServerHandler)
 
-        server.config = {
+        self.httpd.config = {
             "paths": self.paths,
             "on_game_event_callback": self.on_game_event_callback
         }
 
-        server.serve_forever()
+        self.httpd.serve_forever()
 
     def get_port(self):
         return self.port
@@ -100,8 +100,8 @@ class Server:
         
         self.port = port
 
-        server_thread = threading.Thread(target=self._server_target, daemon=True)
-        server_thread.start()
+        self.server_thread = threading.Thread(target=self._server_target, daemon=True)
+        self.server_thread.start()
 
         self.logger.info(f"Server started on port {self.port}")
 
@@ -109,7 +109,20 @@ class Server:
         self.logger.info(f"Custom documents URL: {self.get_custom_documents_url()}")
         self.logger.info(f"API URL: {self.get_api_url()}")
 
+    def stop_server(self):
+        if self.server_thread is None:
+            return
+        if self.httpd is not None:
+            self.httpd.shutdown()
+            self.httpd.server_close()
+            self.httpd = None
+        self.server_thread.join(timeout=5)
+        self.server_thread = None
+        self.logger.info("Server stopped")
+
     def __init__(self, logger: Logger, paths: Paths, on_game_event_callback: callable):
         self.logger = logger
         self.paths = paths
         self.on_game_event_callback = on_game_event_callback
+        self.httpd = None
+        self.server_thread = None
