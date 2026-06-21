@@ -5,7 +5,7 @@
   "api_version": 1,
   "publish": {
     "tags": ["RetroDECK", "emulation"],
-    "description": "A Decky plugin for RetroDECK. Allows to use emulator actions without using hotkeys.",
+    "description": "A Decky plugin for RetroDECK. Lets you trigger emulator actions without using hotkeys and displays game metadata.",
     "image": "https://raw.githubusercontent.com/Teppichseite/RetroDECKY/refs/heads/main/assets/logo/store.png"
   }
 }

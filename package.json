@@ -1,7 +1,7 @@
 {
   "name": "RetroDECKY",
   "version": "1.0.0",
-  "description": "A Decky plugin for RetroDECK. Allows to use emulator actions without using hotkeys.",
+  "description": "A Decky plugin for RetroDECK.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
