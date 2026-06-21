@@ -1,62 +1,64 @@
 export interface GameEvent {
-    type: "game_start" | "game_end";
-    path: string;
-    name: string;
-    system_name: string;
-    system_full_name: string;
-    image_path: string | null;
-    manual_path: string | null;
-    emulator_name: string[];
+  type: "game_start" | "game_end";
+  path: string;
+  name: string;
+  system_name: string;
+  system_full_name: string;
+  image_path: string | null;
+  manual_path: string | null;
+  emulator_name: string[];
 }
 
 export interface HotkeyLabel {
-    name: 'string';
-    keys: string[];
+  name: "string";
+  keys: string[];
 }
 
 export interface Action {
-    id: string;
-    name: string;
-    category?: string;
-    disabled?: boolean;
-    icon: {
-        type: "path";
-        value: string;
-    };
-    action: {
+  id: string;
+  name: string;
+  category?: string;
+  disabled?: boolean;
+  icon: {
+    type: "path";
+    value: string;
+  };
+  action:
+    | {
         type: "hotkey";
         operation: "hold" | "press";
         keys: string[];
-    } | {
+      }
+    | {
         type: "builtin";
         operation: "view_manual" | "exit";
-    };
-    systems: "*" | string[];
-    emulators: "*" | (string | string[])[];
-    hotkeyLabels: HotkeyLabel[]
+      };
+  systems: "*" | string[];
+  emulators: "*" | (string | string[])[];
+  hotkeyLabels: HotkeyLabel[];
 }
 
 export interface PersistedPdfViewState {
-    pageNumber: number;
-    zoom: number;
-    position: {
-        x: number;
-        y: number;
-    }
+  pageNumber: number;
+  zoom: number;
+  position: {
+    x: number;
+    y: number;
+  };
 }
 
 export interface PdfViewState extends PersistedPdfViewState {
-    totalPages: number;
+  totalPages: number;
 }
 
 export interface TextViewState {
-    fontSize: number;
-    scrollTop: number;
+  fontSize: number;
+  scrollTop: number;
 }
 
 export interface SetupState {
-    isRetrodeckFlatpakInstalled: boolean;
-    areEsDeEventScriptsCreated: boolean;
+  isRetrodeckFlatpakInstalled: boolean;
+  areEsDeEventScriptsCreated: boolean;
 }
 
 export type SettingsKey = string;

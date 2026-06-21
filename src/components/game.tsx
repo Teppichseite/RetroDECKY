@@ -3,34 +3,42 @@ import { ActionsComponent } from "./actions";
 import { useMenuContext } from "../context";
 
 export function Game() {
+  const { gameEvent } = useMenuContext();
 
-    const { gameEvent } = useMenuContext();
+  if (!gameEvent) {
+    return <div />;
+  }
 
-    if (!gameEvent) {
-        return <div />;
-    }
-
-    return <div>
-        <PanelSection>
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "100%",
-            }}>
-                {gameEvent.image_path && <img
-                    src={gameEvent.image_path.replace(/\\/g, "")}
-                    alt={gameEvent.name}
-                    style={{ width: "60%", marginTop: '10px' }}
-                />}
-                <div className={staticClasses.PanelSectionTitle} style={{ marginTop: '20px', textAlign: 'center' }}>
-                    {gameEvent.name}
-                </div>
-                <div style={{ marginBottom: '20px', fontSize: '14px', textAlign: 'center' }}>
-                    {gameEvent.system_full_name}
-                </div>
-            </div>
-            <ActionsComponent />
-        </PanelSection>
-    </div >;
-};
+  return (
+    <div>
+      <PanelSection>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          {gameEvent.image_path && (
+            <img
+              src={gameEvent.image_path.replace(/\\/g, "")}
+              alt={gameEvent.name}
+              style={{ width: "60%", marginTop: "10px" }}
+            />
+          )}
+          <div
+            className={staticClasses.PanelSectionTitle}
+            style={{ marginTop: "20px", textAlign: "center" }}
+          >
+            {gameEvent.name}
+          </div>
+          <div style={{ marginBottom: "20px", fontSize: "14px", textAlign: "center" }}>
+            {gameEvent.system_full_name}
+          </div>
+        </div>
+        <ActionsComponent />
+      </PanelSection>
+    </div>
+  );
+}

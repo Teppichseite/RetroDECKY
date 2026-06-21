@@ -12,13 +12,20 @@ export const checkSetupStateBe = callable<[], [boolean, boolean]>("check_setup_s
 export const getSettingBe = callable<[SettingsKey], any>("get_setting");
 export const setSettingBe = callable<[SettingsKey, any], void>("set_setting");
 
-export const listCustomDocumentsBe = callable<[string, string], string[]>("list_custom_documents");
-export const copyFileToCustomDocumentsBe = callable<[string, string, string, string], string>("copy_file_to_custom_documents");
+export const listCustomDocumentsBe = callable<[string, string], string[]>(
+  "list_custom_documents"
+);
+export const copyFileToCustomDocumentsBe = callable<
+  [string, string, string, string],
+  string
+>("copy_file_to_custom_documents");
 
-export const mapBeSetupStateToSetupState = (beSetupState: [boolean, boolean]): SetupState => {
-    const [isRetrodeckFlatpakInstalled, areEsDeEventScriptsCreated] = beSetupState;
-    return {
-        isRetrodeckFlatpakInstalled,
-        areEsDeEventScriptsCreated
-    };
+export const mapBeSetupStateToSetupState = (
+  beSetupState: [boolean, boolean]
+): SetupState => {
+  const [isRetrodeckFlatpakInstalled, areEsDeEventScriptsCreated] = beSetupState;
+  return {
+    isRetrodeckFlatpakInstalled,
+    areEsDeEventScriptsCreated,
+  };
 };

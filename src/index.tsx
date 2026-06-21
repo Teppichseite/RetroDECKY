@@ -1,18 +1,16 @@
-import {
-  staticClasses
-} from "@decky/ui";
-import {
-  definePlugin,
-} from "@decky/api"
+import { staticClasses } from "@decky/ui";
+import { definePlugin } from "@decky/api";
 import { FaGamepad } from "react-icons/fa";
 import { MenuContextProvider } from "./context";
 import { Menu } from "./components/menu";
 import { startRetroDECKOnStartup } from "./autostart";
 
 function Content() {
-  return <MenuContextProvider>
-    <Menu />
-  </MenuContextProvider>;
+  return (
+    <MenuContextProvider>
+      <Menu />
+    </MenuContextProvider>
+  );
 }
 
 export default definePlugin(() => {
@@ -28,6 +26,6 @@ export default definePlugin(() => {
     onDismount() {
       unregisterStartupSubscription();
       console.log("RetroDECKY plugin unloaded");
-    }
+    },
   };
 });
