@@ -59,7 +59,6 @@ cli/decky
 py_modules/*
 !py_modules/server.py
 !py_modules/models.py
-!py_modules/key_emitter.py
 !py_modules/es_de_helper.py
 !py_modules/paths_resolver.py
 !py_modules/custom_documents.py

@@ -14,8 +14,6 @@ function Content() {
 }
 
 export default definePlugin(() => {
-  console.log("RetroDECKY plugin initializing");
-
   const unregisterStartupSubscription = startRetroDECKOnStartup();
 
   return {
