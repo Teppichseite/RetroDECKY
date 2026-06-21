@@ -1,11 +1,11 @@
 {
   "name": "RetroDECKY",
   "author": "Teppichseite",
-  "flags": ["debug"],
+  "flags": [],
   "api_version": 1,
   "publish": {
-    "tags": ["RetroDECK", "emulation"],
-    "description": "A Decky plugin for RetroDECK. Lets you trigger emulator actions without using hotkeys and displays game metadata.",
+    "tags": ["RetroDECK", "emulation", "gaming", "utility"],
+    "description": "A Decky plugin for the all-in-one retro gaming platform RetroDECK. That enables per game hotkeys via built-in menu buttons, automatic boot integration, real-time game metadata and artwork display, plus an in-session PDF manual viewer supporting custom documents like TXT and Markdown.",
     "image": "https://raw.githubusercontent.com/Teppichseite/RetroDECKY/refs/heads/main/assets/logo/store.png"
   }
 }
