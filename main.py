@@ -71,7 +71,6 @@ class Plugin:
         )
 
     def _on_game_event(self, game_event_raw: str):
-
         decky.logger.info(f"Raw game event received: {game_event_raw}")
         try:
             game_event = self._build_game_event(game_event_raw)
@@ -85,6 +84,8 @@ class Plugin:
             decky.logger.error(f"Error emitting game event: {e}")
             return
 
+    def send_raw_game_event(self, game_event_raw: str):
+        self._on_game_event(game_event_raw)
 
     def _load_actions(self):
         with open(self.paths.actionsFile, "r") as f:

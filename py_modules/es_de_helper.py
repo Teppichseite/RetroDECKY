@@ -121,7 +121,7 @@ class EsDeHelper:
         
         return None
 
-    def _load_gamelist_game_alternative_emulator(self, system_name: str, rom_path: str):
+    def load_game_data(self, system_name: str, rom_path: str) -> dict | None:
         gamelist = self._load_gamelist(system_name)
         if gamelist is None or "gameList" not in gamelist:
             return None
@@ -140,8 +140,17 @@ class EsDeHelper:
             if gamelist_path != normalized_rom_path:
                 continue
 
-            if "altemulator" in game:
-                return game['altemulator']
+            return game
+
+        return None
+
+    def _load_gamelist_game_alternative_emulator(self, system_name: str, rom_path: str):
+        game = self.load_game_data(system_name, rom_path)
+        if game is None:
+            return None
+
+        if "altemulator" in game:
+            return game['altemulator']
 
         return None
         
