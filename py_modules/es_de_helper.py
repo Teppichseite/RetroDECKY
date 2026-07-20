@@ -84,6 +84,12 @@ class EsDeHelper:
 
         self.logger.info(f"Loaded {len(self.es_systems)} es-de systems") 
 
+    def resolve_system_fullname(self, system_name: str) -> str | None:
+        if not self.es_systems or system_name not in self.es_systems:
+            return None
+
+        return self.es_systems[system_name].get("fullname")
+
     def _preprocess_gamelist_xml(self, xml_string: str) -> dict:
         xml_string = xml_string.lstrip()
         if xml_string.startswith("<?xml"):

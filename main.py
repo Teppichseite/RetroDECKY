@@ -43,12 +43,20 @@ class Plugin:
 
     def _build_game_event(self, raw_data: str) -> GameEvent:
         parts = raw_data.strip().split(";")
-        if len(parts) != 5:
+        if len(parts) < 4:
             decky.logger.error(f"Invalid game event data: {raw_data}")
             return None
 
         rom_path = parts[1]
         system_name = parts[3]
+        provided_full_name = parts[4].strip() if len(parts) > 4 else ""
+        if provided_full_name == "empty":
+            provided_full_name = ""
+        system_full_name = (
+            provided_full_name
+            or self.es_de_helper.resolve_system_fullname(system_name)
+            or system_name
+        )
 
         miximage_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "miximages")
         cover_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "covers")
@@ -64,8 +72,8 @@ class Plugin:
             path=rom_path,
             name=parts[2],
             system_name=system_name,
-            system_full_name=parts[4],
-            emulator_name=emulator_name or parts[4],
+            system_full_name=system_full_name,
+            emulator_name=emulator_name or system_full_name,
             image_path=self._resolve_media_path(image_path),
             manual_path=self._resolve_media_path(manual_path),
         )
