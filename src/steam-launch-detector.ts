@@ -3,7 +3,7 @@ import {
     AppDetails,
     ELaunchSource,
 } from "@decky/ui/dist/globals/steam-client/App";
-import { sendRawGameEventBe } from "./backend";
+import { getSettingBe, sendRawGameEventBe } from "./backend";
 
 declare var SteamClient: SteamClient;
 
@@ -71,14 +71,22 @@ function tokenizeLaunchCommand(command: string): string[] {
     return tokens;
 }
 
+/** Matches: run net.retrodeck.retrodeck -s <system> <path> */
+const RETRODECK_LAUNCH_OPTIONS_RE =
+    /^run\s+net\.retrodeck\.retrodeck\s+-s\s+\S+\s+(?:"[^"]+"|'[^']+'|\S+)/;
+
 function parseRetrodeckLaunchOptions(launchOptions: string): {
     romPath: string;
-    systemName: string | null;
+    systemName: string;
 } | null {
+    if (!RETRODECK_LAUNCH_OPTIONS_RE.test(launchOptions)) {
+        return null;
+    }
+
     const tokens = tokenizeLaunchCommand(launchOptions);
 
     if (
-        tokens.length < 3 ||
+        tokens.length < 5 ||
         tokens[0] !== "run" ||
         tokens[1] !== "net.retrodeck.retrodeck"
     ) {
@@ -110,26 +118,14 @@ function parseRetrodeckLaunchOptions(launchOptions: string): {
         break;
     }
 
-    if (!romPath) {
-        return null;
-    }
-
-    // Fall back to the roms/<system>/... folder when -s was omitted
-    if (!systemName) {
-        const romsMatch = romPath.match(/(?:^|\/)roms\/([^/]+)\//);
-        if (romsMatch) {
-            systemName = romsMatch[1];
-        }
-    }
-
-    if (!systemName) {
+    if (!romPath || !systemName) {
         return null;
     }
 
     return { romPath, systemName };
 }
 
-function getRawGameEvent(gameId: string): string | null {
+function getRawGameStartEvent(gameId: string): { appId: number; rawEvent: string } | null {
     const foundApp = appStore?.allApps?.find(
         (app) => app.m_gameid === gameId
     );
@@ -141,7 +137,7 @@ function getRawGameEvent(gameId: string): string | null {
     const appDetails = appDetailsStore?.GetAppDetails?.(foundApp.appid);
     const launchOptions = appDetails?.strShortcutLaunchOptions.trim();
 
-    if (!launchOptions?.startsWith("run net.retrodeck.retrodeck")) {
+    if (!launchOptions) {
         return null;
     }
 
@@ -152,52 +148,59 @@ function getRawGameEvent(gameId: string): string | null {
 
     const { romPath, systemName } = parsed;
 
-    return `game_start;${romPath};${appDetails?.strDisplayName};${systemName};empty`;
+    return {
+        appId: foundApp.appid,
+        rawEvent: `game_start;${romPath};${appDetails?.strDisplayName};${systemName};empty`,
+    };
 }
 
 export function startSteamLaunchDetector(): () => void {
-    const trackedGameActions = new Map<number, { gameId: string }>();
+    const trackedApps = new Map<number, { gameId: string }>();
 
     const startSubscription = SteamClient.Apps.RegisterForGameActionStart(
-        (gameActionId, gameId, action, launchSource) => {
+        async (gameActionId, gameId, action, launchSource) => {
             if (action !== "LaunchApp") {
                 return;
             }
 
-            console.log("Game action started", gameActionId, gameId, action, launchSource);
-
-            const rawGameEvent = getRawGameEvent(gameId);
-
-            if(!rawGameEvent) {
+            const disabled = await getSettingBe("steamLaunchDetectionDisabled");
+            if (disabled) {
                 return;
             }
 
-            console.log("Raw game event", rawGameEvent);
+            const gameStart = getRawGameStartEvent(gameId);
 
-            sendRawGameEventBe(rawGameEvent);
-
-            trackedGameActions.set(gameActionId, { gameId });
-        }
-    );
-
-    const endSubscription = SteamClient.Apps.RegisterForGameActionEnd(
-        (gameActionId) => {
-            const trackedLaunch = trackedGameActions.get(gameActionId);
-            if (!trackedLaunch) {
+            if (!gameStart) {
                 return;
             }
 
-            console.log("Game action ended", gameActionId);
+            sendRawGameEventBe(gameStart.rawEvent);
 
-            //sendRawGameEventBe("game_end;;;");
-
-            trackedGameActions.delete(gameActionId);
+            trackedApps.set(gameStart.appId, { gameId });
         }
     );
+
+    const lifetimeSubscription =
+        SteamClient.GameSessions.RegisterForAppLifetimeNotifications(
+            (notification) => {
+                if (notification.bRunning) {
+                    return;
+                }
+
+                const trackedLaunch = trackedApps.get(notification.unAppID);
+                if (!trackedLaunch) {
+                    return;
+                }
+
+                sendRawGameEventBe("game_end;;;");
+
+                trackedApps.delete(notification.unAppID);
+            }
+        );
 
     return () => {
         startSubscription.unregister();
-        endSubscription.unregister();
-        trackedGameActions.clear();
+        lifetimeSubscription.unregister();
+        trackedApps.clear();
     };
 }
