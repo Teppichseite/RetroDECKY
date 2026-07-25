@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   Field,
   Focusable,
@@ -17,9 +17,9 @@ export interface GameInfoModalProps extends ModalRootProps {
 }
 
 const METADATA_GAP = "16px";
-const SECTION_GAP = "32px";
+const SECTION_GAP = "48px";
 const DESCRIPTION_MAX_HEIGHT = "250px";
-const SECTION_DESCRIPTION_MAX_HEIGHT = "100px";
+const SECTION_DESCRIPTION_MAX_HEIGHT = "150px";
 const DESCRIPTION_SCROLL_STEP = 80;
 
 const formatRating = (rating: string | null): string | null => {
@@ -108,7 +108,7 @@ const SectionHeader = ({ title }: { title: string }) => (
     style={{
       fontWeight: "bold",
       fontSize: "16px",
-      marginBottom: "8px",
+      marginBottom: "16px",
       color: "#dcdedf",
     }}
   >
@@ -201,7 +201,10 @@ const MetadataFieldRows = ({
   }
 
   return (
-    <div
+    <Focusable
+      noFocusRing
+      className="FocusRegion"
+      flow-children="grid"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -211,71 +214,125 @@ const MetadataFieldRows = ({
       }}
     >
       {metadataRows.map((row, rowIndex) => (
-        <div
+        <MetadataFieldRow
           key={rowIndex}
-          style={{
-            display: "flex",
-            gap: METADATA_GAP,
-            alignItems: "flex-start",
-            width: "100%",
-            boxSizing: "border-box",
-          }}
-        >
-          {row.map((field, fieldIndex) => {
-            const linkUrl = field.isLink ? field.value : null;
-            const canOpenLink = Boolean(linkUrl);
+          row={row}
+          rowIndex={rowIndex}
+          rowCount={metadataRows.length}
+          onOpenLink={onOpenLink}
+        />
+      ))}
+    </Focusable>
+  );
+};
 
-            return (
-              <div
-                key={field.label}
+const MetadataFieldRow = ({
+  row,
+  rowIndex,
+  rowCount,
+  onOpenLink,
+}: {
+  row: MetadataField[];
+  rowIndex: number;
+  rowCount: number;
+  onOpenLink?: (url: string) => void;
+}) => {
+  const valueRefs = useRef<Array<HTMLSpanElement | null>>([]);
+  const [sharedValueHeight, setSharedValueHeight] = useState<number | undefined>();
+
+  useLayoutEffect(() => {
+    valueRefs.current = valueRefs.current.slice(0, row.length);
+
+    const maxHeight = Math.max(
+      ...valueRefs.current.map((el) => el?.offsetHeight ?? 0),
+      0
+    );
+
+    setSharedValueHeight((prev) => {
+      const next = maxHeight > 0 ? maxHeight : undefined;
+      return prev === next ? prev : next;
+    });
+  });
+
+  return (
+    <Focusable
+      noFocusRing
+      className="FocusRegion"
+      flow-children="row"
+      style={{
+        display: "flex",
+        gap: METADATA_GAP,
+        alignItems: "stretch",
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      {row.map((field, fieldIndex) => {
+        const linkUrl = field.isLink ? field.value : null;
+        const canOpenLink = Boolean(linkUrl);
+
+        return (
+          <div
+            key={field.label}
+            style={{
+              flex: "1 1 0",
+              minWidth: 0,
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Field
+              label={field.label}
+              bottomSeparator={
+                rowIndex < rowCount - 1 || fieldIndex < row.length - 1
+                  ? "standard"
+                  : "none"
+              }
+            >
+              <Focusable
+                noFocusRing
+                className="FocusRegion"
                 style={{
-                  flex: "1 1 0",
-                  minWidth: 0,
-                  overflow: "hidden",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                  minHeight: sharedValueHeight,
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                onActivate={() => {
+                  if (linkUrl) {
+                    onOpenLink?.(linkUrl);
+                  }
                 }}
               >
-                <Field
-                  label={field.label}
-                  bottomSeparator={
-                    rowIndex < metadataRows.length - 1 ||
-                    fieldIndex < row.length - 1
-                      ? "standard"
-                      : "none"
-                  }
+                <span
+                  ref={(el) => {
+                    valueRefs.current[fieldIndex] = el;
+                  }}
+                  style={{
+                    color: canOpenLink ? "#1a9fff" : "#dcdedf",
+                    textDecoration: canOpenLink ? "underline" : "none",
+                    whiteSpace: "normal",
+                    wordBreak: "break-word",
+                    overflowWrap: "anywhere",
+                    textAlign: "right",
+                  }}
                 >
-                  <Focusable
-                    noFocusRing
-                    className="FocusRegion"
-                    onActivate={() => {
-                      if (linkUrl) {
-                        onOpenLink?.(linkUrl);
-                      }
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: canOpenLink ? "#1a9fff" : "#dcdedf",
-                        textDecoration: canOpenLink ? "underline" : "none",
-                        whiteSpace: "normal",
-                        wordBreak: "break-word",
-                        overflowWrap: "anywhere",
-                      }}
-                    >
-                      {field.isLink
-                        ? canOpenLink
-                          ? "Open Link"
-                          : "-"
-                        : displayValue(field.value)}
-                    </span>
-                  </Focusable>
-                </Field>
-              </div>
-            );
-          })}
-          {row.length === 1 && <div style={{ flex: "1 1 0", minWidth: 0 }} />}
-        </div>
-      ))}
-    </div>
+                  {field.isLink
+                    ? canOpenLink
+                      ? "Open Link"
+                      : "-"
+                    : displayValue(field.value)}
+                </span>
+              </Focusable>
+            </Field>
+          </div>
+        );
+      })}
+      {row.length === 1 && <div style={{ flex: "1 1 0", minWidth: 0 }} />}
+    </Focusable>
   );
 };
 
@@ -393,7 +450,7 @@ const ComponentInfoMetadata = ({
 export const GameInfoModal = (props: GameInfoModalProps) => {
   const { gameEvent } = props;
   const contentRef = useRef<HTMLDivElement>(null);
-  useDialogContentStyling(contentRef, "65vw");
+  useDialogContentStyling(contentRef, "75vw");
 
   const handleClose = () => {
     props.closeModal?.();
