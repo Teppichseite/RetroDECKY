@@ -52,6 +52,21 @@ const displayValue = (value: string | null | undefined): string => {
   return value;
 };
 
+const formatListOrString = (
+  value: string | string[] | null | undefined
+): string | null => {
+  if (value == null) {
+    return null;
+  }
+
+  if (Array.isArray(value)) {
+    const joined = value.filter(Boolean).join(", ");
+    return joined || null;
+  }
+
+  return value.trim() === "" ? null : value;
+};
+
 interface MetadataField {
   label: string;
   value: string | null;
@@ -161,6 +176,38 @@ const SystemInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
     },
     { label: "Hardware Type", value: systemMetadata.hardware_type },
     { label: "System Description", value: systemMetadata.description },
+  ];
+
+  return (
+    <div style={{ marginTop: METADATA_GAP }}>
+      <MetadataFieldRows fields={metadataFields} />
+    </div>
+  );
+};
+
+const ComponentInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
+  const componentMetadata = gameEvent.component_metadata;
+  if (!componentMetadata) {
+    return null;
+  }
+
+  const metadataFields: MetadataField[] = [
+    { label: "Component Name", value: componentMetadata.name },
+    { label: "Component Type", value: componentMetadata.component_type },
+    {
+      label: "Component Systems",
+      value: formatListOrString(
+        componentMetadata.system_friendly_name || componentMetadata.system
+      ),
+    },
+    { label: "Component Description", value: componentMetadata.description },
+    { label: "Wiki", value: componentMetadata.url_rdwiki },
+    { label: "Website", value: componentMetadata.url_webpage },
+    { label: "Source", value: componentMetadata.url_source },
+    {
+      label: "Donation",
+      value: formatListOrString(componentMetadata.url_donation_purchase),
+    },
   ];
 
   return (
@@ -318,6 +365,7 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
 
         <GameInfoMetadata gameEvent={gameEvent} />
         <SystemInfoMetadata gameEvent={gameEvent} />
+        <ComponentInfoMetadata gameEvent={gameEvent} />
       </div>
     </ModalRoot>
   );

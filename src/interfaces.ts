@@ -26,6 +26,18 @@ export interface SystemMetadata {
   cart_size: string | null;
 }
 
+export interface ComponentMetadata {
+  name: string | null;
+  description: string | null;
+  url_rdwiki: string | null;
+  url_webpage: string | null;
+  url_donation_purchase: string | string[] | null;
+  url_source: string | null;
+  system: string | string[] | null;
+  component_type: string | null;
+  system_friendly_name: string | string[] | null;
+}
+
 export interface GameEvent {
   type: "game_start" | "game_end";
   path: string;
@@ -37,6 +49,8 @@ export interface GameEvent {
   emulator_name: string[];
   game_metadata: GameMetadata;
   system_metadata: SystemMetadata | null;
+  component: string | null;
+  component_metadata: ComponentMetadata | null;
 }
 
 export interface HotkeyLabel {

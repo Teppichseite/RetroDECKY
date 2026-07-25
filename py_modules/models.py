@@ -29,6 +29,18 @@ class SystemMetadata:
     cart_size: str | None
 
 @dataclass
+class ComponentMetadata:
+    name: str | None
+    description: str | None
+    url_rdwiki: str | None
+    url_webpage: str | None
+    url_donation_purchase: str | list[str] | None
+    url_source: str | None
+    system: str | list[str] | None
+    component_type: str | None
+    system_friendly_name: str | list[str] | None
+
+@dataclass
 class GameEvent:
     type: str
     path: str
@@ -40,6 +52,8 @@ class GameEvent:
     manual_path: str | None
     game_metadata: GameMetadata
     system_metadata: SystemMetadata | None
+    component: str | None
+    component_metadata: ComponentMetadata | None
 
 @dataclass
 class Paths:
@@ -48,6 +62,7 @@ class Paths:
     esDeDownloadedMediaFolder: str
     esDeDefaultEsSystemsFile: str
     systemMetadataFolder: str
+    componentsFolder: str
     romsFolder: str
     actionsFile: str
     customDocumentsFolder: str

@@ -1,7 +1,8 @@
 from logging import Logger
+import json
 import os
 import xmltodict
-from models import Paths, SystemMetadata
+from models import ComponentMetadata, Paths, SystemMetadata
 
 class EsDeHelper:
 
@@ -153,6 +154,68 @@ class EsDeHelper:
                 )
 
         return None
+
+    def resolve_component_name(self, emulator_name: list[str] | None) -> str | None:
+        if not emulator_name:
+            return None
+
+        first = emulator_name[0]
+        if not isinstance(first, str):
+            return None
+
+        parts = first.strip().lower().split()
+        if not parts:
+            return None
+
+        return parts[0]
+
+    def _parse_component_metadata(self, data: dict | None) -> ComponentMetadata | None:
+        if not data or not isinstance(data, dict):
+            return None
+
+        return ComponentMetadata(
+            name=data.get("name"),
+            description=data.get("description"),
+            url_rdwiki=data.get("url_rdwiki"),
+            url_webpage=data.get("url_webpage"),
+            url_donation_purchase=data.get("url_donation_purchase"),
+            url_source=data.get("url_source"),
+            system=data.get("system"),
+            component_type=data.get("component_type"),
+            system_friendly_name=data.get("system_friendly_name"),
+        )
+
+    def resolve_component_metadata(self, component_name: str | None) -> ComponentMetadata | None:
+        if not component_name:
+            return None
+
+        manifest_path = os.path.join(
+            self.paths.componentsFolder,
+            component_name,
+            "component_manifest.json",
+        )
+
+        if not os.path.isfile(manifest_path):
+            self.logger.error(f"Component manifest not found at {manifest_path}")
+            return None
+
+        try:
+            with open(manifest_path, "r") as f:
+                parsed = json.load(f)
+
+            if not isinstance(parsed, dict):
+                return None
+
+            entry = parsed.get(component_name)
+            if entry is None and len(parsed) == 1:
+                entry = next(iter(parsed.values()))
+
+            return self._parse_component_metadata(entry)
+        except Exception as e:
+            self.logger.error(
+                f"Failed to load component metadata for {component_name} at {manifest_path}: {e}"
+            )
+            return None
 
     def _preprocess_gamelist_xml(self, xml_string: str) -> dict:
         xml_string = xml_string.lstrip()
