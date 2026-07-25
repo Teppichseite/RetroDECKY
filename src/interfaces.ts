@@ -7,6 +7,13 @@ export interface GameEvent {
   image_path: string | null;
   manual_path: string | null;
   emulator_name: string[];
+  desc: string | null;
+  rating: string | null;
+  releasedate: string | null;
+  developer: string | null;
+  publisher: string | null;
+  genre: string | null;
+  players: string | null;
 }
 
 export interface HotkeyLabel {
@@ -31,7 +38,7 @@ export interface Action {
       }
     | {
         type: "builtin";
-        operation: "view_manual" | "exit";
+        operation: "view_manual" | "view_game_info" | "exit";
       };
   systems: "*" | string[];
   emulators: "*" | (string | string[])[];

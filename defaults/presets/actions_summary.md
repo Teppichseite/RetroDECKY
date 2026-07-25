@@ -34,7 +34,11 @@ This file provides an overview of all actions defined in actions.json.
 
 ### Quick
 
-*10 action(s)*
+*11 action(s)*
+
+- **Game Info** (`display-view-game-info`)
+  - Action: `[view_game_info]`
+  - Emulators: *
 
 - **View Manual** (`display-view-pdf`)
   - Action: `[view_manual]`
@@ -462,8 +466,8 @@ This file provides an overview of all actions defined in actions.json.
 
 ## Statistics
 
-- **Total Actions**: 92
+- **Total Actions**: 93
 - **Hotkey Actions**: 90
-- **Builtin Actions**: 2
+- **Builtin Actions**: 3
 - **Categories**: 12
 - **Emulators**: 23

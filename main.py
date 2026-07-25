@@ -67,6 +67,8 @@ class Plugin:
 
         emulator_name = self.es_de_helper.resolve_emulator_name(system_name, rom_path)
 
+        game_data = self.es_de_helper.load_game_data(system_name, rom_path) or {}
+
         return GameEvent(
             type=parts[0],
             path=rom_path,
@@ -76,6 +78,13 @@ class Plugin:
             emulator_name=emulator_name or system_full_name,
             image_path=self._resolve_media_path(image_path),
             manual_path=self._resolve_media_path(manual_path),
+            desc=game_data.get("desc"),
+            rating=game_data.get("rating"),
+            releasedate=game_data.get("releasedate"),
+            developer=game_data.get("developer"),
+            publisher=game_data.get("publisher"),
+            genre=game_data.get("genre"),
+            players=game_data.get("players"),
         )
 
     def _on_game_event(self, game_event_raw: str):

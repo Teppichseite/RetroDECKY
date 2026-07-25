@@ -24,6 +24,7 @@ from bs4 import BeautifulSoup
 # Prefix action_id with ! to hide it
 ACTION_GROUPS = {
     "quick": [
+        "display-view-game-info",
         "display-view-pdf",
         "quick-load-state",
         "quick-save-state",
@@ -567,6 +568,17 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
+    # Define Game Info action
+    view_game_info_action = {
+        "id": "display-view-game-info",
+        "name": "Game Info",
+        "category": "Quick",
+        "icon": {"type": "path", "value": "RD-edit-find"},
+        "action": {"type": "builtin", "operation": "view_game_info"},
+        "systems": "*",
+        "emulators": "*",
+    }
+
     # Define Quit action (last in Quick Menu)
     quit_action = {
         "id": "quick-quit-component",
@@ -578,7 +590,8 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
-    actions.insert(0, view_manual_action)
+    actions.insert(0, view_game_info_action)
+    actions.insert(1, view_manual_action)
     actions.append(quit_action)
 
     # Add Azahar to load and save state actions

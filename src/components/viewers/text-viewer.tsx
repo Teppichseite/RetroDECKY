@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 
 import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from "@decky/ui";
-import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from "./viewers-shared";
+import { ViewerInfo, RetrodeckSpinner } from "./viewers-shared";
+import { useDialogContentStyling } from "../../hooks";
 import { useCachedTextViewState } from "./viewer-state";
 
 const SCROLL_STEP = 50;

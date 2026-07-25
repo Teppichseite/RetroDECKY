@@ -1,4 +1,3 @@
-import { useEffect, RefObject } from "react";
 import { Field } from "@decky/ui";
 import { getIconPath } from "../../utils";
 import retrodeckLogo from "../../../assets/logo/icon-RetroDECKY.svg";
@@ -125,21 +124,3 @@ export const RetrodeckSpinner = ({ size = 64 }: { size?: number }) => (
     />
   </div>
 );
-
-export const useDialogContentStyling = (contentRef: RefObject<HTMLDivElement | null>) => {
-  useEffect(() => {
-    const el = contentRef.current;
-    if (!el) return;
-
-    let parent: HTMLElement | null = el.parentElement;
-    while (parent) {
-      if (parent.classList.contains("DialogContent")) {
-        parent.style.width = "95vw";
-        parent.style.maxWidth = "95vw";
-        parent.style.padding = "12px";
-        break;
-      }
-      parent = parent.parentElement;
-    }
-  }, [contentRef]);
-};

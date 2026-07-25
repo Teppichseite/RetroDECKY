@@ -10,6 +10,13 @@ class GameEvent:
     emulator_name: list[str] | None
     image_path: str | None
     manual_path: str | None
+    desc: str | None
+    rating: str | None
+    releasedate: str | None
+    developer: str | None
+    publisher: str | None
+    genre: str | None
+    players: str | None
 
 @dataclass
 class Paths:

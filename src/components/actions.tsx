@@ -15,6 +15,7 @@ import { getIconPath } from "../utils";
 import { ActionModal } from "./action-modal";
 import { PdfViewerModal } from "./viewers/pdf-viewer";
 import { DocumentListModal } from "./document-list-modal";
+import { GameInfoModal } from "./game-info-modal";
 
 export const ActionsComponent = () => {
   const { displayedActions } = useMenuContext();
@@ -160,6 +161,17 @@ export const ActionComponent = ({
     );
   };
 
+  const openGameInfoModal = () => {
+    setFocusedElement(null);
+    showModal(
+      <GameInfoModal
+        gameEvent={gameEvent}
+        onClose={() => setFocusedElement(`action:${action.id}`)}
+      />,
+      findSP()
+    );
+  };
+
   const onOpenModal = () => {
     if (isManualViewAction) {
       openManualListModal();
@@ -177,6 +189,8 @@ export const ActionComponent = ({
 
   const isManualViewAction =
     action.action.type === "builtin" && action.action.operation === "view_manual";
+  const isGameInfoAction =
+    action.action.type === "builtin" && action.action.operation === "view_game_info";
   const showInfoButton =
     isFocused && (action.action.type !== "builtin" || isManualViewAction);
   const isDisabled =
@@ -197,6 +211,11 @@ export const ActionComponent = ({
           findSP()
         );
       }
+      return;
+    }
+
+    if (isGameInfoAction) {
+      openGameInfoModal();
       return;
     }
 
