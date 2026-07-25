@@ -1,7 +1,7 @@
 [
   {
     "id": "display-view-game-info",
-    "name": "Game Info",
+    "name": "View Info",
     "category": "Quick",
     "icon": {
       "type": "path",

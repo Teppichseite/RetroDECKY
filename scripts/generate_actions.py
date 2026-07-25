@@ -568,10 +568,10 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
-    # Define Game Info action
+    # Define View Info action
     view_game_info_action = {
         "id": "display-view-game-info",
-        "name": "Game Info",
+        "name": "View Info",
         "category": "Quick",
         "icon": {"type": "path", "value": "RD-edit-find"},
         "action": {"type": "builtin", "operation": "view_game_info"},

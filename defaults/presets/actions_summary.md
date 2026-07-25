@@ -36,7 +36,7 @@ This file provides an overview of all actions defined in actions.json.
 
 *11 action(s)*
 
-- **Game Info** (`display-view-game-info`)
+- **View Info** (`display-view-game-info`)
   - Action: `[view_game_info]`
   - Emulators: *
 
