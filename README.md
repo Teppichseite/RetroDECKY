@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explanation" width="300">
-  <img src="./assets/screenshots/screenshot7.png" alt="RetroDECKY Documents" width="300">
+  <img src="./assets/screenshots/screenshot8.png" alt="RetroDECKY Metadata" width="300">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Documents" width="300">
 </p>
 
 <p>
@@ -48,7 +48,7 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - **Running Game Actions** - Displays hotkey actions specific to the currently running game.
 
-- **Running Game Information** - Displays data from ES-DE such as artwork, covers and metadata.
+- **Running Game Information** - Displays data from ES-DE and RetroDECK such as artwork, covers and metadata.
 
 - **Hotkey Triggering** - Execute hotkey functions through Decky menu buttons instead of keyboard hotkeys, button combos or radial menus.
 
