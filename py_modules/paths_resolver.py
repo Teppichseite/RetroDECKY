@@ -10,9 +10,16 @@ class PathsResolver:
         ".var", "app", "net.retrodeck.retrodeck", "config", "retrodeck", "retrodeck.json"
     )
 
-    def __init__(self, user_home: str, plugin_dir: str, logger: Logger):
+    def __init__(
+        self,
+        user_home: str,
+        plugin_dir: str,
+        flatpak_location: str,
+        logger: Logger,
+    ):
         self.user_home = user_home
         self.plugin_dir = plugin_dir
+        self.flatpak_location = flatpak_location
         self.logger = logger
 
     def _read_retrodeck_json(self) -> dict | None:
@@ -56,6 +63,19 @@ class PathsResolver:
         custom_documents_folder = os.path.join(
             retrodeck_storage_path, "retrodecky", "documents"
         )
+        components_folder = os.path.join(
+            self.flatpak_location, "files", "retrodeck", "components"
+        )
+        system_metadata_folder = os.path.join(
+            components_folder,
+            "es-de",
+            "share",
+            "es-de",
+            "themes",
+            "RetroDECK-theme-main",
+            "system",
+            "metadata",
+        )
 
         return Paths(
             esDeUserFolder=os.path.join(rd_home_path, "ES-DE"),
@@ -64,6 +84,8 @@ class PathsResolver:
             ),
             esDeDownloadedMediaFolder=downloaded_media_path,
             esDeDefaultEsSystemsFile=os.path.join(self.plugin_dir, "presets", "es_systems.xml"),
+            systemMetadataFolder=system_metadata_folder,
+            componentsFolder=components_folder,
             actionsFile=os.path.join(self.plugin_dir, "presets", "actions.json"),
             romsFolder=roms_path,
             customDocumentsFolder=custom_documents_folder,

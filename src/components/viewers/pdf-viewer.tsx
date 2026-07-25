@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, useMemo } from "react";
 
 import { PdfViewState } from "../../interfaces";
 import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from "@decky/ui";
-import { ViewerInfo, RetrodeckSpinner, useDialogContentStyling } from "./viewers-shared";
+import { ViewerInfo, RetrodeckSpinner } from "./viewers-shared";
+import { useDialogContentStyling } from "../../hooks";
 import { useCachedPdfViewState } from "./viewer-state";
 
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";

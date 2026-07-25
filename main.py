@@ -2,7 +2,7 @@ import os
 import subprocess
 
 from es_de_helper import EsDeHelper
-from models import GameEvent, Paths
+from models import GameEvent, GameMetadata, Paths
 from paths_resolver import PathsResolver
 from server import Server
 from custom_documents import CustomDocuments
@@ -67,6 +67,12 @@ class Plugin:
 
         emulator_name = self.es_de_helper.resolve_emulator_name(system_name, rom_path)
 
+        game_data = self.es_de_helper.load_game_data(system_name, rom_path) or {}
+        system_metadata = self.es_de_helper.resolve_system_metadata(system_name)
+
+        component = self.es_de_helper.resolve_component_name(emulator_name)
+        component_metadata = self.es_de_helper.resolve_component_metadata(component)
+
         return GameEvent(
             type=parts[0],
             path=rom_path,
@@ -76,6 +82,18 @@ class Plugin:
             emulator_name=emulator_name or system_full_name,
             image_path=self._resolve_media_path(image_path),
             manual_path=self._resolve_media_path(manual_path),
+            game_metadata=GameMetadata(
+                desc=game_data.get("desc"),
+                rating=game_data.get("rating"),
+                releasedate=game_data.get("releasedate"),
+                developer=game_data.get("developer"),
+                publisher=game_data.get("publisher"),
+                genre=game_data.get("genre"),
+                players=game_data.get("players"),
+            ),
+            system_metadata=system_metadata,
+            component=component,
+            component_metadata=component_metadata,
         )
 
     def _on_game_event(self, game_event_raw: str):
@@ -123,9 +141,9 @@ class Plugin:
             decky.logger.error(f"Error creating es-de event scripts: {e}")
             return
 
-    def _check_retrodeck_flatpak(self) -> bool:
+    def _check_retrodeck_flatpak(self) -> str | None:
         output = subprocess.run(
-            ['flatpak', 'info', 'net.retrodeck.retrodeck'],
+            ['flatpak', 'info', '--show-location', 'net.retrodeck.retrodeck'],
             capture_output=True,
             env={ "LD_LIBRARY_PATH": "" }
         )
@@ -133,10 +151,16 @@ class Plugin:
         if output.returncode != 0:
             self.is_retrodeck_flatpak_installed = False
             decky.logger.error(f"Failed to check RetroDECK flatpak installation: {output.stderr.decode()}")
-            return False
+            return None
+
+        location = output.stdout.decode().strip()
+        if not location:
+            self.is_retrodeck_flatpak_installed = False
+            decky.logger.error("RetroDECK flatpak location is empty")
+            return None
 
         self.is_retrodeck_flatpak_installed = True
-        return True
+        return location
 
     async def check_setup_state(self) -> [bool, bool]:
         return self.is_retrodeck_flatpak_installed, self.are_es_de_event_scripts_created
@@ -164,12 +188,17 @@ class Plugin:
         self.settings = SettingsManager(name="settings", settings_directory=decky.DECKY_PLUGIN_SETTINGS_DIR)
         self.settings.read()
 
-        self._check_retrodeck_flatpak()
-        if not self.is_retrodeck_flatpak_installed:
+        flatpak_location = self._check_retrodeck_flatpak()
+        if not flatpak_location:
             decky.logger.error("RetroDECK flatpak is not installed")
             return
 
-        self.paths = PathsResolver(decky.DECKY_USER_HOME, decky.DECKY_PLUGIN_DIR, decky.logger).resolve()
+        self.paths = PathsResolver(
+            decky.DECKY_USER_HOME,
+            decky.DECKY_PLUGIN_DIR,
+            flatpak_location,
+            decky.logger,
+        ).resolve()
         if self.paths is None:
             decky.logger.error("Failed to resolve paths")
             return

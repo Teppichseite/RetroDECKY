@@ -1,3 +1,43 @@
+export interface GameMetadata {
+  desc: string | null;
+  rating: string | null;
+  releasedate: string | null;
+  developer: string | null;
+  publisher: string | null;
+  genre: string | null;
+  players: string | null;
+}
+
+export interface SystemMetadata {
+  name: string | null;
+  description: string | null;
+  manufacturer: string | null;
+  release_year: string | null;
+  release_date: string | null;
+  release_date_formatted: string | null;
+  hardware_type: string | null;
+  cover_size: string | null;
+  cover_size_type: string | null;
+  color: string | null;
+  color_palette_1: string | null;
+  color_palette_2: string | null;
+  color_palette_3: string | null;
+  color_palette_4: string | null;
+  cart_size: string | null;
+}
+
+export interface ComponentMetadata {
+  name: string | null;
+  description: string | null;
+  url_rdwiki: string | null;
+  url_webpage: string | null;
+  url_donation_purchase: string | string[] | null;
+  url_source: string | null;
+  system: string | string[] | null;
+  component_type: string | null;
+  system_friendly_name: string | string[] | null;
+}
+
 export interface GameEvent {
   type: "game_start" | "game_end";
   path: string;
@@ -7,6 +47,10 @@ export interface GameEvent {
   image_path: string | null;
   manual_path: string | null;
   emulator_name: string[];
+  game_metadata: GameMetadata;
+  system_metadata: SystemMetadata | null;
+  component: string | null;
+  component_metadata: ComponentMetadata | null;
 }
 
 export interface HotkeyLabel {
@@ -31,7 +75,7 @@ export interface Action {
       }
     | {
         type: "builtin";
-        operation: "view_manual" | "exit";
+        operation: "view_manual" | "view_game_info" | "exit";
       };
   systems: "*" | string[];
   emulators: "*" | (string | string[])[];

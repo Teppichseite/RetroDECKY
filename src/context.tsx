@@ -175,6 +175,10 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         return;
       }
 
+      if (action.action.operation === "view_game_info") {
+        return;
+      }
+
       if (action.action.operation === "exit") {
         if (!lastFocusedChangedEvent) {
           return;

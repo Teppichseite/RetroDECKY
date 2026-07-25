@@ -1,5 +1,21 @@
 [
   {
+    "id": "display-view-game-info",
+    "name": "View Info",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-edit-find"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "view_game_info"
+    },
+    "systems": "*",
+    "emulators": "*",
+    "hotkeyLabels": []
+  },
+  {
     "id": "display-view-pdf",
     "name": "View Manual",
     "category": "Quick",

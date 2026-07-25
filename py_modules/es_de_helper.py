@@ -1,7 +1,8 @@
 from logging import Logger
+import json
 import os
 import xmltodict
-from models import Paths
+from models import ComponentMetadata, Paths, SystemMetadata
 
 class EsDeHelper:
 
@@ -89,6 +90,132 @@ class EsDeHelper:
             return None
 
         return self.es_systems[system_name].get("fullname")
+
+    def _xml_text(self, value) -> str | None:
+        if value is None:
+            return None
+
+        if isinstance(value, dict):
+            text = value.get("#text")
+            if isinstance(text, str):
+                text = text.strip()
+                return text or None
+            return None
+
+        if isinstance(value, str):
+            text = value.strip()
+            return text or None
+
+        return str(value)
+
+    def _parse_system_metadata_variables(self, variables: dict | None) -> SystemMetadata | None:
+        if not variables or not isinstance(variables, dict):
+            return None
+
+        return SystemMetadata(
+            name=self._xml_text(variables.get("systemName")),
+            description=self._xml_text(variables.get("systemDescription")),
+            manufacturer=self._xml_text(variables.get("systemManufacturer")),
+            release_year=self._xml_text(variables.get("systemReleaseYear")),
+            release_date=self._xml_text(variables.get("systemReleaseDate")),
+            release_date_formatted=self._xml_text(variables.get("systemReleaseDateFormated")),
+            hardware_type=self._xml_text(variables.get("systemHardwareType")),
+            cover_size=self._xml_text(variables.get("systemCoverSize")),
+            cover_size_type=self._xml_text(variables.get("systemCoverSizeType")),
+            color=self._xml_text(variables.get("systemColor")),
+            color_palette_1=self._xml_text(variables.get("systemColorPalette1")),
+            color_palette_2=self._xml_text(variables.get("systemColorPalette2")),
+            color_palette_3=self._xml_text(variables.get("systemColorPalette3")),
+            color_palette_4=self._xml_text(variables.get("systemColorPalette4")),
+            cart_size=self._xml_text(variables.get("systemCartSize")),
+        )
+
+    def resolve_system_metadata(self, system_name: str) -> SystemMetadata | None:
+        metadata_folder = self.paths.systemMetadataFolder
+        candidates = [
+            os.path.join(metadata_folder, f"{system_name}.xml"),
+            os.path.join(metadata_folder, "_default.xml"),
+        ]
+
+        for metadata_path in candidates:
+            if not os.path.isfile(metadata_path):
+                continue
+
+            try:
+                with open(metadata_path, "r") as f:
+                    parsed = xmltodict.parse(f.read())
+                variables = parsed.get("theme", {}).get("variables")
+                metadata = self._parse_system_metadata_variables(variables)
+                if metadata is not None:
+                    return metadata
+            except Exception as e:
+                self.logger.error(
+                    f"Failed to load system metadata for {system_name} at {metadata_path}: {e}"
+                )
+
+        return None
+
+    def resolve_component_name(self, emulator_name: list[str] | None) -> str | None:
+        if not emulator_name:
+            return None
+
+        first = emulator_name[0]
+        if not isinstance(first, str):
+            return None
+
+        parts = first.strip().lower().split()
+        if not parts:
+            return None
+
+        return parts[0]
+
+    def _parse_component_metadata(self, data: dict | None) -> ComponentMetadata | None:
+        if not data or not isinstance(data, dict):
+            return None
+
+        return ComponentMetadata(
+            name=data.get("name"),
+            description=data.get("description"),
+            url_rdwiki=data.get("url_rdwiki"),
+            url_webpage=data.get("url_webpage"),
+            url_donation_purchase=data.get("url_donation_purchase"),
+            url_source=data.get("url_source"),
+            system=data.get("system"),
+            component_type=data.get("component_type"),
+            system_friendly_name=data.get("system_friendly_name"),
+        )
+
+    def resolve_component_metadata(self, component_name: str | None) -> ComponentMetadata | None:
+        if not component_name:
+            return None
+
+        manifest_path = os.path.join(
+            self.paths.componentsFolder,
+            component_name,
+            "component_manifest.json",
+        )
+
+        if not os.path.isfile(manifest_path):
+            self.logger.error(f"Component manifest not found at {manifest_path}")
+            return None
+
+        try:
+            with open(manifest_path, "r") as f:
+                parsed = json.load(f)
+
+            if not isinstance(parsed, dict):
+                return None
+
+            entry = parsed.get(component_name)
+            if entry is None and len(parsed) == 1:
+                entry = next(iter(parsed.values()))
+
+            return self._parse_component_metadata(entry)
+        except Exception as e:
+            self.logger.error(
+                f"Failed to load component metadata for {component_name} at {manifest_path}: {e}"
+            )
+            return None
 
     def _preprocess_gamelist_xml(self, xml_string: str) -> dict:
         xml_string = xml_string.lstrip()

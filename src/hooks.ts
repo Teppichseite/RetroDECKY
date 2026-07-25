@@ -6,7 +6,7 @@
 // Modifications Copyright (C) 2025-2026 Teppichseite
 // Licensed under the GNU General Public License v3.0 or (at your option) any later version.
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, RefObject } from "react";
 
 const jsContextState: Record<string, any> = {};
 
@@ -29,4 +29,25 @@ export const useJsContextState = <T>(
   );
 
   return [state ?? initialValue, setState];
+};
+
+export const useDialogContentStyling = (
+  contentRef: RefObject<HTMLDivElement | null>,
+  width = "95vw"
+) => {
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    let parent: HTMLElement | null = el.parentElement;
+    while (parent) {
+      if (parent.classList.contains("DialogContent")) {
+        parent.style.width = width;
+        parent.style.maxWidth = width;
+        parent.style.padding = "12px";
+        break;
+      }
+      parent = parent.parentElement;
+    }
+  }, [contentRef, width]);
 };
