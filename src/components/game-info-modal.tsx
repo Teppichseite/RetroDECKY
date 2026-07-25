@@ -52,28 +52,15 @@ const displayValue = (value: string | null | undefined): string => {
   return value;
 };
 
-interface GameInfoMetadataProps {
-  gameEvent: GameEvent;
+interface MetadataField {
+  label: string;
+  value: string | null;
 }
 
-const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
-  const metadataFields: { label: string; value: string | null }[] = [
-    { label: "System", value: gameEvent.system_full_name || gameEvent.system_name },
-    {
-      label: "Component",
-      value: gameEvent.emulator_name?.filter(Boolean).join(" - ") || null,
-    },
-    { label: "Rating", value: formatRating(gameEvent.rating) },
-    { label: "Release Date", value: formatReleaseDate(gameEvent.releasedate) },
-    { label: "Developer", value: gameEvent.developer },
-    { label: "Publisher", value: gameEvent.publisher },
-    { label: "Genre", value: gameEvent.genre },
-    { label: "Players", value: gameEvent.players },
-  ];
-
-  const metadataRows: { label: string; value: string | null }[][] = [];
-  for (let i = 0; i < metadataFields.length; i += 2) {
-    metadataRows.push(metadataFields.slice(i, i + 2));
+const MetadataFieldRows = ({ fields }: { fields: MetadataField[] }) => {
+  const metadataRows: MetadataField[][] = [];
+  for (let i = 0; i < fields.length; i += 2) {
+    metadataRows.push(fields.slice(i, i + 2));
   }
 
   return (
@@ -133,6 +120,52 @@ const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
           {row.length === 1 && <div style={{ flex: "1 1 0", minWidth: 0 }} />}
         </div>
       ))}
+    </div>
+  );
+};
+
+interface GameInfoMetadataProps {
+  gameEvent: GameEvent;
+}
+
+const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
+  const metadataFields: MetadataField[] = [
+    { label: "System", value: gameEvent.system_full_name || gameEvent.system_name },
+    {
+      label: "Component",
+      value: gameEvent.emulator_name?.filter(Boolean).join(" - ") || null,
+    },
+    { label: "Rating", value: formatRating(gameEvent.game_metadata.rating) },
+    { label: "Release Date", value: formatReleaseDate(gameEvent.game_metadata.releasedate) },
+    { label: "Developer", value: gameEvent.game_metadata.developer },
+    { label: "Publisher", value: gameEvent.game_metadata.publisher },
+    { label: "Genre", value: gameEvent.game_metadata.genre },
+    { label: "Players", value: gameEvent.game_metadata.players },
+  ];
+
+  return <MetadataFieldRows fields={metadataFields} />;
+};
+
+const SystemInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
+  const systemMetadata = gameEvent.system_metadata;
+  if (!systemMetadata) {
+    return null;
+  }
+
+  const metadataFields: MetadataField[] = [
+    { label: "System Name", value: systemMetadata.name },
+    { label: "Manufacturer", value: systemMetadata.manufacturer },
+    {
+      label: "System Release Date",
+      value: systemMetadata.release_date_formatted || systemMetadata.release_date,
+    },
+    { label: "Hardware Type", value: systemMetadata.hardware_type },
+    { label: "System Description", value: systemMetadata.description },
+  ];
+
+  return (
+    <div style={{ marginTop: METADATA_GAP }}>
+      <MetadataFieldRows fields={metadataFields} />
     </div>
   );
 };
@@ -276,7 +309,7 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
                     width: "100%",
                   }}
                 >
-                  {displayValue(gameEvent.desc)}
+                  {displayValue(gameEvent.game_metadata.desc)}
                 </div>
               </Focusable>
             </Field>
@@ -284,6 +317,7 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
         </div>
 
         <GameInfoMetadata gameEvent={gameEvent} />
+        <SystemInfoMetadata gameEvent={gameEvent} />
       </div>
     </ModalRoot>
   );

@@ -1,0 +1,611 @@
+<theme>
+    <variables>
+        <langLabelRating>Rating</langLabelRating>
+        <langLabelReleasedate>Released</langLabelReleasedate>
+        <langLabelPlayers>Players</langLabelPlayers>
+        <langLabelGenre>Genre</langLabelGenre>
+        <langLabelDeveloper>Developer</langLabelDeveloper>
+        <langLabelPublisher>Publisher</langLabelPublisher>
+        <langLabelManufacturer>Manufacturer</langLabelManufacturer>
+        <langLabelHardwareType>Type</langLabelHardwareType>
+        <langLabelGames>Games</langLabelGames>
+        <langLabelFavorites>Favorites</langLabelFavorites>
+        <langLabelLastPlay>Last Played</langLabelLastPlay>
+        <langLabelTimePlay>Times Played</langLabelTimePlay>
+        <langLabelSysName>System Name</langLabelSysName>
+        <langLabelCompleted>Completed</langLabelCompleted>
+        <langLabelChild>Child Safe</langLabelChild>
+        <langLabelContain>Contains</langLabelContain>
+        <langLabelInclude>Including</langLabelInclude>
+        <langLabelEmulator>Emulator</langLabelEmulator>
+        <langLabelSystemSelect>System Select</langLabelSystemSelect>
+        <langLabelSystem>System</langLabelSystem>
+        <langLabelSystemLogo>System Logo</langLabelSystemLogo>
+        <langLabelGF>Gaming Frontend</langLabelGF>
+        <langLabelPower>Power On</langLabelPower>
+        <langLabelPowerby>Powered By</langLabelPowerby>
+        <langUnknown>Unknown</langUnknown>
+    </variables>
+    <language name="bs_BA">
+        <variables>
+            <langLabelRating>Rejting</langLabelRating>
+            <langLabelReleasedate>Oslobođen</langLabelReleasedate>
+            <langLabelPlayers>Igrači</langLabelPlayers>
+            <langLabelGenre>Žanr</langLabelGenre>
+            <langLabelDeveloper>Programer</langLabelDeveloper>
+            <langLabelPublisher>Izdavač</langLabelPublisher>
+            <langLabelManufacturer>Proizvođač</langLabelManufacturer>
+            <langLabelHardwareType>Vrsta</langLabelHardwareType>
+            <langLabelGames>Igre</langLabelGames>
+            <langLabelFavorites>Favoriti</langLabelFavorites>
+            <langLabelLastPlay>Zadnja igrana</langLabelLastPlay>
+            <langLabelTimePlay>Puta igrana</langLabelTimePlay>
+            <langLabelSysName>Naziv sistema</langLabelSysName>
+            <langLabelCompleted>Završen</langLabelCompleted>
+            <langLabelChild>Sef dete</langLabelChild>
+            <langLabelContain>Sadrži</langLabelContain>
+            <langLabelInclude>Uključujući</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Sistem Odaberite</langLabelSystemSelect>
+            <langLabelSystem>Sistem</langLabelSystem>
+            <langLabelSystemLogo>Sistemski logo</langLabelSystemLogo>
+            <langLabelGF>Gaming Frontend</langLabelGF>
+            <langLabelPower>Napajanje</langLabelPower>
+            <langLabelPowerby>Pokreće ih</langLabelPowerby>
+            <langUnknown>Nepoznat</langUnknown>
+        </variables>
+    </language>
+    <language name="ca_ES">
+        <variables>
+            <langLabelRating>Valoració</langLabelRating>
+            <langLabelReleasedate>Llançat</langLabelReleasedate>
+            <langLabelPlayers>Jugadors</langLabelPlayers>
+            <langLabelGenre>Gènere</langLabelGenre>
+            <langLabelDeveloper>Desenvolupador</langLabelDeveloper>
+            <langLabelPublisher>Editorial</langLabelPublisher>
+            <langLabelManufacturer>Fabricant</langLabelManufacturer>
+            <langLabelHardwareType>Tipus</langLabelHardwareType>
+            <langLabelGames>Jocs</langLabelGames>
+            <langLabelFavorites>Preferits</langLabelFavorites>
+            <langLabelLastPlay>Última reproducció</langLabelLastPlay>
+            <langLabelTimePlay>Veces jugades</langLabelTimePlay>
+            <langLabelSysName>Nom del sistema</langLabelSysName>
+            <langLabelCompleted>Completat</langLabelCompleted>
+            <langLabelChild>Segur per a nens</langLabelChild>
+            <langLabelContain>Conté</langLabelContain>
+            <langLabelInclude>Incloent</langLabelInclude>
+            <langLabelEmulator>Emulador</langLabelEmulator>
+            <langLabelSystemSelect>Selecció del sistema</langLabelSystemSelect>
+            <langLabelSystem>Sistema</langLabelSystem>
+            <langLabelSystemLogo>Logotip del sistema</langLabelSystemLogo>
+            <langLabelGF>Interface de jocs</langLabelGF>
+            <langLabelPower>Enceneu</langLabelPower>
+            <langLabelPowerby>Funcionat per</langLabelPowerby>
+            <langUnknown>Desconegut</langUnknown>
+        </variables>
+    </language>
+    <language name="de_DE">
+        <variables>
+            <langLabelRating>Bewertungen</langLabelRating>
+            <langLabelReleasedate>Freigabedatum</langLabelReleasedate>
+            <langLabelPlayers>Spieler</langLabelPlayers>
+            <langLabelGenre>Genre</langLabelGenre>
+            <langLabelDeveloper>Entwickler</langLabelDeveloper>
+            <langLabelPublisher>Herausgeber</langLabelPublisher>
+            <langLabelManufacturer>Hersteller</langLabelManufacturer>
+            <langLabelHardwareType>Art der Hardware</langLabelHardwareType>
+            <langLabelGames>Spiele</langLabelGames>
+            <langLabelFavorites>Favoriten</langLabelFavorites>
+            <langLabelLastPlay>Zuletzt Gespielt</langLabelLastPlay>
+            <langLabelTimePlay>Anzahl gespielter Spiele</langLabelTimePlay>
+            <langLabelSysName>Systemname</langLabelSysName>
+            <langLabelCompleted>Vollendet</langLabelCompleted>
+            <langLabelChild>Kindersicher</langLabelChild>
+            <langLabelContain>Enthält</langLabelContain>
+            <langLabelInclude>Einschließlich</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Systemauswahl</langLabelSystemSelect>
+            <langLabelSystem>System</langLabelSystem>
+            <langLabelSystemLogo>System Logo</langLabelSystemLogo>
+            <langLabelGF>Frontend für Spiele</langLabelGF>
+            <langLabelGameSelection>Spielauswahl</langLabelGameSelection>
+            <langLabelGameSynopsis>Spielsynopse</langLabelGameSynopsis>
+            <langLabelPower>Einschalten</langLabelPower>
+            <langLabelPowerby>Versorgt von</langLabelPowerby>
+            <langUnknown>Unbekannt</langUnknown>
+        </variables>
+    </language>
+    <language name="en_GB">
+        <variables>
+            <langLabelFavorites>Favourites</langLabelFavorites>
+        </variables>
+    </language>
+    <language name="es_ES">
+        <variables>
+            <langLabelRating>Valoracion</langLabelRating>
+            <langLabelReleasedate>Lanzamiento</langLabelReleasedate>
+            <langLabelPlayers>Jugadores</langLabelPlayers>
+            <langLabelGenre>Genero</langLabelGenre>
+            <langLabelDeveloper>Desarrollador</langLabelDeveloper>
+            <langLabelPublisher>Compañia</langLabelPublisher>
+            <langLabelManufacturer>Fabricante</langLabelManufacturer>
+            <langLabelHardwareType>Tipo</langLabelHardwareType>
+            <langLabelGames>Juegos</langLabelGames>
+            <langLabelFavorites>Favoritos</langLabelFavorites>
+            <langLabelLastPlay>Jugado por última vez</langLabelLastPlay>
+            <langLabelTimePlay>Tiempos jugados</langLabelTimePlay>
+            <langLabelSysName>Nombre del sistema</langLabelSysName>
+            <langLabelCompleted>Terminado</langLabelCompleted>
+            <langLabelChild>Seguro para niños</langLabelChild>
+            <langLabelContain>Contiene</langLabelContain>
+            <langLabelInclude>Incluido</langLabelInclude>
+            <langLabelEmulator>Emulador</langLabelEmulator>
+            <langLabelSystemSelect>Seleccionar sistema</langLabelSystemSelect>
+            <langLabelSystem>Sistema</langLabelSystem>
+            <langLabelSystemLogo>Logotipo del sistema</langLabelSystemLogo>
+            <langLabelGF>Interfaz de juegos</langLabelGF>
+            <langLabelGameSelection>Selección de juego</langLabelGameSelection>
+            <langLabelGameSynopsis>Sinopsis del juego</langLabelGameSynopsis>
+            <langLabelPower>Encendido</langLabelPower>
+            <langLabelPowerby>Desarrollado por</langLabelPowerby>
+            <langUnknown>Desconocido</langUnknown>
+        </variables>
+    </language>
+    <language name="fr_FR">
+        <variables>
+            <langLabelRating>Notation</langLabelRating>
+            <langLabelReleasedate>Date de Sortie</langLabelReleasedate>
+            <langLabelPlayers>Joueurs</langLabelPlayers>
+            <langLabelGenre>Genre</langLabelGenre>
+            <langLabelDeveloper>Développeur</langLabelDeveloper>
+            <langLabelPublisher>Editeur</langLabelPublisher>
+            <langLabelManufacturer>Fabricant</langLabelManufacturer>
+            <langLabelHardwareType>Type</langLabelHardwareType>
+            <langLabelGames>Jeux</langLabelGames>
+            <langLabelFavorites>Favoris</langLabelFavorites>
+            <langLabelLastPlay>Dernière lecture</langLabelLastPlay>
+            <langLabelTimePlay>Temps joués</langLabelTimePlay>
+            <langLabelSysName>Nom du système</langLabelSysName>
+            <langLabelCompleted>Complété</langLabelCompleted>
+            <langLabelChild>Sécurité des enfants</langLabelChild>
+            <langLabelContain>Contient</langLabelContain>
+            <langLabelInclude>Y compris</langLabelInclude>
+            <langLabelEmulator>Émulateur</langLabelEmulator>
+            <langLabelSystemSelect>Sélection du système</langLabelSystemSelect>
+            <langLabelSystem>Système</langLabelSystem>
+            <langLabelSystemLogo>Logo du système</langLabelSystemLogo>
+            <langLabelGF>Interface de jeu</langLabelGF>
+            <langLabelGameSelection>Sélection de jeux</langLabelGameSelection>
+            <langLabelGameSynopsis>Résumé du jeu</langLabelGameSynopsis>
+            <langLabelPower>Allumer</langLabelPower>
+            <langLabelPowerby>Alimenté par</langLabelPowerby>
+            <langUnknown>Inconnu</langUnknown>
+        </variables>
+    </language>
+    <language name="hr_HR">
+        <variables>
+            <langLabelRating>Ocjena</langLabelRating>
+            <langLabelReleasedate>Pušten</langLabelReleasedate>
+            <langLabelPlayers>Igrači</langLabelPlayers>
+            <langLabelGenre>Žanr</langLabelGenre>
+            <langLabelDeveloper>Programer</langLabelDeveloper>
+            <langLabelPublisher>Izdavač</langLabelPublisher>
+            <langLabelManufacturer>Proizvođač</langLabelManufacturer>
+            <langLabelHardwareType>Tip</langLabelHardwareType>
+            <langLabelGames>Igre</langLabelGames>
+            <langLabelFavorites>Favoriti</langLabelFavorites>
+            <langLabelLastPlay>Zadnji put igrao</langLabelLastPlay>
+            <langLabelTimePlay>Times igrao</langLabelTimePlay>
+            <langLabelSysName>Naziv sustava</langLabelSysName>
+            <langLabelCompleted>Dovršen</langLabelCompleted>
+            <langLabelChild>Dijete sigurno</langLabelChild>
+            <langLabelContain>Sadrži</langLabelContain>
+            <langLabelInclude>Uključujući</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Odabir sustava</langLabelSystemSelect>
+            <langLabelSystem>Sistem</langLabelSystem>
+            <langLabelSystemLogo>Logotip sustava</langLabelSystemLogo>
+            <langLabelGF>Igrački prednji dio</langLabelGF>
+            <langLabelPower>Napasti</langLabelPower>
+            <langLabelPowerby>Pokrenut</langLabelPowerby>
+            <langUnknown>Nepoznat</langUnknown>
+        </variables>
+    </language>
+    <language name="it_IT">
+        <variables>
+            <langLabelRating>Valutazione</langLabelRating>
+            <langLabelReleasedate>Data Uscita</langLabelReleasedate>
+            <langLabelPlayers>Nr. Giocatori</langLabelPlayers>
+            <langLabelGenre>Genere</langLabelGenre>
+            <langLabelDeveloper>Sviluppatore</langLabelDeveloper>
+            <langLabelPublisher>Casa Editrice</langLabelPublisher>
+            <langLabelManufacturer>Produttore</langLabelManufacturer>
+            <langLabelHardwareType>Tipo</langLabelHardwareType>
+            <langLabelGames>Giochi</langLabelGames>
+            <langLabelFavorites>Preferiti</langLabelFavorites>
+            <langLabelLastPlay>Ostatnio odtwarzane</langLabelLastPlay>
+            <langLabelTimePlay>Tempi giocati</langLabelTimePlay>
+            <langLabelSysName>Nome del sistema</langLabelSysName>
+            <langLabelCompleted>Completato</langLabelCompleted>
+            <langLabelChild>Sicuro per i bambini</langLabelChild>
+            <langLabelContain>Contiene</langLabelContain>
+            <langLabelInclude>Compreso</langLabelInclude>
+            <langLabelEmulator>Emulatore</langLabelEmulator>
+            <langLabelSystemSelect>Seleziona sistema</langLabelSystemSelect>
+            <langLabelSystem>Sistema</langLabelSystem>
+            <langLabelSystemLogo>Logo du système</langLabelSystemLogo>
+            <langLabelGF>Frontend di gioco</langLabelGF>
+            <langLabelGameSelection>Selezione del gioco</langLabelGameSelection>
+            <langLabelGameSynopsis>Sinossi del gioco</langLabelGameSynopsis>
+            <langLabelPower>Accensione</langLabelPower>
+            <langLabelPowerby>Offerto da</langLabelPowerby>
+            <langUnknown>Sconosciuto</langUnknown>
+        </variables>
+    </language>
+    <language name="ja_JP">
+        <variables>
+            <langLabelRating>評価</langLabelRating>
+            <langLabelReleasedate>発行日</langLabelReleasedate>
+            <langLabelPlayers>プレイヤー</langLabelPlayers>
+            <langLabelGenre>ジャンル</langLabelGenre>
+            <langLabelDeveloper>開発者</langLabelDeveloper>
+            <langLabelPublisher>発行者</langLabelPublisher>
+            <langLabelManufacturer>メーカー</langLabelManufacturer>
+            <langLabelHardwareType>タイプ</langLabelHardwareType>
+            <langLabelGames>ゲーム</langLabelGames>
+            <langLabelFavorites>お気に入り</langLabelFavorites>
+            <langLabelLastPlay>最後にプレイした時間</langLabelLastPlay>
+            <langLabelTimePlay>プレイ時間</langLabelTimePlay>
+            <langLabelSysName>システム名</langLabelSysName>
+            <langLabelCompleted>完了しました</langLabelCompleted>
+            <langLabelChild>子供にも安全</langLabelChild>
+            <langLabelContain>含まれています</langLabelContain>
+            <langLabelInclude>含む</langLabelInclude>
+            <langLabelEmulator>エミュレータ</langLabelEmulator>
+            <langLabelSystemSelect>システムセレクト</langLabelSystemSelect>
+            <langLabelSystem>システム</langLabelSystem>
+            <langLabelSystemLogo>システムロゴ</langLabelSystemLogo>
+            <langLabelGF>ゲームフロントエンド</langLabelGF>
+            <langLabelGameSelection>ゲームの選択</langLabelGameSelection>
+            <langLabelGameSynopsis>ゲーム概要</langLabelGameSynopsis>
+            <langLabelPower>電源オン</langLabelPower>
+            <langLabelPowerby>搭載</langLabelPowerby>
+            <langUnknown>未知</langUnknown>
+        </variables>
+    </language>
+    <language name="ko_KR">
+        <variables>
+            <langLabelRating>평가</langLabelRating>
+            <langLabelReleasedate>출시일</langLabelReleasedate>
+            <langLabelPlayers>플레이어</langLabelPlayers>
+            <langLabelGenre>장르</langLabelGenre>
+            <langLabelDeveloper>개발자</langLabelDeveloper>
+            <langLabelPublisher>발행자</langLabelPublisher>
+            <langLabelManufacturer>제조업체</langLabelManufacturer>
+            <langLabelHardwareType>하드웨어 유형</langLabelHardwareType>
+            <langLabelGames>계략</langLabelGames>
+            <langLabelFavorites>즐겨찾기</langLabelFavorites>
+            <langLabelLastPlay>마지막으로 재생</langLabelLastPlay>
+            <langLabelTimePlay>플레이 시간</langLabelTimePlay>
+            <langLabelSysName>시스템 이름</langLabelSysName>
+            <langLabelCompleted>완벽한</langLabelCompleted>
+            <langLabelChild>어린이 안전</langLabelChild>
+            <langLabelContain>포함하다</langLabelContain>
+            <langLabelInclude>포함</langLabelInclude>
+            <langLabelEmulator>에뮬레이터</langLabelEmulator>
+            <langLabelSystemSelect>시스템 선택</langLabelSystemSelect>
+            <langLabelSystem>시스템</langLabelSystem>
+            <langLabelSystemLogo>시스템 로고</langLabelSystemLogo>
+            <langLabelGF>게임 프런트엔드</langLabelGF>
+            <langLabelGameSelection> 게임 선택</langLabelGameSelection>
+            <langLabelGameSynopsis>게임 개요</langLabelGameSynopsis>
+            <langLabelPower>켜기</langLabelPower>
+            <langLabelPowerby>제공:</langLabelPowerby>
+            <langUnknown>알려지지 않은</langUnknown>
+        </variables>
+    </language>
+    <language name="nl_NL">
+        <variables>
+            <langLabelRating>Beoordeling</langLabelRating>
+            <langLabelReleasedate>Releasedatum</langLabelReleasedate>
+            <langLabelPlayers>Spelers</langLabelPlayers>
+            <langLabelGenre>Genre</langLabelGenre>
+            <langLabelDeveloper>Ontwikkelaar</langLabelDeveloper>
+            <langLabelPublisher>Uitgever</langLabelPublisher>
+            <langLabelManufacturer>Fabrikant</langLabelManufacturer>
+            <langLabelHardwareType>Hardwaretype</langLabelHardwareType>
+            <langLabelGames>Spellen</langLabelGames>
+            <langLabelFavorites>Favorieten</langLabelFavorites>
+            <langLabelLastPlay>Laatst gespeeld</langLabelLastPlay>
+            <langLabelTimePlay>Aantal keer gespeeld</langLabelTimePlay>
+            <langLabelSysName>Systeemnaam</langLabelSysName>
+            <langLabelCompleted>Voltooid</langLabelCompleted>
+            <langLabelChild>Kindveilig</langLabelChild>
+            <langLabelContain>Bevat</langLabelContain>
+            <langLabelInclude>Inbegrepen</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Systeem selecteren</langLabelSystemSelect>
+            <langLabelSystem>Systeem</langLabelSystem>
+            <langLabelSystemLogo>Systeemlogo</langLabelSystemLogo>
+            <langLabelGF>Gaming Frontend</langLabelGF>
+            <langLabelGameSelection>Spel selecteren</langLabelGameSelection>
+            <langLabelGameSynopsis>Game Synopsis</langLabelGameSynopsis>
+            <langLabelPower>Inschakelen</langLabelPower>
+            <langLabelPowerby>Aangedreven door</langLabelPowerby>
+            <langUnknown>Onbekend</langUnknown>
+        </variables>
+    </language>
+    <language name="pl_PL">
+        <variables>
+            <langLabelRating>Ocena</langLabelRating>
+            <langLabelReleasedate>Wydano</langLabelReleasedate>
+            <langLabelPlayers>Liczba Graczy</langLabelPlayers>
+            <langLabelGenre>Gatunek</langLabelGenre>
+            <langLabelDeveloper>Deweloper</langLabelDeveloper>
+            <langLabelPublisher>Wydawca</langLabelPublisher>
+            <langLabelManufacturer>Producent</langLabelManufacturer>
+            <langLabelHardwareType>Typ</langLabelHardwareType>
+            <langLabelGames>Zawody sportowe</langLabelGames>
+            <langLabelFavorites>Ulubione</langLabelFavorites>
+            <langLabelLastPlay>Ostatnio odtwarzane</langLabelLastPlay>
+            <langLabelTimePlay>Liczba zagrań</langLabelTimePlay>
+            <langLabelSysName>Nazwa systemu</langLabelSysName>
+            <langLabelCompleted>Zakończony</langLabelCompleted>
+            <langLabelChild>Sicuro per i bambini</langLabelChild>
+            <langLabelContain>Zawiera</langLabelContain>
+            <langLabelInclude>W tym</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Wybierz system</langLabelSystemSelect>
+            <langLabelSystem>System</langLabelSystem>
+            <langLabelSystemLogo>Logo systemu</langLabelSystemLogo>
+            <langLabelGF>Frontend do gier</langLabelGF>
+            <langLabelGameSelection>Wybór gry</langLabelGameSelection>
+            <langLabelGameSynopsis>Streszczenie gry</langLabelGameSynopsis>
+            <langLabelPower>Inschakelen</langLabelPower>
+            <langLabelPowerby>Aangedreven door</langLabelPowerby>
+            <langUnknown>Nieznane</langUnknown>
+        </variables>
+    </language>
+    <language name="pt_BR">
+        <variables>
+            <langLabelRating>Avaliação</langLabelRating>
+            <langLabelReleasedate>Lançamento</langLabelReleasedate>
+            <langLabelPlayers>Jogadores</langLabelPlayers>
+            <langLabelGenre>Gênero</langLabelGenre>
+            <langLabelDeveloper>Desenvolvedor</langLabelDeveloper>
+            <langLabelPublisher>Distribuidor</langLabelPublisher>
+            <langLabelManufacturer>Fabricante</langLabelManufacturer>
+            <langLabelHardwareType>Tipo</langLabelHardwareType>
+            <langLabelGames>Jogos</langLabelGames>
+            <langLabelFavorites>Favoritos</langLabelFavorites>
+            <langLabelLastPlay>Jogado pela última vez</langLabelLastPlay>
+            <langLabelTimePlay>Tempos jogados</langLabelTimePlay>
+            <langLabelSysName>Nome do sistema</langLabelSysName>
+            <langLabelCompleted>Concluído</langLabelCompleted>
+            <langLabelChild>Seguro para crianças</langLabelChild>
+            <langLabelContain>Contém</langLabelContain>
+            <langLabelInclude>Incluindo</langLabelInclude>
+            <langLabelEmulator>Emulador</langLabelEmulator>
+            <langLabelSystemSelect>Seleção do sistema</langLabelSystemSelect>
+            <langLabelSystem>Sistema</langLabelSystem>
+            <langLabelSystemLogo>Logotipo do sistema</langLabelSystemLogo>
+            <langLabelGF>Front-end de jogos</langLabelGF>
+            <langLabelGameSelection>Seleção de jogos</langLabelGameSelection>
+            <langLabelGameSynopsis>Sinopse do jogo</langLabelGameSynopsis>
+            <langLabelPower>Ligar</langLabelPower>
+            <langLabelPowerby>Distribuído por</langLabelPowerby>
+            <langUnknown>Desconhecido</langUnknown>
+        </variables>
+    </language>
+    <language name="pt_PT">
+        <variables>
+            <langLabelRating>Classificação</langLabelRating>
+            <langLabelReleasedate>Lançado</langLabelReleasedate>
+            <langLabelPlayers>Jogadores</langLabelPlayers>
+            <langLabelGenre>Género</langLabelGenre>
+            <langLabelDeveloper>Programador</langLabelDeveloper>
+            <langLabelPublisher>Editora</langLabelPublisher>
+            <langLabelManufacturer>Fabricante</langLabelManufacturer>
+            <langLabelHardwareType>Tipo</langLabelHardwareType>
+            <langLabelGames>Jogos</langLabelGames>
+            <langLabelFavorites>Favoritos</langLabelFavorites>
+            <langLabelLastPlay>Último jogo</langLabelLastPlay>
+            <langLabelTimePlay>Tempos jogados</langLabelTimePlay>
+            <langLabelSysName>Nome do sistema</langLabelSysName>
+            <langLabelCompleted>Concluído</langLabelCompleted>
+            <langLabelChild>Segurança das crianças</langLabelChild>
+            <langLabelContain>Contém</langLabelContain>
+            <langLabelInclude>Incluindo</langLabelInclude>
+            <langLabelEmulator>Emulador</langLabelEmulator>
+            <langLabelSystemSelect>Seleção do sistema</langLabelSystemSelect>
+            <langLabelSystem>Sistema</langLabelSystem>
+            <langLabelSystemLogo>Logótipo do sistema</langLabelSystemLogo>
+            <langLabelGF>Front-end de jogos</langLabelGF>
+            <langLabelPower>Ligar</langLabelPower>
+            <langLabelPowerby>Alimentado por</langLabelPowerby>
+            <langUnknown>Desconhecido</langUnknown>
+        </variables>
+    </language>
+    <language name="ro_RO">
+        <variables>
+            <langLabelRating>Scor</langLabelRating>
+            <langLabelReleasedate>Lansat</langLabelReleasedate>
+            <langLabelPlayers>Număr de Jucători</langLabelPlayers>
+            <langLabelGenre>Gen</langLabelGenre>
+            <langLabelDeveloper>Dezvoltator</langLabelDeveloper>
+            <langLabelPublisher>Editor</langLabelPublisher>
+            <langLabelManufacturer>Producător</langLabelManufacturer>
+            <langLabelHardwareType>Tip</langLabelHardwareType>
+            <langLabelGames>Jocuri</langLabelGames>
+            <langLabelFavorites>Favorite</langLabelFavorites>
+            <langLabelLastPlay>Ultima jucat</langLabelLastPlay>
+            <langLabelTimePlay>Timp jucat</langLabelTimePlay>
+            <langLabelSysName>Nume sistem</langLabelSysName>
+            <langLabelCompleted>Terminat</langLabelCompleted>
+            <langLabelChild>În siguranță pentru copii</langLabelChild>
+            <langLabelContain>Conține</langLabelContain>
+            <langLabelInclude>Inclusiv</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>Selectare sistem</langLabelSystemSelect>
+            <langLabelSystem>Sistem</langLabelSystem>
+            <langLabelSystemLogo>Logo-ul sistemului</langLabelSystemLogo>
+            <langLabelGF>Gaming Frontend</langLabelGF>
+            <langLabelGameSelection>Selecția jocului</langLabelGameSelection>
+            <langLabelGameSynopsis>Sinopsis jocului</langLabelGameSynopsis>
+            <langLabelPower>Pornire</langLabelPower>
+            <langLabelPowerby>Cu sprijinul</langLabelPowerby>
+            <langUnknown>Necunoscut</langUnknown>
+        </variables>
+    </language>
+    <language name="ru_RU">
+        <variables>
+            <langLabelRating>Рейтинг</langLabelRating>
+            <langLabelReleasedate>Дата Выхода</langLabelReleasedate>
+            <langLabelPlayers>Игроки</langLabelPlayers>
+            <langLabelGenre>Жанр</langLabelGenre>
+            <langLabelDeveloper>Разработчик</langLabelDeveloper>
+            <langLabelPublisher>Издатель</langLabelPublisher>
+            <langLabelManufacturer>Производитель</langLabelManufacturer>
+            <langLabelHardwareType>Тип</langLabelHardwareType>
+            <langLabelGames>Игры</langLabelGames>
+            <langLabelFavorites>Избранное</langLabelFavorites>
+            <langLabelLastPlay>Последняя игра</langLabelLastPlay>
+            <langLabelTimePlay>Раз сыграно</langLabelTimePlay>
+            <langLabelSysName>Имя системы</langLabelSysName>
+            <langLabelCompleted>Завершенный</langLabelCompleted>
+            <langLabelChild>Безопасно для детей</langLabelChild>
+            <langLabelContain>Содержит</langLabelContain>
+            <langLabelInclude>Включая</langLabelInclude>
+            <langLabelEmulator>Эмулятор</langLabelEmulator>
+            <langLabelSystemSelect>Выбор системы</langLabelSystemSelect>
+            <langLabelSystem>Система</langLabelSystem>
+            <langLabelSystemLogo>Системный логотип</langLabelSystemLogo>
+            <langLabelGF>Игровой интерфейс</langLabelGF>
+            <langLabelGameSelection>Выбор игры</langLabelGameSelection>
+            <langLabelGameSynopsis>Краткое описание игры</langLabelGameSynopsis>
+            <langLabelPower>Включение питания</langLabelPower>
+            <langLabelPowerby>Cu sprijinul</langLabelPowerby>
+            <langUnknown>Неизвестно</langUnknown>
+        </variables>
+    </language>
+    <language name="sr_RS">
+        <variables>
+            <langLabelRating>Оцена</langLabelRating>
+            <langLabelReleasedate>Објављен</langLabelReleasedate>
+            <langLabelPlayers>Играчи</langLabelPlayers>
+            <langLabelGenre>Жанр</langLabelGenre>
+            <langLabelDeveloper>Разводнички</langLabelDeveloper>
+            <langLabelPublisher>Издавач</langLabelPublisher>
+            <langLabelManufacturer>Произвођач</langLabelManufacturer>
+            <langLabelHardwareType>Уписати</langLabelHardwareType>
+            <langLabelGames>Игре</langLabelGames>
+            <langLabelFavorites>Фаворити</langLabelFavorites>
+            <langLabelLastPlay>Последњи одиграни</langLabelLastPlay>
+            <langLabelTimePlay>Играно време</langLabelTimePlay>
+            <langLabelSysName>Име система</langLabelSysName>
+            <langLabelCompleted>Завршен</langLabelCompleted>
+            <langLabelChild>Безначе</langLabelChild>
+            <langLabelContain>Садржи</langLabelContain>
+            <langLabelInclude>Укључујући</langLabelInclude>
+            <langLabelEmulator>Емулатор</langLabelEmulator>
+            <langLabelSystemSelect>Систем Селецт</langLabelSystemSelect>
+            <langLabelSystem>Систем</langLabelSystem>
+            <langLabelSystemLogo>Системски логотип</langLabelSystemLogo>
+            <langLabelGF>ГАМИНГ ФРЕНТРОНД</langLabelGF>
+            <langLabelPower>Напајање</langLabelPower>
+            <langLabelPowerby>Покреће га</langLabelPowerby>
+            <langUnknown>Непознат</langUnknown>
+        </variables>
+    </language>
+    <language name="sv_SE">
+        <variables>
+            <langLabelRating>Betyg</langLabelRating>
+            <langLabelReleasedate>Utgivet</langLabelReleasedate>
+            <langLabelPlayers>Spelare</langLabelPlayers>
+            <langLabelGenre>Genre</langLabelGenre>
+            <langLabelDeveloper>Utvecklare</langLabelDeveloper>
+            <langLabelPublisher>Utgivare</langLabelPublisher>
+            <langLabelManufacturer>Tillverkare</langLabelManufacturer>
+            <langLabelHardwareType>Typ</langLabelHardwareType>
+            <langLabelGames>Spel</langLabelGames>
+            <langLabelFavorites>Favoriter</langLabelFavorites>
+            <langLabelLastPlay>Senast spelat</langLabelLastPlay>
+            <langLabelTimePlay>Spelade gånger</langLabelTimePlay>
+            <langLabelSysName>Systemnamn</langLabelSysName>
+            <langLabelCompleted>Avslutad</langLabelCompleted>
+            <langLabelChild>Barnsäkert</langLabelChild>
+            <langLabelContain>Innehåller</langLabelContain>
+            <langLabelInclude>Inklusive</langLabelInclude>
+            <langLabelEmulator>Emulator</langLabelEmulator>
+            <langLabelSystemSelect>System Välj</langLabelSystemSelect>
+            <langLabelSystem>System</langLabelSystem>
+            <langLabelSystemLogo>Systemlogotyp</langLabelSystemLogo>
+            <langLabelGF>Gaming Frontend</langLabelGF>
+            <langLabelGameSelection>Spelval</langLabelGameSelection>
+            <langLabelGameSynopsis>Spelöversikt</langLabelGameSynopsis>
+            <langLabelPower>Ström på</langLabelPower>
+            <langLabelPowerby>Drivs av</langLabelPowerby>
+            <langUnknown>Okänd</langUnknown>
+        </variables>
+    </language>
+    <language name="zh_CN">
+        <variables>
+            <langLabelRating>评价</langLabelRating>
+            <langLabelReleasedate>发行日</langLabelReleasedate>
+            <langLabelPlayers>玩家</langLabelPlayers>
+            <langLabelGenre>分类</langLabelGenre>
+            <langLabelDeveloper>开发者</langLabelDeveloper>
+            <langLabelPublisher>发行商</langLabelPublisher>
+            <langLabelManufacturer>制造商</langLabelManufacturer>
+            <langLabelHardwareType>类型</langLabelHardwareType>
+            <langLabelGames>游戏</langLabelGames>
+            <langLabelFavorites>收藏夹</langLabelFavorites>
+            <langLabelLastPlay>最后玩过</langLabelLastPlay>
+            <langLabelTimePlay>玩过的次数</langLabelTimePlay>
+            <langLabelSysName>系统名称</langLabelSysName>
+            <langLabelCompleted>完全的</langLabelCompleted>
+            <langLabelChild>儿童安全</langLabelChild>
+            <langLabelContain>包含</langLabelContain>
+            <langLabelInclude>包括</langLabelInclude>
+            <langLabelEmulator>模拟器</langLabelEmulator>
+            <langLabelSystemSelect>系统选择</langLabelSystemSelect>
+            <langLabelSystem>系统</langLabelSystem>
+            <langLabelSystemLogo>系统标志</langLabelSystemLogo>
+            <langLabelGF>游戏前端</langLabelGF>
+            <langLabelGameSelection>游戏选择</langLabelGameSelection>
+            <langLabelGameSynopsis>游戏简介</langLabelGameSynopsis>
+            <langLabelPower>开机</langLabelPower>
+            <langLabelPowerby>供电</langLabelPowerby>
+            <langUnknown>未知</langUnknown>
+        </variables>
+    </language>
+    <language name="zh_TW">
+        <variables>
+            <langLabelRating>評級</langLabelRating>
+            <langLabelReleasedate>發佈</langLabelReleasedate>
+            <langLabelPlayers>玩家</langLabelPlayers>
+            <langLabelGenre>類型</langLabelGenre>
+            <langLabelDeveloper>開發人員</langLabelDeveloper>
+            <langLabelPublisher>發佈者</langLabelPublisher>
+            <langLabelManufacturer>製造商</langLabelManufacturer>
+            <langLabelHardwareType>型別</langLabelHardwareType>
+            <langLabelGames>遊戲</langLabelGames>
+            <langLabelFavorites>收藏夾</langLabelFavorites>
+            <langLabelLastPlay>上次播放</langLabelLastPlay>
+            <langLabelTimePlay>播放次數</langLabelTimePlay>
+            <langLabelSysName>系統名稱</langLabelSysName>
+            <langLabelCompleted>已完成</langLabelCompleted>
+            <langLabelChild>兒童安全</langLabelChild>
+            <langLabelContain>包含</langLabelContain>
+            <langLabelInclude>包括</langLabelInclude>
+            <langLabelEmulator>模擬器</langLabelEmulator>
+            <langLabelSystemSelect>系統選擇</langLabelSystemSelect>
+            <langLabelSystem>系統</langLabelSystem>
+            <langLabelSystemLogo>系統標誌</langLabelSystemLogo>
+            <langLabelGF>遊戲前端</langLabelGF>
+            <langLabelPower>開機</langLabelPower>
+            <langLabelPowerby>技術支援</langLabelPowerby>
+            <langUnknown>未知</langUnknown>
+        </variables>
+    </language>
+</theme>

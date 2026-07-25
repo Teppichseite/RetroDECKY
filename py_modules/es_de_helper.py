@@ -1,7 +1,7 @@
 from logging import Logger
 import os
 import xmltodict
-from models import Paths
+from models import Paths, SystemMetadata
 
 class EsDeHelper:
 
@@ -89,6 +89,70 @@ class EsDeHelper:
             return None
 
         return self.es_systems[system_name].get("fullname")
+
+    def _xml_text(self, value) -> str | None:
+        if value is None:
+            return None
+
+        if isinstance(value, dict):
+            text = value.get("#text")
+            if isinstance(text, str):
+                text = text.strip()
+                return text or None
+            return None
+
+        if isinstance(value, str):
+            text = value.strip()
+            return text or None
+
+        return str(value)
+
+    def _parse_system_metadata_variables(self, variables: dict | None) -> SystemMetadata | None:
+        if not variables or not isinstance(variables, dict):
+            return None
+
+        return SystemMetadata(
+            name=self._xml_text(variables.get("systemName")),
+            description=self._xml_text(variables.get("systemDescription")),
+            manufacturer=self._xml_text(variables.get("systemManufacturer")),
+            release_year=self._xml_text(variables.get("systemReleaseYear")),
+            release_date=self._xml_text(variables.get("systemReleaseDate")),
+            release_date_formatted=self._xml_text(variables.get("systemReleaseDateFormated")),
+            hardware_type=self._xml_text(variables.get("systemHardwareType")),
+            cover_size=self._xml_text(variables.get("systemCoverSize")),
+            cover_size_type=self._xml_text(variables.get("systemCoverSizeType")),
+            color=self._xml_text(variables.get("systemColor")),
+            color_palette_1=self._xml_text(variables.get("systemColorPalette1")),
+            color_palette_2=self._xml_text(variables.get("systemColorPalette2")),
+            color_palette_3=self._xml_text(variables.get("systemColorPalette3")),
+            color_palette_4=self._xml_text(variables.get("systemColorPalette4")),
+            cart_size=self._xml_text(variables.get("systemCartSize")),
+        )
+
+    def resolve_system_metadata(self, system_name: str) -> SystemMetadata | None:
+        metadata_folder = self.paths.systemMetadataFolder
+        candidates = [
+            os.path.join(metadata_folder, f"{system_name}.xml"),
+            os.path.join(metadata_folder, "_default.xml"),
+        ]
+
+        for metadata_path in candidates:
+            if not os.path.isfile(metadata_path):
+                continue
+
+            try:
+                with open(metadata_path, "r") as f:
+                    parsed = xmltodict.parse(f.read())
+                variables = parsed.get("theme", {}).get("variables")
+                metadata = self._parse_system_metadata_variables(variables)
+                if metadata is not None:
+                    return metadata
+            except Exception as e:
+                self.logger.error(
+                    f"Failed to load system metadata for {system_name} at {metadata_path}: {e}"
+                )
+
+        return None
 
     def _preprocess_gamelist_xml(self, xml_string: str) -> dict:
         xml_string = xml_string.lstrip()

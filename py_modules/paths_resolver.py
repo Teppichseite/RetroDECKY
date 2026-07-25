@@ -64,6 +64,7 @@ class PathsResolver:
             ),
             esDeDownloadedMediaFolder=downloaded_media_path,
             esDeDefaultEsSystemsFile=os.path.join(self.plugin_dir, "presets", "es_systems.xml"),
+            systemMetadataFolder=os.path.join(self.plugin_dir, "presets", "system_metadata"),
             actionsFile=os.path.join(self.plugin_dir, "presets", "actions.json"),
             romsFolder=roms_path,
             customDocumentsFolder=custom_documents_folder,
