@@ -66,6 +66,16 @@ class PathsResolver:
         components_folder = os.path.join(
             self.flatpak_location, "files", "retrodeck", "components"
         )
+        system_metadata_folder = os.path.join(
+            components_folder,
+            "es-de",
+            "share",
+            "es-de",
+            "themes",
+            "RetroDECK-theme-main",
+            "system",
+            "metadata",
+        )
 
         return Paths(
             esDeUserFolder=os.path.join(rd_home_path, "ES-DE"),
@@ -74,7 +84,7 @@ class PathsResolver:
             ),
             esDeDownloadedMediaFolder=downloaded_media_path,
             esDeDefaultEsSystemsFile=os.path.join(self.plugin_dir, "presets", "es_systems.xml"),
-            systemMetadataFolder=os.path.join(self.plugin_dir, "presets", "system_metadata"),
+            systemMetadataFolder=system_metadata_folder,
             componentsFolder=components_folder,
             actionsFile=os.path.join(self.plugin_dir, "presets", "actions.json"),
             romsFolder=roms_path,

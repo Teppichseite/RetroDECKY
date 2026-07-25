@@ -5,6 +5,7 @@ import {
   ModalRoot,
   ModalRootProps,
   GamepadButton,
+  Navigation,
 } from "@decky/ui";
 import { GameEvent } from "../interfaces";
 import { getIconPath } from "../utils";
@@ -16,7 +17,9 @@ export interface GameInfoModalProps extends ModalRootProps {
 }
 
 const METADATA_GAP = "16px";
+const SECTION_GAP = "32px";
 const DESCRIPTION_MAX_HEIGHT = "250px";
+const SECTION_DESCRIPTION_MAX_HEIGHT = "100px";
 const DESCRIPTION_SCROLL_STEP = 80;
 
 const formatRating = (rating: string | null): string | null => {
@@ -67,12 +70,131 @@ const formatListOrString = (
   return value.trim() === "" ? null : value;
 };
 
+const isValidHttpUrl = (value: string): boolean => {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
+const resolveFirstValidUrl = (
+  value: string | string[] | null | undefined
+): string | null => {
+  if (value == null) {
+    return null;
+  }
+
+  const candidates = Array.isArray(value) ? value : [value];
+  for (const candidate of candidates) {
+    const trimmed = candidate?.trim();
+    if (trimmed && isValidHttpUrl(trimmed)) {
+      return trimmed;
+    }
+  }
+
+  return null;
+};
+
 interface MetadataField {
   label: string;
   value: string | null;
+  isLink?: boolean;
 }
 
-const MetadataFieldRows = ({ fields }: { fields: MetadataField[] }) => {
+const SectionHeader = ({ title }: { title: string }) => (
+  <div
+    style={{
+      fontWeight: "bold",
+      fontSize: "16px",
+      marginBottom: "8px",
+      color: "#dcdedf",
+    }}
+  >
+    {title}
+  </div>
+);
+
+const DESCRIPTION_ACTION_MAP = {
+  [GamepadButton.BUMPER_LEFT]: "Scroll Up",
+  [GamepadButton.BUMPER_RIGHT]: "Scroll Down",
+};
+
+interface DescriptionFieldProps {
+  value: string | null | undefined;
+  maxHeight?: string;
+}
+
+const DescriptionField = ({
+  value,
+  maxHeight = DESCRIPTION_MAX_HEIGHT,
+}: DescriptionFieldProps) => {
+  const descriptionScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollDescription = (delta: number) => {
+    descriptionScrollRef.current?.scrollBy({ top: delta, behavior: "smooth" });
+  };
+
+  const handleDescriptionButtonDown = (evt: { detail: { button: number } }) => {
+    const button = evt.detail.button;
+
+    if (button === GamepadButton.BUMPER_LEFT) {
+      scrollDescription(-DESCRIPTION_SCROLL_STEP);
+      return;
+    }
+
+    if (button === GamepadButton.BUMPER_RIGHT) {
+      scrollDescription(DESCRIPTION_SCROLL_STEP);
+      return;
+    }
+  };
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        minWidth: 0,
+        overflow: "hidden",
+        boxSizing: "border-box",
+      }}
+    >
+      <Field label="Description" childrenLayout="below" bottomSeparator="none">
+        <Focusable
+          noFocusRing
+          className="FocusRegion"
+          onActivate={() => {}}
+          onButtonDown={handleDescriptionButtonDown}
+          actionDescriptionMap={DESCRIPTION_ACTION_MAP}
+        >
+          <div
+            ref={descriptionScrollRef}
+            style={{
+              maxHeight,
+              overflowY: "auto",
+              whiteSpace: "normal",
+              wordBreak: "break-word",
+              overflowWrap: "anywhere",
+              lineHeight: 1.45,
+              color: "#dcdedf",
+              width: "100%",
+            }}
+          >
+            {displayValue(value)}
+          </div>
+        </Focusable>
+      </Field>
+    </div>
+  );
+};
+
+const MetadataFieldRows = ({
+  fields,
+  onOpenLink,
+}: {
+  fields: MetadataField[];
+  onOpenLink?: (url: string) => void;
+}) => {
   const metadataRows: MetadataField[][] = [];
   for (let i = 0; i < fields.length; i += 2) {
     metadataRows.push(fields.slice(i, i + 2));
@@ -99,39 +221,57 @@ const MetadataFieldRows = ({ fields }: { fields: MetadataField[] }) => {
             boxSizing: "border-box",
           }}
         >
-          {row.map((field, fieldIndex) => (
-            <div
-              key={field.label}
-              style={{
-                flex: "1 1 0",
-                minWidth: 0,
-                overflow: "hidden",
-              }}
-            >
-              <Field
-                label={field.label}
-                bottomSeparator={
-                  rowIndex < metadataRows.length - 1 ||
-                  fieldIndex < row.length - 1
-                    ? "standard"
-                    : "none"
-                }
+          {row.map((field, fieldIndex) => {
+            const linkUrl = field.isLink ? field.value : null;
+            const canOpenLink = Boolean(linkUrl);
+
+            return (
+              <div
+                key={field.label}
+                style={{
+                  flex: "1 1 0",
+                  minWidth: 0,
+                  overflow: "hidden",
+                }}
               >
-                <Focusable noFocusRing className="FocusRegion" onActivate={() => {}}>
-                  <span
-                    style={{
-                      color: "#dcdedf",
-                      whiteSpace: "normal",
-                      wordBreak: "break-word",
-                      overflowWrap: "anywhere",
+                <Field
+                  label={field.label}
+                  bottomSeparator={
+                    rowIndex < metadataRows.length - 1 ||
+                    fieldIndex < row.length - 1
+                      ? "standard"
+                      : "none"
+                  }
+                >
+                  <Focusable
+                    noFocusRing
+                    className="FocusRegion"
+                    onActivate={() => {
+                      if (linkUrl) {
+                        onOpenLink?.(linkUrl);
+                      }
                     }}
                   >
-                    {displayValue(field.value)}
-                  </span>
-                </Focusable>
-              </Field>
-            </div>
-          ))}
+                    <span
+                      style={{
+                        color: canOpenLink ? "#1a9fff" : "#dcdedf",
+                        textDecoration: canOpenLink ? "underline" : "none",
+                        whiteSpace: "normal",
+                        wordBreak: "break-word",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {field.isLink
+                        ? canOpenLink
+                          ? "Open Link"
+                          : "-"
+                        : displayValue(field.value)}
+                    </span>
+                  </Focusable>
+                </Field>
+              </div>
+            );
+          })}
           {row.length === 1 && <div style={{ flex: "1 1 0", minWidth: 0 }} />}
         </div>
       ))}
@@ -141,6 +281,7 @@ const MetadataFieldRows = ({ fields }: { fields: MetadataField[] }) => {
 
 interface GameInfoMetadataProps {
   gameEvent: GameEvent;
+  onOpenLink?: (url: string) => void;
 }
 
 const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
@@ -158,7 +299,11 @@ const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
     { label: "Players", value: gameEvent.game_metadata.players },
   ];
 
-  return <MetadataFieldRows fields={metadataFields} />;
+  return (
+    <div style={{ marginBottom: SECTION_GAP }}>
+      <MetadataFieldRows fields={metadataFields} />
+    </div>
+  );
 };
 
 const SystemInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
@@ -175,17 +320,26 @@ const SystemInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
       value: systemMetadata.release_date_formatted || systemMetadata.release_date,
     },
     { label: "Hardware Type", value: systemMetadata.hardware_type },
-    { label: "System Description", value: systemMetadata.description },
   ];
 
   return (
-    <div style={{ marginTop: METADATA_GAP }}>
-      <MetadataFieldRows fields={metadataFields} />
+    <div style={{ marginBottom: SECTION_GAP }}>
+      <SectionHeader title="System Info" />
+      <DescriptionField
+        value={systemMetadata.description}
+        maxHeight={SECTION_DESCRIPTION_MAX_HEIGHT}
+      />
+      <div style={{ marginTop: METADATA_GAP }}>
+        <MetadataFieldRows fields={metadataFields} />
+      </div>
     </div>
   );
 };
 
-const ComponentInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
+const ComponentInfoMetadata = ({
+  gameEvent,
+  onOpenLink,
+}: GameInfoMetadataProps) => {
   const componentMetadata = gameEvent.component_metadata;
   if (!componentMetadata) {
     return null;
@@ -200,19 +354,38 @@ const ComponentInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
         componentMetadata.system_friendly_name || componentMetadata.system
       ),
     },
-    { label: "Component Description", value: componentMetadata.description },
-    { label: "Wiki", value: componentMetadata.url_rdwiki },
-    { label: "Website", value: componentMetadata.url_webpage },
-    { label: "Source", value: componentMetadata.url_source },
+    {
+      label: "Wiki",
+      value: resolveFirstValidUrl(componentMetadata.url_rdwiki),
+      isLink: true,
+    },
+    {
+      label: "Website",
+      value: resolveFirstValidUrl(componentMetadata.url_webpage),
+      isLink: true,
+    },
+    {
+      label: "Source",
+      value: resolveFirstValidUrl(componentMetadata.url_source),
+      isLink: true,
+    },
     {
       label: "Donation",
-      value: formatListOrString(componentMetadata.url_donation_purchase),
+      value: resolveFirstValidUrl(componentMetadata.url_donation_purchase),
+      isLink: true,
     },
   ];
 
   return (
-    <div style={{ marginTop: METADATA_GAP }}>
-      <MetadataFieldRows fields={metadataFields} />
+    <div>
+      <SectionHeader title="Component Info" />
+      <DescriptionField
+        value={componentMetadata.description}
+        maxHeight={SECTION_DESCRIPTION_MAX_HEIGHT}
+      />
+      <div style={{ marginTop: METADATA_GAP }}>
+        <MetadataFieldRows fields={metadataFields} onOpenLink={onOpenLink} />
+      </div>
     </div>
   );
 };
@@ -220,7 +393,6 @@ const ComponentInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
 export const GameInfoModal = (props: GameInfoModalProps) => {
   const { gameEvent } = props;
   const contentRef = useRef<HTMLDivElement>(null);
-  const descriptionScrollRef = useRef<HTMLDivElement>(null);
   useDialogContentStyling(contentRef, "65vw");
 
   const handleClose = () => {
@@ -228,27 +400,9 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
     props.onClose?.();
   };
 
-  const scrollDescription = (delta: number) => {
-    descriptionScrollRef.current?.scrollBy({ top: delta, behavior: "smooth" });
-  };
-
-  const handleDescriptionButtonDown = (evt: { detail: { button: number } }) => {
-    const button = evt.detail.button;
-
-    if (button === GamepadButton.BUMPER_LEFT) {
-      scrollDescription(-DESCRIPTION_SCROLL_STEP);
-      return;
-    }
-
-    if (button === GamepadButton.BUMPER_RIGHT) {
-      scrollDescription(DESCRIPTION_SCROLL_STEP);
-      return;
-    }
-  };
-
-  const descriptionActionDescriptionMap = {
-    [GamepadButton.BUMPER_LEFT]: "Scroll Up",
-    [GamepadButton.BUMPER_RIGHT]: "Scroll Down",
+  const handleOpenLink = (url: string) => {
+    handleClose();
+    Navigation.NavigateToExternalWeb(url);
   };
 
   const imageSrc = gameEvent.image_path?.replace(/\\/g, "") ?? null;
@@ -335,37 +489,13 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
               overflow: "hidden",
             }}
           >
-            <Field label="Description" childrenLayout="below" bottomSeparator="none">
-              <Focusable
-                noFocusRing
-                className="FocusRegion"
-                onActivate={() => {}}
-                onButtonDown={handleDescriptionButtonDown}
-                actionDescriptionMap={descriptionActionDescriptionMap}
-              >
-                <div
-                  ref={descriptionScrollRef}
-                  style={{
-                    maxHeight: DESCRIPTION_MAX_HEIGHT,
-                    overflowY: "auto",
-                    whiteSpace: "normal",
-                    wordBreak: "break-word",
-                    overflowWrap: "anywhere",
-                    lineHeight: 1.45,
-                    color: "#dcdedf",
-                    width: "100%",
-                  }}
-                >
-                  {displayValue(gameEvent.game_metadata.desc)}
-                </div>
-              </Focusable>
-            </Field>
+            <DescriptionField value={gameEvent.game_metadata.desc} />
           </div>
         </div>
 
         <GameInfoMetadata gameEvent={gameEvent} />
         <SystemInfoMetadata gameEvent={gameEvent} />
-        <ComponentInfoMetadata gameEvent={gameEvent} />
+        <ComponentInfoMetadata gameEvent={gameEvent} onOpenLink={handleOpenLink} />
       </div>
     </ModalRoot>
   );
