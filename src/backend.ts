@@ -1,6 +1,8 @@
 import { callable } from "@decky/api";
 import { Action, GameEvent, SettingsKey, SetupState } from "./interfaces";
 
+export const sendRawGameEventBe = callable<[string], void>("send_raw_game_event");
+
 export const getActionsBe = callable<[], Action[]>("get_actions");
 export const getGameEventBe = callable<[], GameEvent | null>("get_game_event");
 
