@@ -4,7 +4,6 @@ import { FaGamepad } from "react-icons/fa";
 import { MenuContextProvider } from "./context";
 import { Menu } from "./components/menu";
 import { startRetroDECKOnStartup } from "./autostart";
-import { startSteamLaunchDetector } from "./steam-launch-detector";
 
 function Content() {
   return (
@@ -17,8 +16,6 @@ function Content() {
 export default definePlugin(() => {
   const unregisterStartupSubscription = startRetroDECKOnStartup();
 
-  const unregisterSteamLaunchDetector = startSteamLaunchDetector();
-
   return {
     name: "RetroDECKY",
     titleView: <div className={staticClasses.Title}>RetroDECKY</div>,
@@ -26,7 +23,7 @@ export default definePlugin(() => {
     icon: <FaGamepad />,
     onDismount() {
       unregisterStartupSubscription();
-      unregisterSteamLaunchDetector();
+
       console.log("RetroDECKY plugin unloaded");
     },
   };
