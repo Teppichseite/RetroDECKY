@@ -35,9 +35,6 @@ export const Settings = () => {
     false
   );
 
-  const [steamLaunchDetectionDisabled, setSteamLaunchDetectionDisabled] =
-    useSettingToggle("steamLaunchDetectionDisabled", false);
-
   return (
     <div>
       <ButtonItem
@@ -65,12 +62,6 @@ export const Settings = () => {
             description={`Automatically launch RetroDECK when Steam starts in Gaming Mode. This launches any steam game which is called "RetroDECK" in your library. (experimental)`}
             checked={autoStartEnabled}
             onChange={setAutoStartEnabled}
-          />
-          <ToggleField
-            label="Disable Steam App Launch Detection"
-            description="Disable automatic detection of game launches through Steam. When enabled, the plugin will not detect and track games launched via Steam shortcuts."
-            checked={steamLaunchDetectionDisabled}
-            onChange={setSteamLaunchDetectionDisabled}
           />
         </div>
       )}
