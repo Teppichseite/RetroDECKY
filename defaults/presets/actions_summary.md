@@ -25,10 +25,9 @@ This file provides an overview of all actions defined in actions.json.
 - RPCS3 Shortcut (Standalone)
 - RetroArch
 - Ruffle (Standalone)
-- ScummVM
 - Solarus (Standalone)
 
-**Total: 23 emulator(s)**
+**Total: 22 emulator(s)**
 
 ## Categories and Actions
 
@@ -263,7 +262,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: Dolphin (Standalone), Primehack (Standalone)
 
 
-### Melonds
+### MelonDS
 
 *4 action(s)*
 
@@ -284,7 +283,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: MelonDS (Standalone)
 
 
-### Mame
+### MAME
 
 *11 action(s)*
 
@@ -333,7 +332,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: MAME (Standalone)
 
 
-### Retroarch
+### RetroArch
 
 *5 action(s)*
 
@@ -419,49 +418,49 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: *
 
 
-### Scummvm
+### ScummVM
 
 *10 action(s)*
 
 - **Close** (`scummvm-close`)
   - Hotkey: `KEY_C (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Open** (`scummvm-open`)
   - Hotkey: `KEY_O (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Give** (`scummvm-give`)
   - Hotkey: `KEY_G (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Pick-Up** (`scummvm-pick-up`)
   - Hotkey: `KEY_P (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Use** (`scummvm-use`)
   - Hotkey: `KEY_U (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Look-At** (`scummvm-look-at`)
   - Hotkey: `KEY_L (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Move** (`scummvm-move`)
   - Hotkey: `KEY_M (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Push / Shove** (`scummvm-push-shove`)
   - Hotkey: `KEY_S (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Pull / Yank** (`scummvm-pull-yank`)
   - Hotkey: `KEY_Y (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Fight** (`scummvm-fight`)
   - Hotkey: `KEY_F (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 
 ## Statistics
@@ -470,4 +469,4 @@ This file provides an overview of all actions defined in actions.json.
 - **Hotkey Actions**: 90
 - **Builtin Actions**: 3
 - **Categories**: 12
-- **Emulators**: 23
+- **Emulators**: 22

@@ -2052,7 +2052,7 @@
   {
     "id": "melonds-closeopen-lid",
     "name": "Close/Open Lid",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-emblem-downloads"
@@ -2082,7 +2082,7 @@
   {
     "id": "melonds-sunlight",
     "name": "Sunlight +",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-list-add"
@@ -2112,7 +2112,7 @@
   {
     "id": "melonds-sunlight",
     "name": "Sunlight -",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-list-remove"
@@ -2142,7 +2142,7 @@
   {
     "id": "melonds-play-microphone",
     "name": "Play Microphone",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-media-playback-start"
@@ -2172,7 +2172,7 @@
   {
     "id": "mame-service-mode",
     "name": "Service Mode",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-emblem-documents"
@@ -2204,7 +2204,7 @@
   {
     "id": "mame-service-button-1",
     "name": "Service Button 1",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-BLUE"
@@ -2236,7 +2236,7 @@
   {
     "id": "mame-service-button-2",
     "name": "Service Button 2",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-GREEN"
@@ -2268,7 +2268,7 @@
   {
     "id": "mame-service-button-3",
     "name": "Service Button 3",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-RED"
@@ -2300,7 +2300,7 @@
   {
     "id": "mame-service-button-4",
     "name": "Service Button 4",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-YELLOW"
@@ -2332,7 +2332,7 @@
   {
     "id": "mame-insert-bill-note",
     "name": "Insert Bill / Note",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-emblem-generic"
@@ -2364,7 +2364,7 @@
   {
     "id": "mame-tilt",
     "name": "Tilt",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "rd-tilt"
@@ -2396,7 +2396,7 @@
   {
     "id": "mame-tilt-player-1",
     "name": "Tilt - Player 1",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-1"
@@ -2428,7 +2428,7 @@
   {
     "id": "mame-tilt-player-2",
     "name": "Tilt - Player 2",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-2"
@@ -2460,7 +2460,7 @@
   {
     "id": "mame-tilt-player-3",
     "name": "Tilt - Player 3",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-3"
@@ -2492,7 +2492,7 @@
   {
     "id": "mame-tilt-player-4",
     "name": "Tilt - Player 4",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-4"
@@ -2524,7 +2524,7 @@
   {
     "id": "retroarch-cheats-onoff",
     "name": "Cheats On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-utilities-terminal"
@@ -2554,7 +2554,7 @@
   {
     "id": "retroarch-previous-cheat",
     "name": "Previous Cheat",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-go-previous"
@@ -2584,7 +2584,7 @@
   {
     "id": "retroarch-next-cheat",
     "name": "Next Cheat",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-go-next"
@@ -2614,7 +2614,7 @@
   {
     "id": "retroarch-ai-service-onoff",
     "name": "AI Service On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-godot"
@@ -2644,7 +2644,7 @@
   {
     "id": "retroarch-netplay-host-onoff",
     "name": "Netplay Host On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-notification-network-ethernet-connected"
@@ -3040,7 +3040,7 @@
   {
     "id": "scummvm-close",
     "name": "Close",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-close"
@@ -3056,7 +3056,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3070,7 +3070,7 @@
   {
     "id": "scummvm-open",
     "name": "Open",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-open"
@@ -3086,7 +3086,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3100,7 +3100,7 @@
   {
     "id": "scummvm-give",
     "name": "Give",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-give"
@@ -3116,7 +3116,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3130,7 +3130,7 @@
   {
     "id": "scummvm-pick-up",
     "name": "Pick-Up",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-pickup"
@@ -3146,7 +3146,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3160,7 +3160,7 @@
   {
     "id": "scummvm-use",
     "name": "Use",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-use"
@@ -3176,7 +3176,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3190,7 +3190,7 @@
   {
     "id": "scummvm-look-at",
     "name": "Look-At",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-look"
@@ -3206,7 +3206,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3220,7 +3220,7 @@
   {
     "id": "scummvm-move",
     "name": "Move",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-move"
@@ -3236,7 +3236,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3250,7 +3250,7 @@
   {
     "id": "scummvm-push-shove",
     "name": "Push / Shove",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-push"
@@ -3266,7 +3266,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3280,7 +3280,7 @@
   {
     "id": "scummvm-pull-yank",
     "name": "Pull / Yank",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-pull"
@@ -3296,7 +3296,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3310,7 +3310,7 @@
   {
     "id": "scummvm-fight",
     "name": "Fight",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-fight"
@@ -3326,7 +3326,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {

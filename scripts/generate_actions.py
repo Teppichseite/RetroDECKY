@@ -154,12 +154,21 @@ CATEGORY_ORDER = [
     "Speed",
     "Azahar",
     "Dolphin",
-    "Melonds",
-    "Mame",
-    "Retroarch",
+    "MelonDS",
+    "MAME",
+    "RetroArch",
     "Keyboard",
-    "Scummvm"
+    "ScummVM",
 ]
+
+# Override category display names for ACTION_GROUPS keys.
+# Groups not listed here use group_name.capitalize().
+GROUP_CATEGORY_OVERRIDES: Dict[str, str] = {
+    "melonds": "MelonDS",
+    "mame": "MAME",
+    "retroarch": "RetroArch",
+    "scummvm": "ScummVM",
+}
 
 
 EMULATOR_EXPANDS: Dict[str, List[str]] = {
@@ -185,7 +194,7 @@ EMULATOR_EXPANDS: Dict[str, List[str]] = {
     ],
     "RetroArch": ["RetroArch"],
     "Ruffle": ["Ruffle (Standalone)"],
-    "ScummVM": ["ScummVM"],
+    "ScummVM": ["RetroArch"],
     "Solarus": ["Solarus (Standalone)"],
 }
 
@@ -635,7 +644,9 @@ def apply_category_overrides(actions: List[Dict]) -> List[Dict]:
                 actual_id = action_id[1:]  # Remove the ! prefix
                 hidden_actions.add(actual_id)
             else:
-                action_to_group[action_id] = group_name.capitalize()
+                action_to_group[action_id] = GROUP_CATEGORY_OVERRIDES.get(
+                    group_name, group_name.capitalize()
+                )
 
     # Filter out hidden actions and apply category overrides
     filtered_actions = []
