@@ -32,6 +32,20 @@ class EsDeHelper:
         
         return ''.join(result)
 
+    def resolve_effective_rom_path(self, rom_path: str) -> str:
+        rom_path = os.path.normpath(rom_path.replace("\\", ""))
+
+        file_ext = os.path.splitext(rom_path)[1]
+        if not file_ext:
+            return rom_path
+
+        parent = os.path.dirname(rom_path)
+        parent_ext = os.path.splitext(os.path.basename(parent))[1]
+        if parent_ext.lower() == file_ext.lower():
+            return parent
+
+        return rom_path
+
     def resolve_relative_media_path(self, rom_path: str, system_name: str, media_type: str) -> str:
         
         rom_path = rom_path.replace("\\", "")
@@ -131,29 +145,21 @@ class EsDeHelper:
         )
 
     def resolve_system_metadata(self, system_name: str) -> SystemMetadata | None:
-        metadata_folder = self.paths.systemMetadataFolder
-        candidates = [
-            os.path.join(metadata_folder, f"{system_name}.xml"),
-            os.path.join(metadata_folder, "_default.xml"),
-        ]
+        metadata_path = os.path.join(self.paths.systemMetadataFolder, f"{system_name}.xml")
 
-        for metadata_path in candidates:
-            if not os.path.isfile(metadata_path):
-                continue
+        if not os.path.isfile(metadata_path):
+            return None
 
-            try:
-                with open(metadata_path, "r") as f:
-                    parsed = xmltodict.parse(f.read())
-                variables = parsed.get("theme", {}).get("variables")
-                metadata = self._parse_system_metadata_variables(variables)
-                if metadata is not None:
-                    return metadata
-            except Exception as e:
-                self.logger.error(
-                    f"Failed to load system metadata for {system_name} at {metadata_path}: {e}"
-                )
-
-        return None
+        try:
+            with open(metadata_path, "r") as f:
+                parsed = xmltodict.parse(f.read())
+            variables = parsed.get("theme", {}).get("variables")
+            return self._parse_system_metadata_variables(variables)
+        except Exception as e:
+            self.logger.error(
+                f"Failed to load system metadata for {system_name} at {metadata_path}: {e}"
+            )
+            return None
 
     def resolve_component_name(self, emulator_name: list[str] | None) -> str | None:
         if not emulator_name:

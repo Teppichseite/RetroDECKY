@@ -48,6 +48,7 @@ class Plugin:
             return None
 
         rom_path = parts[1]
+        effective_rom_path = self.es_de_helper.resolve_effective_rom_path(rom_path)
         system_name = parts[3]
         provided_full_name = parts[4].strip() if len(parts) > 4 else ""
         if provided_full_name == "empty":
@@ -58,16 +59,16 @@ class Plugin:
             or system_name
         )
 
-        miximage_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "miximages")
-        cover_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "covers")
+        miximage_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "miximages")
+        cover_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "covers")
 
         image_path = miximage_path or cover_path
 
-        manual_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "manuals")
+        manual_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "manuals")
 
-        emulator_name = self.es_de_helper.resolve_emulator_name(system_name, rom_path)
+        emulator_name = self.es_de_helper.resolve_emulator_name(system_name, effective_rom_path)
 
-        game_data = self.es_de_helper.load_game_data(system_name, rom_path) or {}
+        game_data = self.es_de_helper.load_game_data(system_name, effective_rom_path) or {}
         system_metadata = self.es_de_helper.resolve_system_metadata(system_name)
 
         component = self.es_de_helper.resolve_component_name(emulator_name)
@@ -79,7 +80,7 @@ class Plugin:
             name=parts[2],
             system_name=system_name,
             system_full_name=system_full_name,
-            emulator_name=emulator_name or system_full_name,
+            emulator_name=emulator_name or [],
             image_path=self._resolve_media_path(image_path),
             manual_path=self._resolve_media_path(manual_path),
             game_metadata=GameMetadata(
