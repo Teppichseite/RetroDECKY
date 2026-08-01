@@ -1,10 +1,13 @@
 from logging import Logger
 import threading
 import os
-import socket
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import unquote
 from models import Paths
+
+# Port kept stable across restarts to avoid stale caches on the frontend.
+# Falls back to a random free port if something else is already bound to it.
+PREFERRED_PORT = 47842
 
 class ServerHandler(SimpleHTTPRequestHandler):
     def _get_path_mappings(self):
@@ -69,15 +72,14 @@ class ServerHandler(SimpleHTTPRequestHandler):
 
 
 class Server:
-    def _server_target(self):
-        self.httpd = HTTPServer(("localhost", self.port), ServerHandler)
-
-        self.httpd.config = {
-            "paths": self.paths,
-            "on_game_event_callback": self.on_game_event_callback
-        }
-
-        self.httpd.serve_forever()
+    def _create_httpd(self) -> HTTPServer:
+        try:
+            return HTTPServer(("localhost", PREFERRED_PORT), ServerHandler)
+        except OSError as e:
+            self.logger.warning(
+                f"Preferred port {PREFERRED_PORT} unavailable ({e}), falling back to a random free port"
+            )
+            return HTTPServer(("localhost", 0), ServerHandler)
 
     def get_port(self):
         return self.port
@@ -92,15 +94,16 @@ class Server:
         return f"http://localhost:{self.port}/api/"
         
     def start_server(self):
+        self.httpd = self._create_httpd()
 
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(('', 0))
-            s.listen(1)
-            port = s.getsockname()[1]
-        
-        self.port = port
+        self.httpd.config = {
+            "paths": self.paths,
+            "on_game_event_callback": self.on_game_event_callback
+        }
 
-        self.server_thread = threading.Thread(target=self._server_target, daemon=True)
+        self.port = self.httpd.server_address[1]
+
+        self.server_thread = threading.Thread(target=self.httpd.serve_forever, daemon=True)
         self.server_thread.start()
 
         self.logger.info(f"Server started on port {self.port}")
