@@ -351,8 +351,8 @@ class EsDeHelper:
 
     def remove_es_de_event_scripts(self) -> bool:
         scripts = [
-            ["game-start", "game_start_decky.sh"],
-            ["game-end", "game_end_decky.sh"],
+            ["game-start", "game_start_RetroDECKY_v1.sh"],
+            ["game-end", "game_end_RetroDECKY_v1.sh"],
         ]
 
         for script_name, script_file in scripts:
