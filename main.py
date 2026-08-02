@@ -6,6 +6,7 @@ from models import GameEvent, GameMetadata, Paths
 from paths_resolver import PathsResolver
 from server import Server
 from custom_documents import CustomDocuments
+from retro_achievements import RetroAchievements
 
 import asyncio
 from dataclasses import asdict
@@ -24,6 +25,8 @@ class Plugin:
     es_de_helper: EsDeHelper = None
 
     custom_documents: CustomDocuments = None
+
+    retro_achievements: RetroAchievements = None
 
     game_event: GameEvent = None
 
@@ -173,6 +176,22 @@ class Plugin:
         self.settings.setSetting(key, value)
         self.settings.commit()
 
+    async def get_retroachievements_status(self) -> dict:
+        return await self.retro_achievements.get_status()
+
+    async def save_retroachievements_credentials(self, username: str, api_key: str) -> dict:
+        return await self.retro_achievements.save_credentials(username, api_key)
+
+    async def clear_retroachievements_credentials(self) -> dict:
+        return await self.retro_achievements.clear_credentials()
+
+    async def get_retroachievements_for_game(
+        self, system_name: str, system_full_name: str, game_name: str
+    ) -> dict:
+        return await self.retro_achievements.get_achievements_for_game(
+            system_name, system_full_name, game_name
+        )
+
     async def list_custom_documents(self, system_name: str, game_path: str) -> list[str]:
         """List all PDF and TXT files in the custom_documents directory for a given game, returns server URLs"""
         return await self.custom_documents.list_custom_documents(system_name, game_path)
@@ -216,6 +235,12 @@ class Plugin:
             decky.logger,
             self.paths,
             self.server.get_custom_documents_url
+        )
+
+        self.retro_achievements = RetroAchievements(
+            decky.logger,
+            decky.DECKY_PLUGIN_RUNTIME_DIR,
+            self.settings,
         )
 
         self._check_es_de_event_scripts()

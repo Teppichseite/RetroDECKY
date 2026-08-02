@@ -179,6 +179,10 @@ export const MenuContextProvider = (props: MenuContextProviderProps) => {
         return;
       }
 
+      if (action.action.operation === "view_retroachievements") {
+        return;
+      }
+
       if (action.action.operation === "exit") {
         if (!lastFocusedChangedEvent) {
           return;
