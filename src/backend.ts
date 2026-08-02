@@ -35,7 +35,7 @@ export const clearRetroAchievementsCredentialsBe = callable<
   RaClearResult
 >("clear_retroachievements_credentials");
 export const getRetroAchievementsForGameBe = callable<
-  [string, string, string],
+  [string, string, string, string],
   RaGameResult
 >("get_retroachievements_for_game");
 

@@ -26,7 +26,8 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
     getRetroAchievementsForGameBe(
       gameEvent.system_name,
       gameEvent.system_full_name,
-      gameEvent.name
+      gameEvent.name,
+      gameEvent.path
     ).then((payload) => {
       if (!cancelled) {
         setResult(payload);
@@ -37,7 +38,7 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
     return () => {
       cancelled = true;
     };
-  }, [gameEvent.system_name, gameEvent.system_full_name, gameEvent.name]);
+  }, [gameEvent.system_name, gameEvent.system_full_name, gameEvent.name, gameEvent.path]);
 
   const handleClose = () => {
     props.closeModal?.();

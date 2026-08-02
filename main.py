@@ -186,10 +186,10 @@ class Plugin:
         return await self.retro_achievements.clear_credentials()
 
     async def get_retroachievements_for_game(
-        self, system_name: str, system_full_name: str, game_name: str
+        self, system_name: str, system_full_name: str, game_name: str, game_path: str
     ) -> dict:
         return await self.retro_achievements.get_achievements_for_game(
-            system_name, system_full_name, game_name
+            system_name, system_full_name, game_name, game_path
         )
 
     async def list_custom_documents(self, system_name: str, game_path: str) -> list[str]:
@@ -241,6 +241,7 @@ class Plugin:
             decky.logger,
             decky.DECKY_PLUGIN_RUNTIME_DIR,
             self.settings,
+            decky.DECKY_PLUGIN_DIR,
         )
 
         self._check_es_de_event_scripts()

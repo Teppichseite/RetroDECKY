@@ -93,26 +93,6 @@ SYSTEM_NAME_TO_RA_CONSOLE_ID: dict[str, int] = {
 }
 
 
-def normalize_title(title: str) -> str:
-    """Normalize a game title for fuzzy matching. Isolated for later iteration."""
-    if not title:
-        return ""
-
-    normalized = title.strip()
-    normalized = os.path.splitext(normalized)[0]
-    normalized = re.sub(r"\([^)]*\)", "", normalized)
-    normalized = re.sub(r"\[[^\]]*\]", "", normalized)
-    normalized = re.sub(r"[^\w\s]", " ", normalized, flags=re.UNICODE)
-    normalized = re.sub(r"\s+", " ", normalized).strip().lower()
-
-    for article in ("the ", "a ", "an "):
-        if normalized.startswith(article):
-            normalized = normalized[len(article) :]
-            break
-
-    return normalized
-
-
 def _build_ssl_context() -> ssl.SSLContext:
     ca_candidates = [
         os.environ.get("SSL_CERT_FILE"),
@@ -157,10 +137,14 @@ def _fetch_url_with_curl(url: str, timeout: int) -> str:
 
 
 class RetroAchievements:
-    def __init__(self, logger: Logger, cache_dir: str, settings):
+    def __init__(self, logger: Logger, cache_dir: str, settings, plugin_dir: str):
         self.logger = logger
         self.cache_dir = os.path.join(cache_dir, "retroachievements")
         self.settings = settings
+        self.plugin_dir = plugin_dir
+        self.rahasher_path = os.path.join(plugin_dir, "assets", "bin", "RAHasher")
+        self._cached_hash_key: tuple[int, str] | None = None
+        self._cached_hash: str | None = None
         os.makedirs(self.cache_dir, exist_ok=True)
 
     def _get_credentials(self) -> tuple[str | None, str | None]:
@@ -343,28 +327,131 @@ class RetroAchievements:
     def _resolve_console_id(self, system_name: str) -> int | None:
         return SYSTEM_NAME_TO_RA_CONSOLE_ID.get(system_name.lower())
 
-    def _find_game(self, games: list[dict], game_name: str) -> dict | None:
-        target = normalize_title(game_name)
+    def _normalize_rom_path(self, game_path: str) -> str:
+        return os.path.normpath(game_path.replace("\\", ""))
+
+    def _hash_cache_key(self, console_id: int, game_path: str) -> tuple[int, str]:
+        return console_id, self._normalize_rom_path(game_path)
+
+    def _resolve_hash_path(self, game_path: str) -> str | None:
+        game_path = self._normalize_rom_path(game_path) if game_path else game_path
+
+        if not game_path or not os.path.exists(game_path):
+            self.logger.error(f"Game file not found for hashing: {game_path}")
+            return None
+
+        if not game_path.lower().endswith(".m3u"):
+            return game_path
+
+        try:
+            with open(game_path, "r", encoding="utf-8", errors="replace") as f:
+                first_line = f.readline().strip()
+        except OSError as e:
+            self.logger.error(f"Failed to read m3u playlist {game_path}: {e}")
+            return None
+
+        if not first_line:
+            self.logger.error(f"m3u playlist is empty: {game_path}")
+            return None
+
+        first_line = first_line.replace("\\", "")
+        entry_path = first_line if os.path.isabs(first_line) else os.path.join(
+            os.path.dirname(game_path), first_line
+        )
+        entry_path = os.path.normpath(entry_path)
+
+        if not os.path.exists(entry_path):
+            self.logger.error(
+                f"m3u entry not found for hashing: {entry_path} (from {game_path})"
+            )
+            return None
+
+        return entry_path
+
+    def _get_cached_hash(self, console_id: int, game_path: str) -> str | None:
+        cache_key = self._hash_cache_key(console_id, game_path)
+        if self._cached_hash_key == cache_key:
+            return self._cached_hash
+        return None
+
+    def _set_cached_hash(self, console_id: int, game_path: str, game_hash: str) -> None:
+        self._cached_hash_key = self._hash_cache_key(console_id, game_path)
+        self._cached_hash = game_hash
+
+    def _hash_game_file_sync(self, console_id: int, game_path: str) -> str | None:
+        cached = self._get_cached_hash(console_id, game_path)
+        if cached is not None:
+            return cached
+
+        if not os.path.isfile(self.rahasher_path):
+            self.logger.error(f"RAHasher not found at {self.rahasher_path}")
+            return None
+
+        hash_path = self._resolve_hash_path(game_path)
+        if not hash_path:
+            return None
+
+        result = subprocess.run(
+            [self.rahasher_path, str(console_id), hash_path],
+            capture_output=True,
+            text=True,
+            env={**os.environ, "LD_LIBRARY_PATH": ""},
+        )
+
+        if result.returncode != 0:
+            stderr = (result.stderr or "").strip()
+            stdout = (result.stdout or "").strip()
+            self.logger.warning(
+                f"RAHasher failed for {hash_path} (console {console_id}): "
+                f"{stderr or stdout or f'exit {result.returncode}'}"
+            )
+            return None
+
+        for line in reversed((result.stdout or "").strip().splitlines()):
+            candidate = line.strip()
+            if re.fullmatch(r"[0-9a-fA-F]{32}", candidate):
+                game_hash = candidate.lower()
+                self._set_cached_hash(console_id, game_path, game_hash)
+                return game_hash
+
+        self.logger.warning(f"RAHasher produced no hash for {hash_path}")
+        return None
+
+    async def _hash_game_file(self, console_id: int, game_path: str) -> str | None:
+        cached = self._get_cached_hash(console_id, game_path)
+        if cached is not None:
+            return cached
+        return await asyncio.to_thread(self._hash_game_file_sync, console_id, game_path)
+
+    def _find_game_by_hash(self, games: list[dict], game_hash: str) -> dict | None:
+        target = game_hash.lower().strip()
         if not target:
             return None
 
-        exact_matches = []
-        prefix_matches = []
+        for game in games:
+            hashes = game.get("Hashes") or game.get("hashes") or []
+            for entry in hashes:
+                if str(entry).lower() == target:
+                    return game
+        return None
+
+    def _normalize_game_title(self, title: str) -> str:
+        # Strip region/revision tags: "Game 1 (USA) [Rev1]" -> "Game 1"
+        normalized = re.sub(r"\([^)]*\)", "", title)
+        normalized = re.sub(r"\[[^\]]*\]", "", normalized)
+        # Keep letters and digits only (drops whitespace and symbols)
+        normalized = re.sub(r"[^0-9A-Za-z]", "", normalized)
+        return normalized.lower()
+
+    def _find_game_by_title(self, games: list[dict], game_name: str) -> dict | None:
+        target = self._normalize_game_title(game_name)
+        if not target:
+            return None
 
         for game in games:
             title = game.get("Title") or game.get("title") or ""
-            normalized = normalize_title(title)
-            if not normalized:
-                continue
-            if normalized == target:
-                exact_matches.append(game)
-            elif normalized.startswith(target) or target.startswith(normalized):
-                prefix_matches.append(game)
-
-        if exact_matches:
-            return exact_matches[0]
-        if prefix_matches:
-            return prefix_matches[0]
+            if self._normalize_game_title(str(title)) == target:
+                return game
         return None
 
     def _badge_urls(self, badge_name: str | None) -> tuple[str | None, str | None]:
@@ -456,7 +543,11 @@ class RetroAchievements:
         return achievements, summary, game
 
     async def get_achievements_for_game(
-        self, system_name: str, system_full_name: str, game_name: str
+        self,
+        system_name: str,
+        system_full_name: str,
+        game_name: str,
+        game_path: str,
     ) -> dict:
         username, api_key = self._get_credentials()
         if not username or not api_key:
@@ -480,11 +571,19 @@ class RetroAchievements:
                 }
 
             games = await self._get_game_list(console_id, api_key)
-            matched_game = self._find_game(games, game_name)
+
+            matched_game = None
+            game_hash = await self._hash_game_file(console_id, game_path)
+            if game_hash:
+                matched_game = self._find_game_by_hash(games, game_hash)
+
+            if matched_game is None:
+                matched_game = self._find_game_by_title(games, game_name)
+
             if matched_game is None:
                 return {
                     "status": "not_found",
-                    "message": "No RetroAchievements found for this game.",
+                    "message": "Game was not found.",
                     "game": None,
                     "summary": None,
                     "achievements": [],
