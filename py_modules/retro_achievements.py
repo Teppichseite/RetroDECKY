@@ -317,11 +317,7 @@ class RetroAchievements:
         return entry_path
 
     def _ensure_rahasher(self) -> bool:
-        if self._rahasher_unzipped:
-            return True
-
-        if os.path.isfile(self.rahasher_path):
-            self._rahasher_unzipped = True
+        if self._rahasher_unzipped and os.path.isfile(self.rahasher_path):
             return True
 
         if not os.path.isfile(self.rahasher_zip_path):
