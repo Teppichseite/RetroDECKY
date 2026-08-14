@@ -996,6 +996,22 @@ Source: https://github.com/mozilla/pdf.js/blob/master/LICENSE
 
 --------------------------------------------------------------------------------
 
+Package: RAHasher
+Upstream: https://github.com/RetroAchievements/RALibretro
+License: GNU General Public License v3.0
+
+RAHasher is a ROM hashing utility from RALibretro used by RetroDECKY to match
+games against RetroAchievements. The binary is bundled with this plugin.
+
+Copyright (C) RetroAchievements / RALibretro contributors
+Licensed under the GNU General Public License version 3.
+The full license text is included at the beginning of this file.
+
+Source: https://github.com/RetroAchievements/RALibretro
+Source (COPYING): https://github.com/RetroAchievements/RALibretro/blob/develop/COPYING
+
+--------------------------------------------------------------------------------
+
 ===============================================================================
                          RetroDECK related 3rd Party Licenses
 ===============================================================================

@@ -58,6 +58,8 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - **Additional Documents** - Add PDF, TXT, or Markdown documents per game and view them during the game session
 
+- **RetroAchievements** - View achievement progress for the currently running game, including softcore and hardcore mode
+
 ---
 
 ## Known Issues
@@ -136,6 +138,19 @@ You can add custom documents which you can view during a game session. Supported
     - E.g. for the rom path `~/retrodeck/roms/snes/game A.zip` the documents would be stored under `~/retrodeck/storage/retrodecky/documents/snes/game A/`
     - You can just add your documents to the folder and they will be **visible in the plugin UI**
 
+### RetroAchievements
+
+RetroDECKY can show [RetroAchievements](https://retroachievements.org/) progress for the currently running game, including **softcore** and **hardcore** completion.
+
+RetroDECKY only **displays** achievement progress. To actually **earn** achievements while playing, you still need to set up RetroAchievements in **RetroDECK** for the respective emulator as usual.
+
+1. While no game is running, open **RetroDECKY** from the Steam **Quick Access Menu**.
+1. Go to **Settings** > **RetroAchievements**.
+2. Enter your RetroAchievements **username** and **API key** (from your [RetroAchievements control panel](https://retroachievements.org/settings?tab=applications)), then save.
+3. While a supported game is running, click on the "Achievements" button from the in-game menu to see unlocked and locked achievements.
+
+Games are matched to RetroAchievements first by **ROM hash**. For some file extensions hashing is not supported — notably Dolphin **`.rvz`** and PSP **`.cso`**. In those cases RetroDECKY falls back to matching the game **by name**.
+
 ---
 
 ## Architecture: How does it work?
@@ -202,6 +217,12 @@ RetroDECKY supports most component hotkeys documented here:
 ### Game PDF Viewer
 
 The plugin uses PDF.js and react-pdf to render PDF files. Internally it uses WASM to improve rendering performance.
+
+---
+
+### RetroAchievements
+
+RetroDECKY uses the official [RetroAchievements API](https://api-docs.retroachievements.org/) to fetch achievement progress for the currently running game. ROM hashes for game matching are computed with [RAHasher](https://github.com/RetroAchievements/RALibretro) from RALibretro (bundled with the plugin).
 
 ---
 
