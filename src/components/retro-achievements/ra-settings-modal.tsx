@@ -125,13 +125,14 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
               </div>
             )}
             <div>
-              Enter your RetroAchievements username and API Key below. You can find your API
-              key if you go to your RetroAchievements Profile &gt; Applications &gt; Web API
-              Key.
+              Enter your RetroAchievements <strong>username</strong> and{" "}
+              <strong>API Key</strong> below. You can find your API key under{" "}
+              <strong>Profile &gt; Applications &gt; Web API Key</strong> on the
+              RetroAchievements website.
             </div>
             <div style={{ marginTop: "12px" }}>
-              You still have to activate RetroAchievements in the RetroDECK Configurator if not
-              yet happened.
+              You also need to enable RetroAchievements in the{" "}
+              <strong>RetroDECK Configurator</strong> if you haven&apos;t already.
             </div>
           </div>
         </Focusable>

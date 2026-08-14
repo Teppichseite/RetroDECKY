@@ -54,6 +54,7 @@ class GameEvent:
     system_metadata: SystemMetadata | None
     component: str | None
     component_metadata: ComponentMetadata | None
+    retro_achievements_available: bool
 
 @dataclass
 class Paths:

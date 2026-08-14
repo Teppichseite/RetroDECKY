@@ -51,6 +51,7 @@ export interface GameEvent {
   system_metadata: SystemMetadata | null;
   component: string | null;
   component_metadata: ComponentMetadata | null;
+  retro_achievements_available: boolean;
 }
 
 export interface HotkeyLabel {
@@ -131,11 +132,10 @@ export interface RaAchievement {
   badge_locked_url: string | null;
   earned: boolean;
   earned_hardcore: boolean;
-  date_earned: string | null;
   display_order: number;
 }
 
-export interface RaGameSummary {
+export interface RaProgressSummary {
   earned_count: number;
   total_count: number;
   earned_points: number;
@@ -143,12 +143,20 @@ export interface RaGameSummary {
   completion: string;
 }
 
+export interface RaGameSummary {
+  softcore: RaProgressSummary;
+  hardcore: RaProgressSummary;
+}
+
+export type RaMatchMethod = "hash" | "name";
+
 export interface RaGameInfo {
   id: number;
   title: string;
   console_name: string;
   image_icon: string | null;
   user_completion: string;
+  matched_by: RaMatchMethod;
 }
 
 export type RaGameResultStatus =

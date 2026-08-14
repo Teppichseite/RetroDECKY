@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Field, Focusable, ModalRoot, ModalRootProps } from "@decky/ui";
+import { Field, Focusable, ModalRoot, ModalRootProps, Navigation } from "@decky/ui";
 import { GameEvent, RaGameResult } from "../../interfaces";
 import { getRetroAchievementsForGameBe } from "../../backend";
 import { useDialogContentStyling } from "../../hooks";
@@ -43,6 +43,11 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
   const handleClose = () => {
     props.closeModal?.();
     props.onClose?.();
+  };
+
+  const handleOpenLink = (url: string) => {
+    handleClose();
+    Navigation.NavigateToExternalWeb(url);
   };
 
   return (
@@ -97,7 +102,13 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
         {!loading && result?.status === "ok" && result.game && result.summary && (
           <Focusable noFocusRing className="FocusRegion" flow-children="grid">
             <Field childrenLayout="below" bottomSeparator="standard">
-              <Focusable noFocusRing className="FocusRegion" onActivate={() => {}}>
+              <Focusable
+                noFocusRing
+                className="FocusRegion"
+                onActivate={() =>
+                  handleOpenLink(`https://retroachievements.org/game/${result.game!.id}`)
+                }
+              >
                 <div
                   style={{
                     color: "#dcdedf",
@@ -106,14 +117,26 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
                 >
                   <div style={{ fontWeight: "bold", marginBottom: "8px" }}>
                     {result.game.title}
-                    {result.game.console_name ? ` (${result.game.console_name})` : ""}
+                    {result.game.console_name ? ` - ${result.game.console_name}` : ""}
+                    {result.game.matched_by === "name" ? " (Matched by name)" : ""}
                   </div>
                   <div>
-                    {result.summary.earned_count} / {result.summary.total_count} achievements
+                    Softcore · {result.summary.softcore.earned_count} /{" "}
+                    {result.summary.softcore.total_count} achievements
                     {" · "}
-                    {result.summary.earned_points} / {result.summary.total_points} points
+                    {result.summary.softcore.earned_points} /{" "}
+                    {result.summary.softcore.total_points} points
                     {" · "}
-                    {result.summary.completion} complete
+                    {result.summary.softcore.completion} complete
+                  </div>
+                  <div>
+                    Hardcore · {result.summary.hardcore.earned_count} /{" "}
+                    {result.summary.hardcore.total_count} achievements
+                    {" · "}
+                    {result.summary.hardcore.earned_points} /{" "}
+                    {result.summary.hardcore.total_points} points
+                    {" · "}
+                    {result.summary.hardcore.completion} complete
                   </div>
                 </div>
               </Focusable>
@@ -125,6 +148,11 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
                 achievement={achievement}
                 bottomSeparator={
                   index < result.achievements.length - 1 ? "standard" : "none"
+                }
+                onActivate={() =>
+                  handleOpenLink(
+                    `https://retroachievements.org/achievement/${achievement.id}`
+                  )
                 }
               />
             ))}

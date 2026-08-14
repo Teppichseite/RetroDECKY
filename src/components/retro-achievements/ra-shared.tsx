@@ -19,11 +19,13 @@ export const RaStatusMessage = ({ message }: { message: string }) => (
 export interface RaAchievementRowProps {
   achievement: RaAchievement;
   bottomSeparator?: "standard" | "none";
+  onActivate?: () => void;
 }
 
 export const RaAchievementRow = ({
   achievement,
   bottomSeparator = "standard",
+  onActivate,
 }: RaAchievementRowProps) => {
   const badgeSrc = achievement.earned
     ? achievement.badge_url
@@ -31,7 +33,7 @@ export const RaAchievementRow = ({
 
   return (
     <Field childrenLayout="below" bottomSeparator={bottomSeparator}>
-      <Focusable noFocusRing className="FocusRegion" onActivate={() => {}}>
+      <Focusable noFocusRing className="FocusRegion" onActivate={onActivate}>
         <div
           style={{
             display: "flex",
@@ -73,10 +75,14 @@ export const RaAchievementRow = ({
             >
               {achievement.description}
             </div>
-            {achievement.earned && achievement.date_earned && (
+            {(achievement.earned || achievement.earned_hardcore) && (
               <div style={{ color: "#7a8288", fontSize: "12px", marginTop: "6px" }}>
-                Earned: {achievement.date_earned}
-                {achievement.earned_hardcore ? " (Hardcore)" : ""}
+                {[
+                  achievement.earned ? "Softcore" : null,
+                  achievement.earned_hardcore ? "Hardcore" : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
               </div>
             )}
           </div>

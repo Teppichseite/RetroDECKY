@@ -6,7 +6,7 @@ from models import GameEvent, GameMetadata, Paths
 from paths_resolver import PathsResolver
 from server import Server
 from custom_documents import CustomDocuments
-from retro_achievements import RetroAchievements
+from retro_achievements import RetroAchievements, is_ra_available_for_system
 
 import asyncio
 from dataclasses import asdict
@@ -98,6 +98,7 @@ class Plugin:
             system_metadata=system_metadata,
             component=component,
             component_metadata=component_metadata,
+            retro_achievements_available=is_ra_available_for_system(system_name),
         )
 
     def _on_game_event(self, game_event_raw: str):
@@ -239,7 +240,6 @@ class Plugin:
 
         self.retro_achievements = RetroAchievements(
             decky.logger,
-            decky.DECKY_PLUGIN_RUNTIME_DIR,
             self.settings,
             decky.DECKY_PLUGIN_DIR,
         )

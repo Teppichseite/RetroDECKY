@@ -13,8 +13,8 @@ from logging import Logger
 API_BASE = "https://retroachievements.org/API"
 BADGE_BASE = "https://media.retroachievements.org/Badge"
 
-GAME_LIST_CACHE_TTL = 7 * 24 * 60 * 60
-REQUEST_TIMEOUT = 10
+GAME_LIST_CACHE_TTL = 24 * 60 * 60
+REQUEST_TIMEOUT = 30
 
 SETTINGS_USERNAME_KEY = "retroAchievementsUsername"
 SETTINGS_API_KEY = "retroAchievementsApiKey"
@@ -93,6 +93,12 @@ SYSTEM_NAME_TO_RA_CONSOLE_ID: dict[str, int] = {
 }
 
 
+def is_ra_available_for_system(system_name: str) -> bool:
+    if not system_name:
+        return False
+    return system_name.lower() in SYSTEM_NAME_TO_RA_CONSOLE_ID
+
+
 def _build_ssl_context() -> ssl.SSLContext:
     ca_candidates = [
         os.environ.get("SSL_CERT_FILE"),
@@ -113,39 +119,15 @@ def _build_ssl_context() -> ssl.SSLContext:
     return ssl.create_default_context()
 
 
-def _fetch_url_with_curl(url: str, timeout: int) -> str:
-    result = subprocess.run(
-        [
-            "curl",
-            "-fsS",
-            "--max-time",
-            str(timeout),
-            "-A",
-            "RetroDECKY/1.0",
-            url,
-        ],
-        capture_output=True,
-        text=True,
-        env={**os.environ, "LD_LIBRARY_PATH": ""},
-    )
-
-    if result.returncode != 0:
-        stderr = result.stderr.strip()
-        raise urllib.error.URLError(stderr or "curl request failed")
-
-    return result.stdout
-
-
 class RetroAchievements:
-    def __init__(self, logger: Logger, cache_dir: str, settings, plugin_dir: str):
+    def __init__(self, logger: Logger, settings, plugin_dir: str):
         self.logger = logger
-        self.cache_dir = os.path.join(cache_dir, "retroachievements")
         self.settings = settings
         self.plugin_dir = plugin_dir
         self.rahasher_path = os.path.join(plugin_dir, "assets", "bin", "RAHasher")
-        self._cached_hash_key: tuple[int, str] | None = None
-        self._cached_hash: str | None = None
-        os.makedirs(self.cache_dir, exist_ok=True)
+        self._cached_match_key: tuple[int, str] | None = None
+        self._cached_match: tuple[int, str] | None = None  # game_id, "hash" | "name"
+        self._game_list_cache: dict[int, tuple[float, list[dict]]] = {}
 
     def _get_credentials(self) -> tuple[str | None, str | None]:
         username = self.settings.getSetting(SETTINGS_USERNAME_KEY)
@@ -159,48 +141,6 @@ class RetroAchievements:
         self.settings.setSetting(SETTINGS_API_KEY, api_key)
         self.settings.commit()
 
-    def _cache_path(self, name: str) -> str:
-        safe_name = re.sub(r"[^\w.-]", "_", name)
-        return os.path.join(self.cache_dir, f"{safe_name}.json")
-
-    def _read_cache(self, name: str, ttl: int) -> list | dict | None:
-        path = self._cache_path(name)
-        if not os.path.isfile(path):
-            return None
-
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                payload = json.load(f)
-        except (OSError, json.JSONDecodeError) as e:
-            self.logger.warning(f"Failed to read RA cache {name}: {e}")
-            return None
-
-        fetched_at = payload.get("fetched_at", 0)
-        if time.time() - fetched_at > ttl:
-            return None
-
-        return payload.get("data")
-
-    def _read_cache_stale(self, name: str) -> list | dict | None:
-        path = self._cache_path(name)
-        if not os.path.isfile(path):
-            return None
-
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                payload = json.load(f)
-            return payload.get("data")
-        except (OSError, json.JSONDecodeError):
-            return None
-
-    def _write_cache(self, name: str, data: list | dict) -> None:
-        path = self._cache_path(name)
-        try:
-            with open(path, "w", encoding="utf-8") as f:
-                json.dump({"fetched_at": time.time(), "data": data}, f)
-        except OSError as e:
-            self.logger.warning(f"Failed to write RA cache {name}: {e}")
-
     def _fetch_json_sync(self, endpoint: str, params: dict[str, str]) -> list | dict:
         query = urllib.parse.urlencode(params)
         url = f"{API_BASE}/{endpoint}?{query}"
@@ -209,22 +149,12 @@ class RetroAchievements:
             headers={"User-Agent": "RetroDECKY/1.0"},
         )
 
-        try:
-            with urllib.request.urlopen(
-                request,
-                timeout=REQUEST_TIMEOUT,
-                context=_build_ssl_context(),
-            ) as response:
-                body = response.read().decode("utf-8")
-        except urllib.error.URLError as e:
-            reason = str(getattr(e, "reason", e))
-            if "certificate" not in reason.lower() and "ssl" not in reason.lower():
-                raise
-
-            self.logger.warning(
-                f"RA HTTPS request failed via urllib ({reason}), falling back to curl"
-            )
-            body = _fetch_url_with_curl(url, REQUEST_TIMEOUT)
+        with urllib.request.urlopen(
+            request,
+            timeout=REQUEST_TIMEOUT,
+            context=_build_ssl_context(),
+        ) as response:
+            body = response.read().decode("utf-8")
 
         return json.loads(body)
 
@@ -284,10 +214,11 @@ class RetroAchievements:
         return {"cleared": True}
 
     async def _get_game_list(self, console_id: int, api_key: str) -> list[dict]:
-        cache_name = f"games_{console_id}"
-        cached = self._read_cache(cache_name, GAME_LIST_CACHE_TTL)
+        cached = self._game_list_cache.get(console_id)
         if cached is not None:
-            return cached
+            fetched_at, data = cached
+            if time.time() - fetched_at <= GAME_LIST_CACHE_TTL:
+                return data
 
         try:
             result = await self._get_json(
@@ -300,14 +231,13 @@ class RetroAchievements:
                 },
             )
             if isinstance(result, list):
-                self._write_cache(cache_name, result)
+                self._game_list_cache[console_id] = (time.time(), result)
                 return result
         except Exception as e:
             self.logger.error(f"Failed to fetch RA game list for console {console_id}: {e}")
 
-        stale = self._read_cache_stale(cache_name)
-        if stale is not None:
-            return stale
+        if cached is not None:
+            return cached[1]
 
         raise RuntimeError(f"Failed to load RetroAchievements game list for console {console_id}")
 
@@ -330,8 +260,20 @@ class RetroAchievements:
     def _normalize_rom_path(self, game_path: str) -> str:
         return os.path.normpath(game_path.replace("\\", ""))
 
-    def _hash_cache_key(self, console_id: int, game_path: str) -> tuple[int, str]:
+    def _match_cache_key(self, console_id: int, game_path: str) -> tuple[int, str]:
         return console_id, self._normalize_rom_path(game_path)
+
+    def _get_cached_match(self, console_id: int, game_path: str) -> tuple[int, str] | None:
+        cache_key = self._match_cache_key(console_id, game_path)
+        if self._cached_match_key == cache_key:
+            return self._cached_match
+        return None
+
+    def _set_cached_match(
+        self, console_id: int, game_path: str, game_id: int, matched_by: str
+    ) -> None:
+        self._cached_match_key = self._match_cache_key(console_id, game_path)
+        self._cached_match = (game_id, matched_by)
 
     def _resolve_hash_path(self, game_path: str) -> str | None:
         game_path = self._normalize_rom_path(game_path) if game_path else game_path
@@ -368,21 +310,7 @@ class RetroAchievements:
 
         return entry_path
 
-    def _get_cached_hash(self, console_id: int, game_path: str) -> str | None:
-        cache_key = self._hash_cache_key(console_id, game_path)
-        if self._cached_hash_key == cache_key:
-            return self._cached_hash
-        return None
-
-    def _set_cached_hash(self, console_id: int, game_path: str, game_hash: str) -> None:
-        self._cached_hash_key = self._hash_cache_key(console_id, game_path)
-        self._cached_hash = game_hash
-
     def _hash_game_file_sync(self, console_id: int, game_path: str) -> str | None:
-        cached = self._get_cached_hash(console_id, game_path)
-        if cached is not None:
-            return cached
-
         if not os.path.isfile(self.rahasher_path):
             self.logger.error(f"RAHasher not found at {self.rahasher_path}")
             return None
@@ -410,17 +338,12 @@ class RetroAchievements:
         for line in reversed((result.stdout or "").strip().splitlines()):
             candidate = line.strip()
             if re.fullmatch(r"[0-9a-fA-F]{32}", candidate):
-                game_hash = candidate.lower()
-                self._set_cached_hash(console_id, game_path, game_hash)
-                return game_hash
+                return candidate.lower()
 
         self.logger.warning(f"RAHasher produced no hash for {hash_path}")
         return None
 
     async def _hash_game_file(self, console_id: int, game_path: str) -> str | None:
-        cached = self._get_cached_hash(console_id, game_path)
-        if cached is not None:
-            return cached
         return await asyncio.to_thread(self._hash_game_file_sync, console_id, game_path)
 
     def _find_game_by_hash(self, games: list[dict], game_hash: str) -> dict | None:
@@ -461,11 +384,6 @@ class RetroAchievements:
         badge_locked_url = f"{BADGE_BASE}/{badge_name}_lock.png"
         return badge_url, badge_locked_url
 
-    def _format_date(self, value: str | None) -> str | None:
-        if not value:
-            return None
-        return value.split(" ")[0]
-
     def _build_achievements_payload(self, progress: dict) -> tuple[list[dict], dict, dict]:
         achievements_map = progress.get("Achievements") or progress.get("achievements") or {}
         achievements: list[dict] = []
@@ -501,9 +419,6 @@ class RetroAchievements:
                     "badge_locked_url": badge_locked_url,
                     "earned": earned,
                     "earned_hardcore": earned_hardcore,
-                    "date_earned": self._format_date(
-                        achievement.get("DateEarned") or achievement.get("dateEarned")
-                    ),
                     "display_order": display_order,
                 }
             )
@@ -512,22 +427,44 @@ class RetroAchievements:
             key=lambda item: (0 if item["earned"] else 1, item["display_order"], item["title"])
         )
 
-        earned_count = sum(1 for item in achievements if item["earned"])
         total_count = len(achievements)
-        earned_points = sum(item["points"] for item in achievements if item["earned"])
         total_points = sum(item["points"] for item in achievements)
-        completion = (
-            f"{round((earned_count / total_count) * 100)}%"
+
+        softcore_earned_count = sum(1 for item in achievements if item["earned"])
+        softcore_earned_points = sum(
+            item["points"] for item in achievements if item["earned"]
+        )
+        softcore_completion = (
+            f"{round((softcore_earned_count / total_count) * 100)}%"
+            if total_count > 0
+            else "0%"
+        )
+
+        hardcore_earned_count = sum(1 for item in achievements if item["earned_hardcore"])
+        hardcore_earned_points = sum(
+            item["points"] for item in achievements if item["earned_hardcore"]
+        )
+        hardcore_completion = (
+            f"{round((hardcore_earned_count / total_count) * 100)}%"
             if total_count > 0
             else "0%"
         )
 
         summary = {
-            "earned_count": earned_count,
-            "total_count": total_count,
-            "earned_points": earned_points,
-            "total_points": total_points,
-            "completion": completion,
+            "softcore": {
+                "earned_count": softcore_earned_count,
+                "total_count": total_count,
+                "earned_points": softcore_earned_points,
+                "total_points": total_points,
+                "completion": softcore_completion,
+            },
+            "hardcore": {
+                "earned_count": hardcore_earned_count,
+                "total_count": total_count,
+                "earned_points": hardcore_earned_points,
+                "total_points": total_points,
+                "completion": hardcore_completion,
+            },
         }
 
         game = {
@@ -537,7 +474,7 @@ class RetroAchievements:
             "image_icon": progress.get("ImageIcon") or progress.get("imageIcon"),
             "user_completion": progress.get("UserCompletion")
             or progress.get("userCompletion")
-            or completion,
+            or softcore_completion,
         }
 
         return achievements, summary, game
@@ -570,28 +507,40 @@ class RetroAchievements:
                     "achievements": [],
                 }
 
-            games = await self._get_game_list(console_id, api_key)
+            cached_match = self._get_cached_match(console_id, game_path)
+            if cached_match is not None:
+                game_id, matched_by = cached_match
+            else:
+                games = await self._get_game_list(console_id, api_key)
 
-            matched_game = None
-            game_hash = await self._hash_game_file(console_id, game_path)
-            if game_hash:
-                matched_game = self._find_game_by_hash(games, game_hash)
+                matched_game = None
+                matched_by = None
+                game_hash = await self._hash_game_file(console_id, game_path)
+                if game_hash:
+                    matched_game = self._find_game_by_hash(games, game_hash)
+                    if matched_game is not None:
+                        matched_by = "hash"
 
-            if matched_game is None:
-                matched_game = self._find_game_by_title(games, game_name)
+                if matched_game is None:
+                    matched_game = self._find_game_by_title(games, game_name)
+                    if matched_game is not None:
+                        matched_by = "name"
 
-            if matched_game is None:
-                return {
-                    "status": "not_found",
-                    "message": "Game was not found.",
-                    "game": None,
-                    "summary": None,
-                    "achievements": [],
-                }
+                if matched_game is None:
+                    return {
+                        "status": "not_found",
+                        "message": "Game was not found.",
+                        "game": None,
+                        "summary": None,
+                        "achievements": [],
+                    }
 
-            game_id = int(matched_game.get("ID") or matched_game.get("id"))
+                game_id = int(matched_game.get("ID") or matched_game.get("id"))
+                self._set_cached_match(console_id, game_path, game_id, matched_by)
+
             progress = await self._get_game_progress(game_id, username, api_key)
             achievements, summary, game = self._build_achievements_payload(progress)
+            game["matched_by"] = matched_by
 
             return {
                 "status": "ok",
