@@ -25,6 +25,7 @@ from bs4 import BeautifulSoup
 ACTION_GROUPS = {
     "quick": [
         "display-view-game-info",
+        "display-view-retroachievements",
         "display-view-pdf",
         "quick-load-state",
         "quick-save-state",
@@ -588,6 +589,16 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
+    view_achievements_action = {
+        "id": "display-view-retroachievements",
+        "name": "Achievements",
+        "category": "Quick",
+        "icon": {"type": "path", "value": "RD-emblem-favorite"},
+        "action": {"type": "builtin", "operation": "view_retroachievements"},
+        "systems": "*",
+        "emulators": "*",
+    }
+
     # Define Quit action (last in Quick Menu)
     quit_action = {
         "id": "quick-quit-component",
@@ -600,7 +611,8 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
     }
 
     actions.insert(0, view_game_info_action)
-    actions.insert(1, view_manual_action)
+    actions.insert(1, view_achievements_action)
+    actions.insert(2, view_manual_action)
     actions.append(quit_action)
 
     # Add Azahar to load and save state actions

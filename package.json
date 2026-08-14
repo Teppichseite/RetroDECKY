@@ -52,6 +52,14 @@
     "react-pdf": "^10.2.0",
     "tslib": "^2.7.0"
   },
+  "remote_binary_bundling" : true,
+  "remote_binary": [
+    {
+      "name": "RAHasher.zip",
+      "url": "https://github.com/RetroAchievements/RALibretro/releases/download/1.8.4/RAHasher-x64-Linux-1.8.4.zip",
+      "sha256hash": "406245d66805e3e14d093a162e2b8cbfce3317342e913444b0f4d401ed0b39d6"
+    }
+  ],
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [

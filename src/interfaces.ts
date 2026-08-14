@@ -51,6 +51,7 @@ export interface GameEvent {
   system_metadata: SystemMetadata | null;
   component: string | null;
   component_metadata: ComponentMetadata | null;
+  retro_achievements_available: boolean;
 }
 
 export interface HotkeyLabel {
@@ -68,15 +69,15 @@ export interface Action {
     value: string;
   };
   action:
-    | {
-        type: "hotkey";
-        operation: "hold" | "press";
-        keys: string[];
-      }
-    | {
-        type: "builtin";
-        operation: "view_manual" | "view_game_info" | "exit";
-      };
+  | {
+    type: "hotkey";
+    operation: "hold" | "press";
+    keys: string[];
+  }
+  | {
+    type: "builtin";
+    operation: "view_manual" | "view_game_info" | "view_retroachievements" | "exit";
+  };
   systems: "*" | string[];
   emulators: "*" | (string | string[])[];
   hotkeyLabels: HotkeyLabel[];
@@ -106,3 +107,69 @@ export interface SetupState {
 }
 
 export type SettingsKey = string;
+
+export interface RaStatus {
+  configured: boolean;
+  username: string | null;
+}
+
+export interface RaSaveResult {
+  saved: boolean;
+  user: string | null;
+  error: string | null;
+}
+
+export interface RaClearResult {
+  cleared: boolean;
+}
+
+export interface RaAchievement {
+  id: number;
+  title: string;
+  description: string;
+  points: number;
+  badge_url: string | null;
+  badge_locked_url: string | null;
+  earned: boolean;
+  earned_hardcore: boolean;
+  display_order: number;
+}
+
+export interface RaProgressSummary {
+  earned_count: number;
+  total_count: number;
+  earned_points: number;
+  total_points: number;
+  completion: string;
+}
+
+export interface RaGameSummary {
+  softcore: RaProgressSummary;
+  hardcore: RaProgressSummary;
+}
+
+export type RaMatchMethod = "hash" | "name";
+
+export interface RaGameInfo {
+  id: number;
+  title: string;
+  console_name: string;
+  image_icon: string | null;
+  user_completion: string;
+  matched_by: RaMatchMethod;
+}
+
+export type RaGameResultStatus =
+  | "not_configured"
+  | "no_console"
+  | "not_found"
+  | "error"
+  | "ok";
+
+export interface RaGameResult {
+  status: RaGameResultStatus;
+  message: string | null;
+  game: RaGameInfo | null;
+  summary: RaGameSummary | null;
+  achievements: RaAchievement[];
+}

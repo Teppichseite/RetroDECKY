@@ -16,6 +16,22 @@
     "hotkeyLabels": []
   },
   {
+    "id": "display-view-retroachievements",
+    "name": "Achievements",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-favorite"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "view_retroachievements"
+    },
+    "systems": "*",
+    "emulators": "*",
+    "hotkeyLabels": []
+  },
+  {
     "id": "display-view-pdf",
     "name": "View Manual",
     "category": "Quick",

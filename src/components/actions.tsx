@@ -16,6 +16,7 @@ import { ActionModal } from "./action-modal";
 import { PdfViewerModal } from "./viewers/pdf-viewer";
 import { DocumentListModal } from "./document-list-modal";
 import { GameInfoModal } from "./game-info-modal";
+import { RaAchievementsModal } from "./retro-achievements";
 
 export const ActionsComponent = () => {
   const { displayedActions } = useMenuContext();
@@ -172,6 +173,17 @@ export const ActionComponent = ({
     );
   };
 
+  const openRetroAchievementsModal = () => {
+    setFocusedElement(null);
+    showModal(
+      <RaAchievementsModal
+        gameEvent={gameEvent}
+        onClose={() => setFocusedElement(`action:${action.id}`)}
+      />,
+      findSP()
+    );
+  };
+
   const onOpenModal = () => {
     if (isManualViewAction) {
       openManualListModal();
@@ -191,6 +203,9 @@ export const ActionComponent = ({
     action.action.type === "builtin" && action.action.operation === "view_manual";
   const isGameInfoAction =
     action.action.type === "builtin" && action.action.operation === "view_game_info";
+  const isRetroAchievementsAction =
+    action.action.type === "builtin" &&
+    action.action.operation === "view_retroachievements";
   const showInfoButton =
     isFocused && (action.action.type !== "builtin" || isManualViewAction);
   const isDisabled =
@@ -216,6 +231,11 @@ export const ActionComponent = ({
 
     if (isGameInfoAction) {
       openGameInfoModal();
+      return;
+    }
+
+    if (isRetroAchievementsAction) {
+      openRetroAchievementsModal();
       return;
     }
 

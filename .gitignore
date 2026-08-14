@@ -62,5 +62,8 @@ py_modules/*
 !py_modules/es_de_helper.py
 !py_modules/paths_resolver.py
 !py_modules/custom_documents.py
+!py_modules/retro_achievements.py
+
+bin_local/
 
 test_script.py

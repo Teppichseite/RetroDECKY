@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { ButtonItem, ToggleField } from "@decky/ui";
+import { ButtonItem, ToggleField, findSP, showModal } from "@decky/ui";
 import { ButtonItemIconContent } from "./shared";
 import { getIconPath } from "../utils";
-import { getSettingBe, setSettingBe } from "../backend";
+import { getSettingBe, setSettingBe, getRetroAchievementsStatusBe } from "../backend";
 import { SettingsKey } from "../interfaces";
+import { RaSettingsModal } from "./retro-achievements";
 
 const useSettingToggle = (
   key: SettingsKey,
@@ -29,11 +30,33 @@ const useSettingToggle = (
 
 export const Settings = () => {
   const [showSettings, setShowSettings] = useState(false);
+  const [raStatusDescription, setRaStatusDescription] = useState("Not configured");
 
   const [autoStartEnabled, setAutoStartEnabled] = useSettingToggle(
     "autoStartEnabled",
     false
   );
+
+  const refreshRaStatus = () => {
+    getRetroAchievementsStatusBe().then((status) => {
+      setRaStatusDescription(
+        status.configured && status.username
+          ? `Signed in as ${status.username}`
+          : "Not configured"
+      );
+    });
+  };
+
+  useEffect(() => {
+    refreshRaStatus();
+  }, []);
+
+  const openRaSettings = () => {
+    showModal(
+      <RaSettingsModal onSaved={refreshRaStatus} />,
+      findSP()
+    );
+  };
 
   return (
     <div>
@@ -63,6 +86,22 @@ export const Settings = () => {
             checked={autoStartEnabled}
             onChange={setAutoStartEnabled}
           />
+          <ButtonItem layout="below" onClick={openRaSettings}>
+            <ButtonItemIconContent
+              icon={
+                <img
+                  src={getIconPath("RD-emblem-favorite")}
+                  width={24}
+                  height={24}
+                />
+              }
+            >
+              <div>
+                <div>RetroAchievements</div>
+                <div style={{ fontSize: "12px", opacity: 0.8 }}>{raStatusDescription}</div>
+              </div>
+            </ButtonItemIconContent>
+          </ButtonItem>
         </div>
       )}
     </div>

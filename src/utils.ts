@@ -20,6 +20,15 @@ export const filterActions = (actions: Action[], gameEvent: GameEvent): Action[]
           return e?.toLowerCase() === gameEvent.emulator_name[i]?.toLowerCase();
         });
       });
+    })
+    .filter((action) => {
+      if (
+        action.action.type === "builtin" &&
+        action.action.operation === "view_retroachievements"
+      ) {
+        return gameEvent.retro_achievements_available;
+      }
+      return true;
     });
 };
 
