@@ -64,6 +64,6 @@ py_modules/*
 !py_modules/custom_documents.py
 !py_modules/retro_achievements.py
 
-assets/bin/RAHasher
+bin/*
 
 test_script.py

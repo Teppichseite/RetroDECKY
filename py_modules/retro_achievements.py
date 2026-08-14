@@ -3,11 +3,13 @@ import json
 import os
 import re
 import ssl
+import stat
 import subprocess
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import zipfile
 from logging import Logger
 
 API_BASE = "https://retroachievements.org/API"
@@ -120,11 +122,15 @@ def _build_ssl_context() -> ssl.SSLContext:
 
 
 class RetroAchievements:
-    def __init__(self, logger: Logger, settings, plugin_dir: str):
+    def __init__(self, logger: Logger, settings, plugin_dir: str, runtime_dir: str):
         self.logger = logger
         self.settings = settings
         self.plugin_dir = plugin_dir
-        self.rahasher_path = os.path.join(plugin_dir, "assets", "bin", "RAHasher")
+        self.runtime_dir = runtime_dir
+        self.rahasher_zip_path = os.path.join(plugin_dir, "bin", "RAHasher.zip")
+        self.rahasher_dir = os.path.join(runtime_dir, "RAHasher")
+        self.rahasher_path = os.path.join(self.rahasher_dir, "bin64", "RAHasher")
+        self._rahasher_unzipped = False
         self._cached_match_key: tuple[int, str] | None = None
         self._cached_match: tuple[int, str] | None = None  # game_id, "hash" | "name"
         self._game_list_cache: dict[int, tuple[float, list[dict]]] = {}
@@ -310,9 +316,45 @@ class RetroAchievements:
 
         return entry_path
 
+    def _ensure_rahasher(self) -> bool:
+        if self._rahasher_unzipped:
+            return True
+
+        if os.path.isfile(self.rahasher_path):
+            self._rahasher_unzipped = True
+            return True
+
+        if not os.path.isfile(self.rahasher_zip_path):
+            self.logger.error(f"RAHasher zip not found at {self.rahasher_zip_path}")
+            return False
+
+        try:
+            os.makedirs(self.rahasher_dir, exist_ok=True)
+            with zipfile.ZipFile(self.rahasher_zip_path, "r") as archive:
+                archive.extractall(self.rahasher_dir)
+
+            if not os.path.isfile(self.rahasher_path):
+                self.logger.error(
+                    f"RAHasher binary missing after unzip at {self.rahasher_path}"
+                )
+                return False
+
+            os.chmod(
+                self.rahasher_path,
+                os.stat(self.rahasher_path).st_mode
+                | stat.S_IXUSR
+                | stat.S_IXGRP
+                | stat.S_IXOTH,
+            )
+            self._rahasher_unzipped = True
+            self.logger.info(f"Unzipped RAHasher to {self.rahasher_path}")
+            return True
+        except Exception as e:
+            self.logger.error(f"Failed to unzip RAHasher: {e}")
+            return False
+
     def _hash_game_file_sync(self, console_id: int, game_path: str) -> str | None:
-        if not os.path.isfile(self.rahasher_path):
-            self.logger.error(f"RAHasher not found at {self.rahasher_path}")
+        if not self._ensure_rahasher():
             return None
 
         hash_path = self._resolve_hash_path(game_path)

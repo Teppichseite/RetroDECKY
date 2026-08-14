@@ -242,6 +242,7 @@ class Plugin:
             decky.logger,
             self.settings,
             decky.DECKY_PLUGIN_DIR,
+            decky.DECKY_PLUGIN_RUNTIME_DIR,
         )
 
         self._check_es_de_event_scripts()
