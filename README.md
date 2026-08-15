@@ -17,12 +17,12 @@
 
 <p>
   <img src="./assets/screenshots/screenshot8.png" alt="RetroDECKY Metadata" width="300">
-  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Documents" width="300">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkeys" width="300">
 </p>
 
 <p>
   <img src="./assets/screenshots/screenshot5.png" alt="RetroDECKY PDF Viewer" width="300">
-  <img src="./assets/screenshots/screenshot6.png" alt="RetroDECKY Text Viewer" width="300">
+  <img src="./assets/screenshots/screenshot9.png" alt="RetroDECKY Achievements" width="300">
 </p>
 
 ---

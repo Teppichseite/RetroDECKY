@@ -17,6 +17,7 @@ BADGE_BASE = "https://media.retroachievements.org/Badge"
 
 GAME_LIST_CACHE_TTL = 24 * 60 * 60
 REQUEST_TIMEOUT = 30
+RAHASHER_TIMEOUT = 60
 
 SETTINGS_USERNAME_KEY = "retroAchievementsUsername"
 SETTINGS_API_KEY = "retroAchievementsApiKey"
@@ -357,12 +358,20 @@ class RetroAchievements:
         if not hash_path:
             return None
 
-        result = subprocess.run(
-            [self.rahasher_path, str(console_id), hash_path],
-            capture_output=True,
-            text=True,
-            env={**os.environ, "LD_LIBRARY_PATH": ""},
-        )
+        try:
+            result = subprocess.run(
+                [self.rahasher_path, str(console_id), hash_path],
+                capture_output=True,
+                text=True,
+                timeout=RAHASHER_TIMEOUT,
+                env={**os.environ, "LD_LIBRARY_PATH": ""},
+            )
+        except subprocess.TimeoutExpired:
+            self.logger.warning(
+                f"RAHasher timed out after {RAHASHER_TIMEOUT}s for {hash_path} "
+                f"(console {console_id})"
+            )
+            return None
 
         if result.returncode != 0:
             stderr = (result.stderr or "").strip()
