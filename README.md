@@ -16,13 +16,13 @@
 </p>
 
 <p>
-  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkey Explanation" width="300">
-  <img src="./assets/screenshots/screenshot7.png" alt="RetroDECKY Documents" width="300">
+  <img src="./assets/screenshots/screenshot8.png" alt="RetroDECKY Metadata" width="300">
+  <img src="./assets/screenshots/screenshot4.png" alt="RetroDECKY Hotkeys" width="300">
 </p>
 
 <p>
   <img src="./assets/screenshots/screenshot5.png" alt="RetroDECKY PDF Viewer" width="300">
-  <img src="./assets/screenshots/screenshot6.png" alt="RetroDECKY Text Viewer" width="300">
+  <img src="./assets/screenshots/screenshot9.png" alt="RetroDECKY Achievements" width="300">
 </p>
 
 ---
@@ -48,7 +48,7 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - **Running Game Actions** - Displays hotkey actions specific to the currently running game.
 
-- **Running Game Information** - Displays data from ES-DE such as artwork, covers and metadata.
+- **Running Game Information** - Displays data from ES-DE and RetroDECK such as artwork, covers and metadata.
 
 - **Hotkey Triggering** - Execute hotkey functions through Decky menu buttons instead of keyboard hotkeys, button combos or radial menus.
 
@@ -56,12 +56,16 @@ RetroDECKY addresses these issues by providing a **content-aware** in-game menu 
 
 - **PDF Manual Viewer** - Read game manuals without leaving the game session.
 
+- **Additional Documents** - Add PDF, TXT, or Markdown documents per game and view them during the game session
+
+- **RetroAchievements** - View achievement progress for the currently running game, including softcore and hardcore mode
+
 ---
 
 ## Known Issues
 
-- Hotkey actions requiring **held inputs** like fast-forward are not fully supported.
-- The **PDF manual viewer** is currently experimental.
+- Hotkey actions requiring **held inputs** like fast-forward are currently not fully supported.
+- Launching games directly via the Steam library is currently not supported.
 
 ---
 
@@ -119,28 +123,80 @@ Choose one of the following methods:
 
 ---
 
+## Guides
+
+### Custom Documents
+
+You can add custom documents which you can view during a game session. Supported file types are **PDF**, **TXT**, and **Markdown** (`.md` / `.markdown`). There are two ways to add documents:
+
+1. **In the plugin UI**
+    - While the game is running, open **RetroDECKY** from the Steam **Quick Access Menu**.
+    - Navigate to the button **View Manual** and and tap on the document button right next to it
+    - Tap **Add Document**, choose a file in the system picker (PDF / TXT / Markdown). The plugin copies it into that game’s documents folder and refreshes the list.
+2. **Manually**
+    - Custom documents are stored under `<storage path>/retrodecky/documents/<system>/<relative path for rom>`
+    - E.g. for the rom path `~/retrodeck/roms/snes/game A.zip` the documents would be stored under `~/retrodeck/storage/retrodecky/documents/snes/game A/`
+    - You can just add your documents to the folder and they will be **visible in the plugin UI**
+
+### RetroAchievements
+
+RetroDECKY can show [RetroAchievements](https://retroachievements.org/) progress for the currently running game, including **softcore** and **hardcore** completion.
+
+RetroDECKY only **displays** achievement progress. To actually **earn** achievements while playing, you still need to set up RetroAchievements in **RetroDECK** for the respective emulator as usual.
+
+1. While no game is running, open **RetroDECKY** from the Steam **Quick Access Menu**.
+1. Go to **Settings** > **RetroAchievements**.
+2. Enter your RetroAchievements **username** and **API key** (from your [RetroAchievements control panel](https://retroachievements.org/settings?tab=applications)), then save.
+3. While a supported game is running, click on the "Achievements" button from the in-game menu to see unlocked and locked achievements.
+
+Games are matched to RetroAchievements first by **ROM hash**. For some file extensions hashing is not supported — notably Dolphin **`.rvz`** and PSP **`.cso`**. In those cases RetroDECKY falls back to matching the game **by name**.
+
+---
+
 ## Architecture: How does it work?
 
-**RetroDECKY** integrates with RetroDECK using through ES-DE event scripts.
+RetroDECKY sits between **ES-DE / RetroDECK** (which runs games and fires event scripts) and the **SteamOS** UI.
+
+- **Local HTTP service** — Receives game lifecycle **POSTs** from ES-DE scripts and **serves** ES-DE media and custom documents so the **Frontend** can load covers and manuals.
+
+- **Decky backend** — The plugin’s Python side that **Decky Loader** talks to: the UI **calls into** it for actions, settings, setup checks, and document lists (the usual Decky plugin channel, separate from the localhost HTTP service above).
+
+- **Event emission** — When a game event POST is handled, the backend **emits** an update through Decky event emitter so the menu **refreshes immediately** instead of polling for the active game.
+
+The **React** frontend loads media data from the local service, uses the **Decky backend** for structured data, and can send **simulated keyboard shortcuts** to the active emulator or component.
+
+<p>
+  <img src="./assets/architecture/architecture.svg" alt="RetroDECKY architecture" width="700">  
+</p>
 
 ### Game Event Detection
 
-1. When a game launches in RetroDECK via the **ES-DE** component, a custom event script is executed. RetroDECKY injects this script via `~/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts` directory during initialization.
-2. The script sends the games metadata and assets to the plugin backend.
-3. The plugin updates the menu with metadata and assets based on the detected game in combination with what system.
+RetroDECKY uses [ES-DE custom event scripts](https://github.com/RetroDECK/ES-DE/blob/retrodeck-main/INSTALL.md#custom-event-scripts). The **game-start** and **game-end** events notify the plugin when a session begins and ends so the menu can show the right game context and metadata.
+
+Scripts live under:
+
+```
+/home/deck/.var/app/net.retrodeck.retrodeck/config/ES-DE/scripts
+├── game-end
+│   └── game_end_RetroDECKY_v1.sh
+└── game-start
+    └── game_start_RetroDECKY_v1.sh
+```
+
+Each script sends a small background HTTP **POST** request to RetroDECKY’s local **`/api/game-event`** endpoint: one payload marks a **game start**, the other a **game end**, and both include the same four pieces of information ES-DE passes in: **ROM path**, **game name**, **system name**, and **system full name**. That lets the plugin know which game is currently running.
 
 #### Detected ES-DE Metadata
 
-The plugin automatically resolves assets using **ES-DE** metadata directories under `retrodeck/ES-DE/`.
+The plugin automatically resolves assets using **ES-DE** metadata directories under `${retrodeck_home_path}$/ES-DE/` and under `${retrodeck_downloaded_media_path}$`.
 
 Supported media types include:
 
-- **Cover artwork**
 - **Gamelists**
-- **Game manuals**
+- **Cover artwork**
 - **Miximages**
+- **Game manuals**
 
-Metadata and assets served through a **local HTTP server** and displayed within the plugin interface.
+Metadata and assets are served through the **local HTTP** layer above and shown in the **Decky** UI.
 
 ---
 
@@ -158,12 +214,15 @@ RetroDECKY supports most component hotkeys documented here:
 
 ---
 
-### Game Manual Viewer
+### Game PDF Viewer
 
-Current implementation is a **proof of concept**.
+The plugin uses PDF.js and react-pdf to render PDF files. Internally it uses WASM to improve rendering performance.
 
-- Game manuals are stored as **PDF files**.
-- Rendering is handled using **PDF.js**.
+---
+
+### RetroAchievements
+
+RetroDECKY uses the official [RetroAchievements API](https://api-docs.retroachievements.org/) to fetch achievement progress for the currently running game. ROM hashes for game matching are computed with [RAHasher](https://github.com/RetroAchievements/RALibretro) from RALibretro (bundled with the plugin).
 
 ---
 

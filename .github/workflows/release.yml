@@ -39,7 +39,7 @@ jobs:
         run: |
           pnpm i
           pnpm run build
-        continue-on-error: true
+        continue-on-error: false
 
       - name: Download Decky Plugin CLI
         run: |

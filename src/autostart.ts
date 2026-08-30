@@ -13,7 +13,7 @@ declare var appStore: {
   allApps: AppOverview[];
 };
 
-const RETRODECK_APP_NAME = 'RetroDECK';
+const RETRODECK_APP_NAME = "RetroDECK";
 
 async function waitForAppStore(timeoutMs = 10000, intervalMs = 250): Promise<boolean> {
   const start = Date.now();
@@ -39,10 +39,7 @@ async function waitForSP(timeoutMs = 10000, intervalMs = 250): Promise<boolean> 
 }
 
 export async function findRetroDECKApp(): Promise<AppOverview | undefined> {
-  const [appStoreReady, spReady] = await Promise.all([
-    waitForAppStore(),
-    waitForSP()
-  ]);
+  const [appStoreReady, spReady] = await Promise.all([waitForAppStore(), waitForSP()]);
 
   if (!appStoreReady || !spReady) {
     console.warn("RetroDECKY: Could not find RetroDECK app in Steam library");
@@ -70,29 +67,28 @@ let wasStarted = false;
 
 const wasRetroDECKStarted = () => {
   return sessionStorage.getItem("RetroDECKY_startup_finished") === "true" || wasStarted;
-}
+};
 
 const setRetroDECKStarted = () => {
   wasStarted = true;
   sessionStorage.setItem("RetroDECKY_startup_finished", "true");
-}
+};
 
 export function startRetroDECKOnStartup() {
   try {
     const historyExport = findModuleChild((m) => {
       if (typeof m !== "object") return undefined;
       for (let prop in m) {
-        if (m[prop]?.m_history) return m[prop].m_history
+        if (m[prop]?.m_history) return m[prop].m_history;
       }
-    })
+    });
 
     if (!historyExport) {
       console.warn("RetroDECKY: Could not find history module");
-      return () => { };
+      return () => {};
     }
 
     const unlisten = historyExport.listen(async (info: any) => {
-
       if (info.pathname !== "/library/home") {
         return;
       }
@@ -114,12 +110,11 @@ export function startRetroDECKOnStartup() {
 
         await startRetroDECK();
       });
-
     });
 
     return unlisten;
   } catch (error) {
     console.error("RetroDECKY: Error starting RetroDECK on startup", error);
-    return () => { };
+    return () => {};
   }
 }

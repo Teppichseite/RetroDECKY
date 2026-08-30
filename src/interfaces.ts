@@ -1,54 +1,175 @@
+export interface GameMetadata {
+  desc: string | null;
+  rating: string | null;
+  releasedate: string | null;
+  developer: string | null;
+  publisher: string | null;
+  genre: string | null;
+  players: string | null;
+}
+
+export interface SystemMetadata {
+  name: string | null;
+  description: string | null;
+  manufacturer: string | null;
+  release_year: string | null;
+  release_date: string | null;
+  release_date_formatted: string | null;
+  hardware_type: string | null;
+  cover_size: string | null;
+  cover_size_type: string | null;
+  color: string | null;
+  color_palette_1: string | null;
+  color_palette_2: string | null;
+  color_palette_3: string | null;
+  color_palette_4: string | null;
+  cart_size: string | null;
+}
+
+export interface ComponentMetadata {
+  name: string | null;
+  description: string | null;
+  url_rdwiki: string | null;
+  url_webpage: string | null;
+  url_donation_purchase: string | string[] | null;
+  url_source: string | null;
+  system: string | string[] | null;
+  component_type: string | null;
+  system_friendly_name: string | string[] | null;
+}
+
 export interface GameEvent {
-    type: "game_start" | "game_end";
-    path: string;
-    name: string;
-    system_name: string;
-    system_full_name: string;
-    image_path: string | null;
-    manual_path: string | null;
-    emulator_name: string[];
+  type: "game_start" | "game_end";
+  path: string;
+  name: string;
+  system_name: string;
+  system_full_name: string;
+  image_path: string | null;
+  manual_path: string | null;
+  emulator_name: string[];
+  game_metadata: GameMetadata;
+  system_metadata: SystemMetadata | null;
+  component: string | null;
+  component_metadata: ComponentMetadata | null;
+  retro_achievements_available: boolean;
 }
 
 export interface HotkeyLabel {
-    name: 'string';
-    keys: string[];
+  name: "string";
+  keys: string[];
 }
 
 export interface Action {
-    id: string;
-    name: string;
-    category?: string;
-    disabled?: boolean;
-    icon: {
-        type: "path";
-        value: string;
-    };
-    action: {
-        type: "hotkey";
-        operation: "hold" | "press";
-        keys: string[];
-    } | {
-        type: "builtin";
-        operation: "view_manual" | "exit";
-    };
-    systems: "*" | string[];
-    emulators: "*" | (string | string[])[];
-    hotkeyLabels: HotkeyLabel[]
+  id: string;
+  name: string;
+  category?: string;
+  disabled?: boolean;
+  icon: {
+    type: "path";
+    value: string;
+  };
+  action:
+  | {
+    type: "hotkey";
+    operation: "hold" | "press";
+    keys: string[];
+  }
+  | {
+    type: "builtin";
+    operation: "view_manual" | "view_game_info" | "view_retroachievements" | "exit";
+  };
+  systems: "*" | string[];
+  emulators: "*" | (string | string[])[];
+  hotkeyLabels: HotkeyLabel[];
 }
 
-export interface PdfViewState {
-    pageNumber: number;
-    zoom: number;
-    totalPages: number;
-    position: {
-        x: number;
-        y: number;
-    }
+export interface PersistedPdfViewState {
+  pageNumber: number;
+  zoom: number;
+  position: {
+    x: number;
+    y: number;
+  };
+}
+
+export interface PdfViewState extends PersistedPdfViewState {
+  totalPages: number;
+}
+
+export interface TextViewState {
+  fontSize: number;
+  scrollTop: number;
 }
 
 export interface SetupState {
-    isRetrodeckFlatpakInstalled: boolean;
-    areEsDeEventScriptsCreated: boolean;
+  isRetrodeckFlatpakInstalled: boolean;
+  areEsDeEventScriptsCreated: boolean;
 }
 
 export type SettingsKey = string;
+
+export interface RaStatus {
+  configured: boolean;
+  username: string | null;
+}
+
+export interface RaSaveResult {
+  saved: boolean;
+  user: string | null;
+  error: string | null;
+}
+
+export interface RaClearResult {
+  cleared: boolean;
+}
+
+export interface RaAchievement {
+  id: number;
+  title: string;
+  description: string;
+  points: number;
+  badge_url: string | null;
+  badge_locked_url: string | null;
+  earned: boolean;
+  earned_hardcore: boolean;
+  display_order: number;
+}
+
+export interface RaProgressSummary {
+  earned_count: number;
+  total_count: number;
+  earned_points: number;
+  total_points: number;
+  completion: string;
+}
+
+export interface RaGameSummary {
+  softcore: RaProgressSummary;
+  hardcore: RaProgressSummary;
+}
+
+export type RaMatchMethod = "hash" | "name";
+
+export interface RaGameInfo {
+  id: number;
+  title: string;
+  console_name: string;
+  image_icon: string | null;
+  user_completion: string;
+  matched_by: RaMatchMethod;
+}
+
+export type RaGameResultStatus =
+  | "not_configured"
+  | "no_console"
+  | "not_found"
+  | "error"
+  | "ok";
+
+export interface RaGameResult {
+  status: RaGameResultStatus;
+  message: string | null;
+  game: RaGameInfo | null;
+  summary: RaGameSummary | null;
+  achievements: RaAchievement[];
+}

@@ -24,6 +24,8 @@ from bs4 import BeautifulSoup
 # Prefix action_id with ! to hide it
 ACTION_GROUPS = {
     "quick": [
+        "display-view-game-info",
+        "display-view-retroachievements",
         "display-view-pdf",
         "quick-load-state",
         "quick-save-state",
@@ -112,21 +114,21 @@ ACTION_GROUPS = {
         "retroarch-ai-service-onoff",
         "retroarch-netplay-host-onoff",
     ],
-    "steam": [
-        "steam-escape",
-        "steam-enter",
-        "steam-space",
-        "steam-tab",
-        "steam-control",
-        "steam-alt",
-        "steam-shift",
-        "steam-alt-f4",
-        "steam-f1",
-        "steam-f4",
-        "steam-f5",
-        "steam-f8",
-        "steam-f10",
-        "steam-slash",
+    "keyboard": [
+        "keyboard-escape",
+        "keyboard-enter",
+        "keyboard-space",
+        "keyboard-tab",
+        "keyboard-control",
+        "keyboard-alt",
+        "keyboard-shift",
+        "keyboard-alt-f4",
+        "keyboard-f1",
+        "keyboard-f4",
+        "keyboard-f5",
+        "keyboard-f8",
+        "keyboard-f10",
+        "keyboard-slash",
     ],
     "scummvm": [
         "scummvm-close",
@@ -153,12 +155,21 @@ CATEGORY_ORDER = [
     "Speed",
     "Azahar",
     "Dolphin",
-    "Melonds",
-    "Mame",
-    "Retroarch",
-    "Steam",
-    "Scummvm"
+    "MelonDS",
+    "MAME",
+    "RetroArch",
+    "Keyboard",
+    "ScummVM",
 ]
+
+# Override category display names for ACTION_GROUPS keys.
+# Groups not listed here use group_name.capitalize().
+GROUP_CATEGORY_OVERRIDES: Dict[str, str] = {
+    "melonds": "MelonDS",
+    "mame": "MAME",
+    "retroarch": "RetroArch",
+    "scummvm": "ScummVM",
+}
 
 
 EMULATOR_EXPANDS: Dict[str, List[str]] = {
@@ -184,7 +195,7 @@ EMULATOR_EXPANDS: Dict[str, List[str]] = {
     ],
     "RetroArch": ["RetroArch"],
     "Ruffle": ["Ruffle (Standalone)"],
-    "ScummVM": ["ScummVM"],
+    "ScummVM": ["RetroArch"],
     "Solarus": ["Solarus (Standalone)"],
 }
 
@@ -567,6 +578,27 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
+    # Define View Info action
+    view_game_info_action = {
+        "id": "display-view-game-info",
+        "name": "View Info",
+        "category": "Quick",
+        "icon": {"type": "path", "value": "RD-edit-find"},
+        "action": {"type": "builtin", "operation": "view_game_info"},
+        "systems": "*",
+        "emulators": "*",
+    }
+
+    view_achievements_action = {
+        "id": "display-view-retroachievements",
+        "name": "Achievements",
+        "category": "Quick",
+        "icon": {"type": "path", "value": "RD-emblem-favorite"},
+        "action": {"type": "builtin", "operation": "view_retroachievements"},
+        "systems": "*",
+        "emulators": "*",
+    }
+
     # Define Quit action (last in Quick Menu)
     quit_action = {
         "id": "quick-quit-component",
@@ -578,7 +610,9 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
         "emulators": "*",
     }
 
-    actions.insert(0, view_manual_action)
+    actions.insert(0, view_game_info_action)
+    actions.insert(1, view_achievements_action)
+    actions.insert(2, view_manual_action)
     actions.append(quit_action)
 
     # Add Azahar to load and save state actions
@@ -587,6 +621,24 @@ def modify_actions(actions: List[Dict]) -> List[Dict]:
             emus = action.get("emulators", [])
             if isinstance(emus, list) and "Azahar" not in emus:
                 emus.append("Azahar")
+
+    return actions
+
+
+def apply_keyboard_action_overrides(actions: List[Dict]) -> List[Dict]:
+    """Rename scraped Steam-category actions to Keyboard and show them for all emulators."""
+    keyboard_ids = set(ACTION_GROUPS.get("keyboard", []))
+
+    for action in actions:
+        action_id = action.get("id", "")
+        if action_id.startswith("steam-"):
+            action["id"] = "keyboard-" + action_id[len("steam-") :]
+        elif action_id not in keyboard_ids:
+            continue
+
+        if action.get("id", "") in keyboard_ids:
+            action["emulators"] = "*"
+            action["systems"] = "*"
 
     return actions
 
@@ -604,7 +656,9 @@ def apply_category_overrides(actions: List[Dict]) -> List[Dict]:
                 actual_id = action_id[1:]  # Remove the ! prefix
                 hidden_actions.add(actual_id)
             else:
-                action_to_group[action_id] = group_name.capitalize()
+                action_to_group[action_id] = GROUP_CATEGORY_OVERRIDES.get(
+                    group_name, group_name.capitalize()
+                )
 
     # Filter out hidden actions and apply category overrides
     filtered_actions = []
@@ -793,6 +847,9 @@ def main():
     actions = parse_html(html)
 
     actions = modify_actions(actions)
+
+    # Rename Steam actions to Keyboard and make them available for all emulators
+    actions = apply_keyboard_action_overrides(actions)
 
     # Apply category overrides
     actions = apply_category_overrides(actions)

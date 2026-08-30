@@ -2,10 +2,11 @@ import os
 import subprocess
 
 from es_de_helper import EsDeHelper
-from models import GameEvent, Paths
+from models import GameEvent, GameMetadata, Paths
 from paths_resolver import PathsResolver
 from server import Server
 from custom_documents import CustomDocuments
+from retro_achievements import RetroAchievements, is_ra_available_for_system
 
 import asyncio
 from dataclasses import asdict
@@ -25,6 +26,8 @@ class Plugin:
 
     custom_documents: CustomDocuments = None
 
+    retro_achievements: RetroAchievements = None
+
     game_event: GameEvent = None
 
     settings: SettingsManager = None
@@ -43,35 +46,62 @@ class Plugin:
 
     def _build_game_event(self, raw_data: str) -> GameEvent:
         parts = raw_data.strip().split(";")
-        if len(parts) != 5:
+        if len(parts) < 4:
             decky.logger.error(f"Invalid game event data: {raw_data}")
             return None
 
         rom_path = parts[1]
+        effective_rom_path = self.es_de_helper.resolve_effective_rom_path(rom_path)
         system_name = parts[3]
+        provided_full_name = parts[4].strip() if len(parts) > 4 else ""
+        if provided_full_name == "empty":
+            provided_full_name = ""
+        system_full_name = (
+            provided_full_name
+            or self.es_de_helper.resolve_system_fullname(system_name)
+            or system_name
+        )
 
-        miximage_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "miximages")
-        cover_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "covers")
+        miximage_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "miximages")
+        cover_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "covers")
 
         image_path = miximage_path or cover_path
 
-        manual_path = self.es_de_helper.resolve_relative_media_path(rom_path, system_name, "manuals")
+        manual_path = self.es_de_helper.resolve_relative_media_path(effective_rom_path, system_name, "manuals")
 
-        emulator_name = self.es_de_helper.resolve_emulator_name(system_name)
+        emulator_name = self.es_de_helper.resolve_emulator_name(system_name, effective_rom_path)
+
+        game_data = self.es_de_helper.load_game_data(system_name, effective_rom_path) or {}
+        system_metadata = self.es_de_helper.resolve_system_metadata(system_name)
+
+        component = self.es_de_helper.resolve_component_name(emulator_name)
+        component_metadata = self.es_de_helper.resolve_component_metadata(component)
 
         return GameEvent(
             type=parts[0],
             path=rom_path,
             name=parts[2],
             system_name=system_name,
-            system_full_name=parts[4],
-            emulator_name=emulator_name or parts[4],
+            system_full_name=system_full_name,
+            emulator_name=emulator_name or [],
             image_path=self._resolve_media_path(image_path),
             manual_path=self._resolve_media_path(manual_path),
+            game_metadata=GameMetadata(
+                desc=game_data.get("desc"),
+                rating=game_data.get("rating"),
+                releasedate=game_data.get("releasedate"),
+                developer=game_data.get("developer"),
+                publisher=game_data.get("publisher"),
+                genre=game_data.get("genre"),
+                players=game_data.get("players"),
+            ),
+            system_metadata=system_metadata,
+            component=component,
+            component_metadata=component_metadata,
+            retro_achievements_available=is_ra_available_for_system(system_name),
         )
 
     def _on_game_event(self, game_event_raw: str):
-
         decky.logger.info(f"Raw game event received: {game_event_raw}")
         try:
             game_event = self._build_game_event(game_event_raw)
@@ -85,6 +115,8 @@ class Plugin:
             decky.logger.error(f"Error emitting game event: {e}")
             return
 
+    def send_raw_game_event(self, game_event_raw: str):
+        self._on_game_event(game_event_raw)
 
     def _load_actions(self):
         with open(self.paths.actionsFile, "r") as f:
@@ -114,9 +146,9 @@ class Plugin:
             decky.logger.error(f"Error creating es-de event scripts: {e}")
             return
 
-    def _check_retrodeck_flatpak(self) -> bool:
+    def _check_retrodeck_flatpak(self) -> str | None:
         output = subprocess.run(
-            ['flatpak', 'info', 'net.retrodeck.retrodeck'],
+            ['flatpak', 'info', '--show-location', 'net.retrodeck.retrodeck'],
             capture_output=True,
             env={ "LD_LIBRARY_PATH": "" }
         )
@@ -124,10 +156,16 @@ class Plugin:
         if output.returncode != 0:
             self.is_retrodeck_flatpak_installed = False
             decky.logger.error(f"Failed to check RetroDECK flatpak installation: {output.stderr.decode()}")
-            return False
+            return None
+
+        location = output.stdout.decode().strip()
+        if not location:
+            self.is_retrodeck_flatpak_installed = False
+            decky.logger.error("RetroDECK flatpak location is empty")
+            return None
 
         self.is_retrodeck_flatpak_installed = True
-        return True
+        return location
 
     async def check_setup_state(self) -> [bool, bool]:
         return self.is_retrodeck_flatpak_installed, self.are_es_de_event_scripts_created
@@ -138,6 +176,22 @@ class Plugin:
     async def set_setting(self, key: str, value):
         self.settings.setSetting(key, value)
         self.settings.commit()
+
+    async def get_retroachievements_status(self) -> dict:
+        return await self.retro_achievements.get_status()
+
+    async def save_retroachievements_credentials(self, username: str, api_key: str) -> dict:
+        return await self.retro_achievements.save_credentials(username, api_key)
+
+    async def clear_retroachievements_credentials(self) -> dict:
+        return await self.retro_achievements.clear_credentials()
+
+    async def get_retroachievements_for_game(
+        self, system_name: str, system_full_name: str, game_name: str, game_path: str
+    ) -> dict:
+        return await self.retro_achievements.get_achievements_for_game(
+            system_name, system_full_name, game_name, game_path
+        )
 
     async def list_custom_documents(self, system_name: str, game_path: str) -> list[str]:
         """List all PDF and TXT files in the custom_documents directory for a given game, returns server URLs"""
@@ -155,12 +209,17 @@ class Plugin:
         self.settings = SettingsManager(name="settings", settings_directory=decky.DECKY_PLUGIN_SETTINGS_DIR)
         self.settings.read()
 
-        self._check_retrodeck_flatpak()
-        if not self.is_retrodeck_flatpak_installed:
+        flatpak_location = self._check_retrodeck_flatpak()
+        if not flatpak_location:
             decky.logger.error("RetroDECK flatpak is not installed")
             return
 
-        self.paths = PathsResolver(decky.DECKY_USER_HOME, decky.DECKY_PLUGIN_DIR, decky.logger).resolve()
+        self.paths = PathsResolver(
+            decky.DECKY_USER_HOME,
+            decky.DECKY_PLUGIN_DIR,
+            flatpak_location,
+            decky.logger,
+        ).resolve()
         if self.paths is None:
             decky.logger.error("Failed to resolve paths")
             return
@@ -179,6 +238,13 @@ class Plugin:
             self.server.get_custom_documents_url
         )
 
+        self.retro_achievements = RetroAchievements(
+            decky.logger,
+            self.settings,
+            decky.DECKY_PLUGIN_DIR,
+            decky.DECKY_PLUGIN_RUNTIME_DIR,
+        )
+
         self._check_es_de_event_scripts()
 
         self._load_actions()
@@ -186,8 +252,9 @@ class Plugin:
         decky.logger.info("Loaded RetroDECKY plugin")
 
     async def _unload(self):
+        if self.server is not None:
+            self.server.stop_server()
         decky.logger.info("Unloaded RetroDECKY plugin")
-        pass
 
     async def _uninstall(self):
         try:

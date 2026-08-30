@@ -1,7 +1,8 @@
 from logging import Logger
+import json
 import os
 import xmltodict
-from models import Paths
+from models import ComponentMetadata, Paths, SystemMetadata
 
 class EsDeHelper:
 
@@ -30,6 +31,20 @@ class EsDeHelper:
                 i += 1
         
         return ''.join(result)
+
+    def resolve_effective_rom_path(self, rom_path: str) -> str:
+        rom_path = os.path.normpath(rom_path.replace("\\", ""))
+
+        file_ext = os.path.splitext(rom_path)[1]
+        if not file_ext:
+            return rom_path
+
+        parent = os.path.dirname(rom_path)
+        parent_ext = os.path.splitext(os.path.basename(parent))[1]
+        if parent_ext.lower() == file_ext.lower():
+            return parent
+
+        return rom_path
 
     def resolve_relative_media_path(self, rom_path: str, system_name: str, media_type: str) -> str:
         
@@ -84,6 +99,130 @@ class EsDeHelper:
 
         self.logger.info(f"Loaded {len(self.es_systems)} es-de systems") 
 
+    def resolve_system_fullname(self, system_name: str) -> str | None:
+        if not self.es_systems or system_name not in self.es_systems:
+            return None
+
+        return self.es_systems[system_name].get("fullname")
+
+    def _xml_text(self, value) -> str | None:
+        if value is None:
+            return None
+
+        if isinstance(value, dict):
+            text = value.get("#text")
+            if isinstance(text, str):
+                text = text.strip()
+                return text or None
+            return None
+
+        if isinstance(value, str):
+            text = value.strip()
+            return text or None
+
+        return str(value)
+
+    def _parse_system_metadata_variables(self, variables: dict | None) -> SystemMetadata | None:
+        if not variables or not isinstance(variables, dict):
+            return None
+
+        return SystemMetadata(
+            name=self._xml_text(variables.get("systemName")),
+            description=self._xml_text(variables.get("systemDescription")),
+            manufacturer=self._xml_text(variables.get("systemManufacturer")),
+            release_year=self._xml_text(variables.get("systemReleaseYear")),
+            release_date=self._xml_text(variables.get("systemReleaseDate")),
+            release_date_formatted=self._xml_text(variables.get("systemReleaseDateFormated")),
+            hardware_type=self._xml_text(variables.get("systemHardwareType")),
+            cover_size=self._xml_text(variables.get("systemCoverSize")),
+            cover_size_type=self._xml_text(variables.get("systemCoverSizeType")),
+            color=self._xml_text(variables.get("systemColor")),
+            color_palette_1=self._xml_text(variables.get("systemColorPalette1")),
+            color_palette_2=self._xml_text(variables.get("systemColorPalette2")),
+            color_palette_3=self._xml_text(variables.get("systemColorPalette3")),
+            color_palette_4=self._xml_text(variables.get("systemColorPalette4")),
+            cart_size=self._xml_text(variables.get("systemCartSize")),
+        )
+
+    def resolve_system_metadata(self, system_name: str) -> SystemMetadata | None:
+        metadata_path = os.path.join(self.paths.systemMetadataFolder, f"{system_name}.xml")
+
+        if not os.path.isfile(metadata_path):
+            return None
+
+        try:
+            with open(metadata_path, "r") as f:
+                parsed = xmltodict.parse(f.read())
+            variables = parsed.get("theme", {}).get("variables")
+            return self._parse_system_metadata_variables(variables)
+        except Exception as e:
+            self.logger.error(
+                f"Failed to load system metadata for {system_name} at {metadata_path}: {e}"
+            )
+            return None
+
+    def resolve_component_name(self, emulator_name: list[str] | None) -> str | None:
+        if not emulator_name:
+            return None
+
+        first = emulator_name[0]
+        if not isinstance(first, str):
+            return None
+
+        parts = first.strip().lower().split()
+        if not parts:
+            return None
+
+        return parts[0]
+
+    def _parse_component_metadata(self, data: dict | None) -> ComponentMetadata | None:
+        if not data or not isinstance(data, dict):
+            return None
+
+        return ComponentMetadata(
+            name=data.get("name"),
+            description=data.get("description"),
+            url_rdwiki=data.get("url_rdwiki"),
+            url_webpage=data.get("url_webpage"),
+            url_donation_purchase=data.get("url_donation_purchase"),
+            url_source=data.get("url_source"),
+            system=data.get("system"),
+            component_type=data.get("component_type"),
+            system_friendly_name=data.get("system_friendly_name"),
+        )
+
+    def resolve_component_metadata(self, component_name: str | None) -> ComponentMetadata | None:
+        if not component_name:
+            return None
+
+        manifest_path = os.path.join(
+            self.paths.componentsFolder,
+            component_name,
+            "component_manifest.json",
+        )
+
+        if not os.path.isfile(manifest_path):
+            self.logger.error(f"Component manifest not found at {manifest_path}")
+            return None
+
+        try:
+            with open(manifest_path, "r") as f:
+                parsed = json.load(f)
+
+            if not isinstance(parsed, dict):
+                return None
+
+            entry = parsed.get(component_name)
+            if entry is None and len(parsed) == 1:
+                entry = next(iter(parsed.values()))
+
+            return self._parse_component_metadata(entry)
+        except Exception as e:
+            self.logger.error(
+                f"Failed to load component metadata for {component_name} at {manifest_path}: {e}"
+            )
+            return None
+
     def _preprocess_gamelist_xml(self, xml_string: str) -> dict:
         xml_string = xml_string.lstrip()
         if xml_string.startswith("<?xml"):
@@ -95,20 +234,64 @@ class EsDeHelper:
 
         return wrapped_xml
 
-    def _load_gamelist_alternative_emulator(self, system_name: str):
+    def _load_gamelist(self, system_name: str) -> dict | None:
         gamelist_path = os.path.join(self.paths.esDeUserFolder, "gamelists", system_name, "gamelist.xml")
         try:
             with open(gamelist_path, "r") as f: 
                 xml_content = self._preprocess_gamelist_xml(f.read())
-                gamelist = xmltodict.parse(xml_content)['wrapperRoot']
-
-                if "alternativeEmulator" in gamelist:
-                    return gamelist['alternativeEmulator']['label']
-                
-                return None
+                return xmltodict.parse(xml_content)['wrapperRoot']
         except:
             self.logger.error(f"Failed to load gamelist for system {system_name} at path {gamelist_path}")
             return None
+
+    def _normalize_rom_path_for_gamelist(self, rom_path: str, system_name: str) -> str:
+        rom_path = rom_path.replace("\\", "")
+        rom_path_normalized = os.path.normpath(rom_path)
+        rom_system_folder = os.path.normpath(os.path.join(self.paths.romsFolder, system_name))
+        return os.path.normpath(os.path.relpath(rom_path_normalized, rom_system_folder))
+
+    def _load_gamelist_alternative_emulator(self, system_name: str):
+        gamelist = self._load_gamelist(system_name)
+        if gamelist is None:
+            return None
+
+        if "alternativeEmulator" in gamelist:
+            return gamelist['alternativeEmulator']['label']
+        
+        return None
+
+    def load_game_data(self, system_name: str, rom_path: str) -> dict | None:
+        gamelist = self._load_gamelist(system_name)
+        if gamelist is None or "gameList" not in gamelist:
+            return None
+
+        games = gamelist['gameList']['game']
+        if not isinstance(games, list):
+            games = [games]
+
+        normalized_rom_path = self._normalize_rom_path_for_gamelist(rom_path, system_name)
+
+        for game in games:
+            if game.get('path') is None:
+                continue
+
+            gamelist_path = os.path.normpath(game['path'].strip().removeprefix('./'))
+            if gamelist_path != normalized_rom_path:
+                continue
+
+            return game
+
+        return None
+
+    def _load_gamelist_game_alternative_emulator(self, system_name: str, rom_path: str):
+        game = self.load_game_data(system_name, rom_path)
+        if game is None:
+            return None
+
+        if "altemulator" in game:
+            return game['altemulator']
+
+        return None
         
     def _resolve_emulator_by_command(self, command: dict) -> bool:
         if(command['#text'].strip().startswith("%EMULATOR_RETROARCH%")):
@@ -116,7 +299,7 @@ class EsDeHelper:
 
         return [command['@label'].strip()]
 
-    def resolve_emulator_name(self, system_name: str) -> list[str]:
+    def resolve_emulator_name(self, system_name: str, rom_path: str) -> list[str]:
         if system_name not in self.es_systems:
             return []
 
@@ -124,7 +307,10 @@ class EsDeHelper:
 
         command_list = commands if isinstance(commands, list) else [commands]
 
-        alt_emulator = self._load_gamelist_alternative_emulator(system_name)
+        alt_emulator = self._load_gamelist_game_alternative_emulator(system_name, rom_path)
+        if alt_emulator is None:
+            alt_emulator = self._load_gamelist_alternative_emulator(system_name)
+
         if alt_emulator is not None:
 
             for command in command_list:
@@ -165,8 +351,8 @@ class EsDeHelper:
 
     def remove_es_de_event_scripts(self) -> bool:
         scripts = [
-            ["game-start", "game_start_decky.sh"],
-            ["game-end", "game_end_decky.sh"],
+            ["game-start", "game_start_RetroDECKY_v1.sh"],
+            ["game-end", "game_end_RetroDECKY_v1.sh"],
         ]
 
         for script_name, script_file in scripts:

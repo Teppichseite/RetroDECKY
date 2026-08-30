@@ -1,5 +1,37 @@
 [
   {
+    "id": "display-view-game-info",
+    "name": "View Info",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-edit-find"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "view_game_info"
+    },
+    "systems": "*",
+    "emulators": "*",
+    "hotkeyLabels": []
+  },
+  {
+    "id": "display-view-retroachievements",
+    "name": "Achievements",
+    "category": "Quick",
+    "icon": {
+      "type": "path",
+      "value": "RD-emblem-favorite"
+    },
+    "action": {
+      "type": "builtin",
+      "operation": "view_retroachievements"
+    },
+    "systems": "*",
+    "emulators": "*",
+    "hotkeyLabels": []
+  },
+  {
     "id": "display-view-pdf",
     "name": "View Manual",
     "category": "Quick",
@@ -2036,7 +2068,7 @@
   {
     "id": "melonds-closeopen-lid",
     "name": "Close/Open Lid",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-emblem-downloads"
@@ -2066,7 +2098,7 @@
   {
     "id": "melonds-sunlight",
     "name": "Sunlight +",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-list-add"
@@ -2096,7 +2128,7 @@
   {
     "id": "melonds-sunlight",
     "name": "Sunlight -",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-list-remove"
@@ -2126,7 +2158,7 @@
   {
     "id": "melonds-play-microphone",
     "name": "Play Microphone",
-    "category": "Melonds",
+    "category": "MelonDS",
     "icon": {
       "type": "path",
       "value": "RD-media-playback-start"
@@ -2156,7 +2188,7 @@
   {
     "id": "mame-service-mode",
     "name": "Service Mode",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-emblem-documents"
@@ -2188,7 +2220,7 @@
   {
     "id": "mame-service-button-1",
     "name": "Service Button 1",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-BLUE"
@@ -2220,7 +2252,7 @@
   {
     "id": "mame-service-button-2",
     "name": "Service Button 2",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-GREEN"
@@ -2252,7 +2284,7 @@
   {
     "id": "mame-service-button-3",
     "name": "Service Button 3",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-RED"
@@ -2284,7 +2316,7 @@
   {
     "id": "mame-service-button-4",
     "name": "Service Button 4",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-Arcade-YELLOW"
@@ -2316,7 +2348,7 @@
   {
     "id": "mame-insert-bill-note",
     "name": "Insert Bill / Note",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-emblem-generic"
@@ -2348,7 +2380,7 @@
   {
     "id": "mame-tilt",
     "name": "Tilt",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "rd-tilt"
@@ -2380,7 +2412,7 @@
   {
     "id": "mame-tilt-player-1",
     "name": "Tilt - Player 1",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-1"
@@ -2412,7 +2444,7 @@
   {
     "id": "mame-tilt-player-2",
     "name": "Tilt - Player 2",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-2"
@@ -2444,7 +2476,7 @@
   {
     "id": "mame-tilt-player-3",
     "name": "Tilt - Player 3",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-3"
@@ -2476,7 +2508,7 @@
   {
     "id": "mame-tilt-player-4",
     "name": "Tilt - Player 4",
-    "category": "Mame",
+    "category": "MAME",
     "icon": {
       "type": "path",
       "value": "RD-tilt-4"
@@ -2508,7 +2540,7 @@
   {
     "id": "retroarch-cheats-onoff",
     "name": "Cheats On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-utilities-terminal"
@@ -2538,7 +2570,7 @@
   {
     "id": "retroarch-previous-cheat",
     "name": "Previous Cheat",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-go-previous"
@@ -2568,7 +2600,7 @@
   {
     "id": "retroarch-next-cheat",
     "name": "Next Cheat",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-go-next"
@@ -2598,7 +2630,7 @@
   {
     "id": "retroarch-ai-service-onoff",
     "name": "AI Service On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-godot"
@@ -2628,7 +2660,7 @@
   {
     "id": "retroarch-netplay-host-onoff",
     "name": "Netplay Host On/Off",
-    "category": "Retroarch",
+    "category": "RetroArch",
     "icon": {
       "type": "path",
       "value": "RD-notification-network-ethernet-connected"
@@ -2656,9 +2688,9 @@
     ]
   },
   {
-    "id": "steam-escape",
+    "id": "keyboard-escape",
     "name": "Escape",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-ESC"
@@ -2670,17 +2702,8 @@
         "KEY_ESC"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "GZDoom (Standalone)",
-      "IkemanGO (Standalone)",
-      "OpenBOR (Standalone)",
-      "PC-Systems",
-      "Ruffle (Standalone)",
-      "Solarus (Standalone)"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2691,9 +2714,9 @@
     ]
   },
   {
-    "id": "steam-enter",
+    "id": "keyboard-enter",
     "name": "Enter",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-Enter"
@@ -2705,16 +2728,8 @@
         "KEY_ENTER"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "GZDoom (Standalone)",
-      "IkemanGO (Standalone)",
-      "OpenBOR (Standalone)",
-      "PC-Systems",
-      "Solarus (Standalone)"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2725,9 +2740,9 @@
     ]
   },
   {
-    "id": "steam-space",
+    "id": "keyboard-space",
     "name": "Space",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-space"
@@ -2739,12 +2754,8 @@
         "KEY_SPACE"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2755,9 +2766,9 @@
     ]
   },
   {
-    "id": "steam-tab",
+    "id": "keyboard-tab",
     "name": "Tab",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-Tab"
@@ -2769,12 +2780,8 @@
         "KEY_TAB"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2785,9 +2792,9 @@
     ]
   },
   {
-    "id": "steam-control",
+    "id": "keyboard-control",
     "name": "Control",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-ctrl"
@@ -2799,12 +2806,8 @@
         "KEY_LEFTCTRL"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2815,9 +2818,9 @@
     ]
   },
   {
-    "id": "steam-alt",
+    "id": "keyboard-alt",
     "name": "Alt",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-alt"
@@ -2829,12 +2832,8 @@
         "KEY_LEFTALT"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2845,9 +2844,9 @@
     ]
   },
   {
-    "id": "steam-shift",
+    "id": "keyboard-shift",
     "name": "Shift",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-shift"
@@ -2859,12 +2858,8 @@
         "KEY_LEFTSHIFT"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2875,9 +2870,9 @@
     ]
   },
   {
-    "id": "steam-alt-f4",
+    "id": "keyboard-alt-f4",
     "name": "Alt + F4",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-alt-f4"
@@ -2890,12 +2885,8 @@
         "KEY_F4"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2907,9 +2898,9 @@
     ]
   },
   {
-    "id": "steam-f1",
+    "id": "keyboard-f1",
     "name": "F1",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F1"
@@ -2921,12 +2912,8 @@
         "KEY_F1"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2937,9 +2924,9 @@
     ]
   },
   {
-    "id": "steam-f4",
+    "id": "keyboard-f4",
     "name": "F4",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F4"
@@ -2951,12 +2938,8 @@
         "KEY_F4"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2967,9 +2950,9 @@
     ]
   },
   {
-    "id": "steam-f5",
+    "id": "keyboard-f5",
     "name": "F5",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F5"
@@ -2981,12 +2964,8 @@
         "KEY_F5"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -2997,9 +2976,9 @@
     ]
   },
   {
-    "id": "steam-f8",
+    "id": "keyboard-f8",
     "name": "F8",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-F8"
@@ -3011,12 +2990,8 @@
         "KEY_F8"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -3027,9 +3002,9 @@
     ]
   },
   {
-    "id": "steam-f10",
+    "id": "keyboard-f10",
     "name": "F10",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "rd-pc-call"
@@ -3041,12 +3016,8 @@
         "KEY_F10"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -3057,9 +3028,9 @@
     ]
   },
   {
-    "id": "steam-slash",
+    "id": "keyboard-slash",
     "name": "Slash (/)",
-    "category": "Steam",
+    "category": "Keyboard",
     "icon": {
       "type": "path",
       "value": "RD-frontslash"
@@ -3071,12 +3042,8 @@
         "KEY_SLASH"
       ]
     },
-    "systems": [
-      "PC"
-    ],
-    "emulators": [
-      "PC-Systems"
-    ],
+    "systems": "*",
+    "emulators": "*",
     "hotkeyLabels": [
       {
         "name": "Keyboard",
@@ -3089,7 +3056,7 @@
   {
     "id": "scummvm-close",
     "name": "Close",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-close"
@@ -3105,7 +3072,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3119,7 +3086,7 @@
   {
     "id": "scummvm-open",
     "name": "Open",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-open"
@@ -3135,7 +3102,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3149,7 +3116,7 @@
   {
     "id": "scummvm-give",
     "name": "Give",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-give"
@@ -3165,7 +3132,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3179,7 +3146,7 @@
   {
     "id": "scummvm-pick-up",
     "name": "Pick-Up",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-pickup"
@@ -3195,7 +3162,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3209,7 +3176,7 @@
   {
     "id": "scummvm-use",
     "name": "Use",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-use"
@@ -3225,7 +3192,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3239,7 +3206,7 @@
   {
     "id": "scummvm-look-at",
     "name": "Look-At",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-look"
@@ -3255,7 +3222,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3269,7 +3236,7 @@
   {
     "id": "scummvm-move",
     "name": "Move",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-move"
@@ -3285,7 +3252,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3299,7 +3266,7 @@
   {
     "id": "scummvm-push-shove",
     "name": "Push / Shove",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-push"
@@ -3315,7 +3282,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3329,7 +3296,7 @@
   {
     "id": "scummvm-pull-yank",
     "name": "Pull / Yank",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-pull"
@@ -3345,7 +3312,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {
@@ -3359,7 +3326,7 @@
   {
     "id": "scummvm-fight",
     "name": "Fight",
-    "category": "Scummvm",
+    "category": "ScummVM",
     "icon": {
       "type": "path",
       "value": "rd-pc-fight"
@@ -3375,7 +3342,7 @@
       "scummvm"
     ],
     "emulators": [
-      "ScummVM"
+      "RetroArch"
     ],
     "hotkeyLabels": [
       {

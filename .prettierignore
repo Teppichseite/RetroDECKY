@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+out/
+*.js.map
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyi
+
+# Other
+*.zip
+defaults/

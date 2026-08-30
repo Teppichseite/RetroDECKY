@@ -25,16 +25,19 @@ This file provides an overview of all actions defined in actions.json.
 - RPCS3 Shortcut (Standalone)
 - RetroArch
 - Ruffle (Standalone)
-- ScummVM
 - Solarus (Standalone)
 
-**Total: 23 emulator(s)**
+**Total: 22 emulator(s)**
 
 ## Categories and Actions
 
 ### Quick
 
-*10 action(s)*
+*11 action(s)*
+
+- **View Info** (`display-view-game-info`)
+  - Action: `[view_game_info]`
+  - Emulators: *
 
 - **View Manual** (`display-view-pdf`)
   - Action: `[view_manual]`
@@ -259,7 +262,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: Dolphin (Standalone), Primehack (Standalone)
 
 
-### Melonds
+### MelonDS
 
 *4 action(s)*
 
@@ -280,7 +283,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: MelonDS (Standalone)
 
 
-### Mame
+### MAME
 
 *11 action(s)*
 
@@ -329,7 +332,7 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: MAME (Standalone)
 
 
-### Retroarch
+### RetroArch
 
 *5 action(s)*
 
@@ -354,116 +357,116 @@ This file provides an overview of all actions defined in actions.json.
   - Emulators: RetroArch
 
 
-### Steam
+### Keyboard
 
 *14 action(s)*
 
-- **Escape** (`steam-escape`)
+- **Escape** (`keyboard-escape`)
   - Hotkey: `KEY_ESC (press)`
-  - Emulators: GZDoom (Standalone), IkemanGO (Standalone), OpenBOR (Standalone), PC-Systems, Ruffle (Standalone), Solarus (Standalone)
+  - Emulators: *
 
-- **Enter** (`steam-enter`)
+- **Enter** (`keyboard-enter`)
   - Hotkey: `KEY_ENTER (press)`
-  - Emulators: GZDoom (Standalone), IkemanGO (Standalone), OpenBOR (Standalone), PC-Systems, Solarus (Standalone)
+  - Emulators: *
 
-- **Space** (`steam-space`)
+- **Space** (`keyboard-space`)
   - Hotkey: `KEY_SPACE (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Tab** (`steam-tab`)
+- **Tab** (`keyboard-tab`)
   - Hotkey: `KEY_TAB (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Control** (`steam-control`)
+- **Control** (`keyboard-control`)
   - Hotkey: `KEY_LEFTCTRL (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Alt** (`steam-alt`)
+- **Alt** (`keyboard-alt`)
   - Hotkey: `KEY_LEFTALT (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Shift** (`steam-shift`)
+- **Shift** (`keyboard-shift`)
   - Hotkey: `KEY_LEFTSHIFT (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Alt + F4** (`steam-alt-f4`)
+- **Alt + F4** (`keyboard-alt-f4`)
   - Hotkey: `KEY_LEFTALT + KEY_F4 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F1** (`steam-f1`)
+- **F1** (`keyboard-f1`)
   - Hotkey: `KEY_F1 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F4** (`steam-f4`)
+- **F4** (`keyboard-f4`)
   - Hotkey: `KEY_F4 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F5** (`steam-f5`)
+- **F5** (`keyboard-f5`)
   - Hotkey: `KEY_F5 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F8** (`steam-f8`)
+- **F8** (`keyboard-f8`)
   - Hotkey: `KEY_F8 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **F10** (`steam-f10`)
+- **F10** (`keyboard-f10`)
   - Hotkey: `KEY_F10 (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
-- **Slash (/)** (`steam-slash`)
+- **Slash (/)** (`keyboard-slash`)
   - Hotkey: `KEY_SLASH (press)`
-  - Emulators: PC-Systems
+  - Emulators: *
 
 
-### Scummvm
+### ScummVM
 
 *10 action(s)*
 
 - **Close** (`scummvm-close`)
   - Hotkey: `KEY_C (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Open** (`scummvm-open`)
   - Hotkey: `KEY_O (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Give** (`scummvm-give`)
   - Hotkey: `KEY_G (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Pick-Up** (`scummvm-pick-up`)
   - Hotkey: `KEY_P (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Use** (`scummvm-use`)
   - Hotkey: `KEY_U (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Look-At** (`scummvm-look-at`)
   - Hotkey: `KEY_L (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Move** (`scummvm-move`)
   - Hotkey: `KEY_M (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Push / Shove** (`scummvm-push-shove`)
   - Hotkey: `KEY_S (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Pull / Yank** (`scummvm-pull-yank`)
   - Hotkey: `KEY_Y (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 - **Fight** (`scummvm-fight`)
   - Hotkey: `KEY_F (press)`
-  - Emulators: ScummVM
+  - Emulators: RetroArch
 
 
 ## Statistics
 
-- **Total Actions**: 92
+- **Total Actions**: 93
 - **Hotkey Actions**: 90
-- **Builtin Actions**: 2
+- **Builtin Actions**: 3
 - **Categories**: 12
-- **Emulators**: 23
+- **Emulators**: 22
