@@ -8,7 +8,7 @@
    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
    id="svg1"
    sodipodi:docname="icon-RetroDECKY.svg"
-   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -23,8 +23,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.0977553"
-     inkscape:cx="292.87038"
-     inkscape:cy="516.50857"
+     inkscape:cx="281.02802"
+     inkscape:cy="516.50855"
      inkscape:window-width="3840"
      inkscape:window-height="2082"
      inkscape:window-x="0"
@@ -33,7 +33,7 @@
      inkscape:current-layer="svg1"
      showguides="true" /><path
      d="m 804.42134,196.46292 c 0,-110.382995 -89.617,-199.999995 -200,-199.999995 h -400 c -110.382996,0 -199.9999962,89.617 -199.9999962,199.999995 v 400 c 0,110.383 89.6170002,200 199.9999962,200 h 400 c 110.383,0 200,-89.617 200,-200 z"
-     style="fill:#111111"
+     style="fill:#000000"
      id="path1" /><path
      id="D"
      d="M635.592,657.249c-13.837,13.838 -29.145,24.422 -45.925,31.754c-16.78,7.331 -35.032,10.997 -54.755,10.997l-322.642,0l-0,-82.868l322.642,0c7.332,0 14.224,-1.368 20.678,-4.104c6.454,-2.737 12.082,-6.506 16.884,-11.308c4.801,-4.801 8.57,-10.429 11.307,-16.883c2.736,-6.454 4.104,-13.347 4.104,-20.678l0,-328.318c0,-6.815 -1.497,-13.398 -4.492,-19.749c-2.994,-6.35 -6.944,-11.978 -11.849,-16.883c-4.905,-4.905 -10.533,-8.855 -16.883,-11.849c-6.351,-2.995 -12.934,-4.492 -19.749,-4.492l-322.642,-0l-0,-82.868l322.642,-0c9.81,-0 19.336,1.033 28.578,3.098c9.242,2.065 18.122,4.982 26.641,8.751c8.519,3.769 16.6,8.287 24.241,13.553c7.641,5.267 14.715,11.05 21.22,17.349c13.528,13.114 24.035,28.216 31.521,45.306c7.487,17.09 11.23,35.548 11.23,55.374l-0,313.138c-0,19.826 -3.666,38.104 -10.997,54.832c-7.332,16.729 -17.916,32.011 -31.754,45.848Z"
@@ -127,7 +127,7 @@
      style="font-size:40px;font-family:DREAMS;-inkscape-font-specification:DREAMS;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect5);display:inline;fill:#000000;stroke-width:0.586" /><g
      id="Layer_2"
      data-name="Layer 2"
-     transform="matrix(8.1594953,0,0,7.2745773,128.78744,220.24347)"
+     transform="matrix(7.9297765,0,0,7.0697721,123.70276,227.25807)"
      style="fill:url(#linearGradient2)"><g
        id="Layer_6"
        data-name="Layer 6"
