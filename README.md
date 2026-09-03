@@ -102,23 +102,24 @@ This requires that RetroDECK & Decky Loader is installed.
 
 Choose one of the following methods:
 
-### Install from the Decky Plugin Store (not available yet, but will be the recommended path)
+### Install from the Decky Plugin Store 
+
+*(not available yet, but will be the recommended path)*
 
 Search for **RetroDECKY** in the **Decky Plugin Store** and press **Install**.
 
 ### Manual Install from Github
 
-- Download and install from the **GitHub Releases page**
-  1. Switch to desktop mode and open your browser
-  2. Go to the [GitHub Releases page](https://github.com/Teppichseite/RetroDECKY/releases)
-  3. For the latest release download `RetroDECKY.zip` under assets
-  4. Switch back to Gaming mode
-  5. Open the Quick Access Menu > Decky Tab > Click on the settings icon on the top right
-  6. Under "General" enable "Developer mode"
-  7. Go to the "Developer" section on the left side
-  8. Click on "Browse" next to "Install Plugin from ZIP file"
-  9. Select the `RetroDECKY.zip` file you downloaded in step 3 (usually stored under `~/Downloads`)
-  10. Click on "Install"
+1. Switch to desktop mode and open your browser.
+2. Download and install from the [GitHub Releases page](https://github.com/Teppichseite/RetroDECKY/releases).
+3. For the latest release download `RetroDECKY.zip` under assets.
+4. Switch back to Gaming mode.
+5. Open the Quick Access Menu > Decky Tab > Click on the settings icon on the top right.
+6. Under "General" enable "Developer mode".
+7. Go to the "Developer" section on the left side.
+8. Click on "Browse" next to "Install Plugin from ZIP file".
+9. Select the `RetroDECKY.zip` file you downloaded in step 3 (usually stored under `~/Downloads`).
+10. Click on **Install**.
 
 ---
 
