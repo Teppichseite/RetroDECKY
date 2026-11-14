@@ -1,6 +1,7 @@
 import { Field } from "@decky/ui";
 import { getIconPath } from "../../utils";
 import retrodeckLogo from "../../../assets/logo/icon-RetroDECKY.svg";
+import { t } from "../../i18n";
 
 export const ControlGuideKey = ({ button }: { button: string }) => (
   <span
@@ -116,7 +117,7 @@ export const RetrodeckSpinner = ({ size = 64 }: { size?: number }) => (
             }
         `}</style>
     <img
-      alt="Loading"
+      alt={t("common.loading")}
       src={retrodeckLogo}
       width={size}
       height={size}

@@ -9,6 +9,7 @@ import { useCachedPdfViewState } from "./viewer-state";
 import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs";
 import { Document, Page, pdfjs } from "react-pdf";
 import { getDistPath } from "../../utils";
+import { t } from "../../i18n";
 pdfjs.GlobalWorkerOptions.workerSrc = workerSrc as string;
 
 const DEFAULT_ZOOM = 1;
@@ -197,18 +198,18 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
 
   const actionDescriptionMap = isZoomed
     ? {
-        [GamepadButton.BUMPER_LEFT]: "Zoom Out",
-        [GamepadButton.BUMPER_RIGHT]: "Zoom In",
-        [GamepadButton.DIR_LEFT]: "Pan Left",
-        [GamepadButton.DIR_RIGHT]: "Pan Right",
-        [GamepadButton.DIR_UP]: "Pan Up",
-        [GamepadButton.DIR_DOWN]: "Pan Down",
+        [GamepadButton.BUMPER_LEFT]: t("pdfViewer.zoomOut"),
+        [GamepadButton.BUMPER_RIGHT]: t("pdfViewer.zoomIn"),
+        [GamepadButton.DIR_LEFT]: t("pdfViewer.panLeft"),
+        [GamepadButton.DIR_RIGHT]: t("pdfViewer.panRight"),
+        [GamepadButton.DIR_UP]: t("pdfViewer.panUp"),
+        [GamepadButton.DIR_DOWN]: t("pdfViewer.panDown"),
       }
     : {
-        [GamepadButton.BUMPER_LEFT]: "Zoom Out",
-        [GamepadButton.BUMPER_RIGHT]: "Zoom In",
-        [GamepadButton.DIR_LEFT]: "Previous Page",
-        [GamepadButton.DIR_RIGHT]: "Next Page",
+        [GamepadButton.BUMPER_LEFT]: t("pdfViewer.zoomOut"),
+        [GamepadButton.BUMPER_RIGHT]: t("pdfViewer.zoomIn"),
+        [GamepadButton.DIR_LEFT]: t("pdfViewer.previousPage"),
+        [GamepadButton.DIR_RIGHT]: t("pdfViewer.nextPage"),
       };
 
   return (
@@ -230,14 +231,14 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
             `}</style>
       <ViewerInfo
         title={title}
-        viewerTitle="Manual Viewer"
+        viewerTitle={t("pdfViewer.title")}
         fields={[
           {
-            label: "Zoom",
+            label: t("pdfViewer.zoom"),
             value: `${Math.round(viewState.zoom * 100)}%`,
           },
           {
-            label: "Page",
+            label: t("pdfViewer.page"),
             value: `${viewState.pageNumber} / ${viewState.totalPages}`,
           },
         ]}
@@ -287,7 +288,7 @@ export const PdfViewer = ({ pdfPath, title }: PdfViewerProps) => {
               file={fileSource}
               onLoadSuccess={onDocumentLoadSuccess}
               onLoadError={(error) => console.error("PDF load error:", error)}
-              error={<div>Failed to load PDF. Check console for details.</div>}
+              error={<div>{t("pdfViewer.loadError")}</div>}
               loading={<></>}
             >
               <Page

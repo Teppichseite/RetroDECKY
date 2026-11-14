@@ -1,5 +1,6 @@
 import { Field, Focusable } from "@decky/ui";
 import { RaAchievement } from "../../interfaces";
+import { t } from "../../i18n";
 
 export const RaStatusMessage = ({ message }: { message: string }) => (
   <div
@@ -62,7 +63,7 @@ export const RaAchievementRow = ({
             >
               {achievement.title}
               <span style={{ marginLeft: "8px", color: "#1a9fff", fontWeight: "normal" }}>
-                {achievement.points} pts
+                {t("ra.points", { points: achievement.points })}
               </span>
             </div>
             <div

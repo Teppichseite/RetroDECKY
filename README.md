@@ -226,6 +226,12 @@ RetroDECKY uses the official [RetroAchievements API](https://api-docs.retroachie
 
 ---
 
+## Translations
+
+The plugin UI follows the Steam language. English is the reference (`src/i18n/locales/en.ts`) and French is available (`src/i18n/locales/fr.ts`). Missing keys fall back to English. To add a language, create a new file in `src/i18n/locales/` and register it in `src/i18n/index.ts`.
+
+---
+
 ## Acknowledgements
 
 - RetroDECK assets, art and configuration files originate from the RetroDECK project.

@@ -8,6 +8,7 @@ import { ButtonItemIconContent } from "./shared";
 import { getIconPath } from "../utils";
 import { listCustomDocumentsBe, copyFileToCustomDocumentsBe } from "../backend";
 import { FaPlus } from "react-icons/fa";
+import { t, tx } from "../i18n";
 
 export interface DocumentListModalProps extends ModalRootProps {
   gameEvent: GameEvent;
@@ -155,7 +156,7 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
         >
           <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
             <img
-              alt="Manual"
+              alt={t("documents.iconAlt")}
               src={getIconPath("RD-user-red-home")}
               width={42}
               height={42}
@@ -169,13 +170,13 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
               wordBreak: "break-word",
             }}
           >
-            Documents for {props.gameEvent.name}
+            {t("documents.title", { game: props.gameEvent.name })}
           </div>
         </div>
 
         {isLoading ? (
           <div style={{ marginBottom: "20px" }}>
-            <strong>Loading documents...</strong>
+            <strong>{t("documents.loading")}</strong>
           </div>
         ) : documents.length === 0 ? (
           <div
@@ -185,8 +186,10 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
               wordBreak: "break-word",
             }}
           >
-            <strong>No documents available.</strong> Click <strong>Add Document</strong>{" "}
-            to add a PDF, TXT, or Markdown document.
+            {tx("documents.empty", {
+              none: <strong>{t("documents.none")}</strong>,
+              add: <strong>{t("documents.add")}</strong>,
+            })}
           </div>
         ) : (
           documents.map((doc, index) => (
@@ -222,7 +225,7 @@ export const DocumentListModal = (props: DocumentListModalProps) => {
           disabled={isAddingDocument}
         >
           <ButtonItemIconContent icon={<FaPlus />}>
-            {isAddingDocument ? "Adding..." : "Add Document"}
+            {isAddingDocument ? t("documents.adding") : t("documents.add")}
           </ButtonItemIconContent>
         </Button>
       </>

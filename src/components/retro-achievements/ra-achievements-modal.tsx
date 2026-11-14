@@ -1,11 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import { Field, Focusable, ModalRoot, ModalRootProps, Navigation } from "@decky/ui";
-import { GameEvent, RaGameResult } from "../../interfaces";
+import { GameEvent, RaGameResult, RaProgressSummary } from "../../interfaces";
 import { getRetroAchievementsForGameBe } from "../../backend";
 import { useDialogContentStyling } from "../../hooks";
 import { getIconPath } from "../../utils";
 import { RetrodeckSpinner } from "../viewers/viewers-shared";
 import { RaAchievementRow, RaStatusMessage } from "./ra-shared";
+import { t } from "../../i18n";
+
+// The backend message is English; known statuses are translated on the frontend.
+const getStatusMessage = (result: RaGameResult, gameEvent: GameEvent): string => {
+  switch (result.status) {
+    case "not_configured":
+      return t("ra.status.not_configured");
+    case "no_console":
+      return t("ra.status.no_console", {
+        system: gameEvent.system_full_name || gameEvent.system_name,
+      });
+    case "not_found":
+      return t("ra.status.not_found");
+    case "error":
+      return t("ra.status.error");
+    default:
+      return result.message ?? "";
+  }
+};
+
+const formatSummary = (mode: string, summary: RaProgressSummary): string =>
+  t("ra.summary", {
+    mode,
+    earned: summary.earned_count,
+    total: summary.total_count,
+    earnedPoints: summary.earned_points,
+    totalPoints: summary.total_points,
+    completion: summary.completion,
+  });
 
 export interface RaAchievementsModalProps extends ModalRootProps {
   gameEvent: GameEvent;
@@ -71,7 +100,7 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
         >
           <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
             <img
-              alt="Achievements"
+              alt={t("ra.title")}
               src={getIconPath("RD-emblem-favorite")}
               width={42}
               height={42}
@@ -85,7 +114,7 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
               wordBreak: "break-word",
             }}
           >
-            Achievements
+            {t("ra.title")}
           </div>
         </div>
 
@@ -96,7 +125,7 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
         )}
 
         {!loading && result && result.status !== "ok" && result.message && (
-          <RaStatusMessage message={result.message} />
+          <RaStatusMessage message={getStatusMessage(result, gameEvent)} />
         )}
 
         {!loading && result?.status === "ok" && result.game && result.summary && (
@@ -118,26 +147,12 @@ export const RaAchievementsModal = (props: RaAchievementsModalProps) => {
                   <div style={{ fontWeight: "bold", marginBottom: "8px" }}>
                     {result.game.title}
                     {result.game.console_name ? ` - ${result.game.console_name}` : ""}
-                    {result.game.matched_by === "name" ? " (Matched by name)" : ""}
+                    {result.game.matched_by === "name"
+                      ? ` (${t("ra.matchedByName")})`
+                      : ""}
                   </div>
-                  <div>
-                    Softcore · {result.summary.softcore.earned_count} /{" "}
-                    {result.summary.softcore.total_count} achievements
-                    {" · "}
-                    {result.summary.softcore.earned_points} /{" "}
-                    {result.summary.softcore.total_points} points
-                    {" · "}
-                    {result.summary.softcore.completion} complete
-                  </div>
-                  <div>
-                    Hardcore · {result.summary.hardcore.earned_count} /{" "}
-                    {result.summary.hardcore.total_count} achievements
-                    {" · "}
-                    {result.summary.hardcore.earned_points} /{" "}
-                    {result.summary.hardcore.total_points} points
-                    {" · "}
-                    {result.summary.hardcore.completion} complete
-                  </div>
+                  <div>{formatSummary("Softcore", result.summary.softcore)}</div>
+                  <div>{formatSummary("Hardcore", result.summary.hardcore)}</div>
                 </div>
               </Focusable>
             </Field>

@@ -5,6 +5,7 @@ import { getIconPath } from "../utils";
 import { getSettingBe, setSettingBe, getRetroAchievementsStatusBe } from "../backend";
 import { SettingsKey } from "../interfaces";
 import { RaSettingsModal } from "./retro-achievements";
+import { t } from "../i18n";
 
 const useSettingToggle = (
   key: SettingsKey,
@@ -30,7 +31,9 @@ const useSettingToggle = (
 
 export const Settings = () => {
   const [showSettings, setShowSettings] = useState(false);
-  const [raStatusDescription, setRaStatusDescription] = useState("Not configured");
+  const [raStatusDescription, setRaStatusDescription] = useState(
+    t("settings.retroAchievements.notConfigured")
+  );
 
   const [autoStartEnabled, setAutoStartEnabled] = useSettingToggle(
     "autoStartEnabled",
@@ -41,8 +44,8 @@ export const Settings = () => {
     getRetroAchievementsStatusBe().then((status) => {
       setRaStatusDescription(
         status.configured && status.username
-          ? `Signed in as ${status.username}`
-          : "Not configured"
+          ? t("settings.retroAchievements.signedInAs", { username: status.username })
+          : t("settings.retroAchievements.notConfigured")
       );
     });
   };
@@ -75,14 +78,14 @@ export const Settings = () => {
             />
           }
         >
-          Settings
+          {t("settings.title")}
         </ButtonItemIconContent>
       </ButtonItem>
       {showSettings && (
         <div style={{ marginTop: "10px" }}>
           <ToggleField
-            label="Auto Start RetroDECK"
-            description={`Automatically launch RetroDECK when Steam starts in Gaming Mode. This launches any steam game which is called "RetroDECK" in your library. (experimental)`}
+            label={t("settings.autostart.label")}
+            description={t("settings.autostart.description")}
             checked={autoStartEnabled}
             onChange={setAutoStartEnabled}
           />
