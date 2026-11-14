@@ -17,12 +17,13 @@ import { PdfViewerModal } from "./viewers/pdf-viewer";
 import { DocumentListModal } from "./document-list-modal";
 import { GameInfoModal } from "./game-info-modal";
 import { RaAchievementsModal } from "./retro-achievements";
+import { actionName, categoryName, t } from "../i18n";
 
 export const ActionsComponent = () => {
   const { displayedActions } = useMenuContext();
 
   if (displayedActions.length === 0) {
-    return <div style={{ textAlign: "center" }}>There are no actions available.</div>;
+    return <div style={{ textAlign: "center" }}>{t("actionList.empty")}</div>;
   }
 
   const uncategorizedActions = displayedActions.filter((action) => !action.category);
@@ -103,7 +104,7 @@ export const CategoryComponent = ({
           />
         }
       >
-        {category}
+        {categoryName(category)}
       </ActionButton>
       {openedCategory === category && (
         <div style={{ marginLeft: "15px" }}>
@@ -142,7 +143,7 @@ export const ActionComponent = ({
   const icon =
     action.icon.type === "path" ? (
       <img
-        alt={action.name}
+        alt={actionName(action)}
         src={getIconPath(action.icon.value)}
         width={24}
         height={24}
@@ -253,7 +254,7 @@ export const ActionComponent = ({
         onInfoClick={onOpenModal}
         infoIcon={isManualViewAction ? <FaFileAlt /> : <FaInfoCircle />}
       >
-        {action.name}
+        {actionName(action)}
       </ActionButton>
     </div>
   );

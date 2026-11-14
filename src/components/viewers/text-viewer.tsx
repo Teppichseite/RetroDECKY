@@ -4,6 +4,7 @@ import { Focusable, ModalRoot, ModalRootProps, findSP, GamepadButton } from "@de
 import { ViewerInfo, RetrodeckSpinner } from "./viewers-shared";
 import { useDialogContentStyling } from "../../hooks";
 import { useCachedTextViewState } from "./viewer-state";
+import { t } from "../../i18n";
 
 const SCROLL_STEP = 50;
 const PAGE_SCROLL_STEP = 500;
@@ -42,14 +43,16 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error(`Failed to load text file: ${response.statusText}`);
+          throw new Error(
+            t("textViewer.loadErrorStatus", { status: response.statusText })
+          );
         }
 
         const text = await response.text();
         setTextContent(text);
       } catch (err) {
         console.error("Error loading text file:", err);
-        setError(err instanceof Error ? err.message : "Failed to load text file");
+        setError(err instanceof Error ? err.message : t("textViewer.loadError"));
       } finally {
         setIsLoading(false);
       }
@@ -160,12 +163,12 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
   }, [textContent, setScrollTop]);
 
   const actionDescriptionMap = {
-    [GamepadButton.BUMPER_LEFT]: "Smaller Text",
-    [GamepadButton.BUMPER_RIGHT]: "Larger Text",
-    [GamepadButton.DIR_UP]: "Scroll Up",
-    [GamepadButton.DIR_DOWN]: "Scroll Down",
-    [GamepadButton.DIR_LEFT]: "Page Up",
-    [GamepadButton.DIR_RIGHT]: "Page Down",
+    [GamepadButton.BUMPER_LEFT]: t("textViewer.smallerText"),
+    [GamepadButton.BUMPER_RIGHT]: t("textViewer.largerText"),
+    [GamepadButton.DIR_UP]: t("common.scrollUp"),
+    [GamepadButton.DIR_DOWN]: t("common.scrollDown"),
+    [GamepadButton.DIR_LEFT]: t("textViewer.pageUp"),
+    [GamepadButton.DIR_RIGHT]: t("textViewer.pageDown"),
   };
 
   return (
@@ -181,14 +184,14 @@ export const TextViewer = ({ txtPath, title }: TextViewerProps) => {
     >
       <ViewerInfo
         title={title}
-        viewerTitle="Text Viewer"
+        viewerTitle={t("textViewer.title")}
         fields={[
           {
-            label: "Text Size",
+            label: t("textViewer.textSize"),
             value: `${Math.round((fontSize / FONT_SIZE_MIN) * 100)}%`,
           },
           {
-            label: "Position",
+            label: t("textViewer.position"),
             value: `${scrollInfo.totalHeight > 0 ? Math.round((scrollInfo.position / scrollInfo.totalHeight) * 100) : 0}%`,
           },
         ]}

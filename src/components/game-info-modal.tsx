@@ -10,6 +10,7 @@ import {
 import { GameEvent } from "../interfaces";
 import { getIconPath } from "../utils";
 import { useDialogContentStyling } from "../hooks";
+import { t } from "../i18n";
 
 export interface GameInfoModalProps extends ModalRootProps {
   gameEvent: GameEvent;
@@ -116,11 +117,6 @@ const SectionHeader = ({ title }: { title: string }) => (
   </div>
 );
 
-const DESCRIPTION_ACTION_MAP = {
-  [GamepadButton.BUMPER_LEFT]: "Scroll Up",
-  [GamepadButton.BUMPER_RIGHT]: "Scroll Down",
-};
-
 interface DescriptionFieldProps {
   value: string | null | undefined;
   maxHeight?: string;
@@ -131,6 +127,11 @@ const DescriptionField = ({
   maxHeight = DESCRIPTION_MAX_HEIGHT,
 }: DescriptionFieldProps) => {
   const descriptionScrollRef = useRef<HTMLDivElement>(null);
+
+  const descriptionActionMap = {
+    [GamepadButton.BUMPER_LEFT]: t("common.scrollUp"),
+    [GamepadButton.BUMPER_RIGHT]: t("common.scrollDown"),
+  };
 
   const scrollDescription = (delta: number) => {
     descriptionScrollRef.current?.scrollBy({ top: delta, behavior: "smooth" });
@@ -159,13 +160,17 @@ const DescriptionField = ({
         boxSizing: "border-box",
       }}
     >
-      <Field label="Description" childrenLayout="below" bottomSeparator="none">
+      <Field
+        label={t("gameInfo.description")}
+        childrenLayout="below"
+        bottomSeparator="none"
+      >
         <Focusable
           noFocusRing
           className="FocusRegion"
           onActivate={() => {}}
           onButtonDown={handleDescriptionButtonDown}
-          actionDescriptionMap={DESCRIPTION_ACTION_MAP}
+          actionDescriptionMap={descriptionActionMap}
         >
           <div
             ref={descriptionScrollRef}
@@ -322,7 +327,7 @@ const MetadataFieldRow = ({
                 >
                   {field.isLink
                     ? canOpenLink
-                      ? "Open Link"
+                      ? t("gameInfo.openLink")
                       : "-"
                     : displayValue(field.value)}
                 </span>
@@ -343,17 +348,23 @@ interface GameInfoMetadataProps {
 
 const GameInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
   const metadataFields: MetadataField[] = [
-    { label: "System", value: gameEvent.system_full_name || gameEvent.system_name },
     {
-      label: "Component",
+      label: t("gameInfo.system"),
+      value: gameEvent.system_full_name || gameEvent.system_name,
+    },
+    {
+      label: t("gameInfo.component"),
       value: gameEvent.emulator_name?.filter(Boolean).join(" - ") || null,
     },
-    { label: "Rating", value: formatRating(gameEvent.game_metadata.rating) },
-    { label: "Release Date", value: formatReleaseDate(gameEvent.game_metadata.releasedate) },
-    { label: "Developer", value: gameEvent.game_metadata.developer },
-    { label: "Publisher", value: gameEvent.game_metadata.publisher },
-    { label: "Genre", value: gameEvent.game_metadata.genre },
-    { label: "Players", value: gameEvent.game_metadata.players },
+    { label: t("gameInfo.rating"), value: formatRating(gameEvent.game_metadata.rating) },
+    {
+      label: t("gameInfo.releaseDate"),
+      value: formatReleaseDate(gameEvent.game_metadata.releasedate),
+    },
+    { label: t("gameInfo.developer"), value: gameEvent.game_metadata.developer },
+    { label: t("gameInfo.publisher"), value: gameEvent.game_metadata.publisher },
+    { label: t("gameInfo.genre"), value: gameEvent.game_metadata.genre },
+    { label: t("gameInfo.players"), value: gameEvent.game_metadata.players },
   ];
 
   return (
@@ -370,18 +381,18 @@ const SystemInfoMetadata = ({ gameEvent }: GameInfoMetadataProps) => {
   }
 
   const metadataFields: MetadataField[] = [
-    { label: "System Name", value: systemMetadata.name },
-    { label: "Manufacturer", value: systemMetadata.manufacturer },
+    { label: t("gameInfo.systemName"), value: systemMetadata.name },
+    { label: t("gameInfo.manufacturer"), value: systemMetadata.manufacturer },
     {
-      label: "System Release Date",
+      label: t("gameInfo.systemReleaseDate"),
       value: systemMetadata.release_date_formatted || systemMetadata.release_date,
     },
-    { label: "Hardware Type", value: systemMetadata.hardware_type },
+    { label: t("gameInfo.hardwareType"), value: systemMetadata.hardware_type },
   ];
 
   return (
     <div style={{ marginBottom: SECTION_GAP }}>
-      <SectionHeader title="System Info" />
+      <SectionHeader title={t("gameInfo.systemInfo")} />
       <DescriptionField
         value={systemMetadata.description}
         maxHeight={SECTION_DESCRIPTION_MAX_HEIGHT}
@@ -403,31 +414,31 @@ const ComponentInfoMetadata = ({
   }
 
   const metadataFields: MetadataField[] = [
-    { label: "Component Name", value: componentMetadata.name },
-    { label: "Component Type", value: componentMetadata.component_type },
+    { label: t("gameInfo.componentName"), value: componentMetadata.name },
+    { label: t("gameInfo.componentType"), value: componentMetadata.component_type },
     {
-      label: "Component Systems",
+      label: t("gameInfo.componentSystems"),
       value: formatListOrString(
         componentMetadata.system_friendly_name || componentMetadata.system
       ),
     },
     {
-      label: "Wiki",
+      label: t("gameInfo.wiki"),
       value: resolveFirstValidUrl(componentMetadata.url_rdwiki),
       isLink: true,
     },
     {
-      label: "Website",
+      label: t("gameInfo.website"),
       value: resolveFirstValidUrl(componentMetadata.url_webpage),
       isLink: true,
     },
     {
-      label: "Source",
+      label: t("gameInfo.source"),
       value: resolveFirstValidUrl(componentMetadata.url_source),
       isLink: true,
     },
     {
-      label: "Donation",
+      label: t("gameInfo.donation"),
       value: resolveFirstValidUrl(componentMetadata.url_donation_purchase),
       isLink: true,
     },
@@ -435,7 +446,7 @@ const ComponentInfoMetadata = ({
 
   return (
     <div>
-      <SectionHeader title="Component Info" />
+      <SectionHeader title={t("gameInfo.componentInfo")} />
       <DescriptionField
         value={componentMetadata.description}
         maxHeight={SECTION_DESCRIPTION_MAX_HEIGHT}
@@ -485,7 +496,7 @@ export const GameInfoModal = (props: GameInfoModalProps) => {
         >
           <div style={{ flexShrink: 0, display: "flex", alignItems: "center" }}>
             <img
-              alt="Game Info"
+              alt={t("gameInfo.iconAlt")}
               src={getIconPath("RD-edit-find")}
               width={42}
               height={42}

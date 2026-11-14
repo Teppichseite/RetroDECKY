@@ -1,0 +1,258 @@
+import type { Translations } from "../index";
+
+// French locale. Missing keys fall back to English.
+// Use normal spaces before ? ! : ; % » and after «: they are made non-breaking at runtime.
+const fr: Translations = {
+  // Common
+  "common.scrollUp": "Défiler vers le haut",
+  "common.scrollDown": "Défiler vers le bas",
+  "common.loading": "Chargement",
+
+  // Main panel (no game running)
+  "noGame.noGameRunning": "Aucun jeu en cours.",
+  "noGame.wiki": "Wiki RetroDECK",
+  "noGame.github": "Page GitHub",
+
+  // Setup guide
+  "setupGuide.title": "Guide d'installation",
+  "setupGuide.issues": "En cas de problème, consulter {{url}}.",
+  "setupGuide.notInstalled.title":
+    "RetroDECK n'est pas entièrement installé sur ce système",
+  "setupGuide.notInstalled.flatpak": "Flatpak RetroDECK installé",
+  "setupGuide.notInstalled.eventScripts": "Scripts d'événements ES-DE créés",
+  "setupGuide.notInstalled.reload": "Pour recharger cette page : {{path}}",
+  "setupGuide.notInstalled.reloadPath":
+    "Paramètres Decky > Plugins > RetroDECKY > Recharger",
+  "setupGuide.enableScripts.title": "Étapes pour terminer la configuration du plugin",
+  "setupGuide.enableScripts.openMenu": "Ouvrir RetroDECK puis le {{menu}}",
+  "setupGuide.enableScripts.regularMenu": "menu principal",
+  "setupGuide.enableScripts.navigate": "Aller dans {{path}}",
+  "setupGuide.enableScripts.enable": "Activer {{option}}",
+  "setupGuide.enableScripts.restart": "{{restart}} RetroDECK",
+  "setupGuide.enableScripts.restartLabel": "Redémarrer",
+
+  // Settings
+  "settings.title": "Paramètres",
+  "settings.autostart.label": "Lancer RetroDECK au démarrage",
+  "settings.autostart.description":
+    "Lance automatiquement RetroDECK au démarrage de Steam en mode Jeu. Lance le jeu Steam nommé « RetroDECK » dans la bibliothèque. (expérimental)",
+  "settings.retroAchievements.notConfigured": "Non configuré",
+  "settings.retroAchievements.signedInAs": "Connecté en tant que {{username}}",
+
+  // Action list
+  "actionList.empty": "Aucune action disponible.",
+
+  // Action hotkeys modal
+  "actionModal.title": "Raccourcis : {{action}}",
+  "actionModal.profileNotice":
+    "Les raccourcis manette ne fonctionnent qu'avec un {{profile}} officiel.",
+  "actionModal.profile": "profil de manette RetroDECK",
+
+  // Game info modal
+  "gameInfo.iconAlt": "Infos du jeu",
+  "gameInfo.description": "Description",
+  "gameInfo.openLink": "Ouvrir le lien",
+  "gameInfo.system": "Système",
+  "gameInfo.component": "Composant",
+  "gameInfo.rating": "Note",
+  "gameInfo.releaseDate": "Date de sortie",
+  "gameInfo.developer": "Développeur",
+  "gameInfo.publisher": "Éditeur",
+  "gameInfo.genre": "Genre",
+  "gameInfo.players": "Joueurs",
+  "gameInfo.systemInfo": "Infos système",
+  "gameInfo.systemName": "Nom du système",
+  "gameInfo.manufacturer": "Fabricant",
+  "gameInfo.systemReleaseDate": "Sortie du système",
+  "gameInfo.hardwareType": "Type de matériel",
+  "gameInfo.componentInfo": "Infos composant",
+  "gameInfo.componentName": "Nom du composant",
+  "gameInfo.componentType": "Type de composant",
+  "gameInfo.componentSystems": "Systèmes du composant",
+  "gameInfo.wiki": "Wiki",
+  "gameInfo.website": "Site web",
+  "gameInfo.source": "Code source",
+  "gameInfo.donation": "Don",
+
+  // Document list modal
+  "documents.iconAlt": "Manuel",
+  "documents.title": "Documents de {{game}}",
+  "documents.loading": "Chargement des documents...",
+  "documents.empty":
+    "{{none}} Sélectionner {{add}} pour ajouter un document PDF, TXT ou Markdown.",
+  "documents.none": "Aucun document disponible.",
+  "documents.add": "Ajouter un document",
+  "documents.adding": "Ajout...",
+
+  // Viewers
+  "pdfViewer.title": "Lecteur de manuel",
+  "pdfViewer.zoom": "Zoom",
+  "pdfViewer.page": "Page",
+  "pdfViewer.zoomIn": "Zoom avant",
+  "pdfViewer.zoomOut": "Zoom arrière",
+  "pdfViewer.panLeft": "Déplacer à gauche",
+  "pdfViewer.panRight": "Déplacer à droite",
+  "pdfViewer.panUp": "Déplacer en haut",
+  "pdfViewer.panDown": "Déplacer en bas",
+  "pdfViewer.previousPage": "Page précédente",
+  "pdfViewer.nextPage": "Page suivante",
+  "pdfViewer.loadError":
+    "Échec du chargement du PDF. Voir la console pour plus de détails.",
+  "textViewer.title": "Lecteur de texte",
+  "textViewer.textSize": "Taille du texte",
+  "textViewer.position": "Position",
+  "textViewer.smallerText": "Texte plus petit",
+  "textViewer.largerText": "Texte plus grand",
+  "textViewer.pageUp": "Page précédente",
+  "textViewer.pageDown": "Page suivante",
+  "textViewer.loadError": "Échec du chargement du fichier texte",
+  "textViewer.loadErrorStatus": "Échec du chargement du fichier texte : {{status}}",
+
+  // RetroAchievements settings modal
+  "raSettings.loggedInAs": "Connecté en tant que {{username}}.",
+  "raSettings.instructions":
+    "Saisir ci-dessous le {{username}} et la {{apiKey}} RetroAchievements. La clé d'API se trouve dans {{path}} sur le site RetroAchievements.",
+  "raSettings.instructionsUsername": "nom d'utilisateur",
+  "raSettings.instructionsApiKey": "clé d'API",
+  "raSettings.enableInConfigurator":
+    "RetroAchievements doit aussi être activé dans le {{configurator}}, si ce n'est pas déjà fait.",
+  "raSettings.username": "Nom d'utilisateur",
+  "raSettings.apiKey": "Clé d'API",
+  "raSettings.save": "Enregistrer",
+  "raSettings.saving": "Enregistrement...",
+  "raSettings.cancel": "Annuler",
+  "raSettings.logOut": "Se déconnecter",
+  "raSettings.loggingOut": "Déconnexion...",
+  "raSettings.saveFailed": "Échec de l'enregistrement des identifiants.",
+  "raSettings.logOutFailed": "Échec de la déconnexion.",
+
+  // RetroAchievements modal
+  "ra.title": "Succès",
+  "ra.matchedByName": "trouvé par nom",
+  "ra.summary":
+    "{{mode}} · {{earned}} / {{total}} succès · {{earnedPoints}} / {{totalPoints}} points · {{completion}} terminé",
+  "ra.points": "{{points}} pts",
+  "ra.status.not_configured":
+    "RetroAchievements n'est pas configuré. Ajouter le nom d'utilisateur et la clé d'API dans les paramètres.",
+  "ra.status.no_console":
+    "Aucune console RetroAchievements correspondante pour {{system}}.",
+  "ra.status.not_found": "Jeu introuvable.",
+  "ra.status.error": "Échec du chargement de RetroAchievements. Réessayer plus tard.",
+
+  // Hotkey labels (controller names are not translated)
+  "hotkeyLabels.Keyboard": "Clavier",
+
+  // Keyboard key names shown in hotkeys
+  "hotkeyKeys.ENTER": "ENTRÉE",
+  "hotkeyKeys.ESC": "ÉCHAP",
+  "hotkeyKeys.SHIFT": "MAJ",
+  "hotkeyKeys.SPACE": "ESPACE",
+
+  // Action categories (emulator names are not translated)
+  "actionCategories.Quick": "Rapide",
+  "actionCategories.General": "Général",
+  "actionCategories.State": "États",
+  "actionCategories.Display": "Affichage",
+  "actionCategories.Speed": "Vitesse",
+  "actionCategories.Keyboard": "Clavier",
+
+  // Action names
+  "actions.display-view-game-info": "Infos du jeu",
+  "actions.display-view-retroachievements": "Succès",
+  "actions.display-view-pdf": "Afficher le manuel",
+  "actions.quick-load-state": "Charger l'état",
+  "actions.quick-save-state": "Sauvegarder l'état",
+  "actions.quick-pause-resume": "Pause / Reprise",
+  "actions.quick-restart-reset": "Redémarrer / Réinitialiser",
+  "actions.quick-swap-screens": "Inverser les écrans",
+  "actions.display-change-dual-screens-layout": "Disposition double écran",
+  "actions.quick-escape": "Échap",
+  "actions.quick-open-menu": "Ouvrir le menu",
+  "actions.quick-quit-component": "Quitter",
+  "actions.general-pause-resume": "Pause / Reprise",
+  "actions.general-restart-reset": "Redémarrer / Réinitialiser",
+  "actions.general-change-disc-next-disc": "Changer de disque / Disque suivant",
+  "actions.general-open-menu": "Ouvrir le menu",
+  "actions.general-cheats-onoff": "Codes de triche activés/désactivés",
+  "actions.general-turbo-onoff": "Turbo activé/désactivé",
+  "actions.general-take-screenshot": "Capture d'écran",
+  "actions.general-video-recording-onoff": "Enregistrement vidéo activé/désactivé",
+  "actions.state-load-state": "Charger l'état",
+  "actions.state-previous-state": "État précédent",
+  "actions.state-next-state": "État suivant",
+  "actions.state-save-state": "Sauvegarder l'état",
+  "actions.state-undo-load-state": "Annuler le chargement d'état",
+  "actions.state-undo-save-state": "Annuler la sauvegarde d'état",
+  "actions.display-change-widescreen-aspect-ratio": "Écran large / Format d'image",
+  "actions.display-swap-screens": "Inverser les écrans",
+  "actions.display-decrease-resolution-upscale":
+    "Réduire la résolution / mise à l'échelle",
+  "actions.display-increase-resolution-upscale":
+    "Augmenter la résolution / mise à l'échelle",
+  "actions.display-fullscreen-toggle": "Plein écran",
+  "actions.speed-decrease-emulation-speed": "Réduire la vitesse d'émulation",
+  "actions.speed-increase-emulation-speed": "Augmenter la vitesse d'émulation",
+  "actions.speed-reset-emulation-speed": "Réinitialiser la vitesse d'émulation",
+  "actions.speed-frame-limit-onoff": "Limite d'images activée/désactivée",
+  "actions.speed-disable-emulation-speed-limit": "Désactiver la limite de vitesse",
+  "actions.speed-fast-forward": "Avance rapide",
+  "actions.speed-rewind": "Retour arrière",
+  "actions.azahar-load-amiibo": "Charger un Amiibo",
+  "actions.azahar-remove-amiibo": "Retirer l'Amiibo",
+  "actions.dolphin-freelook-mode-onoff": "Caméra libre activée/désactivée",
+  "actions.dolphin-freelook-mode-reset": "Réinitialiser la caméra libre",
+  "actions.dolphin-golf-mode-onoff": "Mode golf activé/désactivé",
+  "actions.dolphin-wii-sync-button": "Bouton de synchro Wii",
+  "actions.dolphin-wiimote-sideways": "Wiimote à l'horizontale",
+  "actions.dolphin-wiimote-upright": "Wiimote à la verticale",
+  "actions.dolphin-wiimote-sync-player-1": "Synchro Wiimote - Joueur 1",
+  "actions.dolphin-wiimote-sync-player-2": "Synchro Wiimote - Joueur 2",
+  "actions.dolphin-wiimote-sync-player-3": "Synchro Wiimote - Joueur 3",
+  "actions.dolphin-wiimote-sync-player-4": "Synchro Wiimote - Joueur 4",
+  "actions.melonds-closeopen-lid": "Fermer/Ouvrir la console",
+  "actions.melonds-sunlight+": "Lumière solaire +",
+  "actions.melonds-sunlight-": "Lumière solaire -",
+  "actions.melonds-play-microphone": "Entrée micro",
+  "actions.mame-service-mode": "Mode service",
+  "actions.mame-service-button-1": "Bouton service 1",
+  "actions.mame-service-button-2": "Bouton service 2",
+  "actions.mame-service-button-3": "Bouton service 3",
+  "actions.mame-service-button-4": "Bouton service 4",
+  "actions.mame-insert-bill-note": "Insérer un billet",
+  "actions.mame-tilt": "Tilt",
+  "actions.mame-tilt-player-1": "Tilt - Joueur 1",
+  "actions.mame-tilt-player-2": "Tilt - Joueur 2",
+  "actions.mame-tilt-player-3": "Tilt - Joueur 3",
+  "actions.mame-tilt-player-4": "Tilt - Joueur 4",
+  "actions.retroarch-cheats-onoff": "Codes de triche activés/désactivés",
+  "actions.retroarch-previous-cheat": "Code de triche précédent",
+  "actions.retroarch-next-cheat": "Code de triche suivant",
+  "actions.retroarch-ai-service-onoff": "Service IA activé/désactivé",
+  "actions.retroarch-netplay-host-onoff": "Hôte Netplay activé/désactivé",
+  "actions.keyboard-escape": "Échap",
+  "actions.keyboard-enter": "Entrée",
+  "actions.keyboard-space": "Espace",
+  "actions.keyboard-tab": "Tab",
+  "actions.keyboard-control": "Ctrl",
+  "actions.keyboard-alt": "Alt",
+  "actions.keyboard-shift": "Maj",
+  "actions.keyboard-alt-f4": "Alt + F4",
+  "actions.keyboard-f1": "F1",
+  "actions.keyboard-f4": "F4",
+  "actions.keyboard-f5": "F5",
+  "actions.keyboard-f8": "F8",
+  "actions.keyboard-f10": "F10",
+  "actions.keyboard-slash": "Barre oblique (/)",
+  "actions.scummvm-close": "Fermer",
+  "actions.scummvm-open": "Ouvrir",
+  "actions.scummvm-give": "Donner",
+  "actions.scummvm-pick-up": "Prendre",
+  "actions.scummvm-use": "Utiliser",
+  "actions.scummvm-look-at": "Regarder",
+  "actions.scummvm-move": "Déplacer",
+  "actions.scummvm-push-shove": "Pousser",
+  "actions.scummvm-pull-yank": "Tirer",
+  "actions.scummvm-fight": "Combattre",
+};
+
+export default fr;

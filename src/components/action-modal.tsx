@@ -1,6 +1,7 @@
 import { Field, Focusable, ModalRoot, ModalRootProps } from "@decky/ui";
 import { Action, HotkeyLabel } from "../interfaces";
 import { getIconPath } from "../utils";
+import { actionName, hotkeyKeyName, hotkeyLabelName, t, tx } from "../i18n";
 
 const HKB_REPLACEMENTS: Record<string, string> = {
   "Steam Deck": "L4/R4/Select",
@@ -26,7 +27,7 @@ export const ActionModal = (props: ActionModalProps) => {
   const icon =
     action.icon.type === "path" ? (
       <img
-        alt={action.name}
+        alt={actionName(action)}
         src={getIconPath(action.icon.value)}
         width={42}
         height={42}
@@ -61,13 +62,14 @@ export const ActionModal = (props: ActionModalProps) => {
             wordBreak: "break-word",
           }}
         >
-          {action.name} Hotkeys
+          {t("actionModal.title", { action: actionName(action) })}
         </div>
       </div>
 
       <div>
-        Controller hotkeys will only work if an official{" "}
-        <strong>RetroDECK Controller profile</strong> is being used.
+        {tx("actionModal.profileNotice", {
+          profile: <strong>{t("actionModal.profile")}</strong>,
+        })}
       </div>
 
       {action.hotkeyLabels && action.hotkeyLabels.length > 0 && (
@@ -75,7 +77,7 @@ export const ActionModal = (props: ActionModalProps) => {
           {action.hotkeyLabels.map((label, index) => (
             <Field
               key={index}
-              label={label.name}
+              label={hotkeyLabelName(label.name)}
               bottomSeparator={
                 index < action.hotkeyLabels.length - 1 ? "standard" : "none"
               }
@@ -104,7 +106,7 @@ export const ActionModal = (props: ActionModalProps) => {
                           color: "#dcdedf",
                         }}
                       >
-                        {key}
+                        {hotkeyKeyName(key)}
                       </span>
                     </span>
                   ))}

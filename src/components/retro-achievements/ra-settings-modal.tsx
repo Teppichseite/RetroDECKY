@@ -12,6 +12,7 @@ import {
   saveRetroAchievementsCredentialsBe,
 } from "../../backend";
 import { getIconPath } from "../../utils";
+import { t, tx } from "../../i18n";
 
 export interface RaSettingsModalProps extends ModalRootProps {
   onClose?: () => void;
@@ -49,14 +50,14 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
     try {
       const result = await saveRetroAchievementsCredentialsBe(username, apiKey);
       if (!result.saved) {
-        setError(result.error ?? "Failed to save credentials.");
+        setError(result.error ?? t("raSettings.saveFailed"));
         return;
       }
 
       props.onSaved?.();
       handleClose();
     } catch {
-      setError("Failed to save credentials.");
+      setError(t("raSettings.saveFailed"));
     } finally {
       setSaving(false);
     }
@@ -74,7 +75,7 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
       setConfigured(false);
       props.onSaved?.();
     } catch {
-      setError("Failed to log out.");
+      setError(t("raSettings.logOutFailed"));
     } finally {
       setLoggingOut(false);
     }
@@ -121,31 +122,33 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
           >
             {configured && savedUsername && (
               <div style={{ marginBottom: "12px", fontWeight: "bold" }}>
-                You are logged in as {savedUsername}.
+                {t("raSettings.loggedInAs", { username: savedUsername })}
               </div>
             )}
             <div>
-              Enter your RetroAchievements <strong>username</strong> and{" "}
-              <strong>API Key</strong> below. You can find your API key under{" "}
-              <strong>Profile &gt; Applications &gt; Web API Key</strong> on the
-              RetroAchievements website.
+              {tx("raSettings.instructions", {
+                username: <strong>{t("raSettings.instructionsUsername")}</strong>,
+                apiKey: <strong>{t("raSettings.instructionsApiKey")}</strong>,
+                path: <strong>Profile &gt; Applications &gt; Web API Key</strong>,
+              })}
             </div>
             <div style={{ marginTop: "12px" }}>
-              You also need to enable RetroAchievements in the{" "}
-              <strong>RetroDECK Configurator</strong> if you haven&apos;t already.
+              {tx("raSettings.enableInConfigurator", {
+                configurator: <strong>RetroDECK Configurator</strong>,
+              })}
             </div>
           </div>
         </Focusable>
 
         <TextField
-          label="Username"
+          label={t("raSettings.username")}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           focusOnMount
         />
 
         <TextField
-          label="API Key"
+          label={t("raSettings.apiKey")}
           value={apiKey}
           onChange={(event) => setApiKey(event.target.value)}
           bIsPassword
@@ -166,10 +169,10 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
           }}
         >
           <DialogButton onClick={handleSave} disabled={saving}>
-            {saving ? "Saving..." : "Save"}
+            {saving ? t("raSettings.saving") : t("raSettings.save")}
           </DialogButton>
           <DialogButton onClick={handleClose} className="DialogButton Secondary">
-            Cancel
+            {t("raSettings.cancel")}
           </DialogButton>
           {configured && (
             <DialogButton
@@ -178,7 +181,7 @@ export const RaSettingsModal = (props: RaSettingsModalProps) => {
               className="DialogButton Secondary"
               style={{ color: "#ff6b6b" }}
             >
-              {loggingOut ? "Logging out..." : "Log Out"}
+              {loggingOut ? t("raSettings.loggingOut") : t("raSettings.logOut")}
             </DialogButton>
           )}
         </div>
